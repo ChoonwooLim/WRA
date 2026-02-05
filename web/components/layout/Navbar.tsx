@@ -8,10 +8,13 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X, Globe, User } from 'lucide-react';
 
+import { LoginModal } from '@/components/auth/LoginModal';
+
 export function Navbar() {
     const { data: session } = useSession();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [loginModalOpen, setLoginModalOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -56,6 +59,16 @@ export function Navbar() {
 
                     {session ? (
                         <div className="flex items-center gap-3 pl-4 border-l border-white/10">
+                            {/* @ts-ignore */}
+                            {session.user?.role === 'admin' && (
+                                <Link
+                                    href="/admin"
+                                    className="px-3 py-1.5 rounded-lg bg-red-600/20 text-red-500 border border-red-600/50 text-xs font-bold hover:bg-red-600/30 transition-colors"
+                                >
+                                    ADMIN
+                                </Link>
+                            )}
+                            <div className="w-px h-6 bg-white/10 mx-2" />
                             {session.user?.image ? (
                                 <img src={session.user.image} alt="Profile" className="w-8 h-8 rounded-full border border-primary/50" />
                             ) : (
@@ -70,7 +83,7 @@ export function Navbar() {
                         </div>
                     ) : (
                         <button
-                            onClick={() => signIn('google')}
+                            onClick={() => setLoginModalOpen(true)}
                             className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-medium transition-all"
                         >
                             Start Login
@@ -92,19 +105,25 @@ export function Navbar() {
                 <div className="md:hidden absolute top-full left-0 right-0 bg-[#050510] border-b border-white/10 p-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
                     <Link href="/curriculum" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Curriculum</Link>
                     <Link href="/admissions" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Admissions</Link>
+                    {/* @ts-ignore */}
+                    {session?.user?.role === 'admin' && (
+                        <Link href="/admin" className="text-red-400 font-bold py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+                    )}
                     <div className="flex justify-center pt-4 border-t border-white/10">
                         <ConnectButton />
                     </div>
                     {!session && (
                         <button
-                            onClick={() => signIn('google')}
+                            onClick={() => { setMobileMenuOpen(false); setLoginModalOpen(true); }}
                             className="w-full py-3 rounded-lg bg-primary/20 text-primary border border-primary/50 font-medium"
                         >
-                            Google Login
+                            Login / Sign Up
                         </button>
                     )}
                 </div>
             )}
+
+            <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
         </nav>
     );
 }
