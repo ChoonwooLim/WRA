@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X, Globe, User } from 'lucide-react';
 
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { useLanguage } from '@/components/providers/LanguageProvider';
+
 import { LoginModal } from '@/components/auth/LoginModal';
 
 export function Navbar() {
@@ -15,6 +18,7 @@ export function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [loginModalOpen, setLoginModalOpen] = useState(false);
+    const { dict } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,13 +48,14 @@ export function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
-                    <Link href="/curriculum" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">Curriculum</Link>
-                    <Link href="/admissions" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">Admissions</Link>
-                    <Link href="/about" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">About</Link>
+                    <Link href="/curriculum" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">{dict.navbar.curriculum}</Link>
+                    <Link href="/admissions" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">{dict.navbar.admissions}</Link>
+                    <Link href="/about" className="text-gray-300 hover:text-primary transition-colors text-sm uppercase tracking-widest font-medium">{dict.navbar.about}</Link>
                 </div>
 
                 {/* Auth & Wallet */}
                 <div className="hidden md:flex items-center gap-4">
+                    <LanguageSwitcher />
                     <ConnectButton
                         accountStatus="avatar"
                         chainStatus="icon"
@@ -103,12 +108,15 @@ export function Navbar() {
             {/* Mobile Menu */}
             {mobileMenuOpen && (
                 <div className="md:hidden absolute top-full left-0 right-0 bg-[#050510] border-b border-white/10 p-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
-                    <Link href="/curriculum" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Curriculum</Link>
-                    <Link href="/admissions" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Admissions</Link>
+                    <Link href="/curriculum" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>{dict.navbar.curriculum}</Link>
+                    <Link href="/admissions" className="text-gray-300 hover:text-primary py-2 text-center" onClick={() => setMobileMenuOpen(false)}>{dict.navbar.admissions}</Link>
                     {/* @ts-ignore */}
                     {session?.user?.role === 'admin' && (
-                        <Link href="/admin" className="text-red-400 font-bold py-2 text-center" onClick={() => setMobileMenuOpen(false)}>Admin Dashboard</Link>
+                        <Link href="/admin" className="text-red-400 font-bold py-2 text-center" onClick={() => setMobileMenuOpen(false)}>{dict.navbar.adminDashboard}</Link>
                     )}
+                    <div className="flex justify-center gap-4 py-2">
+                        <LanguageSwitcher />
+                    </div>
                     <div className="flex justify-center pt-4 border-t border-white/10">
                         <ConnectButton />
                     </div>
@@ -117,7 +125,7 @@ export function Navbar() {
                             onClick={() => { setMobileMenuOpen(false); setLoginModalOpen(true); }}
                             className="w-full py-3 rounded-lg bg-primary/20 text-primary border border-primary/50 font-medium"
                         >
-                            Login / Sign Up
+                            {dict.navbar.loginSignup}
                         </button>
                     )}
                 </div>

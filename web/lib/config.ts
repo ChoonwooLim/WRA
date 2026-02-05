@@ -1,3 +1,19 @@
+// Polyfill indexedDB for SSR to prevent Wagmi/RainbowKit errors
+if (typeof window === 'undefined') {
+    (global as any).indexedDB = {
+        open: () => ({
+            result: {
+                objectStoreNames: { contains: () => false },
+                createObjectStore: () => { },
+                transaction: () => ({ objectStore: () => ({ put: () => { }, get: () => { } }) }),
+            },
+            addEventListener: () => { },
+            onupgradeneeded: () => { },
+            onsuccess: () => { },
+        }),
+    };
+}
+
 import { http, createStorage, cookieStorage } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';

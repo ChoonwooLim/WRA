@@ -25,20 +25,41 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         setLoading(true);
 
         if (activeTab === 'login') {
-            // Create a specific credentials workflow here
-            // For now we simulate specific logic or call NextAuth
-            await signIn('credentials', {
+            const result = await signIn('credentials', {
                 redirect: false,
                 email,
                 password,
             });
-            // In a real app, handle error/success here
-            onClose();
+
+            if (result?.error) {
+                alert('Login failed. Please check your credentials.');
+            } else {
+                onClose();
+            }
         } else {
-            // Handle signup logic (API call to create user)
-            // For demo, we just switch to login or simulated success
-            alert('Membership registration logic requires a backend database connection. UI Demonstration Complete.');
-            setActiveTab('login');
+            // Real Sign Up Logic
+            try {
+                const res = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name || 'New Student',
+                        email,
+                        password
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || 'Registration failed');
+                }
+
+                alert('Registration successful! Please log in.');
+                setActiveTab('login');
+            } catch (error: any) {
+                alert(error.message);
+            }
         }
         setLoading(false);
     };
