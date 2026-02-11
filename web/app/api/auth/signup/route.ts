@@ -50,8 +50,9 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error("Signup error:", error);
         if (error instanceof z.ZodError) {
+            const message = (error as any).errors?.[0]?.message || (error as any).issues?.[0]?.message || "Validation error";
             return NextResponse.json(
-                { user: null, message: error.errors[0].message },
+                { user: null, message },
                 { status: 400 }
             );
         }

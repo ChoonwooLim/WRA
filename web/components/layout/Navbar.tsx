@@ -37,13 +37,20 @@ export function Navbar() {
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-bold text-xl shadow-[0_0_15px_rgba(197,160,89,0.5)] group-hover:scale-105 transition-transform">
-                        W
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-3 group">
+                    <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+                        <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-[10px] opacity-20 group-hover:opacity-40 transition-opacity" />
+                        <img src="/images/wra_logo.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
                     </div>
-                    <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-wider group-hover:text-white transition-colors">
-                        WRA
-                    </span>
+                    <div className="flex flex-col">
+                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d4af37] to-[#fcf6ba] tracking-wider group-hover:text-white transition-colors">
+                            WRA
+                        </span>
+                        <span className="text-[0.6rem] text-gray-400 tracking-[0.2em] uppercase hidden sm:block">
+                            World Royal Academy
+                        </span>
+                    </div>
                 </Link>
 
                 {/* Desktop Menu */}
