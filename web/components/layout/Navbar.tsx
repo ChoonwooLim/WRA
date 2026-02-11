@@ -125,7 +125,7 @@ export function Navbar() {
                 <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
                     <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
                         <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-[10px] opacity-20 group-hover:opacity-40 transition-opacity" />
-                        <img src="/images/wra_logo.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
+                        <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d4af37] to-[#fcf6ba] tracking-wider">

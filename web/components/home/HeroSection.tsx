@@ -19,7 +19,7 @@ export function HeroSection() {
         <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
             {/* Video Background */}
             <div className="absolute top-0 left-0 w-full h-full z-0">
-                <div className="absolute inset-0 bg-black/60 z-10" /> {/* Overlay for text readability */}
+                <div className="absolute inset-0 bg-black/60 z-10" />
                 <video
                     autoPlay
                     loop
@@ -37,9 +37,26 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
+                    className="flex flex-col items-center"
                 >
+                    {/* Main Logo — Prominent */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.7 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, ease: 'easeOut' }}
+                        className="relative mb-8"
+                    >
+                        {/* Gold glow behind logo */}
+                        <div className="absolute inset-0 w-full h-full bg-[#d4af37]/15 rounded-full blur-[60px] scale-125" />
+                        <img
+                            src="/images/wra_logo_main.png"
+                            alt="World Royal Academy Emblem"
+                            className="relative w-36 h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+                        />
+                    </motion.div>
+
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-[#d4af37]/30 backdrop-blur-md mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-[#d4af37]/30 backdrop-blur-md mb-6">
                         <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" />
                         <span className="text-[#d4af37] text-sm font-medium tracking-wide uppercase">
                             {dict.home.welcome}
@@ -73,7 +90,7 @@ export function HeroSection() {
                         </Link>
 
                         <Link
-                            href="/curriculum"
+                            href="/education/language"
                             className="px-8 py-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm text-white font-medium hover:bg-white/10 transition-colors"
                         >
                             {dict.home.exploreCurriculum}

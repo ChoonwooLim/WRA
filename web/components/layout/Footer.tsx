@@ -28,7 +28,7 @@ export function Footer() {
                         <Link href="/" className="flex items-center gap-3">
                             <div className="relative w-10 h-10">
                                 <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-[10px] opacity-20" />
-                                <img src="/images/wra_logo.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
+                                <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
                             </div>
                             <div>
                                 <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d4af37] to-[#fcf6ba]">
