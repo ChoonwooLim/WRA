@@ -5,7 +5,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useSession, signOut } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { Menu, X, User, ChevronDown, Crown, Building2, GraduationCap, Award, Briefcase, Users } from 'lucide-react';
+import { User, ChevronDown, Crown, Building2, GraduationCap, Award, Briefcase, Users } from 'lucide-react';
 
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { useLanguage } from '@/components/providers/LanguageProvider';
@@ -106,6 +106,7 @@ export function Navbar() {
             icon: <Users className="w-4 h-4" />,
             submenu: [
                 { label: dict.navbar.notices, href: '/community/notices' },
+                { label: '자유게시판', href: '/community/free-board' },
                 { label: dict.navbar.newsletter, href: '/community/newsletter' },
                 { label: dict.navbar.qna, href: '/community/qna' },
                 { label: dict.navbar.contact, href: '/community/contact' },
@@ -114,179 +115,304 @@ export function Navbar() {
     ];
 
     return (
-        <nav
-            className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent',
-                scrolled ? 'bg-[#050510]/90 backdrop-blur-xl border-white/5 py-2' : 'bg-transparent py-4'
-            )}
-        >
-            <div className="container mx-auto px-4 flex items-center justify-between" ref={dropdownRef}>
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-                    <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
-                        <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-[10px] opacity-20 group-hover:opacity-40 transition-opacity" />
-                        <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d4af37] to-[#fcf6ba] tracking-wider">
-                            WRA
-                        </span>
-                        <span className="text-[0.55rem] text-gray-400 tracking-[0.15em] uppercase hidden sm:block">
-                            World Royal Academy
-                        </span>
-                    </div>
-                </Link>
-
-                {/* Desktop Menu */}
-                <div className="hidden lg:flex items-center gap-1">
-                    {menuItems.map((item) => (
-                        <div
-                            key={item.href}
-                            className="relative"
-                            onMouseEnter={() => setOpenDropdown(item.href)}
-                            onMouseLeave={() => setOpenDropdown(null)}
-                        >
-                            <Link
-                                href={item.href}
-                                className={cn(
-                                    'flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
-                                    'text-gray-300 hover:text-[#d4af37] hover:bg-white/5',
-                                    openDropdown === item.href && 'text-[#d4af37] bg-white/5'
-                                )}
+        <>
+            {/* TwinVerse-style Header */}
+            <header
+                className={cn(
+                    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+                    scrolled ? 'shadow-[0_8px_40px_rgba(0,0,0,0.4)]' : ''
+                )}
+                style={{
+                    background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.5) 100%)',
+                    backdropFilter: 'blur(10px)',
+                    borderBottom: '1px solid rgba(255,255,255,0.15)',
+                    boxShadow: scrolled
+                        ? '0 8px 40px rgba(0,0,0,0.4), 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+                        : 'inset 0 1px 0 rgba(255,255,255,0.05)',
+                }}
+            >
+                <nav className="py-3">
+                    <div
+                        className="flex items-center max-w-[1920px] mx-auto px-5 relative"
+                        ref={dropdownRef}
+                    >
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+                            <div className="relative w-12 h-12 group-hover:scale-110 transition-transform duration-300">
+                                <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
+                            </div>
+                            <span
+                                className="text-[1.4rem] font-extrabold tracking-[0.12em]"
+                                style={{
+                                    background: 'linear-gradient(135deg, #00d4ff 0%, #64ffda 25%, #8b5cf6 50%, #a78bfa 75%, #06ffa5 100%)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    backgroundClip: 'text',
+                                    filter: 'drop-shadow(0 2px 8px rgba(0, 212, 255, 0.3)) drop-shadow(0 0 20px rgba(100, 255, 218, 0.2))',
+                                }}
                             >
-                                {item.label}
-                                {item.submenu && <ChevronDown className={cn('w-3 h-3 transition-transform duration-200', openDropdown === item.href && 'rotate-180')} />}
-                            </Link>
+                                WRA
+                            </span>
+                        </Link>
 
-                            {/* Dropdown */}
-                            {item.submenu && openDropdown === item.href && (
-                                <div className="absolute top-full left-0 pt-2 z-50">
-                                    <div className="min-w-[220px] bg-[#0a0a20]/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl shadow-black/50 overflow-hidden">
-                                        <div className="p-1">
-                                            {item.submenu.map((sub) => (
-                                                <Link
-                                                    key={sub.href}
-                                                    href={sub.href}
-                                                    className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-gray-300 hover:text-[#d4af37] hover:bg-white/5 transition-all duration-200"
-                                                    onClick={() => setOpenDropdown(null)}
-                                                >
-                                                    <div className="w-1 h-1 rounded-full bg-[#d4af37]/40" />
-                                                    {sub.label}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Auth & Wallet */}
-                <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-                    <LanguageSwitcher />
-                    <ConnectButton accountStatus="avatar" chainStatus="icon" showBalance={false} />
-
-                    {session ? (
-                        <div className="flex items-center gap-2 pl-3 border-l border-white/10">
-                            {/* @ts-ignore */}
-                            {session.user?.role === 'admin' && (
-                                <Link
-                                    href="/admin"
-                                    className="px-2.5 py-1 rounded-lg bg-red-600/20 text-red-500 border border-red-600/50 text-xs font-bold hover:bg-red-600/30 transition-colors"
+                        {/* Desktop Nav Menu — TwinVerse capsule style */}
+                        <ul className="hidden lg:flex items-center gap-[0.4rem] ml-10 flex-wrap list-none">
+                            {menuItems.map((item) => (
+                                <li
+                                    key={item.href}
+                                    className="relative"
+                                    onMouseEnter={() => setOpenDropdown(item.href)}
+                                    onMouseLeave={() => setOpenDropdown(null)}
                                 >
-                                    ADMIN
-                                </Link>
-                            )}
-                            {session.user?.image ? (
-                                <img src={session.user.image} alt="Profile" className="w-7 h-7 rounded-full border border-primary/50" />
-                            ) : (
-                                <User className="w-5 h-5 text-primary" />
-                            )}
-                            <button onClick={() => signOut()} className="text-xs text-gray-400 hover:text-white transition-colors">
-                                Sign Out
-                            </button>
-                        </div>
-                    ) : (
-                        <button
-                            onClick={() => setLoginModalOpen(true)}
-                            className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#d4af37]/20 to-[#d4af37]/10 hover:from-[#d4af37]/30 hover:to-[#d4af37]/20 border border-[#d4af37]/30 text-sm font-medium text-[#d4af37] transition-all hover:shadow-lg hover:shadow-[#d4af37]/10"
-                        >
-                            {dict.navbar.loginSignup}
-                        </button>
-                    )}
-                </div>
-
-                {/* Mobile Menu Toggle */}
-                <button className="lg:hidden text-white p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {mobileMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-[#050510]/98 backdrop-blur-xl border-b border-white/10 max-h-[80vh] overflow-y-auto">
-                    <div className="p-4 space-y-1">
-                        {menuItems.map((item) => (
-                            <div key={item.href}>
-                                <button
-                                    className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-gray-300 hover:text-[#d4af37] hover:bg-white/5 transition-all"
-                                    onClick={() => setMobileSubmenu(mobileSubmenu === item.href ? null : item.href)}
-                                >
-                                    <span className="flex items-center gap-3">
-                                        {item.icon}
-                                        <span className="text-sm font-medium">{item.label}</span>
-                                    </span>
-                                    {item.submenu && (
-                                        <ChevronDown className={cn('w-4 h-4 transition-transform', mobileSubmenu === item.href && 'rotate-180')} />
-                                    )}
-                                </button>
-                                {item.submenu && mobileSubmenu === item.href && (
-                                    <div className="ml-8 space-y-0.5 pb-2">
-                                        {item.submenu.map((sub) => (
-                                            <Link
-                                                key={sub.href}
-                                                href={sub.href}
-                                                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-[#d4af37] hover:bg-white/5 transition-all"
-                                                onClick={() => setMobileMenuOpen(false)}
+                                    {/* Capsule Nav Link */}
+                                    <Link
+                                        href={item.href}
+                                        className={cn(
+                                            'flex items-center gap-1.5 px-4 py-2 rounded-xl text-[0.85rem] font-semibold whitespace-nowrap transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
+                                            'text-white border border-white/20',
+                                            openDropdown === item.href
+                                                ? 'text-[#0a0e27] font-bold scale-105 -translate-y-[2px]'
+                                                : 'hover:scale-105 hover:-translate-y-[2px]'
+                                        )}
+                                        style={{
+                                            textShadow: openDropdown === item.href
+                                                ? '0 2px 8px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.3)'
+                                                : '0 3px 10px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9)',
+                                            background: openDropdown === item.href
+                                                ? 'linear-gradient(135deg, #00d4ff 0%, #64ffda 25%, #8b5cf6 50%, #a78bfa 75%, #06ffa5 100%)'
+                                                : 'rgba(10, 14, 39, 0.5)',
+                                            boxShadow: openDropdown === item.href
+                                                ? '0 10px 40px rgba(0,212,255,0.4), 0 5px 20px rgba(139,92,246,0.3), 0 0 60px rgba(100,255,218,0.2), inset 0 1px 0 rgba(255,255,255,0.2)'
+                                                : 'none',
+                                            borderColor: openDropdown === item.href ? '#00d4ff' : undefined,
+                                        }}
+                                    >
+                                        {item.label}
+                                        {item.submenu && (
+                                            <span
+                                                className={cn(
+                                                    'text-[0.6rem] ml-1 transition-transform duration-300',
+                                                    openDropdown === item.href ? 'rotate-180' : ''
+                                                )}
+                                                style={{ display: 'inline-block' }}
                                             >
-                                                <div className="w-1 h-1 rounded-full bg-[#d4af37]/40" />
-                                                {sub.label}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                                                ▼
+                                            </span>
+                                        )}
+                                    </Link>
 
-                        {/* Mobile Auth */}
-                        <div className="pt-4 mt-4 border-t border-white/10 space-y-3">
-                            <div className="flex justify-center gap-4">
-                                <LanguageSwitcher />
-                            </div>
-                            <div className="flex justify-center">
-                                <ConnectButton />
-                            </div>
-                            {/* @ts-ignore */}
-                            {session?.user?.role === 'admin' && (
-                                <Link href="/admin" className="block text-center text-red-400 font-bold py-2" onClick={() => setMobileMenuOpen(false)}>
-                                    {dict.navbar.adminDashboard}
-                                </Link>
-                            )}
-                            {!session && (
+                                    {/* Dropdown Menu — TwinVerse glassmorphism style */}
+                                    {item.submenu && (
+                                        <ul
+                                            className={cn(
+                                                'absolute top-full left-0 min-w-[240px] rounded-2xl z-[1000] py-3 list-none transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
+                                                openDropdown === item.href
+                                                    ? 'opacity-100 visible translate-y-0'
+                                                    : 'opacity-0 invisible -translate-y-2.5 pointer-events-none'
+                                            )}
+                                            style={{
+                                                background: 'linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.6) 100%)',
+                                                backdropFilter: 'blur(15px)',
+                                                border: '1px solid rgba(255,255,255,0.2)',
+                                                boxShadow: '0 20px 60px rgba(0,0,0,0.4), 0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+                                            }}
+                                        >
+                                            {item.submenu.map((sub) => (
+                                                <li key={sub.href} className="mx-3 my-1">
+                                                    <Link
+                                                        href={sub.href}
+                                                        className="block px-5 py-2.5 rounded-xl text-[0.85rem] font-medium text-white transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-[#0a0e27] hover:font-semibold hover:translate-x-3 hover:scale-[1.02]"
+                                                        style={{
+                                                            textShadow: '0 2px 8px rgba(10,14,39,0.6), 0 0 15px rgba(100,255,218,0.08)',
+                                                            background: 'linear-gradient(135deg, rgba(10,14,39,0.6) 0%, rgba(37,42,82,0.4) 40%, rgba(124,58,237,0.06) 70%, rgba(21,24,43,0.6) 100%)',
+                                                            border: '1px solid rgba(100,255,218,0.1)',
+                                                            backdropFilter: 'blur(8px)',
+                                                        }}
+                                                        onMouseEnter={(e) => {
+                                                            const el = e.currentTarget;
+                                                            el.style.background = 'linear-gradient(135deg, #64ffda 0%, #00d4ff 30%, #8b5cf6 60%, #a78bfa 100%)';
+                                                            el.style.borderColor = '#64ffda';
+                                                            el.style.boxShadow = '0 8px 32px rgba(100,255,218,0.3), 0 4px 16px rgba(139,92,246,0.2), 0 0 40px rgba(0,212,255,0.15), inset 0 1px 0 rgba(255,255,255,0.15)';
+                                                            el.style.textShadow = '0 2px 8px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.2)';
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            const el = e.currentTarget;
+                                                            el.style.background = 'linear-gradient(135deg, rgba(10,14,39,0.6) 0%, rgba(37,42,82,0.4) 40%, rgba(124,58,237,0.06) 70%, rgba(21,24,43,0.6) 100%)';
+                                                            el.style.borderColor = 'rgba(100,255,218,0.1)';
+                                                            el.style.boxShadow = 'none';
+                                                            el.style.textShadow = '0 2px 8px rgba(10,14,39,0.6), 0 0 15px rgba(100,255,218,0.08)';
+                                                        }}
+                                                        onClick={() => setOpenDropdown(null)}
+                                                    >
+                                                        {sub.label}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Right side — Auth & Wallet */}
+                        <div className="hidden lg:flex items-center gap-3 ml-auto flex-shrink-0">
+                            <LanguageSwitcher />
+                            <ConnectButton accountStatus="avatar" chainStatus="icon" showBalance={false} />
+
+                            {session ? (
+                                <div className="flex items-center gap-2 pl-3 border-l border-white/10">
+                                    {/* @ts-ignore */}
+                                    {session.user?.role === 'admin' && (
+                                        <Link
+                                            href="/admin"
+                                            className="px-2.5 py-1 rounded-lg bg-red-600/20 text-red-500 border border-red-600/50 text-xs font-bold hover:bg-red-600/30 transition-colors"
+                                        >
+                                            ADMIN
+                                        </Link>
+                                    )}
+                                    {session.user?.image ? (
+                                        <img src={session.user.image} alt="Profile" className="w-7 h-7 rounded-full border border-primary/50" />
+                                    ) : (
+                                        <User className="w-5 h-5 text-primary" />
+                                    )}
+                                    <button onClick={() => signOut()} className="text-xs text-gray-400 hover:text-white transition-colors">
+                                        Sign Out
+                                    </button>
+                                </div>
+                            ) : (
                                 <button
-                                    onClick={() => { setMobileMenuOpen(false); setLoginModalOpen(true); }}
-                                    className="w-full py-3 rounded-lg bg-gradient-to-r from-[#d4af37]/20 to-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] font-medium"
+                                    onClick={() => setLoginModalOpen(true)}
+                                    className="px-5 py-2 rounded-xl font-semibold text-sm text-white border border-white/20 transition-all duration-[400ms] hover:scale-105 hover:-translate-y-[2px]"
+                                    style={{
+                                        textShadow: '0 3px 10px rgba(0,0,0,0.8)',
+                                        background: 'rgba(10, 14, 39, 0.5)',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        const el = e.currentTarget;
+                                        el.style.background = 'linear-gradient(135deg, #00d4ff 0%, #64ffda 25%, #8b5cf6 50%, #a78bfa 75%, #06ffa5 100%)';
+                                        el.style.color = '#0a0e27';
+                                        el.style.borderColor = '#00d4ff';
+                                        el.style.boxShadow = '0 10px 40px rgba(0,212,255,0.4), 0 5px 20px rgba(139,92,246,0.3)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        const el = e.currentTarget;
+                                        el.style.background = 'rgba(10, 14, 39, 0.5)';
+                                        el.style.color = 'white';
+                                        el.style.borderColor = 'rgba(255,255,255,0.2)';
+                                        el.style.boxShadow = 'none';
+                                    }}
                                 >
                                     {dict.navbar.loginSignup}
                                 </button>
                             )}
                         </div>
+
+                        {/* Mobile Hamburger Toggle — TwinVerse 3-bar style */}
+                        <button
+                            className="lg:hidden ml-auto flex flex-col gap-[5px] p-2"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        >
+                            <span className={cn(
+                                'block w-6 h-[3px] bg-white transition-all duration-300',
+                                mobileMenuOpen && 'rotate-45 translate-y-[8px]'
+                            )} />
+                            <span className={cn(
+                                'block w-6 h-[3px] bg-white transition-all duration-300',
+                                mobileMenuOpen && 'opacity-0'
+                            )} />
+                            <span className={cn(
+                                'block w-6 h-[3px] bg-white transition-all duration-300',
+                                mobileMenuOpen && '-rotate-45 -translate-y-[8px]'
+                            )} />
+                        </button>
                     </div>
-                </div>
-            )}
+                </nav>
+
+                {/* Mobile Menu */}
+                {mobileMenuOpen && (
+                    <div
+                        className="lg:hidden max-h-[80vh] overflow-y-auto"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(5,5,16,0.95) 100%)',
+                            backdropFilter: 'blur(15px)',
+                            borderTop: '1px solid rgba(255,255,255,0.1)',
+                        }}
+                    >
+                        <div className="p-4 space-y-1">
+                            {menuItems.map((item) => (
+                                <div key={item.href}>
+                                    <button
+                                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-white/80 hover:text-white transition-all"
+                                        style={{
+                                            background: mobileSubmenu === item.href
+                                                ? 'linear-gradient(135deg, rgba(10,14,39,0.8) 0%, rgba(37,42,82,0.5) 100%)'
+                                                : 'transparent',
+                                            border: mobileSubmenu === item.href ? '1px solid rgba(100,255,218,0.2)' : '1px solid transparent',
+                                        }}
+                                        onClick={() => setMobileSubmenu(mobileSubmenu === item.href ? null : item.href)}
+                                    >
+                                        <span className="flex items-center gap-3">
+                                            {item.icon}
+                                            <span className="text-sm font-semibold">{item.label}</span>
+                                        </span>
+                                        {item.submenu && (
+                                            <ChevronDown className={cn('w-4 h-4 transition-transform', mobileSubmenu === item.href && 'rotate-180')} />
+                                        )}
+                                    </button>
+                                    {item.submenu && mobileSubmenu === item.href && (
+                                        <div className="ml-4 space-y-1 pb-2 mt-1">
+                                            {item.submenu.map((sub) => (
+                                                <Link
+                                                    key={sub.href}
+                                                    href={sub.href}
+                                                    className="flex items-center gap-2 px-5 py-2 rounded-xl text-sm text-white/60 hover:text-[#64ffda] transition-all"
+                                                    style={{
+                                                        background: 'linear-gradient(135deg, rgba(10,14,39,0.4) 0%, rgba(37,42,82,0.2) 100%)',
+                                                        border: '1px solid rgba(100,255,218,0.05)',
+                                                    }}
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                >
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#64ffda]/40" />
+                                                    {sub.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+
+                            {/* Mobile Auth */}
+                            <div className="pt-4 mt-4 border-t border-white/10 space-y-3">
+                                <div className="flex justify-center gap-4">
+                                    <LanguageSwitcher />
+                                </div>
+                                <div className="flex justify-center">
+                                    <ConnectButton />
+                                </div>
+                                {/* @ts-ignore */}
+                                {session?.user?.role === 'admin' && (
+                                    <Link href="/admin" className="block text-center text-red-400 font-bold py-2" onClick={() => setMobileMenuOpen(false)}>
+                                        {dict.navbar.adminDashboard}
+                                    </Link>
+                                )}
+                                {!session && (
+                                    <button
+                                        onClick={() => { setMobileMenuOpen(false); setLoginModalOpen(true); }}
+                                        className="w-full py-3 rounded-xl font-semibold text-white border border-white/20"
+                                        style={{
+                                            background: 'linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(100,255,218,0.15) 100%)',
+                                        }}
+                                    >
+                                        {dict.navbar.loginSignup}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </header>
 
             <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
-        </nav>
+        </>
     );
 }
