@@ -47,6 +47,26 @@ model User {
 
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  board     String   // 'notices', 'qna', 'free-board'
+  title     String
+  content   String
+  category  String?  // For notices: '활동','인증','투어','교육' etc
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  answered  Boolean  @default(false) // For QnA only
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([board])
+  @@index([authorId])
 }
 
 model VerificationToken {

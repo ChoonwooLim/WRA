@@ -120,17 +120,45 @@ export function Navbar() {
             <header
                 className={cn(
                     'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                    scrolled ? 'shadow-[0_8px_40px_rgba(0,0,0,0.4)]' : ''
+                    scrolled ? 'shadow-[0_8px_40px_rgba(0,0,0,0.6)]' : ''
                 )}
                 style={{
-                    background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.5) 100%)',
-                    backdropFilter: 'blur(10px)',
-                    borderBottom: '1px solid rgba(255,255,255,0.15)',
+                    background: `
+                        linear-gradient(90deg,
+                            rgba(8,6,20,1) 0%,
+                            rgba(12,10,32,1) 15%,
+                            rgba(18,14,38,1) 30%,
+                            rgba(10,8,28,1) 50%,
+                            rgba(18,14,38,1) 70%,
+                            rgba(12,10,32,1) 85%,
+                            rgba(8,6,20,1) 100%
+                        )`,
+                    borderBottom: scrolled
+                        ? '1px solid rgba(180,160,100,0.25)'
+                        : '1px solid rgba(180,160,100,0.15)',
                     boxShadow: scrolled
-                        ? '0 8px 40px rgba(0,0,0,0.4), 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
-                        : 'inset 0 1px 0 rgba(255,255,255,0.05)',
+                        ? '0 8px 40px rgba(0,0,0,0.6), 0 2px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,215,0,0.08), 0 1px 0 rgba(180,160,100,0.15)'
+                        : 'inset 0 1px 0 rgba(255,215,0,0.06), 0 1px 0 rgba(180,160,100,0.1)',
                 }}
             >
+                {/* Decorative overlay layers */}
+                <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background: `
+                            radial-gradient(ellipse 600px 100px at 20% 50%, rgba(100,80,200,0.06) 0%, transparent 100%),
+                            radial-gradient(ellipse 800px 80px at 80% 50%, rgba(0,180,200,0.04) 0%, transparent 100%),
+                            radial-gradient(ellipse 400px 60px at 50% 50%, rgba(200,170,80,0.04) 0%, transparent 100%)
+                        `,
+                    }}
+                />
+                {/* Bottom accent glow line */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-[1px] pointer-events-none"
+                    style={{
+                        background: 'linear-gradient(90deg, transparent 5%, rgba(200,170,80,0.3) 20%, rgba(0,180,220,0.2) 40%, rgba(160,130,220,0.25) 60%, rgba(200,170,80,0.3) 80%, transparent 95%)',
+                    }}
+                />
                 <nav className="py-3">
                     <div
                         className="flex items-center max-w-[1920px] mx-auto px-5 relative"

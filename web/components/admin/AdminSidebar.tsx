@@ -2,34 +2,49 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, FileText, Settings, LogOut, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 
 const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin' },
-    { icon: Users, label: 'Members', href: '/admin/members' },
-    { icon: FileText, label: 'Posts', href: '/admin/posts' },
-    { icon: Settings, label: 'Settings', href: '/admin/settings' },
+    { icon: LayoutDashboard, label: '대시보드', href: '/admin' },
+    { icon: Users, label: '회원 관리', href: '/admin/members' },
+    { icon: FileText, label: '게시글 관리', href: '/admin/posts' },
+    { icon: Shield, label: '인증 관리', href: '/admin/certifications' },
+    { icon: BarChart3, label: '통계', href: '/admin/analytics' },
+    { icon: Bell, label: '알림', href: '/admin/notifications' },
+    { icon: Settings, label: '설정', href: '/admin/settings' },
 ];
 
 export function AdminSidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="w-64 bg-[#0a0a1a] border-r border-white/10 h-screen fixed left-0 top-0 overflow-y-auto flex flex-col">
-            <div className="p-6 border-b border-white/10 flex items-center justify-center">
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded bg-red-600 flex items-center justify-center text-white font-bold">
-                        A
+        <aside className="w-64 h-screen fixed left-0 top-0 overflow-y-auto flex flex-col border-r border-white/10"
+            style={{
+                background: 'linear-gradient(180deg, #0a0a1a 0%, #0d0d20 50%, #0a0a1a 100%)',
+            }}
+        >
+            {/* Logo Section */}
+            <div className="p-6 border-b border-white/10">
+                <Link href="/admin" className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-lg"
+                        style={{
+                            background: 'linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%)',
+                        }}
+                    >
+                        W
                     </div>
-                    <span className="text-xl font-bold text-white tracking-wider">
-                        ADMIN
-                    </span>
-                </div>
+                    <div>
+                        <span className="text-lg font-bold text-white tracking-wider">WRA</span>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest">Admin Panel</p>
+                    </div>
+                </Link>
             </div>
 
-            <nav className="flex-1 p-4 space-y-2">
+            {/* Navigation */}
+            <nav className="flex-1 p-4 space-y-1">
+                <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest px-4 mb-3">메뉴</p>
                 {menuItems.map((item) => {
                     const isActive = pathname === item.href;
                     return (
@@ -37,26 +52,41 @@ export function AdminSidebar() {
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm group",
+                                "flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-medium text-sm group relative",
                                 isActive
-                                    ? "bg-primary/20 text-primary border border-primary/20"
+                                    ? "text-white"
                                     : "text-gray-400 hover:text-white hover:bg-white/5"
                             )}
                         >
-                            <item.icon size={20} className={cn(isActive ? "text-primary" : "text-gray-500 group-hover:text-white")} />
-                            {item.label}
+                            {/* Active indicator line */}
+                            {isActive && (
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full"
+                                    style={{ background: 'linear-gradient(180deg, #00d4ff, #8b5cf6)' }}
+                                />
+                            )}
+                            {isActive && (
+                                <div className="absolute inset-0 rounded-xl opacity-10"
+                                    style={{ background: 'linear-gradient(90deg, #00d4ff, transparent)' }}
+                                />
+                            )}
+                            <item.icon size={18} className={cn(
+                                "transition-colors relative z-10",
+                                isActive ? "text-cyan-400" : "text-gray-500 group-hover:text-white"
+                            )} />
+                            <span className="relative z-10">{item.label}</span>
                         </Link>
                     );
                 })}
             </nav>
 
+            {/* Footer */}
             <div className="p-4 border-t border-white/10">
                 <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl w-full text-left text-red-400 hover:bg-red-500/10 transition-colors text-sm font-medium"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl w-full text-left text-red-400 hover:bg-red-500/10 transition-colors text-sm font-medium"
                 >
-                    <LogOut size={20} />
-                    Exit & Logout
+                    <LogOut size={18} />
+                    로그아웃
                 </button>
             </div>
         </aside>

@@ -1,51 +1,79 @@
 'use client';
 
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { Search, Pen } from 'lucide-react';
-import { useState } from 'react';
+import { Search, Pen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const sampleNotices = [
-    { id: 5, title: '황태손 전하 인도네시아 문화교류 활동 보고', category: '활동', author: '관리자', date: '2026-01-15', views: 234 },
-    { id: 4, title: 'K-Royal Warrant 인증 절차 개선 공지', category: '인증', author: '관리자', date: '2026-01-20', views: 187 },
-    { id: 3, title: '왕립 투어 프로그램 일정 업데이트', category: '투어', author: '관리자', date: '2026-01-28', views: 156 },
-    { id: 2, title: 'The Royal 33 제2기 멤버 모집 안내', category: '인증', author: '관리자', date: '2026-02-05', views: 312 },
-    { id: 1, title: '세계왕립아카데미 2026년 상반기 교육과정 안내', category: '교육', author: '관리자', date: '2026-02-10', views: 489 },
-];
+interface Post {
+    id: string;
+    title: string;
+    category: string | null;
+    views: number;
+    createdAt: string;
+    author: { name: string | null };
+}
 
 export default function NoticesPage() {
     const { dict } = useLanguage();
+    const router = useRouter();
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchInput, setSearchInput] = useState('');
+    const [loading, setLoading] = useState(true);
 
-    const filteredNotices = sampleNotices.filter(n =>
-        n.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const fetchPosts = useCallback(async () => {
+        setLoading(true);
+        try {
+            const params = new URLSearchParams({ board: 'notices', page: String(page), limit: '10' });
+            if (searchTerm) params.set('search', searchTerm);
+            const res = await fetch(`/api/posts?${params}`);
+            const data = await res.json();
+            setPosts(data.posts || []);
+            setTotal(data.total || 0);
+            setTotalPages(data.totalPages || 1);
+        } catch {
+            setPosts([]);
+        } finally {
+            setLoading(false);
+        }
+    }, [page, searchTerm]);
+
+    useEffect(() => { fetchPosts(); }, [fetchPosts]);
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        setPage(1);
+        setSearchTerm(searchInput);
+    };
 
     return (
         <div className="bg-[#050510] min-h-screen pt-[100px] pb-20 px-4">
             <div className="board-container">
-                {/* Board Header */}
                 <div className="board-header">
                     <h1 className="board-title">📢 {dict.pages.community.noticesTitle}</h1>
                 </div>
 
-                {/* Controls: Search + Write */}
                 <div className="board-controls">
-                    <div className="board-search">
+                    <form onSubmit={handleSearch} className="board-search">
                         <Search className="w-4 h-4" />
                         <input
                             type="text"
                             placeholder="공지사항 검색..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                         />
-                    </div>
-                    <button className="btn-tv-primary">
+                    </form>
+                    <Link href="/community/write?board=notices" className="btn-tv-primary">
                         <Pen className="w-3.5 h-3.5" />
                         글쓰기
-                    </button>
+                    </Link>
                 </div>
 
-                {/* Board Table */}
                 <table className="board-table">
                     <thead>
                         <tr>
@@ -58,36 +86,42 @@ export default function NoticesPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredNotices.length === 0 ? (
-                            <tr>
-                                <td colSpan={6} className="text-center py-8 text-gray-500">
-                                    게시글이 없습니다.
-                                </td>
-                            </tr>
+                        {loading ? (
+                            <tr><td colSpan={6} className="text-center py-8 text-gray-500">로딩 중...</td></tr>
+                        ) : posts.length === 0 ? (
+                            <tr><td colSpan={6} className="text-center py-8 text-gray-500">게시글이 없습니다.</td></tr>
                         ) : (
-                            filteredNotices.map((notice) => (
-                                <tr key={notice.id}>
-                                    <td className="text-center text-gray-400">{notice.id}</td>
+                            posts.map((post, idx) => (
+                                <tr key={post.id} className="cursor-pointer" onClick={() => router.push(`/community/post/${post.id}`)}>
+                                    <td className="text-center text-gray-400">{total - ((page - 1) * 10 + idx)}</td>
                                     <td className="text-center">
-                                        <span className="board-badge">{notice.category}</span>
+                                        {post.category && <span className="board-badge">{post.category}</span>}
                                     </td>
-                                    <td className="post-title">{notice.title}</td>
-                                    <td className="text-center text-gray-400">{notice.author}</td>
-                                    <td className="text-center text-gray-400">{notice.date}</td>
-                                    <td className="text-center text-gray-400">{notice.views}</td>
+                                    <td className="post-title">{post.title}</td>
+                                    <td className="text-center text-gray-400">{post.author?.name || '-'}</td>
+                                    <td className="text-center text-gray-400">{new Date(post.createdAt).toLocaleDateString('ko-KR')}</td>
+                                    <td className="text-center text-gray-400">{post.views}</td>
                                 </tr>
                             ))
                         )}
                     </tbody>
                 </table>
 
-                {/* Pagination */}
-                <div className="board-pagination">
-                    <button className="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>»</button>
-                </div>
+                {totalPages > 1 && (
+                    <div className="board-pagination">
+                        <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}>
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).slice(
+                            Math.max(0, page - 3), Math.min(totalPages, page + 2)
+                        ).map(p => (
+                            <button key={p} className={p === page ? 'active' : ''} onClick={() => setPage(p)}>{p}</button>
+                        ))}
+                        <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages}>
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
