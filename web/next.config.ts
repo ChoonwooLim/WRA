@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['pino-pretty', 'lokijs', 'encoding'],
   webpack: (config) => {
     config.externals.push('pino-pretty', 'lokijs', 'encoding', '@base-org/account');
     config.resolve.fallback = {

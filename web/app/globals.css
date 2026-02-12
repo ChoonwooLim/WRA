@@ -2,20 +2,20 @@
 
 :root {
   /* Royal Palette - Enhanced */
-  --background: #050510;
-  /* Deep Blue/Black */
+  --background: #0c1024;
+  /* Deep Navy */
   --foreground: #f8f9fa;
   --primary: #d4af37;
   /* Metallic Gold */
   --primary-foreground: #000000;
-  --secondary: #1a1a2e;
+  --secondary: #151a30;
   /* Navigation / Cards */
   --secondary-foreground: #ffffff;
   --accent: #d4af37;
   --muted: #2d2d44;
 
   --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-  --royal-blue-gradient: linear-gradient(to bottom, #050510, #0a0a20);
+  --royal-blue-gradient: linear-gradient(to bottom, #0c1024, #0e1428, #0c1024);
 
   /* TwinVerse Accent Colors */
   --accent-gold: #d4af37;

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import dynamic from 'next/dynamic';
 import { useSession, signOut } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,19 @@ import { User, ChevronDown, Crown, Building2, GraduationCap, Award, Briefcase, U
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { LoginModal } from '@/components/auth/LoginModal';
+
+// Lazy-load heavy Web3 ConnectButton — won't block initial page render
+const ConnectButton = dynamic(
+    () => import('@rainbow-me/rainbowkit').then((mod) => mod.ConnectButton),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-500 animate-pulse">
+                지갑 로딩...
+            </div>
+        ),
+    }
+);
 
 interface SubMenuItem {
     label: string;

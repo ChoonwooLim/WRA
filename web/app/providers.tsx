@@ -1,35 +1,22 @@
 'use client';
 
 import * as React from 'react';
-import {
-    RainbowKitProvider,
-    darkTheme,
-} from '@rainbow-me/rainbowkit';
-import { WagmiProvider } from 'wagmi';
-import {
-    QueryClientProvider,
-    QueryClient,
-} from '@tanstack/react-query';
 import { SessionProvider } from 'next-auth/react';
-import { config } from '@/lib/config';
-import '@rainbow-me/rainbowkit/styles.css';
-
-const queryClient = new QueryClient();
-
 import { LanguageProvider } from '@/components/providers/LanguageProvider';
+
+// Lazy-load heavy Web3 providers — they won't block initial page render
+const Web3Provider = React.lazy(() => import('@/components/providers/Web3Provider'));
 
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
-        <WagmiProvider config={config}>
-            <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider theme={darkTheme()}>
-                    <SessionProvider>
-                        <LanguageProvider>
-                            {children}
-                        </LanguageProvider>
-                    </SessionProvider>
-                </RainbowKitProvider>
-            </QueryClientProvider>
-        </WagmiProvider>
+        <SessionProvider>
+            <LanguageProvider>
+                <React.Suspense fallback={children}>
+                    <Web3Provider>
+                        {children}
+                    </Web3Provider>
+                </React.Suspense>
+            </LanguageProvider>
+        </SessionProvider>
     );
 }
