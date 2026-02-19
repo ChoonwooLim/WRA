@@ -4,26 +4,10 @@ import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { useState, useRef, useEffect } from 'react';
+
 
 export function HeroSection() {
     const { dict } = useLanguage();
-    const [videoLoaded, setVideoLoaded] = useState(false);
-    const videoRef = useRef<HTMLVideoElement>(null);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (video) {
-            const handleCanPlay = () => setVideoLoaded(true);
-            const handleError = () => setVideoLoaded(false);
-            video.addEventListener('canplay', handleCanPlay);
-            video.addEventListener('error', handleError);
-            return () => {
-                video.removeEventListener('canplay', handleCanPlay);
-                video.removeEventListener('error', handleError);
-            };
-        }
-    }, []);
 
     const scrollToFeatures = () => {
         const featuresSection = document.getElementById('features');
@@ -34,8 +18,8 @@ export function HeroSection() {
 
     return (
         <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
-            {/* Animated Gradient Background (always rendered, hidden when video loads) */}
-            <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}>
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 z-0 opacity-100">
                 <div
                     className="absolute inset-0 animate-gradient-shift"
                     style={{
@@ -61,19 +45,14 @@ export function HeroSection() {
                 </div>
             </div>
 
-            {/* Video Background (shown when available) */}
-            <div className={`absolute top-0 left-0 w-full h-full z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}>
+            {/* Background Image (Static Replacement for Video) */}
+            <div className="absolute top-0 left-0 w-full h-full z-0">
                 <div className="absolute inset-0 bg-black/60 z-10" />
-                <video
-                    ref={videoRef}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                <img
+                    src="/images/hero-bg.png"
+                    alt="Gyeongbokgung Palace"
                     className="w-full h-full object-cover"
-                >
-                    <source src="/videos/hero.mp4" type="video/mp4" />
-                </video>
+                />
             </div>
 
             {/* Content Container */}

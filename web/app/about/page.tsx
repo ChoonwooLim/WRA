@@ -16,10 +16,19 @@ export default function AboutPage() {
             <HeroBanner title={d.heroTitle} subtitle={d.heroSubtitle} />
 
             {/* 설립이념 (Founding Philosophy) — Slide 9 */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-4xl text-center">
+            {/* 설립이념 (Founding Philosophy) — Slide 9 */}
+            <section className="relative py-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/images/about-philosophy.png"
+                        alt="Changdeokgung Palace"
+                        className="w-full h-full object-cover opacity-40"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-[#050510]/80 to-[#050510]" />
+                </div>
+                <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
                     <SectionHeader title="설립이념" subtitle="Founding Philosophy" />
-                    <GlassCard className="p-10 !bg-gradient-to-br !from-[#d4af37]/5 !to-[#d4af37]/0 !border-[#d4af37]/20">
+                    <GlassCard className="p-10 !bg-gradient-to-br !from-[#d4af37]/10 !to-[#d4af37]/5 !border-[#d4af37]/30 backdrop-blur-xl">
                         <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-6">
                             세계 왕립아카데미는 한국, 한국인, 한민족의 뿌리사상인
                         </p>
@@ -63,8 +72,16 @@ export default function AboutPage() {
             </section>
 
             {/* Vision & Mission — Slide 11 */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-5xl">
+            <section className="relative py-20 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/images/about-vision.png"
+                        alt="Buyongjeong Pavilion"
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                    <div className="absolute inset-0 bg-[#050510]/90" />
+                </div>
+                <div className="relative z-10 container mx-auto px-4 max-w-5xl">
                     <SectionHeader title={d.visionTitle} />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <GlassCard className="p-8">

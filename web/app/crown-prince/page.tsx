@@ -53,8 +53,12 @@ export default function CrownPrincePage() {
                 <div className="container mx-auto px-4 max-w-5xl">
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div className="flex-shrink-0">
-                            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border-2 border-[#d4af37]/20 flex items-center justify-center">
-                                <Crown className="w-24 h-24 text-[#d4af37]/60" />
+                            <div className="relative w-64 h-64 rounded-full border-4 border-[#d4af37]/30 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                                <img
+                                    src="/images/crown-prince-portrait.jpg"
+                                    alt="His Imperial Highness Crown Prince Lee Won"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                         </div>
                         <div className="text-center md:text-left">
@@ -93,15 +97,25 @@ export default function CrownPrincePage() {
             {/* Academic Activities */}
             <section className="py-16">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <GlassCard className="p-10 text-center !bg-gradient-to-br !from-[#d4af37]/5 !to-[#d4af37]/0 !border-[#d4af37]/20">
-                        <GraduationCap className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-white mb-3">조선 대한 황실 문화 계승 발전 세계화</h3>
-                        <p className="text-[#d4af37]/60 text-sm mb-3">Globalization of Korean Imperial Cultural Heritage</p>
-                        <p className="text-gray-400 text-sm leading-relaxed max-w-2xl mx-auto">
-                            미국 컬럼비아대학교 강연 등을 통해 조선 대한 황실 문화의 계승 발전과 세계화를 위해
-                            노력하고 계시며, 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신하고 계십니다.
-                        </p>
-                    </GlassCard>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div className="h-full rounded-xl overflow-hidden border border-[#d4af37]/20 shadow-lg relative min-h-[300px]">
+                            <img
+                                src="/images/crown-prince-activities.jpg"
+                                alt="Crown Prince Activities"
+                                className="absolute inset-0 w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#050510] to-transparent opacity-60" />
+                        </div>
+                        <GlassCard className="p-10 text-center md:text-left !bg-gradient-to-br !from-[#d4af37]/5 !to-[#d4af37]/0 !border-[#d4af37]/20 h-full flex flex-col justify-center">
+                            <GraduationCap className="w-10 h-10 text-[#d4af37] mx-auto md:mx-0 mb-4" />
+                            <h3 className="text-xl font-bold text-white mb-3">조선 대한 황실 문화 계승 발전 세계화</h3>
+                            <p className="text-[#d4af37]/60 text-sm mb-3">Globalization of Korean Imperial Cultural Heritage</p>
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                                미국 컬럼비아대학교 강연 등을 통해 조선 대한 황실 문화의 계승 발전과 세계화를 위해
+                                노력하고 계시며, 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신하고 계십니다.
+                            </p>
+                        </GlassCard>
+                    </div>
                 </div>
             </section>
 
