@@ -5,11 +5,10 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { motion } from 'framer-motion';
 
 const lineageData = [
-    { year: '1852', name: '고종 (Gojong)', title: '대한제국 초대 황제', desc: 'Emperor of the Korean Empire' },
-    { year: '1877', name: '의친왕 (Uichinwang)', title: '고종의 아들', desc: 'Son of Emperor Gojong' },
-    { year: '1919', name: '이건 (Lee Geon)', title: '의친왕의 아들', desc: 'Son of Uichinwang' },
-    { year: '1947', name: '이충길 (Lee Chung-gil)', title: '이건의 아들', desc: 'Son of Lee Geon' },
-    { year: '현재', name: '이원 (Lee Won)', title: '대한제국 5대 황태손', desc: '5th Crown Prince of the Korean Imperial Family' },
+    { year: '1852–1919', name: '고종 (高宗)', title: '대한제국 초대 황제', desc: '조선 제26대 국왕이자 대한제국 초대 황제. 1897년 대한제국을 선포하고 근대화를 추진하였습니다.' },
+    { year: '1877–1955', name: '의친왕 의강 (義親王 義剛)', title: '고종의 다섯째 아들', desc: '고종황제의 아들로, 독립운동에 참여하였으며 왕실의 근대 역사를 이어온 핵심 인물입니다.' },
+    { year: '1931–2005', name: '이 구 (李 玖)', title: '의친왕의 손자 / 영친왕의 아들', desc: '영친왕과 이방자 여사의 아들로, 대한제국 황실의 마지막 직계 황태자였습니다.' },
+    { year: '1962–', name: '이 원 (李 源)', title: '대한제국 제5대 황태손', desc: '2003년 이 구 황태손의 양자로 입적되어 황실의 법통을 이은 황사손입니다. 현재 대한제국 황실의 수장으로서 문화재 환수, 국제 교류, 궁중문화축전 기획 등을 통해 황실 문화유산의 세계화에 헌신하고 계십니다.' },
 ];
 
 export default function LineagePage() {
@@ -18,6 +17,18 @@ export default function LineagePage() {
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={dict.pages.crownPrince.lineageTitle} subtitle={dict.pages.crownPrince.lineageDesc} compact />
+
+            {/* Reference Note */}
+            <section className="pt-10 pb-0">
+                <div className="container mx-auto px-4 max-w-3xl text-center">
+                    <p className="text-gray-500 text-xs">
+                        참조: 대한제국황실문화원{' '}
+                        <a href="https://www.imperialhouse.kr/sub02/sub02_01.php" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]/60 hover:text-[#d4af37] transition-colors">
+                            imperialhouse.kr
+                        </a>
+                    </p>
+                </div>
+            </section>
 
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-3xl">
@@ -35,15 +46,15 @@ export default function LineagePage() {
                                 className={`relative flex items-center mb-12 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                             >
                                 {/* Timeline dot */}
-                                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#d4af37] border-4 border-[#050510] z-10 shadow-lg shadow-[#d4af37]/20" />
+                                <div className={`absolute left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-4 border-[#050510] z-10 shadow-lg ${i === lineageData.length - 1 ? 'bg-[#d4af37] shadow-[#d4af37]/40 w-5 h-5' : 'bg-[#d4af37]/70 shadow-[#d4af37]/20'}`} />
 
                                 {/* Content */}
                                 <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                                    <div className="glass-card rounded-xl p-6">
+                                    <div className={`glass-card rounded-xl p-6 ${i === lineageData.length - 1 ? 'border-[#d4af37]/30 !border-2' : ''}`}>
                                         <span className="text-[#d4af37] text-sm font-mono">{item.year}</span>
                                         <h3 className="text-xl font-bold text-white mt-1">{item.name}</h3>
                                         <p className="text-[#d4af37]/80 text-sm mt-1">{item.title}</p>
-                                        <p className="text-gray-400 text-sm mt-2">{item.desc}</p>
+                                        <p className="text-gray-400 text-sm mt-2 leading-relaxed">{item.desc}</p>
                                     </div>
                                 </div>
                             </motion.div>

@@ -4,9 +4,26 @@ import { motion } from 'framer-motion';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage } from '@/components/providers/LanguageProvider';
+import { useState, useRef, useEffect } from 'react';
 
 export function HeroSection() {
     const { dict } = useLanguage();
+    const [videoLoaded, setVideoLoaded] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (video) {
+            const handleCanPlay = () => setVideoLoaded(true);
+            const handleError = () => setVideoLoaded(false);
+            video.addEventListener('canplay', handleCanPlay);
+            video.addEventListener('error', handleError);
+            return () => {
+                video.removeEventListener('canplay', handleCanPlay);
+                video.removeEventListener('error', handleError);
+            };
+        }
+    }, []);
 
     const scrollToFeatures = () => {
         const featuresSection = document.getElementById('features');
@@ -17,10 +34,38 @@ export function HeroSection() {
 
     return (
         <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
-            {/* Video Background */}
-            <div className="absolute top-0 left-0 w-full h-full z-0">
+            {/* Animated Gradient Background (always rendered, hidden when video loads) */}
+            <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`}>
+                <div
+                    className="absolute inset-0 animate-gradient-shift"
+                    style={{
+                        background: `
+                            radial-gradient(ellipse 120% 80% at 20% 50%, rgba(212,175,55,0.15) 0%, transparent 60%),
+                            radial-gradient(ellipse 100% 100% at 80% 20%, rgba(139,92,246,0.1) 0%, transparent 50%),
+                            radial-gradient(ellipse 80% 60% at 50% 80%, rgba(0,212,255,0.08) 0%, transparent 50%),
+                            linear-gradient(135deg, #050510 0%, #0a0e27 25%, #0d1030 50%, #08061a 75%, #050510 100%)
+                        `,
+                    }}
+                />
+                {/* Floating particles effect */}
+                <div className="absolute inset-0 overflow-hidden">
+                    {[...Array(6)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-1 h-1 rounded-full bg-[#d4af37]/30"
+                            initial={{ x: `${15 + i * 15}%`, y: '110%', opacity: 0 }}
+                            animate={{ y: '-10%', opacity: [0, 0.6, 0] }}
+                            transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'linear' }}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Video Background (shown when available) */}
+            <div className={`absolute top-0 left-0 w-full h-full z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}>
                 <div className="absolute inset-0 bg-black/60 z-10" />
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
                     muted
