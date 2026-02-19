@@ -43,12 +43,14 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
         'notices': '📢 공지사항',
         'qna': '❓ Q&A',
         'free-board': '💬 자유게시판',
+        'gallery': '📸 이미지 갤러리',
     };
 
     const boardPath: Record<string, string> = {
         'notices': '/community/notices',
         'qna': '/community/qna',
         'free-board': '/community/free-board',
+        'gallery': '/community/gallery',
     };
 
     // @ts-ignore
@@ -157,9 +159,10 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
                 </div>
 
                 {/* Post Content */}
-                <div className="min-h-[200px] text-gray-300 leading-relaxed whitespace-pre-wrap mb-8">
-                    {post.content}
-                </div>
+                <div
+                    className="min-h-[200px] text-gray-300 leading-relaxed whitespace-pre-wrap mb-8 prose prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                />
 
                 {/* Action Buttons */}
                 <div className="flex justify-between items-center pt-5 border-t border-white/10">

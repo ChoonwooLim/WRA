@@ -120,6 +120,7 @@ export function Navbar() {
             submenu: [
                 { label: dict.navbar.notices, href: '/community/notices' },
                 { label: '자유게시판', href: '/community/free-board' },
+                { label: '이미지 갤러리', href: '/community/gallery' },
                 { label: dict.navbar.newsletter, href: '/community/newsletter' },
                 { label: dict.navbar.qna, href: '/community/qna' },
                 { label: dict.navbar.contact, href: '/community/contact' },
