@@ -13,6 +13,14 @@ export default function CrownPrincePage() {
     const { dict } = useLanguage();
     const d = dict.pages.crownPrince;
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState("/images/crown-prince-color.jpg");
+
+    const profileImages = [
+        "/images/crown-prince-color.jpg",
+        "/images/crown-prince-new.jpg",
+        "/images/crown-prince-alt2.jpg",
+        "/images/crown-prince-alt3.jpg",
+    ];
 
     const subPages = [
         { icon: <Crown className="w-6 h-6" />, title: d.lineageTitle, desc: d.lineageDesc, href: '/crown-prince/lineage' },
@@ -151,21 +159,44 @@ export default function CrownPrincePage() {
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200"
                     onClick={() => setIsImageModalOpen(false)}
                 >
-                    <button
-                        className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-50 p-2 bg-black/20 rounded-full"
-                        onClick={() => setIsImageModalOpen(false)}
-                    >
-                        <X className="w-8 h-8" />
-                    </button>
+                    <div className="absolute top-6 right-6 flex items-center gap-4 z-50">
+                        <button
+                            className="text-white/50 hover:text-white transition-colors p-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full"
+                            onClick={() => setIsImageModalOpen(false)}
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
+                    </div>
+
                     <div
-                        className="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center animate-in zoom-in-95 duration-200"
+                        className="relative max-w-5xl max-h-[90vh] w-full flex flex-col items-center justify-center animate-in zoom-in-95 duration-200"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <img
-                            src="/images/crown-prince-new.jpg"
+                            src={selectedImage}
                             alt="His Imperial Highness Crown Prince Lee Won (Full Profile)"
-                            className="max-w-full max-h-[90vh] object-contain rounded-xl border-4 border-[#d4af37]/40 shadow-[0_0_40px_rgba(212,175,55,0.25)]"
+                            className="w-full max-w-[320px] md:max-w-[480px] aspect-[4/5] md:aspect-[3/4] object-cover object-top rounded-xl border-4 border-[#d4af37]/40 shadow-[0_0_40px_rgba(212,175,55,0.25)] transition-opacity duration-300 mb-6"
                         />
+
+                        {/* Thumbnail Gallery */}
+                        <div className="flex items-center justify-center gap-3 overflow-x-auto max-w-full pb-2 px-2 no-scrollbar">
+                            {profileImages.map((src, i) => (
+                                <button
+                                    key={i}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(src);
+                                    }}
+                                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${selectedImage === src
+                                        ? 'border-[#d4af37] scale-105 shadow-[0_0_15px_rgba(212,175,55,0.6)] z-10'
+                                        : 'border-white/20 hover:border-[#d4af37]/50 opacity-60 hover:opacity-100'
+                                        }`}
+                                >
+                                    <div className="absolute inset-0 bg-black/20 pointer-events-none mix-blend-overlay" />
+                                    <img src={src} alt={`Profile Option ${i + 1}`} className="w-full h-full object-cover object-top" />
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}
