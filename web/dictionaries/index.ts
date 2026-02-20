@@ -55,9 +55,11 @@ export type Dictionary = {
         coreValues: {
             title: string;
             subtitle: string;
+            hongik: { title: string; desc: string };
+            wisdom: { title: string; desc: string };
+            peace: { title: string; desc: string };
+            creation: { title: string; desc: string };
             heritage: { title: string; desc: string };
-            harmony: { title: string; desc: string };
-            humanity: { title: string; desc: string };
         };
         // Warrant Highlights
         warrantHighlights: {
