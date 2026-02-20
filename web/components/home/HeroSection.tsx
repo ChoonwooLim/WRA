@@ -225,7 +225,7 @@ export function HeroSection() {
 
                     {/* Subtitle */}
                     <motion.p
-                        className="text-lg md:text-2xl text-gray-300 max-w-4xl mx-auto mb-14 leading-relaxed font-light break-keep"
+                        className="text-[14.4px] md:text-[19.2px] text-gray-300 max-w-4xl mx-auto mb-14 leading-relaxed font-light break-keep"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.6, duration: 1 }}
