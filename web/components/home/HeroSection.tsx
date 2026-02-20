@@ -9,6 +9,38 @@ import { useEffect, useState, useRef } from 'react';
 // Random number generator for particles
 const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
+const ShinyText = ({ text, delayOffset = 0, isGold = false }: { text: string, delayOffset?: number, isGold?: boolean }) => (
+    <span className="flex">
+        {text.split('').map((char, index) => {
+            const baseDelay = delayOffset + index * 0.15;
+            return (
+                <motion.span
+                    key={index}
+                    className={`inline-block whitespace-pre font-bold ${isGold ? 'text-[#d4af37]' : 'text-white'}`}
+                    animate={{
+                        color: isGold
+                            ? ['#d4af37', '#ffffff', '#d4af37']
+                            : ['#ffffff', '#d4af37', '#ffffff'],
+                        textShadow: isGold
+                            ? ['0 0 20px rgba(212,175,55,0.4)', '0 0 60px rgba(255,255,255,0.9)', '0 0 20px rgba(212,175,55,0.4)']
+                            : ['0 0 10px rgba(255,255,255,0.1)', '0 0 50px rgba(212,175,55,0.9)', '0 0 10px rgba(255,255,255,0.1)'],
+                        y: [0, -3, 0],
+                        scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: baseDelay,
+                        ease: "easeIn"
+                    }}
+                >
+                    {char}
+                </motion.span>
+            );
+        })}
+    </span>
+);
+
 export function HeroSection() {
     const { dict } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
@@ -73,78 +105,22 @@ export function HeroSection() {
             className="relative w-full h-screen overflow-hidden flex items-center justify-center perspective-1000"
             onMouseMove={handleMouseMove}
         >
-            {/* Animated Gradient Background */}
-            <motion.div
-                className="absolute inset-0 z-0"
-                style={{ x: bgX, y: bgY }}
-            >
-                <div
-                    className="absolute inset-0 animate-gradient-shift opacity-60"
-                    style={{
-                        background: `
-                            radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0) 0%, #000000 100%),
-                            linear-gradient(135deg, #050510 0%, #0a0e27 25%, #1a103c 50%, #08061a 75%, #050510 100%)
-                        `,
-                    }}
-                />
-            </motion.div>
+
 
             {/* Background Image (Parallax) */}
             <motion.div
-                className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] z-0"
-                style={{ y: backgroundY, x: bgX, scale: 1.1 }}
+                className="absolute top-[-5%] left-[-8%] w-[120%] h-[120%] z-0 block"
+                style={{ y: backgroundY, x: bgX, scale: 1.15 }}
             >
-                <div className="absolute inset-0 bg-black/95 z-10" />
+                <div className="absolute inset-0 bg-[#050510]/65 z-10" />
                 <img
-                    src="/images/hero-bg.png"
-                    alt="Gyeongbokgung Palace"
-                    className="w-full h-full object-cover filter blur-[2px]"
+                    src="/images/new_bg.jpg"
+                    alt="WRA Royal Background"
+                    className="w-full h-full object-cover"
                 />
             </motion.div>
 
-            {/* Starry Night Particles */}
-            <div className="absolute inset-0 z-1 pointer-events-none">
-                {particles.map((p) => (
-                    <motion.div
-                        key={p.id}
-                        className="absolute rounded-full"
-                        style={{
-                            left: `${p.x}%`,
-                            top: `${p.y}%`,
-                            width: p.size,
-                            height: p.size,
-                            boxShadow: `0 0 ${p.size * 3}px currentColor`
-                        }}
-                        animate={{
-                            y: [0, -20, 0],
-                            opacity: [0.2, 1, 0.2], // Twinkle effect
-                            scale: [1, 1.5, 1],
-                            backgroundColor: ['#d4af37', '#00d4ff', '#8b5cf6', '#ffffff', '#d4af37'], // Color changing
-                            color: ['#d4af37', '#00d4ff', '#8b5cf6', '#ffffff', '#d4af37'] // For box-shadow currentColor
-                        }}
-                        transition={{
-                            duration: p.duration,
-                            repeat: Infinity,
-                            delay: p.delay,
-                            ease: "easeInOut"
-                        }}
-                    />
-                ))}
-            </div>
 
-            {/* Ambient Light Spotlights */}
-            <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-                <motion.div
-                    className="absolute top-[-20%] left-[20%] w-[60%] h-[60%] bg-[#d4af37] rounded-full mix-blend-screen filter blur-[120px] opacity-10"
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div
-                    className="absolute bottom-[-20%] right-[20%] w-[50%] h-[50%] bg-[#8b5cf6] rounded-full mix-blend-screen filter blur-[100px] opacity-10"
-                    animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05] }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                />
-            </div>
 
             {/* Content Container */}
             <motion.div
@@ -182,7 +158,7 @@ export function HeroSection() {
                             <img
                                 src="/images/wra_logo_main.png"
                                 alt="World Royal Academy Emblem"
-                                className="relative w-40 h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.6)]"
+                                className="relative w-48 h-48 md:w-64 md:h-64 lg:w-[19rem] lg:h-[19rem] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.6)]"
                             />
                         </motion.div>
                     </div>
@@ -208,18 +184,15 @@ export function HeroSection() {
                             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                             transition={{ duration: 0.8, delay: 0.8 }}
                         >
-                            {dict.home.titleLine1}
+                            <ShinyText text={dict.home.titleLine1} delayOffset={0} />
                         </motion.span>
                         <motion.span
-                            className="block text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fffacd] to-[#d4af37] pb-2"
+                            className="block pb-2"
                             initial={{ opacity: 0, filter: "blur(10px)", scale: 0.9 }}
                             animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                             transition={{ duration: 1, delay: 1.2 }}
-                            style={{
-                                textShadow: "0 0 40px rgba(212,175,55,0.5)"
-                            }}
                         >
-                            {dict.home.titleLine2}
+                            <ShinyText text={dict.home.titleLine2} delayOffset={(dict.home.titleLine1?.length || 4) * 0.15} isGold={true} />
                         </motion.span>
                     </h1>
 
