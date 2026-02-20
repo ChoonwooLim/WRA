@@ -60,6 +60,8 @@ export type Dictionary = {
             peace: { title: string; desc: string };
             creation: { title: string; desc: string };
             heritage: { title: string; desc: string };
+            harmony: { title: string; desc: string };
+            humanity: { title: string; desc: string };
         };
         // Warrant Highlights
         warrantHighlights: {
@@ -255,6 +257,8 @@ export const en: Dictionary = {
             peace: { title: 'Peace', desc: 'Cultural diversity, tolerance and harmony' },
             creation: { title: 'Creation', desc: 'Enhancing problem-solving through convergence while respecting differences' },
             heritage: { title: 'Heritage', desc: 'Passing down the heritage of peace to future generations' },
+            harmony: { title: 'Harmony', desc: 'Cultural diversity, tolerance and harmonious coexistence' },
+            humanity: { title: 'Humanity', desc: 'Compassion and love for all people beyond borders' },
         },
         warrantHighlights: {
             title: 'WRA Warrants',
@@ -449,6 +453,8 @@ export const ko: Dictionary = {
             peace: { title: '평화', desc: '문화의 다양성, 포용과 조화' },
             creation: { title: '창조', desc: '서로 다름을 존중하며 융복합을 통한 문제해결력 증진' },
             heritage: { title: '유산', desc: '평화유산을 후대에게 계승' },
+            harmony: { title: '조화', desc: '문화의 다양성, 포용과 조화로운 공존' },
+            humanity: { title: '인류애', desc: '국경을 넘어 모든 사람을 향한 연민과 사랑' },
         },
         warrantHighlights: {
             title: 'WRA 워런트',
