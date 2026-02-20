@@ -435,7 +435,7 @@ export const ko: Dictionary = {
         welcome: '한류 경영의 중심에 오신 것을 환영합니다',
         titleLine1: '세계왕립',
         titleLine2: '아카데미',
-        subtitle: '세계왕립아카데미는 대한민국 왕실의 정통 문화유산을 기반으로 교육, 문화, 비즈니스를 융합하는 글로벌 플랫폼입니다.',
+        subtitle: '세계왕립아카데미는 대한민국 왕실의 정통 문화유산을 기반으로\n교육, 문화, 비즈니스를 융합하는 글로벌 플랫폼입니다.',
         startApplication: '입학 신청하기',
         exploreCurriculum: '프로그램 둘러보기',
         scrollDown: '아래로 스크롤하여 더 알아보기',

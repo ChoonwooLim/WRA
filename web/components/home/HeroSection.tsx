@@ -230,7 +230,9 @@ export function HeroSection() {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.6, duration: 1 }}
                     >
-                        {dict.home.subtitle}
+                        {dict.home.subtitle.split('\n').map((line, i, arr) => (
+                            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                        ))}
                     </motion.p>
 
                     {/* CTA Buttons — Magnetic & Glow */}
