@@ -1,15 +1,18 @@
 'use client';
 
+import { useState } from 'react';
+
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { Crown, MapPin, BookOpen, Landmark, Globe, GraduationCap, Shield } from 'lucide-react';
+import { Crown, MapPin, BookOpen, Landmark, Globe, GraduationCap, Shield, X } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CrownPrincePage() {
     const { dict } = useLanguage();
     const d = dict.pages.crownPrince;
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     const subPages = [
         { icon: <Crown className="w-6 h-6" />, title: d.lineageTitle, desc: d.lineageDesc, href: '/crown-prince/lineage' },
@@ -53,12 +56,18 @@ export default function CrownPrincePage() {
                 <div className="container mx-auto px-4 max-w-5xl">
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div className="flex-shrink-0">
-                            <div className="relative w-64 h-64 rounded-full border-4 border-[#d4af37]/30 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                            <div
+                                className="relative w-64 h-64 rounded-full border-4 border-[#d4af37]/30 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)] cursor-pointer group"
+                                onClick={() => setIsImageModalOpen(true)}
+                            >
                                 <img
-                                    src="/images/crown-prince-portrait.jpg"
+                                    src="/images/crown-prince-new.jpg"
                                     alt="His Imperial Highness Crown Prince Lee Won"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover object-top scale-[1.45] origin-top translate-y-6 transition-transform duration-500 group-hover:scale-[1.55]"
                                 />
+                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                    <span className="text-white text-sm font-semibold tracking-wider border border-white/50 px-4 py-2 rounded-full backdrop-blur-sm">크게 보기</span>
+                                </div>
                             </div>
                         </div>
                         <div className="text-center md:text-left">
@@ -100,7 +109,7 @@ export default function CrownPrincePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="h-full rounded-xl overflow-hidden border border-[#d4af37]/20 shadow-lg relative min-h-[300px]">
                             <img
-                                src="/images/crown-prince-activities.jpg"
+                                src="/images/crown-prince-heritage-new.jpg"
                                 alt="Crown Prince Activities"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
@@ -125,7 +134,7 @@ export default function CrownPrincePage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {subPages.map((item, i) => (
                             <Link key={i} href={item.href}>
-                                <GlassCard delay={i * 0.1} className="text-center h-full cursor-pointer">
+                                <GlassCard delay={i * 0.1} className="text-center h-full cursor-pointer hover:border-[#d4af37]/50 transition-colors">
                                     <div className="text-[#d4af37] mb-4 flex justify-center">{item.icon}</div>
                                     <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
                                     <p className="text-gray-400 text-sm">{item.desc}</p>
@@ -135,6 +144,31 @@ export default function CrownPrincePage() {
                     </div>
                 </div>
             </section>
+
+            {/* Image Modal */}
+            {isImageModalOpen && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200"
+                    onClick={() => setIsImageModalOpen(false)}
+                >
+                    <button
+                        className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-50 p-2 bg-black/20 rounded-full"
+                        onClick={() => setIsImageModalOpen(false)}
+                    >
+                        <X className="w-8 h-8" />
+                    </button>
+                    <div
+                        className="relative max-w-5xl max-h-[90vh] w-full flex items-center justify-center animate-in zoom-in-95 duration-200"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src="/images/crown-prince-new.jpg"
+                            alt="His Imperial Highness Crown Prince Lee Won (Full Profile)"
+                            className="max-w-full max-h-[90vh] object-contain rounded-xl border-4 border-[#d4af37]/40 shadow-[0_0_40px_rgba(212,175,55,0.25)]"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

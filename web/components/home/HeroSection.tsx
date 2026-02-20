@@ -201,7 +201,7 @@ export function HeroSection() {
                     </motion.div>
 
                     {/* Title — Cinematic Reveal */}
-                    <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold mb-8 tracking-tighter leading-tight text-white relative">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative">
                         <motion.span
                             className="block"
                             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
