@@ -43,7 +43,18 @@ export default function GalleryWritePage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!title || !selectedFile || !session?.user) return;
+        if (!title) {
+            alert('제목을 입력해주세요.');
+            return;
+        }
+        if (!selectedFile) {
+            alert('이미지를 선택해주세요.');
+            return;
+        }
+        if (!session?.user) {
+            alert('로그인이 필요합니다. 관리자 로그인 후 다시 시도해주세요.');
+            return;
+        }
 
         setUploading(true);
 
