@@ -85,8 +85,8 @@ export function HeroSection() {
     const bgY = useTransform(mouseYSpring, [-0.5, 0.5], ['5%', '-5%']);
 
     // Logo 3D Tilt
-    const logoRotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['15deg', '-15deg']);
-    const logoRotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-15deg', '15deg']);
+    const logoRotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['35deg', '-35deg']);
+    const logoRotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-35deg', '35deg']);
 
     // Generate Particles (Starry Night Effect)
     const particles = mounted ? [...Array(50)].map((_, i) => ({
