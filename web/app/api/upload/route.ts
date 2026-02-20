@@ -15,8 +15,9 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Ensure public/uploads directory exists
-    const uploadDir = join(process.cwd(), 'public', 'uploads');
+    // Ensure upload directory exists
+    // Fallback to public/uploads if UPLOAD_DIR is not defined
+    const uploadDir = process.env.UPLOAD_DIR?.trim() || join(process.cwd(), 'public', 'uploads');
     if (!existsSync(uploadDir)) {
         mkdirSync(uploadDir, { recursive: true });
     }
@@ -29,7 +30,13 @@ export async function POST(request: NextRequest) {
 
     try {
         await writeFile(path, buffer);
-        const url = `/uploads/${filename}`;
+
+        // If UPLOAD_DIR is set, use the custom API route to serve the image.
+        // Otherwise, fallback to the static public folder path.
+        const url = process.env.UPLOAD_DIR?.trim()
+            ? `/api/images/${filename}`
+            : `/uploads/${filename}`;
+
         return NextResponse.json({ success: true, url });
     } catch (error) {
         console.error('Error saving file:', error);
