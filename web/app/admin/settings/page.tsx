@@ -58,7 +58,7 @@ export default function SettingsPage() {
                         <div>
                             <label className="text-sm text-gray-400 mb-1.5 block">사이트 설명</label>
                             <textarea
-                                defaultValue="세계 왕립 아카데미는 대한제국 황실의 정통 문화유산을 기반으로 교육, 문화, 비즈니스를 융합하는 글로벌 플랫폼입니다."
+                                defaultValue="세계왕립아카데미는 대한민국 왕실의 정통 문화유산을 기반으로 교육, 문화, 비즈니스를 융합하는 글로벌 플랫폼입니다."
                                 rows={3}
                                 className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-500/50 transition-colors resize-none"
                             />

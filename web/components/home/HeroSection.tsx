@@ -153,7 +153,7 @@ export function HeroSection() {
             >
                 <div className="flex flex-col items-center">
                     {/* Main Logo — 3D Tilt & Aura */}
-                    <div className="relative mb-8 perspective-500">
+                    <div className="relative mb-16 lg:mb-20 perspective-500">
                         {/* Rotating Gold Aura */}
                         <motion.div
                             className="absolute inset-0 -m-10 border-[2px] border-[#d4af37]/20 rounded-full"
@@ -201,7 +201,7 @@ export function HeroSection() {
                     </motion.div>
 
                     {/* Title — Cinematic Reveal */}
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative flex justify-center gap-3">
                         <motion.span
                             className="block"
                             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
@@ -225,7 +225,7 @@ export function HeroSection() {
 
                     {/* Subtitle */}
                     <motion.p
-                        className="text-lg md:text-2xl text-gray-300 max-w-4xl mx-auto mb-14 leading-relaxed font-light"
+                        className="text-lg md:text-2xl text-gray-300 max-w-4xl mx-auto mb-14 leading-relaxed font-light break-keep"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.6, duration: 1 }}
