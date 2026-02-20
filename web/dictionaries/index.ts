@@ -18,6 +18,7 @@ export type Dictionary = {
         vision: string;
         organization: string;
         partners: string;
+        ceoProfile: string;
         // Education submenu
         kLanguage: string;
         kLiterature: string;
@@ -216,6 +217,7 @@ export const en: Dictionary = {
         vision: 'Vision & Mission',
         organization: 'Organization',
         partners: 'Partners',
+        ceoProfile: 'CEO Profile',
         kLanguage: 'K-Heritage Language',
         kLiterature: 'K-Literature & Writing',
         kStudies: 'K-Studies',
@@ -407,6 +409,7 @@ export const ko: Dictionary = {
         vision: '비전·미션',
         organization: '조직도',
         partners: '제휴기관',
+        ceoProfile: '대표이사 프로필',
         kLanguage: '왕립한국어학당',
         kLiterature: '왕립문예원',
         kStudies: '한국학',

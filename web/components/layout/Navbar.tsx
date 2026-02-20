@@ -79,6 +79,7 @@ export function Navbar() {
             href: '/about',
             icon: <Building2 className="w-4 h-4" />,
             submenu: [
+                { label: dict.navbar.ceoProfile, href: '/about/ceo' },
                 { label: dict.navbar.vision, href: '/about' },
                 { label: dict.navbar.organization, href: '/about/organization' },
                 { label: dict.navbar.partners, href: '/about/partners' },
