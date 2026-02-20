@@ -76,6 +76,24 @@
   animation: gradient-shift 12s ease-in-out infinite;
 }
 
+@keyframes pulse-gold {
+
+  0%,
+  100% {
+    color: #ff8c00;
+    text-shadow: 0 0 5px rgba(255, 140, 0, 0.5);
+  }
+
+  50% {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 4s ease-in-out infinite;
+}
+
 body {
   background: var(--royal-blue-gradient);
   color: var(--foreground);
