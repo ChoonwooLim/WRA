@@ -411,7 +411,7 @@ export const ko: Dictionary = {
         startLogin: '로그인 시작',
         loginSignup: '로그인 / 회원가입',
         profile: '프로필',
-        lineage: '계보',
+        lineage: '황실계보',
         activities: '활동',
         message: '인사말',
         vision: '비전·미션',

@@ -3,6 +3,7 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
+import { CoreValuesSection } from '@/components/home/CoreValuesSection';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Landmark, Handshake, Heart, Globe, Crown, BookOpen, Target, TrendingUp, Shield, Gem } from 'lucide-react';
 import Link from 'next/link';
@@ -159,24 +160,7 @@ export default function AboutPage() {
             </section>
 
             {/* Core Values — Slide 13 */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <SectionHeader title={dict.home.coreValues.title} subtitle={dict.home.coreValues.subtitle} />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            { icon: <Landmark className="w-8 h-8" />, ...dict.home.coreValues.heritage },
-                            { icon: <Handshake className="w-8 h-8" />, ...dict.home.coreValues.harmony },
-                            { icon: <Heart className="w-8 h-8" />, ...dict.home.coreValues.humanity },
-                        ].map((v, i) => (
-                            <GlassCard key={i} delay={i * 0.1} className="text-center">
-                                <div className="text-[#d4af37] mb-4 flex justify-center">{v.icon}</div>
-                                <h3 className="text-lg font-bold text-white mb-2">{v.title}</h3>
-                                <p className="text-gray-400 text-sm">{v.desc}</p>
-                            </GlassCard>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <CoreValuesSection />
 
             {/* Quick Links */}
             <section className="py-20">
