@@ -1,0 +1,154 @@
+﻿commit e355d5a60f1a43c4f591be42911aa89585f631f3
+Author: Steven Lim <choonwoo49@gmail.com>
+Date:   Fri Feb 20 12:13:32 2026 +0900
+
+    feat: Add API endpoints for file uploads and serving images from a configurable directory.
+
+ LINUX_DEPLOYMENT.md                    |  54 +++++++++++++++++++++++++++++++++
+ web/.gitignore                         |   1 +
+ web/app/api/images/[filename]/route.ts |  44 +++++++++++++++++++++++++++
+ web/app/api/upload/route.ts            |  13 ++++++--
+ web/test.png                           | Bin 0 -> 28 bytes
+ 5 files changed, 109 insertions(+), 3 deletions(-)
+
+commit b37c7026d0970e73da3b54812da9bb09a7f9ed2a
+Author: Steven Lim <choonwoo49@gmail.com>
+Date:   Fri Feb 20 11:14:00 2026 +0900
+
+    chore: delete unused file.
+
+ web/scripts/bulk-upload-gallery.ts | 88 --------------------------------------
+ 1 file changed, 88 deletions(-)
+
+commit fec40af0b92a2615c9afc148dd79e7e63c703eb0
+Author: Steven Lim <choonwoo49@gmail.com>
+Date:   Fri Feb 20 11:13:49 2026 +0900
+
+    feat: add script for bulk uploading images as Base64 gallery posts to the database.
+
+ web/scripts/bulk-upload-gallery.ts | 70 ++++++++++++--------------------------
+ 1 file changed, 22 insertions(+), 48 deletions(-)
+
+commit 934ea14c0d45b1b23e5506675ef97e4968e596bf
+Author: Steven Lim <choonwoo49@gmail.com>
+Date:   Thu Feb 19 21:15:01 2026 +0900
+
+    feat: Implement file upload API, gallery and community post pages, and enhance Navbar with authentication and wallet integration.
+
+ web/app/api/upload/route.ts                        |  38 +++
+ web/app/community/gallery/page.tsx                 | 167 ++++++++++++
+ web/app/community/gallery/write/page.tsx           | 200 ++++++++++++++
+ web/app/community/post/[id]/page.tsx               |   9 +-
+ web/components/home/HeroSection.tsx                | 302 +++++++++++++++------
+ web/components/layout/Navbar.tsx                   |   1 +
+ ...6\201\352\263\274-\354\242\205\353\254\230.png" | Bin 0 -> 1850108 bytes
+ .../1771502222074-KakaoTalk_20260211_132200219.jpg | Bin 0 -> 4181920 bytes
+ .../1771502222222-KakaoTalk_20260211_132200757.jpg | Bin 0 -> 77422 bytes
+ .../1771502222387-KakaoTalk_20260211_132200857.jpg | Bin 0 -> 137411 bytes
+ .../1771502222536-KakaoTalk_20260211_132201140.jpg | Bin 0 -> 177506 bytes
+ .../1771502222683-KakaoTalk_20260211_132201283.jpg | Bin 0 -> 238963 bytes
+ .../1771502222831-KakaoTalk_20260211_132201418.jpg | Bin 0 -> 160392 bytes
+ .../1771502222977-KakaoTalk_20260211_132201547.jpg | Bin 0 -> 277190 bytes
+ .../1771502223123-KakaoTalk_20260211_132201676.jpg | Bin 0 -> 274242 bytes
+ .../1771502223272-KakaoTalk_20260211_132201811.jpg | Bin 0 -> 112594 bytes
+ .../1771502223419-KakaoTalk_20260211_132201949.jpg | Bin 0 -> 140771 bytes
+ .../1771502223569-KakaoTalk_20260211_132202101.jpg | Bin 0 -> 217528 bytes
+ .../1771502223721-KakaoTalk_20260211_132202233.jpg | Bin 0 -> 214461 bytes
+ .../1771502223894-KakaoTalk_20260211_132202361.jpg | Bin 0 -> 229681 bytes
+ .../1771502224042-KakaoTalk_20260211_132202502.jpg | Bin 0 -> 285085 bytes
+ .../1771502224188-KakaoTalk_20260211_132202634.jpg | Bin 0 -> 252491 bytes
+ .../1771502224338-KakaoTalk_20260211_132202791.jpg | Bin 0 -> 314011 bytes
+ .../1771502224484-KakaoTalk_20260211_132202918.jpg | Bin 0 -> 207935 bytes
+ .../1771502224631-KakaoTalk_20260211_132203042.jpg | Bin 0 -> 178361 bytes
+ .../1771502224778-KakaoTalk_20260211_132203164.jpg | Bin 0 -> 154395 bytes
+ .../1771502224924-KakaoTalk_20260211_132203316.jpg | Bin 0 -> 161086 bytes
+ .../1771502225070-KakaoTalk_20260211_132203481.jpg | Bin 0 -> 133310 bytes
+ .../1771502225249-KakaoTalk_20260211_132203648.jpg | Bin 0 -> 221276 bytes
+ .../1771502225426-KakaoTalk_20260211_132203893.jpg | Bin 0 -> 39503 bytes
+ .../1771502225573-KakaoTalk_20260211_132204039.jpg | Bin 0 -> 219779 bytes
+ .../1771502225719-KakaoTalk_20260211_132204191.jpg | Bin 0 -> 296531 bytes
+ ...3\265\352\266\201-\354\240\204\352\262\275.png" | Bin 0 -> 28744894 bytes
+ ...5\270-\352\264\221\355\231\224\353\254\270.png" | Bin 0 -> 4349376 bytes
+ ...5\270-\352\267\274\354\240\225\354\240\204.png" | Bin 0 -> 5115606 bytes
+ ...0\234-\355\231\230\352\265\254\353\213\250.png" | Bin 0 -> 585736 bytes
+ ...5\254\352\266\201-\354\240\204\352\262\275.png" | Bin 0 -> 2511923 bytes
+ ...66\201\353\260\225\353\254\274\352\264\200.png" | Bin 0 -> 1538564 bytes
+ ...5\230-\354\204\235\354\241\260\354\240\204.png" | Bin 0 -> 1664519 bytes
+ ...5\230\354\205\250\353\215\230-\354\247\221.png" | Bin 0 -> 5914541 bytes
+ ...54\270\355\231\224\354\266\225\354\240\204.png" | Bin 0 -> 1464161 bytes
+ ...0\260\353\205\220-\355\226\211\354\202\254.png" | Bin 0 -> 242747 bytes
+ ...0\230\352\266\201-\354\240\204\352\262\275.png" | Bin 0 -> 15274639 bytes
+ ...4\270-\355\235\245\355\231\224\353\254\270.png" | Bin 0 -> 39583247 bytes
+ ...2\205\353\254\230-\354\240\225\354\240\204.png" | Bin 0 -> 1281225 bytes
+ ...7\201\353\213\250-\354\240\204\352\262\275.png" | Bin 0 -> 6415286 bytes
+ ...02\254\354\247\201\353\214\200\354\240\234.png" | Bin 0 -> 4223240 bytes
+ ...\211-\353\202\264-\353\252\205\353\246\211.png" | Bin 0 -> 1653916 bytes
+ ...4\274\352\264\200-\354\240\204\352\262\275.png" | Bin 0 -> 1770519 bytes
+ ...2\224-\355\231\215\354\202\264\353\254\270.png" | Bin 0 -> 1730719 bytes
+ ...1\251\354\240\234-\354\226\264\354\260\250.png" | Bin 0 -> 7250693 bytes
+ ...0\270\353\215\230-\355\226\245\353\241\234.png" | Bin 0 -> 2637636 bytes
+ ...35\221\353\260\261\354\202\254\354\247\204.png" | Bin 0 -> 354444 bytes
+ ...04\240\354\264\235\353\217\205\353\266\200.png" | Bin 0 -> 1117197 bytes
+ ...5\230-\354\260\275\352\262\275\352\266\201.png" | Bin 0 -> 1382095 bytes
+ ...7\274\354\231\225-\354\213\240\353\213\271.png" | Bin 0 -> 1524496 bytes
+ ...2\205\353\254\230-\353\214\200\354\240\234.png" | Bin 0 -> 1240381 bytes
+ ...2\205\353\254\230-\354\240\204\352\262\275.png" | Bin 0 -> 1671292 bytes
+ ...2\275\352\266\201-\354\240\204\352\262\275.png" | Bin 0 -> 2033328 bytes
+ ...5\225\352\266\201-\354\240\204\352\262\275.png" | Bin 0 -> 16603290 bytes
+ ...2\224-\353\266\200\354\232\251\354\240\225.png" | Bin 0 -> 19331691 bytes
+ ...5\270-\352\262\275\355\235\254\352\266\201.png" | Bin 0 -> 2265042 bytes
+ ...6\201\354\232\260-\354\240\204\352\262\275.png" | Bin 0 -> 1938420 bytes
+ ...2\260\354\235\230-\353\252\250\354\212\265.png" | Bin 0 -> 1775919 bytes
+ web/scripts/bulk-upload-gallery.ts                 | 114 ++++++++
+ web/scripts/seed-gallery.ts                        | 105 +++++++
+ 66 files changed, 850 insertions(+), 86 deletions(-)
+
+commit 2c5b21e0f731a91333643c9d6839800b9b74a13d
+Author: Steven Lim <choonwoo49@gmail.com>
+Date:   Thu Feb 19 20:40:18 2026 +0900
+
+    feat: initialize new Next.js web application with core pages, components, and assets.
+
+ ...6\201\352\263\274 \354\242\205\353\254\230.png" | Bin 0 -> 1850108 bytes
+ ...3\265\352\266\201 \354\240\204\352\262\275.png" | Bin 0 -> 28744894 bytes
+ ...5\270 \352\264\221\355\231\224\353\254\270.png" | Bin 0 -> 4349376 bytes
+ ...5\270 \352\267\274\354\240\225\354\240\204.png" | Bin 0 -> 5115606 bytes
+ ...0\234 \355\231\230\352\265\254\353\213\250.png" | Bin 0 -> 585736 bytes
+ ...5\254\352\266\201 \354\240\204\352\262\275.png" | Bin 0 -> 2511923 bytes
+ ...66\201\353\260\225\353\254\274\352\264\200.png" | Bin 0 -> 1538564 bytes
+ ...5\230 \354\204\235\354\241\260\354\240\204.png" | Bin 0 -> 1664519 bytes
+ ...5\230\354\205\250\353\215\230 \354\247\221.png" | Bin 0 -> 5914541 bytes
+ ...54\270\355\231\224\354\266\225\354\240\204.png" | Bin 0 -> 1464161 bytes
+ ...0\260\353\205\220 \355\226\211\354\202\254.png" | Bin 0 -> 242747 bytes
+ ...0\230\352\266\201 \354\240\204\352\262\275.png" | Bin 0 -> 15274639 bytes
+ ...4\270 \355\235\245\355\231\224\353\254\270.png" | Bin 0 -> 39583247 bytes
+ ...2\205\353\254\230 \354\240\225\354\240\204.png" | Bin 0 -> 1281225 bytes
+ ...7\201\353\213\250 \354\240\204\352\262\275.png" | Bin 0 -> 6415286 bytes
+ ...02\254\354\247\201\353\214\200\354\240\234.png" | Bin 0 -> 4223240 bytes
+ ...\211 \353\202\264 \353\252\205\353\246\211.png" | Bin 0 -> 1653916 bytes
+ ...4\274\352\264\200 \354\240\204\352\262\275.png" | Bin 0 -> 1770519 bytes
+ ...2\224 \355\231\215\354\202\264\353\254\270.png" | Bin 0 -> 1730719 bytes
+ ...1\251\354\240\234 \354\226\264\354\260\250.png" | Bin 0 -> 7250693 bytes
+ ...0\270\353\215\230 \355\226\245\353\241\234.png" | Bin 0 -> 2637636 bytes
+ ...35\221\353\260\261\354\202\254\354\247\204.png" | Bin 0 -> 354444 bytes
+ ...04\240\354\264\235\353\217\205\353\266\200.png" | Bin 0 -> 1117197 bytes
+ ...5\230 \354\260\275\352\262\275\352\266\201.png" | Bin 0 -> 1382095 bytes
+ ...7\274\354\231\225 \354\213\240\353\213\271.png" | Bin 0 -> 1524496 bytes
+ ...2\205\353\254\230 \353\214\200\354\240\234.png" | Bin 0 -> 1240381 bytes
+ ...2\205\353\254\230 \354\240\204\352\262\275.png" | Bin 0 -> 1671292 bytes
+ ...2\275\352\266\201 \354\240\204\352\262\275.png" | Bin 0 -> 2033328 bytes
+ ...5\225\352\266\201 \354\240\204\352\262\275.png" | Bin 0 -> 16603290 bytes
+ ...2\224 \353\266\200\354\232\251\354\240\225.png" | Bin 0 -> 19331691 bytes
+ ...5\270 \352\262\275\355\235\254\352\266\201.png" | Bin 0 -> 2265042 bytes
+ ...6\201\354\232\260 \354\240\204\352\262\275.png" | Bin 0 -> 1938420 bytes
+ ...2\260\354\235\230 \353\252\250\354\212\265.png" | Bin 0 -> 1775919 bytes
+ web/app/about/page.tsx                             |  27 +++++++++++---
+ web/app/crown-prince/page.tsx                      |  36 +++++++++++++------
+ web/components/home/HeroSection.tsx                |  39 +++++----------------
+ web/package.json                                   |   4 +--
+ web/public/images/about-philosophy.png             | Bin 0 -> 16603290 bytes
+ web/public/images/about-vision.png                 | Bin 0 -> 19331691 bytes
+ web/public/images/crown-prince-activities.jpg      | Bin 0 -> 314011 bytes
+ web/public/images/crown-prince-portrait.jpg        | Bin 0 -> 252491 bytes
+ web/public/images/hero-bg.png                      | Bin 0 -> 28744894 bytes
+ 42 files changed, 58 insertions(+), 48 deletions(-)

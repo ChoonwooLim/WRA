@@ -1,0 +1,15 @@
+﻿* e355d5a (HEAD -> main, origin/main, origin/HEAD) feat: Add API endpoints for file uploads and serving images from a configurable directory.
+* b37c702 chore: delete unused file.
+* fec40af feat: add script for bulk uploading images as Base64 gallery posts to the database.
+* 934ea14 feat: Implement file upload API, gallery and community post pages, and enhance Navbar with authentication and wallet integration.
+* 2c5b21e feat: initialize new Next.js web application with core pages, components, and assets.
+* 9e9aed9 fix: convert admin/members to client component with API route
+* 2268beb feat: Initialize web application with a royal-themed design system, global styles, and core content pages.
+* 57048ce feat: Initialize Next.js web application with Web3 integration, authentication, Prisma setup, and global styling.
+* f1c1177 feat: Implement community board system with post management, various board types, and initial admin dashboard.
+* 39ddf95 feat: Implement initial community board pages for notices, Q&A, and free board, including global styling and a navigation bar.
+* da06a83 feat: integrate official WRA emblem logo across site - Hero section prominent display with gold glow animation - Navbar and Footer updated to use wra_logo_main.png
+* 6e260dc feat: complete WRA site redesign - 7-category GNB, 19 sub-pages, shared components
+* ee6dbed feat: Implement initial website structure, global styling, and core home page sections with supporting assets and configurations.
+* 47b8d6e feat: Implement NextAuth for authentication and role-based authorization, and establish the core admin panel with dashboard, sidebar, and member/post management pages.
+* d28251d feat: Add application configuration file and update project dependencies.
