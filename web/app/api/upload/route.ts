@@ -18,8 +18,18 @@ export async function POST(request: NextRequest) {
     // Ensure upload directory exists
     // Fallback to public/uploads if UPLOAD_DIR is not defined
     const uploadDir = process.env.UPLOAD_DIR?.trim() || join(process.cwd(), 'public', 'uploads');
+
+    console.log('[UPLOAD DEBUG] Environment UPLOAD_DIR:', process.env.UPLOAD_DIR);
+    console.log('[UPLOAD DEBUG] Parsed upload directory:', uploadDir);
+
     if (!existsSync(uploadDir)) {
-        mkdirSync(uploadDir, { recursive: true });
+        console.log('[UPLOAD DEBUG] Directory does not exist, creating:', uploadDir);
+        try {
+            mkdirSync(uploadDir, { recursive: true });
+        } catch (e) {
+            console.error('[UPLOAD DEBUG] Failed to create directory:', e);
+            return NextResponse.json({ success: false, message: 'Failed to create directory' }, { status: 500 });
+        }
     }
 
     // Create a unique filename

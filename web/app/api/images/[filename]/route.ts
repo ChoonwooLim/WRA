@@ -15,7 +15,11 @@ export async function GET(
     const uploadDir = process.env.UPLOAD_DIR?.trim() || join(process.cwd(), 'public', 'uploads');
     const filePath = join(uploadDir, filename);
 
+    console.log('[IMAGE DEBUG] Request for filename:', filename);
+    console.log('[IMAGE DEBUG] Resolved filePath:', filePath);
+
     if (!existsSync(filePath)) {
+        console.error('[IMAGE DEBUG] File does not exist at path:', filePath);
         return new NextResponse('Image not found', { status: 404 });
     }
 
