@@ -16,7 +16,7 @@ export function HeroBanner({ title, subtitle, backgroundImage, className, compac
         <section
             className={cn(
                 'relative flex items-center justify-center overflow-hidden',
-                compact ? 'min-h-[40vh]' : 'min-h-[50vh]',
+                compact ? 'min-h-[25vh]' : 'min-h-[30vh]',
                 className
             )}
         >
@@ -33,7 +33,7 @@ export function HeroBanner({ title, subtitle, backgroundImage, className, compac
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
 
             {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-20">
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pt-24 pb-8">
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
