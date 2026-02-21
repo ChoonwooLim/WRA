@@ -522,6 +522,9 @@ export function KoreanEducationInfographics() {
                                 <span className="text-gray-300 text-sm break-keep">AI 기반 개인 맞춤 분석</span>
                             </li>
                         </ul>
+                        <div className="mt-8 flex justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-[#d4af37] text-sm font-bold flex items-center gap-2">상세보기 <ArrowRight className="w-4 h-4" /></span>
+                        </div>
                     </motion.div>
 
                     {/* Card 2: Video Lectures */}
@@ -561,6 +564,9 @@ export function KoreanEducationInfographics() {
                                 <span className="text-gray-300 text-sm">필요에 따라 유연한 콘텐츠 교체</span>
                             </li>
                         </ul>
+                        <div className="mt-8 flex justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-[#d4af37] text-sm font-bold flex items-center gap-2">상세보기 <ArrowRight className="w-4 h-4" /></span>
+                        </div>
                     </motion.div>
 
                     {/* Card 3: Cloud LMS */}
@@ -592,6 +598,9 @@ export function KoreanEducationInfographics() {
                                 <span className="text-gray-300 text-sm">교육기관용 대시보드</span>
                             </li>
                         </ul>
+                        <div className="mt-8 flex justify-end items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span className="text-[#d4af37] text-sm font-bold flex items-center gap-2">상세보기 <ArrowRight className="w-4 h-4" /></span>
+                        </div>
                     </motion.div>
                 </div>
 
