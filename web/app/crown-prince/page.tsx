@@ -156,30 +156,30 @@ export default function CrownPrincePage() {
             {/* Image Modal */}
             {isImageModalOpen && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200"
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
                     onClick={() => setIsImageModalOpen(false)}
                 >
-                    <div className="absolute top-6 right-6 flex items-center gap-4 z-50">
-                        <button
-                            className="text-white/50 hover:text-white transition-colors p-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full"
-                            onClick={() => setIsImageModalOpen(false)}
-                        >
-                            <X className="w-6 h-6" />
-                        </button>
-                    </div>
-
+                    {/* Modal Box */}
                     <div
-                        className="relative max-w-5xl max-h-[90vh] w-full flex flex-col items-center justify-center animate-in zoom-in-95 duration-200"
+                        className="relative bg-[#0a0a20] border border-[#d4af37]/30 rounded-2xl p-6 md:p-10 shadow-[0_0_50px_rgba(0,0,0,0.8)] max-w-2xl w-full flex flex-col items-center justify-center animate-in zoom-in-95 duration-200"
                         onClick={(e) => e.stopPropagation()}
                     >
+                        {/* Close button (Inside Modal) */}
+                        <button
+                            className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors p-2 bg-white/5 hover:bg-white/10 rounded-full z-50"
+                            onClick={() => setIsImageModalOpen(false)}
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+
                         <img
                             src={selectedImage}
                             alt="His Imperial Highness Crown Prince Lee Won (Full Profile)"
-                            className="w-full max-w-[320px] md:max-w-[480px] aspect-[4/5] md:aspect-[3/4] object-cover object-top rounded-xl border-4 border-[#d4af37]/40 shadow-[0_0_40px_rgba(212,175,55,0.25)] transition-opacity duration-300 mb-6"
+                            className="w-full max-w-[280px] md:max-w-[400px] aspect-[4/5] object-cover object-top rounded-xl border-2 border-[#d4af37]/40 shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-opacity duration-300 mb-8 mt-2"
                         />
 
                         {/* Thumbnail Gallery */}
-                        <div className="flex items-center justify-center gap-3 overflow-x-auto max-w-full pb-2 px-2 no-scrollbar">
+                        <div className="flex items-center justify-center gap-3 overflow-x-auto max-w-full pb-2 px-2 no-scrollbar bg-black/20 rounded-xl p-3 border border-white/5">
                             {profileImages.map((src, i) => (
                                 <button
                                     key={i}
@@ -188,8 +188,8 @@ export default function CrownPrincePage() {
                                         setSelectedImage(src);
                                     }}
                                     className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 ${selectedImage === src
-                                        ? 'border-[#d4af37] scale-105 shadow-[0_0_15px_rgba(212,175,55,0.6)] z-10'
-                                        : 'border-white/20 hover:border-[#d4af37]/50 opacity-60 hover:opacity-100'
+                                        ? 'border-[#d4af37] scale-105 shadow-[0_0_15px_rgba(212,175,55,0.5)] z-10'
+                                        : 'border-white/10 hover:border-[#d4af37]/50 opacity-60 hover:opacity-100'
                                         }`}
                                 >
                                     <div className="absolute inset-0 bg-black/20 pointer-events-none mix-blend-overlay" />
