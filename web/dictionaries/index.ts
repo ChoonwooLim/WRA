@@ -35,6 +35,7 @@ export type Dictionary = {
         newsletter: string;
         qna: string;
         contact: string;
+        textbooks: string;
     };
     home: {
         welcome: string;
@@ -156,6 +157,8 @@ export type Dictionary = {
             step4: string;
             studiesTitle: string;
             studiesDesc: string;
+            textbooksTitle: string;
+            textbooksDesc: string;
         };
         certification: {
             heroTitle: string;
