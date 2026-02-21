@@ -93,6 +93,7 @@ export function Navbar() {
                 { label: dict.navbar.kLanguage, href: '/education/language' },
                 { label: dict.navbar.kLiterature, href: '/education/literature' },
                 { label: dict.navbar.kStudies, href: '/education/studies' },
+                { label: dict.navbar.textbooks, href: '/education/books' },
             ],
         },
         {
