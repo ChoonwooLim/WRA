@@ -37,12 +37,15 @@ export default function CeoProfilePage() {
 
                 <div className="relative z-10 container mx-auto px-4 max-w-5xl">
                     <div className="flex flex-col md:flex-row gap-10 items-center md:items-start">
-                        {/* Profile Image Area (Placeholder until real image is uploaded, or just use stylized text block) */}
-                        <div className="w-48 h-48 md:w-64 md:h-64 rounded-full p-2 bg-gradient-to-br from-[#d4af37] via-[#a78bfa] to-[#00d4ff] flex-shrink-0 relative group">
-                            <div className="w-full h-full rounded-full bg-[#0a0e27] flex items-center justify-center overflow-hidden relative">
-                                {/* Use an elegant monogram or silhouette as fallback */}
-                                <div className="text-6xl font-extrabold text-[#d4af37]/50 tracking-widest font-serif">JK</div>
-                                <div className="absolute inset-0 bg-gradient-to-tr from-[#d4af37]/20 to-transparent mix-blend-overlay"></div>
+                        {/* Profile Image Area */}
+                        <div className="w-48 h-48 md:w-64 md:h-64 rounded-full p-1.5 bg-gradient-to-br from-[#d4af37] via-[#a78bfa] to-[#00d4ff] flex-shrink-0 relative group shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                            <div className="w-full h-full rounded-full bg-[#0a0e27] overflow-hidden relative border-4 border-[#050510]">
+                                <img
+                                    src="/images/jenny-kim.jpg"
+                                    alt="CEO 제니킴"
+                                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-black/10 mix-blend-overlay"></div>
                             </div>
                         </div>
 
