@@ -175,7 +175,7 @@ export default function CrownPrincePage() {
                         <img
                             src={selectedImage}
                             alt="His Imperial Highness Crown Prince Lee Won (Full Profile)"
-                            className="w-full max-w-[280px] md:max-w-[400px] aspect-[4/5] object-cover object-top rounded-xl border-2 border-[#d4af37]/40 shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-opacity duration-300 mb-8 mt-2"
+                            className="w-full max-w-[280px] md:max-w-[400px] aspect-auto object-contain max-h-[50vh] md:max-h-[60vh] object-center rounded-xl border-2 border-[#d4af37]/40 shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-opacity duration-300 mb-8 mt-2"
                         />
 
                         {/* Thumbnail Gallery */}
