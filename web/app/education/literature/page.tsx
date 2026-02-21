@@ -1,31 +1,15 @@
 'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
-import { SectionHeader } from '@/components/shared/SectionHeader';
-import { ProcessDiagram } from '@/components/shared/ProcessDiagram';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { BookOpen, HelpCircle, MessageSquare, PenTool } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function LiteraturePage() {
     const { dict } = useLanguage();
     const d = dict.pages.education;
-
-    const steps = [
-        { label: d.step1, icon: <BookOpen className="w-5 h-5 text-[#d4af37]" /> },
-        { label: d.step2, icon: <HelpCircle className="w-5 h-5 text-[#d4af37]" /> },
-        { label: d.step3, icon: <MessageSquare className="w-5 h-5 text-[#d4af37]" /> },
-        { label: d.step4, icon: <PenTool className="w-5 h-5 text-[#d4af37]" /> },
-    ];
-
-    const stepDetails = [
-        { title: d.step1, desc: '명작과 현대 한국 문학을 깊이 있게 읽고 분석합니다.', descEn: 'Deep reading and analysis of classic and modern Korean literature.' },
-        { title: d.step2, desc: '텍스트에 대한 비판적 질문을 통해 사고력을 키웁니다.', descEn: 'Developing critical thinking through questioning texts.' },
-        { title: d.step3, desc: '동료들과의 토론을 통해 다양한 시각을 탐구합니다.', descEn: 'Exploring diverse perspectives through peer discussions.' },
-        { title: d.step4, desc: '자신만의 작품을 창작하고 출판까지 경험합니다.', descEn: 'Creating and publishing your own literary works.' },
-    ];
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -131,27 +115,136 @@ export default function LiteraturePage() {
                 </div>
             </section>
 
-            {/* Divider */}
-            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent w-full" />
+            {/* Curriculum Divider */}
+            <div className="relative py-12 bg-[#050510]">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
+                </div>
+                <div className="relative flex justify-center">
+                    <div className="bg-[#050510] px-6 text-[#d4af37]">
+                        <BookOpen className="w-8 h-8 opacity-80" />
+                    </div>
+                </div>
+            </div>
 
-            {/* 4-Step Process */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <SectionHeader title="4-Step Creative Curriculum" subtitle="체계적인 4단계 창작 커리큘럼" />
-                    <ProcessDiagram steps={steps} />
+            {/* Curriculum Section 1: 독서 & 토론 */}
+            <section className="py-16 bg-gradient-to-b from-[#050510] to-[#0a0f25] relative">
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+                    <div className="mb-12 text-center">
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37] mb-4">
+                            독서 & 토론
+                        </h2>
+                        <p className="text-gray-400 text-lg">Reading & Discussion</p>
+                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                        {stepDetails.map((s, i) => (
-                            <GlassCard key={i} delay={i * 0.1}>
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">
-                                        {i + 1}
-                                    </div>
-                                    <h3 className="font-bold text-white">{s.title}</h3>
+                    {/* Desktop/Tablet Table Layout */}
+                    <div className="hidden md:block overflow-hidden rounded-2xl border border-[#d4af37]/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)] bg-[#0a1128]/80 backdrop-blur-xl">
+                        <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr] gap-px bg-[#d4af37]/20 border-b border-[#d4af37]/30">
+                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">단계</div>
+                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">단계 활동</div>
+                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">발달되는 능력</div>
+                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">토론·논술로의 연결</div>
+                        </div>
+
+                        {[
+                            { step: '① 독서', activity: '다양한 시·수필·논픽션 읽기', skills: '사고의 폭, 비판적 읽기', connection: '주제 해석·근거 인식' },
+                            { step: '② 글쓰기', activity: '시, 수필 창작', skills: '언어 표현력, 구조화', connection: '논리적 전개 연습' },
+                            { step: '③ 토론', activity: '작품·주제 토론', skills: '공감적 소통, 반론 훈련', connection: '논술의 구두형태' },
+                            { step: '④ 논술', activity: '글로 정리', skills: '종합적 사고·논증', connection: '사고의 완성 단계' },
+                        ].map((row, idx) => (
+                            <div key={idx} className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr] gap-px bg-[#d4af37]/10 hover:bg-[#d4af37]/20 transition-colors">
+                                <div className="p-6 font-bold text-white bg-[#0a1128] text-center text-lg">{row.step}</div>
+                                <div className="p-6 text-gray-200 bg-[#0a1128] flex items-center font-medium">{row.activity}</div>
+                                <div className="p-6 text-gray-300 bg-[#0a1128] flex items-center justify-center text-center">{row.skills}</div>
+                                <div className="p-6 text-gray-300 bg-[#0a1128] flex items-center justify-center text-center font-medium text-[#fceda6]">{row.connection}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile Card Layout for 독서 & 토론 */}
+                    <div className="md:hidden space-y-4">
+                        {[
+                            { step: '① 독서', activity: '다양한 시·수필·논픽션 읽기', skills: '사고의 폭, 비판적 읽기', connection: '주제 해석·근거 인식' },
+                            { step: '② 글쓰기', activity: '시, 수필 창작', skills: '언어 표현력, 구조화', connection: '논리적 전개 연습' },
+                            { step: '③ 토론', activity: '작품·주제 토론', skills: '공감적 소통, 반론 훈련', connection: '논술의 구두형태' },
+                            { step: '④ 논술', activity: '글로 정리', skills: '종합적 사고·논증', connection: '사고의 완성 단계' },
+                        ].map((item, idx) => (
+                            <GlassCard key={idx} delay={idx * 0.1}>
+                                <div className="flex items-center gap-3 mb-4 border-b border-[#d4af37]/20 pb-3">
+                                    <h3 className="font-bold text-xl text-[#d4af37]">{item.step}</h3>
+                                    <span className="text-white font-medium pl-3 border-l border-gray-600">{item.activity}</span>
                                 </div>
-                                <p className="text-gray-400 text-sm">{s.desc}</p>
-                                <p className="text-gray-500 text-xs mt-1">{s.descEn}</p>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-start">
+                                        <span className="text-gray-400 text-sm w-24 shrink-0">발달되는 능력</span>
+                                        <span className="text-gray-200 text-sm text-right break-keep">{item.skills}</span>
+                                    </div>
+                                    <div className="flex justify-between items-start">
+                                        <span className="text-gray-400 text-sm w-24 shrink-0">논술 연결</span>
+                                        <span className="text-[#fceda6] font-medium text-sm text-right break-keep">{item.connection}</span>
+                                    </div>
+                                </div>
                             </GlassCard>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Curriculum Section 2: 책 글쓰기 */}
+            <section className="py-20 relative bg-[#050510]">
+                {/* Visual Background Elements */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[150px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#64ffda]/5 blur-[150px] rounded-full pointer-events-none" />
+
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+                    <div className="mb-16 text-center">
+                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37] mb-4">
+                            책 글쓰기
+                        </h2>
+                        <p className="text-gray-300 text-lg md:text-xl font-medium tracking-wide">
+                            단행본 만드는 기본 틀 교육
+                        </p>
+                    </div>
+
+                    {/* Masonry Columns Layout */}
+                    <div className="columns-1 md:columns-2 gap-6 space-y-6">
+                        {[
+                            { num: 1, title: '단어와 문장에 상상력과 감성 길들이기', bullets: ['생활언어에 문학을', '멋지고 짧은 문장 만들어보기'] },
+                            { num: 4, title: '문장을 늘이기, 호흡을 길게 하기', bullets: ['글을 늘이는 방법', '묘사와 기술의 차이'] },
+                            { num: 2, title: '6가지 글쓰기 방법', bullets: ['눈으로 본 것과 마음으로 본 것을 쓰기', '망원경으로 보기, 현미경으로 보기'] },
+                            { num: 5, title: '비유법 활용하기', bullets: ['은유와 직유', '사물화 (형상화)'] },
+                            { num: 3, title: '기발함과 엉뚱함으로 문장 만들기', bullets: ['최고의 상상력은 기발함', '최고의 신선함은 엉뚱함'] },
+                            { num: 6, title: '문장과 문체 만들기', bullets: ['글쓰기 전에 정해야 할 것', '나만의 문장과 문체 만들기'] },
+                            { num: 7, title: '이야기 만들기 (Storytelling)', bullets: ['이야기의 요소', '실제 이야기 만들기'] },
+                            { num: 10, title: '철학적 글쓰기', bullets: ['속 것을 끄집어 내기', '안보이는 것을 찾아내기'] },
+                            { num: 8, title: '글쓰기 실전', bullets: ['책을 내기 위한 글쓰기', '주제 정하기와 목차 만들기'] },
+                            { num: 11, title: '글 감 찾아내기', bullets: ['주제를 선명하게 하기', '이야기에 숨 불어넣기'] },
+                            { num: 9, title: '책쓰기의 실전', bullets: ['단행본 완성에 필요한 기법', '전문적 글쓰기 방법'] },
+                            { num: 12, title: '다시 기본으로 돌아가기', bullets: ['창조적 문장 만들기', '핵심을 지르는 문장 만들기'] }
+                        ].map((item, idx) => (
+                            <div key={idx} className="break-inside-avoid shadow-lg relative group">
+                                <GlassCard delay={(idx % 6) * 0.1}>
+                                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#d4af37] to-transparent rounded-l-2xl opacity-50 group-hover:opacity-100 transition-opacity" />
+
+                                    <div className="pl-2">
+                                        <div className="flex items-start gap-4 mb-4">
+                                            <div className="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-br from-[#d4af37]/20 to-[#0a1128] border border-[#d4af37]/30 flex items-center justify-center">
+                                                <span className="text-[#fceda6] font-serif font-bold text-lg">{item.num}</span>
+                                            </div>
+                                            <h3 className="font-bold text-white text-lg md:text-xl leading-tight pt-1 break-keep group-hover:text-[#d4af37] transition-colors">{item.title}</h3>
+                                        </div>
+
+                                        <ul className="space-y-2.5 ml-14">
+                                            {item.bullets.map((bullet, bIdx) => (
+                                                <li key={bIdx} className="flex items-start gap-2.5 text-gray-300">
+                                                    <span className="text-[#d4af37] text-sm mt-1 shrink-0">◆</span>
+                                                    <span className="leading-relaxed break-keep">{bullet}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </GlassCard>
+                            </div>
                         ))}
                     </div>
                 </div>
