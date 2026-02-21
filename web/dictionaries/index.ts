@@ -547,7 +547,7 @@ export const ko: Dictionary = {
             topikDesc: '한국어능력시험을 위한 개인 맞춤형 분석 및 모의고사 시스템.',
             lmsTitle: '클라우드 LMS 플랫폼',
             lmsDesc: 'VOD, 진도 추적, 인터랙티브 커뮤니티 기능.',
-            literatureTitle: '왕립문예원 (K-Literature & Writing)',
+            literatureTitle: '왕립문예원',
             literatureDesc: '왕립문예원은 4단계 창작 커리큘럼을 제공합니다.',
             step1: '독서 (Reading)',
             step2: '질문 (Questioning)',

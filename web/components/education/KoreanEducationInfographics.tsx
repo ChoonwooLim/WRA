@@ -991,7 +991,7 @@ export function KoreanEducationInfographics() {
                     className="mb-12 text-center"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                        차별점 <span className="text-gray-500 font-light mx-2">OR</span> 경쟁력
+                        차별점 <span className="text-gray-500 font-light mx-2">&</span> 경쟁력
                     </h2>
                     <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                 </motion.div>
