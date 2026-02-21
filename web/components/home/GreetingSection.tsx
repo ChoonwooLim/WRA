@@ -33,16 +33,17 @@ export function GreetingSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-left"
                     >
-                        <h2 className="text-sm uppercase tracking-[0.3em] text-[#d4af37] mb-3">
+                        <h2 className="text-sm uppercase tracking-[0.4em] text-[#d4af37] mb-2 font-medium">
                             {dict.home.greeting.title}
                         </h2>
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                        <h3 className="text-3xl md:text-4xl font-serif text-[#fceda6] mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                             {dict.home.greeting.name}
                         </h3>
-                        <p className="text-gray-400 leading-relaxed text-lg">
-                            &ldquo;{dict.home.greeting.message}&rdquo;
-                        </p>
+                        <div className="text-gray-300 leading-[1.8] text-lg md:text-xl font-light whitespace-pre-line">
+                            {dict.home.greeting.message}
+                        </div>
                     </motion.div>
                 </div>
             </div>

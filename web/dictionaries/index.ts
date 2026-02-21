@@ -247,7 +247,7 @@ export const en: Dictionary = {
         greeting: {
             title: 'Welcome Message',
             name: 'HRH Crown Prince Lee Won',
-            message: 'Welcome to World Royal Academy. We are committed to preserving and sharing Korea\'s royal heritage with the world through education, culture, and innovation.',
+            message: '"Welcome to the World Royal Academy.\n\nWe inherit the noble spirit and enduring values of the Korean Imperial Family with a modern vision.\nWe are dedicated to fostering global leaders and brilliantly illuminating Korea\'s royal heritage to the world \nthrough exceptional education, culture, and innovation."',
         },
         coreValues: {
             title: 'WRA Introduction_Core Values',
@@ -441,9 +441,9 @@ export const ko: Dictionary = {
         scrollDown: '아래로 스크롤하여 더 알아보기',
         learnMore: '자세히 보기',
         greeting: {
-            title: '인사말',
+            title: '인 사 말',
             name: '황태손 이원 전하',
-            message: '세계왕립아카데미에 오신 것을 환영합니다. 우리는 교육, 문화, 혁신을 통해 대한민국의 왕실 유산을 세계와 나누는 데 전력하고 있습니다.',
+            message: '"세계왕립아카데미에 오신 것을 환영합니다.\n\n유구한 대한제국 황실의 고귀한 정신과 가치를 현대적 비전으로 계승하여,\n글로벌 리더를 양성하고 한국의 헤리티지를 세계 속에 찬란히 빛내고자 합니다."',
         },
         coreValues: {
             title: 'WRA소개_핵심가치',
