@@ -15,7 +15,7 @@ export default function BooksGalleryPage() {
 
     // Safely fallback if dict hasn't updated yet or if keys are missing from older dicts
     const title = dict.pages?.education?.textbooksTitle || "발간 서적 및 교재";
-    const desc = dict.pages?.education?.textbooksDesc || "세계왕립아카데미 및 유관 기관에서 발간한 도서와 교육 자료들을 소개합니다.";
+    const desc = dict.pages?.education?.textbooksDesc || "";
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -72,8 +72,10 @@ export default function BooksGalleryPage() {
                                 세계왕립아카데미 <br className="hidden md:block" />철학과 비전의 정수
                             </h2>
 
-                            <p className="text-gray-300 text-base md:text-lg leading-[1.8] mb-10 whitespace-pre-line font-light max-w-xl">
-                                "한국의 찬란한 왕실 유산과 현대 경영 철학이 만나는 기념비적인 저작입니다.{'\n'}시대를 초월하는 지혜와 글로벌 리더십의 본질을 담아내어, 세상을 이롭게 하는 홍익인간의 가치를 전 세계에 널리 알리고자 합니다."
+                            <p className="text-gray-300 text-base md:text-lg leading-[1.8] mb-10 font-light max-w-xl">
+                                "한국의 찬란한 문화 유산과 현대 경영 철학이 만나는 기념비적인 저작"<br /><br />
+                                시대를 초월하는 지혜와 글로벌 리더십의 본질을 담아내어,<br />
+                                가장 한국적인 가치를 전 세계에 널리 알리고자 합니다.
                             </p>
 
                             <div className="flex gap-4">

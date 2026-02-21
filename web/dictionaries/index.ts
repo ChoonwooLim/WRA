@@ -354,7 +354,7 @@ export const en: Dictionary = {
             studiesTitle: 'K-Studies',
             studiesDesc: 'In-depth academic programs focusing on Korean history, culture, and royal heritage.',
             textbooksTitle: 'Published Books & Materials',
-            textbooksDesc: 'A collection of books and educational resources published by the World Royal Academy and affiliated institutes.',
+            textbooksDesc: '',
         },
         certification: {
             heroTitle: 'WRA Warrant — Certification',
@@ -553,7 +553,7 @@ export const ko: Dictionary = {
             studiesTitle: 'K-학술 (K-Studies)',
             studiesDesc: '한국의 역사, 문화, 왕실 유산에 대한 깊이 있는 학술 및 연구 프로그램입니다.',
             textbooksTitle: '발간 서적 및 교재',
-            textbooksDesc: '세계왕립아카데미 및 유관 기관에서 발간한 도서와 교육 자료들을 소개합니다.',
+            textbooksDesc: '',
         },
         certification: {
             heroTitle: 'WRA 워런트 — 인증',
