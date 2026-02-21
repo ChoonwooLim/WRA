@@ -494,7 +494,7 @@ export function KoreanEducationInfographics() {
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
                                 <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
-                                <span className="text-gray-300 text-sm break-keep">메타인덱스 테이블 기반 체계적 문제 관리</span>
+                                <span className="text-gray-300 text-sm break-keep">메타인덱스 테이블 기반 체계적 <br />문제 관리</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
