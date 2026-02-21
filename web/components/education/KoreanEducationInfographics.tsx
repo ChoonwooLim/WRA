@@ -6,7 +6,8 @@ import {
     Users, GraduationCap, TrendingUp, LineChart, Globe2, Building2,
     AlertTriangle, XCircle, CheckCircle2, Building, Briefcase, FileText,
     AlertCircle, Laptop, Database, Sparkles, Award, Brain, Video, Cloud,
-    X, ArrowRight, PlayCircle, BookOpen, MonitorPlay, Check, PieChart, Bot
+    X, ArrowRight, PlayCircle, BookOpen, MonitorPlay, Check, PieChart, Bot,
+    ShieldCheck, LayoutGrid, Cpu, Target, Share2, Map, MapPin, Settings
 } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 
@@ -616,6 +617,626 @@ export function KoreanEducationInfographics() {
                         "검증된 기술과 유연한 콘텐츠로 한국어 교육의 새로운 표준을 만듭니다."
                     </p>
                 </motion.div>
+            </section>
+
+            {/* Section 6: 목표 시장 분석 */}
+            <section className="container mx-auto px-4 max-w-6xl">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-12 text-center"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        목표 시장 분석
+                    </h2>
+                    <p className="text-xl text-[#d4af37] mb-6">누가 필요로 하는가?</p>
+                    <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full"></div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    {/* B2C */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col h-full relative overflow-hidden group hover:bg-white/10 transition-colors"
+                    >
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                <Users className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <h3 className="text-lg md:text-xl font-bold text-white">개인 학습자 (B2C)</h3>
+                        </div>
+                        <ul className="space-y-6 flex-grow">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">TOPIK 응시자:</span>
+                                    <span className="text-white font-bold text-sm">연 42만 명</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">한국어 학습시장 규모:</span>
+                                    <span className="text-white font-bold text-sm">9조 9천억 원 (2024년)</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">온라인학습 플랫폼:</span>
+                                    <span className="text-white font-bold text-sm">2억명 잠재 시장 (2조원)</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">한류 팬:</span>
+                                    <span className="text-white font-bold text-sm">전 세계 1억 명+</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3">
+                            <TrendingUp className="w-5 h-5 text-[#d4af37]" />
+                            <span className="text-[#d4af37] font-bold text-sm">연평균 성장률 25.1% (2025-2034)</span>
+                        </div>
+                    </motion.div>
+
+                    {/* B2B */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col h-full relative overflow-hidden group hover:bg-white/10 transition-colors"
+                    >
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                <Building2 className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <h3 className="text-lg md:text-xl font-bold text-white">교육 기관 (B2B)</h3>
+                        </div>
+                        <ul className="space-y-6 flex-grow">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">해외 대학 한국어학과:</span>
+                                    <span className="text-white font-bold text-sm">1,421개 대학 (106개국+)</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">중국 한국어학과:</span>
+                                    <span className="text-white font-bold text-sm">271개 (1995년 20개에서 급증)</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">한국어학원/어학원:</span>
+                                    <span className="text-white font-bold text-sm">글로벌 500개+ 기관 네트워크</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">다문화/국제교류센터:</span>
+                                    <span className="text-white font-bold text-sm">전 세계 300개+ </span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div className="mt-8 pt-6 border-t border-white/10 flex items-center gap-3">
+                            <ShieldCheck className="w-5 h-5 text-blue-400" />
+                            <span className="text-blue-400 font-bold text-sm">안정적 장기 계약 시장</span>
+                        </div>
+                    </motion.div>
+
+                    {/* New Market */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                        className="bg-[#050510] border border-[#d4af37]/30 rounded-2xl p-8 flex flex-col h-full relative overflow-hidden group hover:bg-[#050510]/80 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.1)]"
+                    >
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#d4af37]/10 rounded-full blur-3xl -z-10"></div>
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="w-12 h-12 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 flex items-center justify-center shrink-0">
+                                <Briefcase className="w-6 h-6 text-[#d4af37]" />
+                            </div>
+                            <h3 className="text-lg md:text-xl font-bold text-[#d4af37]">신규 시장 기회</h3>
+                        </div>
+                        <ul className="space-y-6 flex-grow">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">기업 한국어 교육:</span>
+                                    <span className="text-white font-medium text-sm">해외 진출 기업 현지 직원 (E-7 비자 대비)</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">교육기술(에듀테크):</span>
+                                    <span className="text-white font-medium text-sm">2025년 61억 달러 시장 전망</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">정부파트너십:</span>
+                                    <span className="text-white font-medium text-sm">Study Korea 300K, 국제교류재단</span>
+                                </div>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <div>
+                                    <span className="text-gray-300 text-sm block mb-1">특화 시장:</span>
+                                    <span className="text-white font-medium text-sm">산업별 맞춤형 한국어 (IT, 제조, 서비스)</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div className="mt-8 pt-6 border-t border-[#d4af37]/20 flex items-center gap-3">
+                            <LayoutGrid className="w-5 h-5 text-[#d4af37]" />
+                            <span className="text-[#d4af37] font-bold text-sm">고부가가치 블루오션 시장</span>
+                        </div>
+                    </motion.div>
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+                    className="flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-[#1e3a8a]/40 via-[#d4af37]/10 to-transparent border border-white/10 rounded-xl p-6 shadow-xl"
+                >
+                    <div className="flex items-center gap-4 mb-4 md:mb-0">
+                        <LineChart className="w-8 h-8 text-[#d4af37]" />
+                        <h3 className="text-lg md:text-2xl font-bold text-white tracking-wide">
+                            시장 성장 전망: 2034년 <span className="text-[#d4af37]">92조 원</span> 규모로 확대 예상
+                        </h3>
+                    </div>
+                    <div className="text-gray-400 text-sm font-medium">
+                        글로벌 마켓 인사이트 리포트 (2024)
+                    </div>
+                </motion.div>
+            </section>
+
+            {/* Section 7: 국내유학시장 기회와 전망 */}
+            <section className="container mx-auto px-4 max-w-6xl mt-16 mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-12"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        국내유학시장 <span className="text-[#d4af37]">기회와 전망</span>
+                    </h2>
+                    <div className="h-1 w-20 bg-[#d4af37] rounded-full"></div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left Col - Study Korea 300K */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                        className="space-y-6 flex flex-col h-full"
+                    >
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm flex-grow flex flex-col">
+                            <div>
+                                <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3 pb-4 border-b border-white/10">
+                                    <span className="text-blue-400">Study Korea 300K</span> 프로젝트
+                                </h3>
+
+                                <div className="space-y-8 mb-10">
+                                    <div className="flex gap-5">
+                                        <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                            <GraduationCap className="w-6 h-6 text-blue-400" />
+                                        </div>
+                                        <div>
+                                            <div className="text-lg font-bold text-white mb-1">20만 → 30만 유학생</div>
+                                            <div className="text-sm text-gray-400 font-medium">2027년까지 50% 증가 목표</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-5">
+                                        <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                            <FileText className="w-6 h-6 text-blue-400" />
+                                        </div>
+                                        <div>
+                                            <div className="text-lg font-bold text-white mb-1">5,000억 원</div>
+                                            <div className="text-sm text-gray-400 font-medium">TOPIK 교육 시장</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-5">
+                                        <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                            <Briefcase className="w-6 h-6 text-blue-400" />
+                                        </div>
+                                        <div>
+                                            <div className="text-lg font-bold text-white mb-1">유학 → 취업 → 정주</div>
+                                            <div className="text-sm text-gray-400 font-medium">원스톱 지원 체계 구축</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-[#050510]/50 border border-white/5 rounded-xl p-6 mb-8 mt-auto">
+                                <h4 className="text-center font-bold text-white mb-8 border-b border-white/5 pb-3">글로벌 유학생 정책 비교</h4>
+                                <div className="flex justify-around items-end h-32 px-4 mb-3 text-center">
+                                    <div className="flex flex-col items-center gap-2 group w-1/3">
+                                        <span className="text-[#d4af37] font-bold text-sm">30만 명</span>
+                                        <div className="w-10 md:w-14 bg-gradient-to-t from-[#1e3a8a] to-blue-500 rounded-t-md h-[60%] group-hover:h-[65%] shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300"></div>
+                                        <span className="text-white text-sm font-bold">한국</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-2 group w-1/3">
+                                        <span className="text-gray-400 text-sm">50만 명</span>
+                                        <div className="w-10 md:w-14 bg-white/10 rounded-t-md h-[100%] group-hover:bg-white/20 transition-all duration-300"></div>
+                                        <span className="text-gray-400 text-sm font-medium">일본</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-2 group w-1/3">
+                                        <span className="text-gray-400 text-sm">50만 명+</span>
+                                        <div className="w-10 md:w-14 bg-white/10 rounded-t-md h-[100%] group-hover:bg-white/20 transition-all duration-300"></div>
+                                        <span className="text-gray-400 text-sm font-medium">중국</span>
+                                    </div>
+                                </div>
+                                <div className="flex justify-between text-xs text-gray-500 px-2 md:px-6">
+                                    <span className="w-1/3 text-center text-[#d4af37] font-semibold">2027 목표</span>
+                                    <span className="w-1/3 text-center">2027 목표</span>
+                                    <span className="w-1/3 text-center">이미 달성</span>
+                                </div>
+                            </div>
+
+                            <ul className="space-y-3 text-sm text-gray-300 bg-white/5 p-5 rounded-xl border border-white/5">
+                                <li className="flex items-center gap-3">
+                                    <Check className="w-5 h-5 text-[#d4af37]" />
+                                    <span className="font-medium text-white">시간제 취업 확대</span> (30시간/주)
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Check className="w-5 h-5 text-[#d4af37]" />
+                                    <span className="font-medium text-white">E-9 비자자 대학 진학 허용</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Check className="w-5 h-5 text-[#d4af37]" />
+                                    <span className="font-medium text-white">졸업 후 취업비자 지원 강화</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </motion.div>
+
+                    {/* Right Col */}
+                    <div className="flex flex-col gap-6">
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                            className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm"
+                        >
+                            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                                <Target className="w-5 h-5 text-blue-400" /> 핵심 기회 요인
+                            </h3>
+                            <ul className="space-y-6">
+                                <li className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center shrink-0 border border-blue-500/20">
+                                        <Laptop className="w-5 h-5 text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold mb-1">TOPIK IBT 확대</h4>
+                                        <p className="text-sm text-gray-400">2025년부터 해외 시행 연 8회로 확대되며 온라인 모의고사 시장 확대 예상</p>
+                                    </div>
+                                </li>
+                                <li className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center shrink-0 border border-blue-500/20">
+                                        <Bot className="w-5 h-5 text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold mb-1">AI 교육기술 시장 성장</h4>
+                                        <p className="text-sm text-gray-400">2018년 8억 달러 → 2025년 61억 달러 맞춤형 학습·평가 기술 수요 급증</p>
+                                    </div>
+                                </li>
+                                <li className="flex gap-4">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center shrink-0 border border-blue-500/20">
+                                        <Building className="w-5 h-5 text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold mb-1">기업 한국어 교육 확대</h4>
+                                        <p className="text-sm text-gray-400">현지 채용 외국인 대상 한국어 교육 및 해외 진출 기업 현지직원 역량강화</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                            className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-sm flex-grow"
+                        >
+                            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                                <Globe2 className="w-5 h-5 text-[#d4af37]" /> 지역별 기회
+                            </h3>
+                            <div className="space-y-8">
+                                <div>
+                                    <div className="flex justify-between items-end mb-3">
+                                        <span className="text-white font-medium">동남아시아</span>
+                                        <span className="text-[#d4af37] font-bold text-sm bg-[#d4af37]/10 px-2 py-1 rounded">가장 빠른 성장</span>
+                                    </div>
+                                    <div className="w-full bg-white/5 rounded-full h-3 overflow-hidden shadow-inner">
+                                        <motion.div initial={{ width: 0 }} whileInView={{ width: '90%' }} transition={{ duration: 1.5, ease: "easeOut" }} className="bg-gradient-to-r from-blue-700 to-[#d4af37] h-full rounded-full"></motion.div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="flex justify-between items-end mb-3">
+                                        <span className="text-white font-medium">중앙아시아</span>
+                                        <span className="text-blue-300 text-sm">3년간 2배 증가</span>
+                                    </div>
+                                    <div className="w-full bg-white/5 rounded-full h-3 overflow-hidden shadow-inner">
+                                        <motion.div initial={{ width: 0 }} whileInView={{ width: '65%' }} transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }} className="bg-gradient-to-r from-blue-900 to-blue-400 h-full rounded-full"></motion.div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="flex justify-between items-end mb-3">
+                                        <span className="text-white font-medium">미주/유럽</span>
+                                        <span className="text-gray-400 text-sm">꾸준한 성장</span>
+                                    </div>
+                                    <div className="w-full bg-white/5 rounded-full h-3 overflow-hidden shadow-inner">
+                                        <motion.div initial={{ width: 0 }} whileInView={{ width: '45%' }} transition={{ duration: 1.5, delay: 0.4, ease: "easeOut" }} className="bg-white/20 h-full rounded-full"></motion.div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+                            className="bg-gradient-to-r from-transparent via-blue-900/20 to-transparent border-l-4 border-blue-500 p-5 text-[15px] text-gray-300 tracking-wide font-medium relative"
+                        >
+                            "정부 주도의 유학생 정책과 AI 교육기술 발전은 한국어 교육 시장의 <strong className="text-white">양적·질적 성장을 동시에 견인</strong>하고 있습니다."
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 8: 차별점 OR 경쟁력 */}
+            <section className="container mx-auto px-4 max-w-6xl mb-16">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-12 text-center"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                        차별점 <span className="text-gray-500 font-light mx-2">OR</span> 경쟁력
+                    </h2>
+                    <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* 기술적 우위 */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-blue-500/50 transition-all duration-300 group"
+                    >
+                        <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/5">
+                            <div className="w-12 h-12 bg-blue-900/40 rounded-xl flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-900/60 transition-colors">
+                                <Cpu className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white">기술적 우위</h3>
+                        </div>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">국내 유일 메타인덱스기반 TOPIK 시스템</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">AI 기반 개인 맞춤 분석</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">IBT 완벽 대응 (2025년 확대)</span>
+                            </li>
+                        </ul>
+                    </motion.div>
+
+                    {/* 콘텐츠 신뢰도 */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} viewport={{ once: true }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-indigo-500/50 transition-all duration-300 group lg:translate-y-8"
+                    >
+                        <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/5">
+                            <div className="w-12 h-12 bg-indigo-900/40 rounded-xl flex items-center justify-center border border-indigo-500/20 group-hover:bg-indigo-900/60 transition-colors">
+                                <Award className="w-6 h-6 text-indigo-400" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white">콘텐츠 신뢰도</h3>
+                        </div>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">서울대학교 언어교육원 콘텐츠</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">60년 교육 노하우 집약</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">애니메이션 상호작용 학습</span>
+                            </li>
+                        </ul>
+                    </motion.div>
+
+                    {/* 교육 생태계 구축 */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }} viewport={{ once: true }}
+                        className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-[#d4af37]/50 transition-all duration-300 group"
+                    >
+                        <div className="flex items-center gap-4 mb-6 pb-4 border-b border-white/5">
+                            <div className="w-12 h-12 bg-[#d4af37]/20 rounded-xl flex items-center justify-center border border-[#d4af37]/30 group-hover:bg-[#d4af37]/30 transition-colors">
+                                <Share2 className="w-6 h-6 text-[#d4af37]" />
+                            </div>
+                            <h3 className="text-xl font-bold text-white">교육 생태계 구축</h3>
+                        </div>
+                        <ul className="space-y-4">
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">한국어 학습 + TOPIK 대비 + 취업 연계</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">캠퍼스 내 전용 교육 인프라</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-[#d4af37] shrink-0 mt-0.5" />
+                                <span className="text-gray-300 text-sm">정부 지원 NCS 직업교육 연계</span>
+                            </li>
+                        </ul>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Section 9: 제공되는 것들 & 글로벌 확장 로드맵 */}
+            <section className="container mx-auto px-4 max-w-6xl pb-16">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    {/* Left Col - 제공되는 것들 */}
+                    <div className="lg:col-span-5 flex flex-col gap-6">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                        >
+                            <h2 className="text-2xl font-bold text-white mb-2">제공되는 것들</h2>
+                            <div className="text-sm text-gray-400 mb-6">WRA 한국어 교육의 유일무이한 혜택</div>
+
+                            <div className="space-y-4 mb-6">
+                                <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+                                    <div className="w-12 h-12 rounded-full bg-blue-900/40 border border-blue-500/20 flex items-center justify-center shrink-0">
+                                        <Brain className="w-6 h-6 text-blue-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold text-[15px] mb-1">AI 기반 TOPIK 모의고사 시스템</h4>
+                                        <p className="text-xs text-gray-400">메타인덱스 분석, IBT 실전 시뮬레이션, 개인 맞춤 학습</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-[#1e3a8a]/30 border border-blue-500/30 rounded-xl p-5 flex items-center gap-4 hover:bg-[#1e3a8a]/50 transition-colors relative overflow-hidden shadow-[0_0_20px_rgba(30,58,138,0.2)]">
+                                    <div className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0 z-10">
+                                        <Building className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div className="z-10">
+                                        <h4 className="text-white font-bold text-[15px] mb-1">서울대 '사랑해요 한국어' 전 과정</h4>
+                                        <p className="text-xs flex flex-wrap gap-2 text-blue-200">
+                                            <span>216차시</span>
+                                            <span>|</span>
+                                            <span>4레벨</span>
+                                            <span>|</span>
+                                            <span className="text-[#d4af37] font-bold tracking-wide">8개 언어 자막 지원</span>
+                                        </p>
+                                    </div>
+                                    <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#d4af37]"></div>
+                                </div>
+
+                                <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+                                    <div className="w-12 h-12 rounded-full bg-cyan-900/40 border border-cyan-500/20 flex items-center justify-center shrink-0">
+                                        <Cloud className="w-6 h-6 text-cyan-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold text-[15px] mb-1">클라우드 LMS 플랫폼</h4>
+                                        <p className="text-xs text-gray-400">통합 학습 관리, 실시간 진도 추적, 자료실</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+                                    <div className="w-12 h-12 rounded-full bg-purple-900/40 border border-purple-500/20 flex items-center justify-center shrink-0">
+                                        <Settings className="w-6 h-6 text-purple-400" />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold text-[15px] mb-1">기관별 맞춤 커스터마이징</h4>
+                                        <p className="text-xs text-gray-400">교육기관 요구사항 반영, 현지화 지원</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="text-xs text-gray-500 italic bg-white/5 p-3 rounded-lg border border-white/5">
+                                (참조) 글로벌 진출 확대를 위해 자막 지원 언어가 기존 6개 언어에서 8개 언어로 변경되었습니다.
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Col - 로드맵 */}
+                    <div className="lg:col-span-7 bg-[#050510]/80 border border-white/10 rounded-2xl p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-900/10 blur-3xl rounded-full -z-10"></div>
+                        <h2 className="text-2xl font-bold text-white flex items-center gap-3 mb-10">
+                            <Map className="w-6 h-6 text-[#d4af37]" /> 글로벌 확장 로드맵
+                        </h2>
+
+                        <div className="space-y-12 relative before:absolute before:inset-y-0 before:left-[1.25rem] md:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-gradient-to-b before:from-blue-500 before:via-indigo-400 before:to-[#d4af37] before:z-0">
+
+                            {/* Phase 1 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                                className="relative flex items-center w-full z-10 group"
+                            >
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 md:left-1/2 md:-translate-x-1/2 flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#050510] bg-blue-500 text-white shadow z-20 transition-transform group-hover:scale-110">
+                                    <MapPin className="w-4 h-4" />
+                                </div>
+                                <div className="w-[calc(100%-3.5rem)] ml-auto md:ml-0 md:mr-auto md:w-[calc(50%-2.5rem)] bg-white/5 border border-white/10 p-6 rounded-xl shadow-lg hover:bg-white/10 transition-colors relative z-10">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h3 className="font-bold text-blue-400 text-lg">2025-2026</h3>
+                                    </div>
+                                    <div className="text-white font-bold mb-3 text-[17px]">인도네시아 거점 완성</div>
+                                    <ul className="space-y-2 text-sm text-gray-400">
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-blue-400"></div> 대학교 수업 모델 완성</li>
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-blue-400"></div> 동남아시아 5개 대학 확장</li>
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-blue-400"></div> 현지 파트너십 네트워크 구축</li>
+                                    </ul>
+                                </div>
+                            </motion.div>
+
+                            {/* Phase 2 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                                className="relative flex items-center w-full z-10 group"
+                            >
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 md:left-1/2 md:-translate-x-1/2 flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#050510] bg-indigo-500 text-white shadow z-20 transition-transform group-hover:scale-110">
+                                    <Target className="w-4 h-4" />
+                                </div>
+                                <div className="w-[calc(100%-3.5rem)] ml-auto md:w-[calc(50%-2.5rem)] md:ml-auto md:mr-0 bg-white/5 border border-white/10 p-6 rounded-xl shadow-lg hover:bg-white/10 transition-colors relative z-10">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h3 className="font-bold text-indigo-400 text-lg">2027-2030</h3>
+                                    </div>
+                                    <div className="text-white font-bold mb-3 text-[17px]">아시아 전역 확산</div>
+                                    <ul className="space-y-2 text-sm text-gray-400">
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-indigo-400"></div> 중앙아시아 3개국 진출</li>
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-indigo-400"></div> 베트남, 태국 대학 연계 확산</li>
+                                        <li className="flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-indigo-400"></div> 정부 교육 정책 연계</li>
+                                    </ul>
+                                </div>
+                            </motion.div>
+
+                            {/* Phase 3 */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
+                                className="relative flex items-center w-full z-10 group"
+                            >
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 md:left-1/2 md:-translate-x-1/2 flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#050510] bg-[#d4af37] text-gray-900 shadow z-20 transition-transform group-hover:scale-110">
+                                    <Globe2 className="w-5 h-5" />
+                                </div>
+                                <div className="w-[calc(100%-3.5rem)] ml-auto md:ml-0 md:mr-auto md:w-[calc(50%-2.5rem)] bg-white/5 border border-[#d4af37]/30 p-6 rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.15)] relative overflow-hidden group-hover:bg-[#d4af37]/5 transition-colors z-10">
+                                    <div className="absolute top-0 right-0 w-16 h-16 bg-[#d4af37]/20 blur-2xl"></div>
+                                    <div className="flex items-center justify-between mb-2 relative z-10">
+                                        <h3 className="font-bold text-[#d4af37] text-lg">2030+</h3>
+                                    </div>
+                                    <div className="text-white font-bold mb-3 text-[17px] relative z-10">글로벌 표준 플랫폼</div>
+                                    <ul className="space-y-2 text-sm text-gray-400 relative z-10">
+                                        <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div> 전 세계 주요 대학 네트워크</li>
+                                        <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div> AI 기반 맞춤형 교육 고도화</li>
+                                        <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div> 한국어 교육의 글로벌 스탠다드</li>
+                                    </ul>
+                                </div>
+                            </motion.div>
+
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.7 }}
+                            className="mt-12 bg-gradient-to-r from-[#d4af37]/20 to-transparent border-l-4 border-[#d4af37] p-6 rounded-r-xl"
+                        >
+                            <h4 className="text-[#d4af37] text-lg font-bold flex items-center gap-2 mb-3">
+                                <Target className="w-6 h-6 text-white" />
+                                목표: 글로벌 한국어 교육 표준 플랫폼
+                            </h4>
+                            <p className="text-gray-300 text-sm leading-relaxed">
+                                한국어 교육의 새로운 표준을 제시하여 전 세계 학습자들에게 양질의 교육기회를 제공합니다.
+                            </p>
+                        </motion.div>
+                    </div>
+                </div>
             </section>
 
             {/* Feature Modals */}
