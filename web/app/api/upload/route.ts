@@ -6,7 +6,8 @@ import { existsSync, mkdirSync } from 'fs';
 
 export async function POST(request: NextRequest) {
     const data = await request.formData();
-    const file: File | null = data.get('file') as unknown as File;
+    const fileEntry = (data as any).get('file');
+    const file = fileEntry instanceof File ? fileEntry : null;
 
     if (!file) {
         return NextResponse.json({ success: false, message: 'No file uploaded' }, { status: 400 });

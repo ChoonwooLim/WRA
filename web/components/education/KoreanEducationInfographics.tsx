@@ -1,12 +1,14 @@
 'use client';
 
 import { motion, useInView, animate } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
     Users, GraduationCap, TrendingUp, LineChart, Globe2, Building2,
     AlertTriangle, XCircle, CheckCircle2, Building, Briefcase, FileText,
-    AlertCircle, Laptop, Database, Sparkles, Award, Brain, Video, Cloud
+    AlertCircle, Laptop, Database, Sparkles, Award, Brain, Video, Cloud,
+    X, ArrowRight, PlayCircle, BookOpen, MonitorPlay, Check, PieChart, Bot
 } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
 
 function Counter({ from = 0, to, duration = 2, suffix = '', prefix = '', decimals = 0 }: any) {
     const nodeRef = useRef<HTMLSpanElement>(null);
@@ -36,6 +38,20 @@ function Counter({ from = 0, to, duration = 2, suffix = '', prefix = '', decimal
 }
 
 export function KoreanEducationInfographics() {
+    const [activeModal, setActiveModal] = useState<'ai' | 'video' | 'lms' | null>(null);
+
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (activeModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [activeModal]);
+
     return (
         <div className="w-full flex flex-col gap-32 py-16">
 
@@ -480,7 +496,8 @@ export function KoreanEducationInfographics() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 relative overflow-hidden group"
+                        onClick={() => setActiveModal('ai')}
+                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 relative overflow-hidden group cursor-pointer hover:bg-white/10 hover:border-[#d4af37]/60 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                     >
                         <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-[0_0_10px_rgba(37,99,235,0.5)]">
                             핵심
@@ -513,7 +530,8 @@ export function KoreanEducationInfographics() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 group"
+                        onClick={() => setActiveModal('video')}
+                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 group cursor-pointer hover:bg-white/10 hover:border-[#d4af37]/60 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                     >
                         <div className="flex items-center gap-4 mb-8">
                             <div className="w-12 h-12 rounded-full bg-[#1e3a8a] border border-blue-500/50 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(30,58,138,0.8)]">
@@ -551,7 +569,8 @@ export function KoreanEducationInfographics() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.3 }}
-                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 group"
+                        onClick={() => setActiveModal('lms')}
+                        className="bg-white/5 border border-[#d4af37]/30 rounded-2xl p-8 group cursor-pointer hover:bg-white/10 hover:border-[#d4af37]/60 transition-all duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)]"
                     >
                         <div className="flex items-center gap-4 mb-8">
                             <div className="w-12 h-12 rounded-full bg-[#1e3a8a] border border-blue-500/50 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(30,58,138,0.8)]">
@@ -589,6 +608,407 @@ export function KoreanEducationInfographics() {
                     </p>
                 </motion.div>
             </section>
+
+            {/* Feature Modals */}
+            <AnimatePresence>
+                {activeModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+                    >
+                        {/* Backdrop */}
+                        <div
+                            className="absolute inset-0 bg-[#050510]/80 backdrop-blur-md"
+                            onClick={() => setActiveModal(null)}
+                        />
+
+                        {/* Modal Container */}
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-slate-900 border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] z-10"
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setActiveModal(null)}
+                                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors z-20"
+                            >
+                                <X className="w-6 h-6" />
+                            </button>
+
+                            <div className="p-6 sm:p-10">
+                                {activeModal === 'ai' && (
+                                    <div className="space-y-8">
+                                        <div className="border-b border-white/10 pb-6">
+                                            <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+                                                <Brain className="text-[#d4af37] w-8 h-8" />
+                                                <span className="text-[#d4af37]">TOPIK</span> 모의고사 시스템 상세
+                                            </h2>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            {/* Left Col - Meta Index */}
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-blue-400">메타인덱스 기반 혁신</h3>
+                                                <div className="space-y-4">
+                                                    <div className="bg-white/5 rounded-xl p-5 flex gap-4 border border-white/5">
+                                                        <Database className="w-8 h-8 text-blue-300 shrink-0" />
+                                                        <div>
+                                                            <div className="font-bold text-white mb-1">메타인덱스 테이블</div>
+                                                            <div className="text-sm text-gray-400 leading-relaxed">문제 유형별 체계적 분류 및 관리 시스템</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-white/5 rounded-xl p-5 flex gap-4 border border-white/5">
+                                                        <Bot className="w-8 h-8 text-blue-300 shrink-0" />
+                                                        <div>
+                                                            <div className="font-bold text-white mb-1">AI 분석</div>
+                                                            <div className="text-sm text-gray-400 leading-relaxed">개인별 취약점 정밀 진단 및 맞춤형 학습 경로 제공</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-white/5 rounded-xl p-5 flex gap-4 border border-white/5">
+                                                        <Laptop className="w-8 h-8 text-blue-300 shrink-0" />
+                                                        <div>
+                                                            <div className="font-bold text-white mb-1">IBT 대응</div>
+                                                            <div className="text-sm text-gray-400 leading-relaxed">2025년 확대되는 IBT 시험 대비</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="bg-gradient-to-r from-blue-900/40 to-transparent border border-blue-500/20 rounded-xl p-6 mt-6">
+                                                    <h4 className="font-bold text-white mb-4">메타인덱스 작동 원리</h4>
+                                                    <div className="flex items-center justify-between gap-2 max-w-sm mx-auto">
+                                                        <div className="flex flex-col items-center gap-2">
+                                                            <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                                                <FileText className="w-5 h-5 text-blue-300" />
+                                                            </div>
+                                                            <span className="text-xs text-gray-300">문제 유형</span>
+                                                        </div>
+                                                        <ArrowRight className="w-4 h-4 text-gray-500" />
+                                                        <div className="flex flex-col items-center gap-2">
+                                                            <div className="w-12 h-12 bg-indigo-500/20 rounded-full flex items-center justify-center">
+                                                                <Brain className="w-5 h-5 text-indigo-300" />
+                                                            </div>
+                                                            <span className="text-xs font-bold text-white">AI 분석</span>
+                                                        </div>
+                                                        <ArrowRight className="w-4 h-4 text-gray-500" />
+                                                        <div className="flex flex-col items-center gap-2">
+                                                            <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                                                                <Award className="w-5 h-5 text-purple-300" />
+                                                            </div>
+                                                            <span className="text-xs text-gray-300">맞춤 학습</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Right Col - Differentiation */}
+                                            <div className="space-y-6 md:border-l md:border-white/10 md:pl-8">
+                                                <h3 className="text-xl font-bold text-indigo-400">차별화 포인트</h3>
+                                                <ul className="space-y-6">
+                                                    <li className="flex items-start gap-4">
+                                                        <div className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/50 flex items-center justify-center shrink-0 mt-1">
+                                                            <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-bold mb-1 tracking-wide">체계적 데이터 분석</h4>
+                                                            <p className="text-sm text-gray-400 leading-relaxed">단순 문제 풀이가 아닌 세부 유형별 학습 패턴 분석</p>
+                                                        </div>
+                                                    </li>
+                                                    <li className="flex items-start gap-4">
+                                                        <div className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/50 flex items-center justify-center shrink-0 mt-1">
+                                                            <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-bold mb-1 tracking-wide">개인별 취약점 파악</h4>
+                                                            <p className="text-sm text-gray-400 leading-relaxed">문항별·영역별 정확한 취약 영역 도출</p>
+                                                        </div>
+                                                    </li>
+                                                    <li className="flex items-start gap-4">
+                                                        <div className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/50 flex items-center justify-center shrink-0 mt-1">
+                                                            <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-bold mb-1 tracking-wide">맞춤형 추천 시스템</h4>
+                                                            <p className="text-sm text-gray-400 leading-relaxed">AI 기반 개인화된 학습 계획 자동 생성</p>
+                                                        </div>
+                                                    </li>
+                                                    <li className="flex items-start gap-4">
+                                                        <div className="w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/50 flex items-center justify-center shrink-0 mt-1">
+                                                            <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="text-white font-bold mb-1 tracking-wide">IBT 실전 환경 구현</h4>
+                                                            <p className="text-sm text-gray-400 leading-relaxed">2025년 확대되는 IBT 시험 완벽 구현</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                                <div className="mt-8 bg-white text-[#050510] rounded-xl p-6 font-bold text-center border-l-4 border-blue-600 shadow-xl">
+                                                    <p className="text-lg leading-relaxed">
+                                                        "단순히 문제를 푸는 것이 아니라,<br />
+                                                        <span className="text-blue-700">데이터 기반으로 합격을 설계</span>합니다"
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {activeModal === 'video' && (
+                                    <div className="space-y-8">
+                                        <div className="border-b border-white/10 pb-6">
+                                            <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+                                                <Video className="text-blue-400 w-8 h-8" />
+                                                한글 동영상 강좌 상세
+                                            </h2>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            {/* Left Column */}
+                                            <div className="space-y-8">
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-blue-400 mb-4">애니메이션 기반 상호작용 학습</h3>
+                                                    <div className="grid grid-cols-2 gap-4">
+                                                        <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                <Users className="w-5 h-5 text-blue-300" />
+                                                                <h4 className="font-bold text-white">학습자 참여형</h4>
+                                                            </div>
+                                                            <p className="text-xs text-gray-400 leading-relaxed">강사 중심 일방향에서 직접 참여 방식으로</p>
+                                                        </div>
+                                                        <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                <PlayCircle className="w-5 h-5 text-blue-300" />
+                                                                <h4 className="font-bold text-white">직접 따라하기</h4>
+                                                            </div>
+                                                            <p className="text-xs text-gray-400 leading-relaxed">애니메이션 시청하며 실시간 참여</p>
+                                                        </div>
+                                                        <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                <FileText className="w-5 h-5 text-blue-300" />
+                                                                <h4 className="font-bold text-white">질문-대답 상호작용</h4>
+                                                            </div>
+                                                            <p className="text-xs text-gray-400 leading-relaxed">실제 대화 상황 시뮬레이션</p>
+                                                        </div>
+                                                        <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+                                                            <div className="flex items-center gap-2 mb-2">
+                                                                <TrendingUp className="w-5 h-5 text-blue-300" />
+                                                                <h4 className="font-bold text-white">마이크로러닝</h4>
+                                                            </div>
+                                                            <p className="text-xs text-gray-400 leading-relaxed">8-15분 단위로 부담없는 학습</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <h3 className="text-xl font-bold text-blue-400 mb-4">커리큘럼 구성</h3>
+                                                    <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-start gap-4">
+                                                        <BookOpen className="w-6 h-6 text-blue-300 mt-1 shrink-0" />
+                                                        <div>
+                                                            <div className="font-bold text-white mb-1">총 4권, 216차시 <span className="text-gray-400 text-sm font-normal">(54차시 × 4단계)</span></div>
+                                                            <div className="text-sm text-gray-400">기초-초급-중급1-중급2 단계별 학습</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Right Column */}
+                                            <div className="space-y-6">
+                                                <h3 className="text-xl font-bold text-indigo-400 mb-4">완벽한 현지화</h3>
+
+                                                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                                                    <div className="flex items-center gap-2 mb-4">
+                                                        <Globe2 className="w-5 h-5 text-indigo-300" />
+                                                        <h4 className="font-bold text-white">7개 언어 자막 지원</h4>
+                                                    </div>
+                                                    <div className="flex flex-wrap gap-2 mb-4">
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">한국어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">영어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">중국어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">일본어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">베트남어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">러시아어</span>
+                                                        <span className="px-3 py-1 bg-white/10 text-gray-300 rounded-lg text-xs">인도네시아어</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-sm">
+                                                        <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+                                                        <span className="text-white">학습 초기 <strong className="text-indigo-300">언어 장벽 최소화</strong> 및 현지 문화 맥락 반영</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="bg-gradient-to-br from-indigo-900/40 to-transparent border border-indigo-500/20 rounded-xl p-5">
+                                                        <h4 className="font-bold text-indigo-300 mb-3 border-b border-indigo-500/30 pb-2">1단계 기초(Beginner)</h4>
+                                                        <ul className="space-y-2 text-xs text-gray-300">
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 한글 읽기/말하기</li>
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 인사, 자기소개, 주문</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="bg-gradient-to-br from-indigo-900/40 to-transparent border border-indigo-500/20 rounded-xl p-5">
+                                                        <h4 className="font-bold text-indigo-300 mb-3 border-b border-indigo-500/30 pb-2">2단계 초급(Basic)</h4>
+                                                        <ul className="space-y-2 text-xs text-gray-300">
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 긴 문장, 반말/높임말</li>
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 가족, 쇼핑, 여행, 취미</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="bg-gradient-to-br from-indigo-900/40 to-transparent border border-indigo-500/20 rounded-xl p-5">
+                                                        <h4 className="font-bold text-indigo-300 mb-3 border-b border-indigo-500/30 pb-2">3단계 중급1</h4>
+                                                        <ul className="space-y-2 text-xs text-gray-300">
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 관용 표현, 한자어</li>
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 이사, 가전, 계획 표현</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="bg-gradient-to-br from-indigo-900/40 to-transparent border border-indigo-500/20 rounded-xl p-5">
+                                                        <h4 className="font-bold text-indigo-300 mb-3 border-b border-indigo-500/30 pb-2">4단계 중급2</h4>
+                                                        <ul className="space-y-2 text-xs text-gray-300">
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 토론, 의견제시</li>
+                                                            <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5"></div> 발표, 업무 의사소통</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-6 bg-gradient-to-br from-white/10 to-transparent border border-white/20 rounded-xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                                <GraduationCap className="w-6 h-6 text-gray-300" />
+                                            </div>
+                                            <div className="text-center sm:text-left">
+                                                <h4 className="font-bold text-white mb-1">하사누딘 대학교에서 검증된 운영 경험</h4>
+                                                <p className="text-sm text-gray-400">온라인/오프라인 병행 수업으로 효과적인 하이브리드 학습 제공</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {activeModal === 'lms' && (
+                                    <div className="space-y-8">
+                                        <div className="border-b border-white/10 pb-6 text-center">
+                                            <p className="text-[#d4af37] text-sm font-bold mb-2">LMS 통합 학습 플랫폼 상세</p>
+                                            <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center justify-center gap-3">
+                                                LMS의 핵심기능
+                                            </h2>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                                            {/* Center Divider for Desktop */}
+                                            <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-px bg-white/10 -translate-x-1/2"></div>
+
+                                            {/* Card 1: 나의 강의실 */}
+                                            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-full flex items-center justify-center shrink-0">
+                                                        <MonitorPlay className="w-6 h-6 text-blue-300" />
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-white">나의 강의실</h3>
+                                                </div>
+                                                <ul className="space-y-4">
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">VOD 애니메이션 강의 시청</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">PDF 교재 및 보충자료 다운로드</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">온라인 과제 제출 및 실시간 피드백</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">개인별 학습 진도 관리</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            {/* Card 2: 학습 지원 시스템 */}
+                                            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-full flex items-center justify-center shrink-0">
+                                                        <Users className="w-6 h-6 text-blue-300" />
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-white">학습 지원 시스템</h3>
+                                                </div>
+                                                <ul className="space-y-4">
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">주 1회 온라인/오프라인 Q&A 세션</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">개별 상담 및 튜터링</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">스터디 그룹 커뮤니티</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            {/* Card 3: 학습 자료실 */}
+                                            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-full flex items-center justify-center shrink-0">
+                                                        <BookOpen className="w-6 h-6 text-blue-300" />
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-white">학습 자료실</h3>
+                                                </div>
+                                                <ul className="space-y-4">
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">TOPIK 기출문제 및 모의고사</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">추천 학습 사이트 및 앱</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">문법·어휘 정리 자료</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            {/* Card 4: 통합 관리 */}
+                                            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-full flex items-center justify-center shrink-0">
+                                                        <PieChart className="w-6 h-6 text-blue-300" />
+                                                    </div>
+                                                    <h3 className="text-xl font-bold text-white">통합 관리</h3>
+                                                </div>
+                                                <ul className="space-y-4">
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">수강 신청 및 과정 안내</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">성취도 평가 및 수료증 발급</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">레벨별 커리큘럼 관리</span>
+                                                    </li>
+                                                    <li className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                                                        <span className="text-gray-300 text-sm font-medium hover:text-white transition-colors">교육기관용 대시보드</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
         </div>
     );
