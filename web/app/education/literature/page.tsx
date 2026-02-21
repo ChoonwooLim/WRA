@@ -6,6 +6,8 @@ import { ProcessDiagram } from '@/components/shared/ProcessDiagram';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { BookOpen, HelpCircle, MessageSquare, PenTool } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function LiteraturePage() {
     const { dict } = useLanguage();
@@ -28,6 +30,109 @@ export default function LiteraturePage() {
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={d.literatureTitle} subtitle={d.literatureDesc} />
+
+            {/* Introduction Section (Korean Literature) */}
+            <section className="py-24 md:py-32 relative overflow-hidden bg-[#050510]">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.05] pointer-events-none mix-blend-overlay" />
+                {/* Background glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1e3a8a]/20 blur-[150px] rounded-full pointer-events-none" />
+
+                <div className="container mx-auto px-4 relative z-10 text-center flex flex-col items-center">
+
+                    {/* Icon Image */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="relative w-full max-w-[400px] mb-12 flex justify-center bg-transparent drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group"
+                    >
+                        <Image
+                            src="/images/k_literature_icon_v2.png"
+                            alt="한국문학 (K-Literature)"
+                            width={400}
+                            height={225}
+                            className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105"
+                            priority
+                        />
+                    </motion.div>
+
+                    {/* Glowing Typography */}
+                    <div className="text-center flex flex-col items-center max-w-3xl mb-4">
+                        <motion.h2
+                            initial={{ backgroundPosition: "0% 50%" }}
+                            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                            transition={{ duration: 5, ease: "linear", repeat: Infinity }}
+                            className="text-4xl md:text-[46px] font-serif font-bold tracking-widest mb-4
+                                       text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]
+                                       bg-[length:200%_auto] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                        >
+                            한국문학
+                        </motion.h2>
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.1 }}
+                            className="text-[#d4af37]/80 font-light text-lg md:text-xl tracking-widest"
+                        >
+                            -시대의 옷을 갈아입은 문학-
+                        </motion.div>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scaleY: 0 }}
+                        whileInView={{ opacity: 1, scaleY: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                        className="w-[1px] h-12 bg-gradient-to-b from-transparent via-gray-400 to-transparent mb-12 origin-top"
+                    />
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        className="text-white text-2xl md:text-3xl font-light mb-20 md:mb-28 tracking-wide flex items-center justify-center gap-2"
+                    >
+                        <span>:</span>
+                        <span>시대의 옷을 갈아입은 문학</span>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 }}
+                        className="mb-20 md:mb-28"
+                    >
+                        <h3 className="text-2xl md:text-4xl text-white font-serif tracking-widest leading-relaxed px-4 md:px-8">
+                            &ldquo;문학, 영상의 옷을 입고 시대를 노래하다.&rdquo;
+                        </h3>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.8 }}
+                        className="text-gray-300 text-lg md:text-xl md:text-[22px] leading-[2.2] md:leading-[2.4] font-light flex flex-col items-center max-w-4xl mx-auto space-y-1 md:space-y-2"
+                    >
+                        <div className="flex text-left relative">
+                            <span className="absolute -left-6 top-0 text-white font-serif">:</span>
+                            <p>종이 위의 활자가 카메라의 렌즈를 만났습니다.</p>
+                        </div>
+                        <p>우리의 시는 시대를 위로하는 가사가 되었고,</p>
+                        <p>우리의 이야기는 세계를 울리는 드라마가 되었습니다.</p>
+                        <p>형태는 변해도 본질은 변하지 않습니다.</p>
+                        <p>변화하는 시대의 길목에서, 한국 문학의 새로운 가능성을 읽어냅니다.</p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent w-full" />
 
             {/* 4-Step Process */}
             <section className="py-20">
