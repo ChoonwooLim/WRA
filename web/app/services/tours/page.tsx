@@ -128,8 +128,8 @@ function TourCard({ tour, index, onImageClick }: { tour: any; index: number; onI
                         onClick={() => onImageClick && onImageClick(tour.modalImage || tour.image, tour.name)}
                     >
                         <img src={tour.image} alt={tour.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md">크게 보기</span>
+                        <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
+                            <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">크게 보기</span>
                         </div>
                     </div>
                 )}
@@ -180,8 +180,8 @@ export default function ToursPage() {
                                     onClick={() => setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도 (Map of 5 Royal Palaces)' })}
                                 >
                                     <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md">크게 보기</span>
+                                    <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
+                                        <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">크게 보기</span>
                                     </div>
                                 </div>
                                 <div className="p-6 flex-grow flex flex-col items-center justify-center text-center">

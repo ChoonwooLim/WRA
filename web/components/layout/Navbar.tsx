@@ -87,7 +87,7 @@ export function Navbar() {
         },
         {
             label: dict.navbar.education,
-            href: '/education',
+            href: '/education/language',
             icon: <GraduationCap className="w-4 h-4" />,
             submenu: [
                 { label: dict.navbar.kLanguage, href: '/education/language' },
