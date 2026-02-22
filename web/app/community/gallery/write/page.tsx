@@ -68,9 +68,12 @@ export default function GalleryWritePage() {
                 body: formData,
             });
 
-            const uploadData = await uploadRes.json();
-            if (!uploadData.success) throw new Error(uploadData.message || 'Upload failed');
+            if (!uploadRes.ok) {
+                const errData = await uploadRes.json();
+                throw new Error(errData.error || 'Upload failed');
+            }
 
+            const uploadData = await uploadRes.json();
             const imageUrl = uploadData.url;
 
             // 2. Create Post
