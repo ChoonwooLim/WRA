@@ -27,14 +27,17 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Server configuration error: Missing ImgBB API Key' }, { status: 500 });
         }
 
-        const imgbbFormData = new FormData();
-        imgbbFormData.append('image', file);
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const base64Image = buffer.toString('base64');
 
-        // ImgBB API endpoint requires 'key' as a query parameter or form data. 
-        // We'll use the API URL directly with the key.
+        // ImgBB API accepts form-urlencoded with base64 data robustly.
         const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
             method: 'POST',
-            body: imgbbFormData,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `image=${encodeURIComponent(base64Image)}`
         });
 
         const data = await response.json();
