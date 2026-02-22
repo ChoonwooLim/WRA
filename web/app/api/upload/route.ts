@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,33 +21,35 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
         }
 
-        const buffer = Buffer.from(await file.arrayBuffer());
-
-        // Clean filename and make it unique
-        const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '');
-        const filename = `${Date.now()}-${originalName}`;
-
-        // Ensure the public/uploads directory exists
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-        try {
-            await mkdir(uploadDir, { recursive: true });
-        } catch (err: any) {
-            if (err.code !== 'EEXIST') {
-                throw err;
-            }
+        // Forward to ImgBB
+        const imgbbApiKey = process.env.IMGBB_API_KEY;
+        if (!imgbbApiKey) {
+            return NextResponse.json({ error: 'Server configuration error: Missing ImgBB API Key' }, { status: 500 });
         }
 
-        const filepath = path.join(uploadDir, filename);
-        await writeFile(filepath, buffer);
+        const imgbbFormData = new FormData();
+        imgbbFormData.append('image', file);
 
-        // Return the public URL
-        const fileUrl = `/uploads/${filename}`;
+        // ImgBB API endpoint requires 'key' as a query parameter or form data. 
+        // We'll use the API URL directly with the key.
+        const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+            method: 'POST',
+            body: imgbbFormData,
+        });
 
-        return NextResponse.json({ url: fileUrl }, { status: 200 });
+        const data = await response.json();
+
+        if (data.success) {
+            return NextResponse.json({ url: data.data.url }, { status: 200 });
+        } else {
+            console.error('ImgBB Error:', data);
+            return NextResponse.json({ error: 'Failed to upload to cloud storage' }, { status: 500 });
+        }
+
     } catch (error) {
         console.error('Error uploading file:', error);
         return NextResponse.json(
-            { error: 'Failed to upload file' },
+            { error: 'Failed to process upload' },
             { status: 500 }
         );
     }
