@@ -409,6 +409,25 @@ export default function ToursPage() {
                 { src: '/images/palaces/gyeonghuigung_seogwol_view.png', caption: '도심 속 서궐(경희궁)의 환상적인 야경' }
             ]
         },
+        '서울 5대궁 안내도': {
+            subtitle: "Map of the 5 Royal Palaces",
+            intro: [
+                "서울의 중심에 위치한 5대 궁궐의 위치와 동선을 한눈에 파악할 수 있는 스페셜 안내 지도입니다."
+            ],
+            sections: [
+                {
+                    title: "직관적인 클래식 지도와 상세 안내도",
+                    paragraphs: [
+                        "첫 번째 지도는 대략적인 이동 동선과 인근 역들을 직관적으로 보여주는 클래식 안내도입니다.",
+                        "두 번째 지도는 5대 궁궐의 구체적인 권역과 위치를 명확히 보여주는 상세 통합 안내도입니다."
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/palaces-map.png', caption: '서울 5대궁 클래식 안내도' },
+                { src: '/images/palaces/seoul-royal-palaces-map.png', caption: '서울 5대궁 상세 통합 안내도' }
+            ]
+        },
         '종묘대제': {
             subtitle: "Jongmyo Daeje",
             intro: [
@@ -725,7 +744,7 @@ export default function ToursPage() {
                             <div className="flex flex-col h-full -mx-6 -mt-6">
                                 <div
                                     className="relative h-56 w-full overflow-hidden cursor-pointer group shrink-0"
-                                    onClick={() => setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도 (Map of 5 Royal Palaces)' })}
+                                    onClick={() => setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' })}
                                 >
                                     <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                     <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
@@ -739,12 +758,6 @@ export default function ToursPage() {
                                     <p className="text-gray-400 text-sm leading-relaxed">
                                         경복궁, 창덕궁, 덕수궁, 창경궁, 경희궁의 전체 위치를 한눈에 확인할 수 있는 스페셜 안내 지도입니다.
                                     </p>
-                                    <button
-                                        className="mt-6 px-4 py-2 rounded-full border border-[#d4af37]/30 text-[#d4af37] text-xs font-semibold hover:bg-[#d4af37]/10 transition-colors"
-                                        onClick={() => setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도 (Map of 5 Royal Palaces)' })}
-                                    >
-                                        상세보기
-                                    </button>
                                 </div>
                             </div>
                         </GlassCard>
