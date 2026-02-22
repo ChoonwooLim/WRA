@@ -29,8 +29,8 @@ export async function POST(req: NextRequest) {
         const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '');
         const filename = `${Date.now()}-${originalName}`;
 
-        // Ensure the public/uploads directory exists
-        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+        // Ensure the directory exists (prioritizing the external UPLOAD_DIR from TwinVerse)
+        const uploadDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'public', 'uploads');
         try {
             await mkdir(uploadDir, { recursive: true });
         } catch (err: any) {
@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
         const filepath = path.join(uploadDir, filename);
         await writeFile(filepath, buffer);
 
-        // Return the public URL
-        const fileUrl = `/uploads/${filename}`;
+        // Return the dynamic API URL which safely serves files from external UPLOAD_DIR
+        const fileUrl = `/api/uploads/${filename}`;
 
         return NextResponse.json({ url: fileUrl }, { status: 200 });
 
