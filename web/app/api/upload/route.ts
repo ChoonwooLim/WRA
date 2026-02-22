@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { writeFile, mkdir } from 'fs/promises';
+import path from 'path';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,33 +23,29 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
         }
 
-        // Forward to ImgBB
-        const imgbbApiKey = process.env.IMGBB_API_KEY;
-        if (!imgbbApiKey) {
-            return NextResponse.json({ error: 'Server configuration error: Missing ImgBB API Key' }, { status: 500 });
+        const buffer = Buffer.from(await file.arrayBuffer());
+
+        // Clean filename and make it unique
+        const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '');
+        const filename = `${Date.now()}-${originalName}`;
+
+        // Ensure the public/uploads directory exists
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+        try {
+            await mkdir(uploadDir, { recursive: true });
+        } catch (err: any) {
+            if (err.code !== 'EEXIST') {
+                throw err;
+            }
         }
 
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const base64Image = buffer.toString('base64');
+        const filepath = path.join(uploadDir, filename);
+        await writeFile(filepath, buffer);
 
-        // ImgBB API accepts form-urlencoded with base64 data robustly.
-        const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `image=${encodeURIComponent(base64Image)}`
-        });
+        // Return the public URL
+        const fileUrl = `/uploads/${filename}`;
 
-        const data = await response.json();
-
-        if (data.success) {
-            return NextResponse.json({ url: data.data.url }, { status: 200 });
-        } else {
-            console.error('ImgBB Error:', data);
-            return NextResponse.json({ error: 'Failed to upload to cloud storage' }, { status: 500 });
-        }
+        return NextResponse.json({ url: fileUrl }, { status: 200 });
 
     } catch (error) {
         console.error('Error uploading file:', error);
