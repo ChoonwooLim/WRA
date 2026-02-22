@@ -224,11 +224,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/gwanghwamun_real.png', caption: '광화문의 웅장한 모습' },
+                { src: '/images/palaces/gyeonghoeru_real.png', caption: '경회루의 고즈넉한 풍경' },
+                { src: '/images/palaces/hyangwonjeong_real.png', caption: '향원정의 아름다운 자태' },
                 { src: '/images/palaces/real-gyeongbokgung.png', caption: '근정전의 장엄한 자태' },
-                { src: '/images/palaces/gyeongbokgung.png', caption: '경회루의 고즈넉한 풍경' },
-                { src: '/images/palaces/changdeokgung.png', caption: '창덕궁 전경 (준비중)' },
-                { src: '/images/palaces/deoksugung.png', caption: '덕수궁 석조전 (준비중)' },
-                { src: '/images/palaces/gyeonghuigung.png', caption: '경희궁 숭정전 (준비중)' }
+                { src: '/images/palaces/dancheong_real.png', caption: '화려한 단청의 아름다움' }
             ]
         },
         '창덕궁': {
@@ -263,11 +263,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/changdeokgung.png', caption: '창덕궁의 고즈넉한 정경' },
-                { src: '/images/palaces/real-gyeongbokgung.png', caption: '창덕궁 갤러리 2 (임시)' },
-                { src: '/images/palaces/gyeongbokgung.png', caption: '창덕궁 갤러리 3 (임시)' },
-                { src: '/images/palaces/deoksugung.png', caption: '창덕궁 갤러리 4 (임시)' },
-                { src: '/images/palaces/gyeonghuigung.png', caption: '창덕궁 갤러리 5 (임시)' }
+                { src: '/images/palaces/changdeokgung_injeongjeon.png', caption: '인정전의 장엄한 전경' },
+                { src: '/images/palaces/changdeokgung_buyongjeong.png', caption: '비원 부용정의 아름다운 가을' },
+                { src: '/images/palaces/changdeokgung_nakseonjae.png', caption: '낙선재의 단아한 건축미' },
+                { src: '/images/palaces/changdeokgung_donhwamun.png', caption: '돈화문의 웅장한 야경' },
+                { src: '/images/palaces/changdeokgung_juhamnu.png', caption: '녹음이 우거진 주합루' }
             ]
         },
         '창경궁': {
@@ -310,11 +310,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/gyeongbokgung.png', caption: '창경궁 갤러리 1 (임시)' },
-                { src: '/images/palaces/real-gyeongbokgung.png', caption: '창경궁 갤러리 2 (임시)' },
-                { src: '/images/palaces/changdeokgung.png', caption: '창경궁 갤러리 3 (임시)' },
-                { src: '/images/palaces/deoksugung.png', caption: '창경궁 갤러리 4 (임시)' },
-                { src: '/images/palaces/gyeonghuigung.png', caption: '창경궁 갤러리 5 (임시)' }
+                { src: '/images/palaces/changgyeonggung_myeongjeongjeon.png', caption: '명정전의 우아한 자태' },
+                { src: '/images/palaces/changgyeonggung_daeonsil.png', caption: '대온실의 고풍스러운 식물원' },
+                { src: '/images/palaces/changgyeonggung_chundangji.png', caption: '춘당지의 환상적인 야경' },
+                { src: '/images/palaces/changgyeonggung_honghwamun.png', caption: '홍화문의 단청과 건축미' },
+                { src: '/images/palaces/changgyeonggung_tongmyeongjeon.png', caption: '통명전의 고즈넉한 풍경' }
             ]
         },
         '덕수궁': {
@@ -356,11 +356,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/deoksugung.png', caption: '덕수궁의 야경' },
-                { src: '/images/palaces/real-gyeongbokgung.png', caption: '덕수궁 갤러리 2 (임시)' },
-                { src: '/images/palaces/gyeongbokgung.png', caption: '덕수궁 갤러리 3 (임시)' },
-                { src: '/images/palaces/changdeokgung.png', caption: '덕수궁 갤러리 4 (임시)' },
-                { src: '/images/palaces/gyeonghuigung.png', caption: '덕수궁 갤러리 5 (임시)' }
+                { src: '/images/palaces/deoksugung_seokjojeon.png', caption: '석조전의 이국적인 야경' },
+                { src: '/images/palaces/deoksugung_junghwajeon.png', caption: '중화전의 위엄 있는 자태' },
+                { src: '/images/palaces/deoksugung_jeonggwanheon.png', caption: '정관헌의 아름다운 낭만' },
+                { src: '/images/palaces/deoksugung_doldamgil.png', caption: '덕수궁 돌담길의 가을 정취' },
+                { src: '/images/palaces/deoksugung_jungmyeongjeon.png', caption: '중명전의 고풍스러운 전경' }
             ]
         },
         '경희궁': {
@@ -402,11 +402,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/gyeonghuigung.png', caption: '경희궁의 정경' },
-                { src: '/images/palaces/real-gyeongbokgung.png', caption: '경희궁 갤러리 2 (임시)' },
-                { src: '/images/palaces/gyeongbokgung.png', caption: '경희궁 갤러리 3 (임시)' },
-                { src: '/images/palaces/changdeokgung.png', caption: '경희궁 갤러리 4 (임시)' },
-                { src: '/images/palaces/deoksugung.png', caption: '경희궁 갤러리 5 (임시)' }
+                { src: '/images/palaces/gyeonghuigung_sungjeongjeon.png', caption: '숭정전의 우아한 전경' },
+                { src: '/images/palaces/gyeonghuigung_taeryeongjeon.png', caption: '태령전의 고풍스러운 지붕' },
+                { src: '/images/palaces/gyeonghuigung_jajeongjeon.png', caption: '자정전 앞의 고즈넉한 봄날' },
+                { src: '/images/palaces/gyeonghuigung_heunghwamun.png', caption: '흥화문의 당당한 모습' },
+                { src: '/images/palaces/gyeonghuigung_seogwol_view.png', caption: '도심 속 서궐(경희궁)의 환상적인 야경' }
             ]
         },
         '종묘대제': {
