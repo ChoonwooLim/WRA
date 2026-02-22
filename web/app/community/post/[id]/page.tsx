@@ -41,6 +41,7 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
 
     const boardLabel: Record<string, string> = {
         'notices': '📢 공지사항',
+        'newsletter': '📰 뉴스레터 발간',
         'qna': '❓ Q&A',
         'free-board': '💬 자유게시판',
         'gallery': '📸 이미지 갤러리',
@@ -48,6 +49,7 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
 
     const boardPath: Record<string, string> = {
         'notices': '/community/notices',
+        'newsletter': '/community/newsletter',
         'qna': '/community/qna',
         'free-board': '/community/free-board',
         'gallery': '/community/gallery',
