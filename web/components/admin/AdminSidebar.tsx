@@ -20,7 +20,7 @@ export function AdminSidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className="w-64 h-screen fixed left-0 top-0 overflow-y-auto flex flex-col border-r border-white/10"
+        <aside className="w-64 h-[calc(100vh-72px)] fixed left-0 top-[72px] overflow-y-auto flex flex-col border-r border-white/10"
             style={{
                 background: 'linear-gradient(180deg, #0a0a1a 0%, #0d0d20 50%, #0a0a1a 100%)',
             }}

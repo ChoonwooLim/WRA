@@ -67,9 +67,9 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: '제목과 내용을 모두 입력해주세요.' }, { status: 400 });
         }
 
-        // Only admin can post to notices
-        if (board === 'notices' && user.role !== 'admin') {
-            return NextResponse.json({ error: '공지사항은 관리자만 작성할 수 있습니다.' }, { status: 403 });
+        // Only admin can post to notices and newsletter
+        if ((board === 'notices' || board === 'newsletter') && user.role !== 'admin') {
+            return NextResponse.json({ error: '공지사항 및 뉴스레터는 관리자만 작성할 수 있습니다.' }, { status: 403 });
         }
 
         const post = await prisma.post.create({

@@ -1,56 +1,56 @@
-
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { writeFile, mkdir } from 'fs/promises';
+import path from 'path';
 
-export async function POST(request: NextRequest) {
-    const data = await request.formData();
-    const fileEntry = (data as any).get('file');
-    const file = fileEntry instanceof File ? fileEntry : null;
+export const dynamic = 'force-dynamic';
 
-    if (!file) {
-        return NextResponse.json({ success: false, message: 'No file uploaded' }, { status: 400 });
-    }
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Ensure upload directory exists
-    // Fallback to public/uploads if UPLOAD_DIR is not defined
-    const uploadDir = process.env.UPLOAD_DIR?.trim() || join(process.cwd(), 'public', 'uploads');
-
-    console.log('[UPLOAD DEBUG] Environment UPLOAD_DIR:', process.env.UPLOAD_DIR);
-    console.log('[UPLOAD DEBUG] Parsed upload directory:', uploadDir);
-
-    if (!existsSync(uploadDir)) {
-        console.log('[UPLOAD DEBUG] Directory does not exist, creating:', uploadDir);
-        try {
-            mkdirSync(uploadDir, { recursive: true });
-        } catch (e) {
-            console.error('[UPLOAD DEBUG] Failed to create directory:', e);
-            return NextResponse.json({ success: false, message: 'Failed to create directory' }, { status: 500 });
-        }
-    }
-
-    // Create a unique filename
-    const timestamp = Date.now();
-    const originalName = file.name.replace(/\s+/g, '-'); // Replace spaces with dashes
-    const filename = `${timestamp}-${originalName}`;
-    const path = join(uploadDir, filename);
-
+export async function POST(req: NextRequest) {
     try {
-        await writeFile(path, buffer);
+        const session = await getServerSession(authOptions);
 
-        // If UPLOAD_DIR is set, use the custom API route to serve the image.
-        // Otherwise, fallback to the static public folder path.
-        const url = process.env.UPLOAD_DIR?.trim()
-            ? `/api/images/${filename}`
-            : `/uploads/${filename}`;
+        // Security check: Only allow admins to upload images for now
+        // @ts-ignore
+        if (!session || session.user?.role !== 'admin') {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
-        return NextResponse.json({ success: true, url });
+        const formData = await req.formData();
+        const file = formData.get('file') as File;
+
+        if (!file) {
+            return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+        }
+
+        const buffer = Buffer.from(await file.arrayBuffer());
+
+        // Clean filename and make it unique
+        const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '');
+        const filename = `${Date.now()}-${originalName}`;
+
+        // Ensure the public/uploads directory exists
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+        try {
+            await mkdir(uploadDir, { recursive: true });
+        } catch (err: any) {
+            if (err.code !== 'EEXIST') {
+                throw err;
+            }
+        }
+
+        const filepath = path.join(uploadDir, filename);
+        await writeFile(filepath, buffer);
+
+        // Return the public URL
+        const fileUrl = `/uploads/${filename}`;
+
+        return NextResponse.json({ url: fileUrl }, { status: 200 });
     } catch (error) {
-        console.error('Error saving file:', error);
-        return NextResponse.json({ success: false, message: 'Upload failed' }, { status: 500 });
+        console.error('Error uploading file:', error);
+        return NextResponse.json(
+            { error: 'Failed to upload file' },
+            { status: 500 }
+        );
     }
 }

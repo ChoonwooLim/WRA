@@ -1,10 +1,23 @@
 'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
+import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { Mail, Send } from 'lucide-react';
-import { useState } from 'react';
+import { Mail, Send, Calendar, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+interface Post {
+    id: string;
+    title: string;
+    content: string;
+    createdAt: string;
+    author?: {
+        name: string | null;
+        email: string | null;
+    };
+}
 
 export default function NewsletterPage() {
     const { dict } = useLanguage();
@@ -18,10 +31,29 @@ export default function NewsletterPage() {
         setEmail('');
     };
 
+    const [newsletters, setNewsletters] = useState<Post[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchNewsletters = async () => {
+            try {
+                const res = await fetch('/api/posts?board=newsletter&limit=6');
+                const data = await res.json();
+                setNewsletters(data.posts || []);
+            } catch (error) {
+                console.error('Failed to fetch newsletters:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchNewsletters();
+    }, []);
+
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={d.newsletterTitle} subtitle={d.newsletterDesc} compact />
 
+            {/* Subscription Section */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-lg">
                     <GlassCard className="p-10 text-center">
@@ -53,6 +85,55 @@ export default function NewsletterPage() {
                             </form>
                         )}
                     </GlassCard>
+                </div>
+            </section>
+
+            {/* Published Newsletters Section */}
+            <section className="py-20 bg-gradient-to-b from-[#0a1128] to-[#050510] relative border-t border-white/5">
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.02] pointer-events-none mix-blend-overlay" />
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+                    <SectionHeader title="Published Newsletters" subtitle="발간된 뉴스레터 모아보기" />
+
+                    {loading ? (
+                        <div className="text-center py-10 text-[#d4af37]/60">불러오는 중...</div>
+                    ) : newsletters.length === 0 ? (
+                        <div className="text-center py-10 text-gray-500">아직 발간된 뉴스레터가 없습니다.</div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {newsletters.map((item) => (
+                                <Link href={`/community/post/${item.id}`} key={item.id} className="block group h-full">
+                                    <GlassCard className="h-full cursor-pointer hover:!border-[#d4af37]/50 transition-all duration-300 flex flex-col bg-[#0a0f25]/60 hover:bg-[#0a0f25]/90">
+                                        <div className="p-8 flex flex-col flex-grow">
+                                            <div className="flex items-center gap-2 text-[#d4af37] text-sm mb-4">
+                                                <Calendar className="w-4 h-4" />
+                                                <span className="font-medium tracking-wide">
+                                                    {new Date(item.createdAt).toLocaleDateString('ko-KR')}
+                                                </span>
+                                            </div>
+                                            <h4 className="text-xl font-bold text-white mb-4 group-hover:text-[#fceda6] transition-colors leading-relaxed break-keep line-clamp-2">
+                                                {item.title}
+                                            </h4>
+                                            <p className="text-gray-400 text-sm leading-relaxed flex-grow mb-8 break-keep line-clamp-3 overflow-hidden text-ellipsis display-webkit-box webkit-line-clamp-3 webkit-box-orient-vertical">
+                                                {item.content.replace(/<[^>]*>?/gm, '')}
+                                            </p>
+
+                                            <div className="flex items-center text-[#d4af37] text-sm font-semibold mt-auto pt-4 border-t border-white/10 group-hover:border-[#d4af37]/30 transition-colors">
+                                                뉴스레터 읽기 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
+                                            </div>
+                                        </div>
+                                    </GlassCard>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+
+                    {!loading && newsletters.length > 0 && (
+                        <div className="mt-16 text-center">
+                            <Link href="/community" className="px-8 py-3 rounded-full border border-[#d4af37]/50 text-[#d4af37] font-medium hover:bg-[#d4af37]/10 transition-colors inline-block">
+                                커뮤니티 홈으로 가기
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

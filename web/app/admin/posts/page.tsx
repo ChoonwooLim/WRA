@@ -18,12 +18,14 @@ interface Post {
 
 const boardLabels: Record<string, string> = {
     notices: '공지사항',
+    newsletter: '뉴스레터',
     qna: 'Q&A',
     'free-board': '자유게시판',
 };
 
 const boardColors: Record<string, string> = {
     notices: 'bg-yellow-500/20 text-yellow-300',
+    newsletter: 'bg-blue-500/20 text-blue-300',
     qna: 'bg-purple-500/20 text-purple-300',
     'free-board': 'bg-cyan-500/20 text-cyan-300',
 };
@@ -125,6 +127,12 @@ export default function AdminPostsPage() {
                         </button>
                     )}
                     <Link
+                        href="/community/write?board=newsletter"
+                        className="px-4 py-2 bg-blue-500/20 text-blue-400 border border-blue-500/30 font-bold rounded-xl hover:bg-blue-500/30 transition-colors text-sm"
+                    >
+                        새 뉴스레터 발간
+                    </Link>
+                    <Link
                         href="/community/write?board=notices"
                         className="px-4 py-2 bg-primary text-black font-bold rounded-xl hover:bg-yellow-500 transition-colors text-sm"
                     >
@@ -147,7 +155,7 @@ export default function AdminPostsPage() {
                         />
                     </form>
                     <div className="flex gap-2">
-                        {['', 'notices', 'qna', 'free-board'].map((b) => (
+                        {['', 'notices', 'newsletter', 'qna', 'free-board'].map((b) => (
                             <button
                                 key={b}
                                 onClick={() => { setBoardFilter(b); setPage(1); }}

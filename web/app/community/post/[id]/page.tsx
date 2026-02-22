@@ -107,7 +107,7 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
             <div className="bg-[#050510] min-h-screen pt-[100px] pb-20 px-4">
                 <div className="board-container text-center py-20">
                     <p className="text-gray-400 text-lg mb-4">게시글을 찾을 수 없습니다.</p>
-                    <Link href="/community/free-board" className="text-cyan-400 hover:underline">목록으로 돌아가기</Link>
+                    <button onClick={() => router.back()} className="text-cyan-400 hover:underline">이전 화면으로 돌아가기</button>
                 </div>
             </div>
         );

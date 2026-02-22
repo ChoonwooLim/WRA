@@ -32,9 +32,9 @@ export default function AdminLayout({
     }
 
     return (
-        <div className="min-h-screen bg-black text-white flex">
+        <div className="min-h-screen bg-black text-white flex pt-[72px]">
             <AdminSidebar />
-            <main className="flex-1 ml-64 p-8 bg-black">
+            <main className="flex-1 ml-64 p-8 bg-black min-h-[calc(100vh-72px)]">
                 {children}
             </main>
         </div>
