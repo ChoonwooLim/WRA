@@ -29,6 +29,44 @@ export default function CertificationPage() {
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={d.heroTitle} subtitle={d.heroSubtitle} />
 
+            {/* Philosophy Section */}
+            <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1128] to-[#050510]">
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none mix-blend-overlay" />
+                <div className="container mx-auto px-4 max-w-5xl relative z-10">
+                    <SectionHeader
+                        title="인증 철학 (Philosophy)"
+                    />
+
+                    <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/30 p-10 md:p-14 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
+                        {/* Decorative Background Elements */}
+                        <div className="absolute top-0 left-0 w-32 h-32 bg-[#d4af37]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                        <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#d4af37]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+                        <div className="relative z-10 flex flex-col items-center">
+                            <Crown className="w-12 h-12 text-[#d4af37] mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+
+                            <h3 className="text-xl md:text-3xl font-serif text-[#fceda6] font-medium leading-[1.6] break-keep mb-10 tracking-wide">
+                                "대한민국의 혼(Spirit)을 담은 명품,<br className="hidden md:block" /> 황실이 그 가치를 보증합니다."
+                            </h3>
+
+                            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent mb-10"></div>
+
+                            <div className="space-y-4 text-gray-300 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide break-keep">
+                                <p>
+                                    <strong className="text-white font-serif">World Royal Academy</strong>는 단순한 품질 인증을 넘어,<br className="hidden md:block" />
+                                    기업가의 철학(Philosophy)과 제품의 장인정신(Craftsmanship)을 엄격히 심사하여<br className="hidden md:block" />
+                                    <span className="text-[#d4af37] font-semibold">'Royal Warrant(황실 인증)'</span> 자격을 부여합니다.
+                                </p>
+                                <p>
+                                    이는 대한민국을 대표하는 브랜드로서의 자부심이자,<br className="hidden md:block" />
+                                    세계 시장을 향한 신뢰의 징표입니다.
+                                </p>
+                            </div>
+                        </div>
+                    </GlassCard>
+                </div>
+            </section>
+
             {/* K-Royal Warrant Overview */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">

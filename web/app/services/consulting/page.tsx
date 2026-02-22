@@ -54,6 +54,45 @@ export default function ConsultingPage() {
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={d.consultingTitle} subtitle={d.consultingDesc} />
 
+            {/* Philosophy Section */}
+            <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1128] to-[#050510]">
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none mix-blend-overlay" />
+                <div className="container mx-auto px-4 max-w-5xl relative z-10">
+                    <SectionHeader
+                        title="컨설팅 철학 (Philosophy)"
+                    />
+
+                    <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/30 p-10 md:p-14 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
+                        {/* Decorative Background Elements */}
+                        <div className="absolute top-0 left-0 w-32 h-32 bg-[#d4af37]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                        <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#d4af37]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+                        <div className="relative z-10 flex flex-col items-center">
+                            <Crown className="w-12 h-12 text-[#d4af37] mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+
+                            <h3 className="text-xl md:text-3xl font-serif text-[#fceda6] font-medium leading-[1.6] break-keep mb-10 tracking-wide">
+                                "비즈니스에 품격을 더해,<br className="hidden md:block" /> 국가의 자산이 되게 합니다."
+                            </h3>
+
+                            <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent mb-10"></div>
+
+                            <div className="space-y-4 text-gray-300 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide break-keep">
+                                <p>
+                                    기술은 훌륭하지만 표현이 서툰 기업,<br className="hidden md:block" />
+                                    세계로 나가고 싶지만 길을 모르는 기업에게<br className="hidden md:block" />
+                                    <strong className="text-white font-serif">World Royal Academy</strong>는 나침반이 됩니다.
+                                </p>
+                                <p>
+                                    우리는 단순한 행정 지원을 넘어,<br className="hidden md:block" />
+                                    귀사의 기술과 제품에 <span className="text-[#d4af37] font-semibold">'이겨낼 수 없는 서사(Narrative)'</span>와<br className="hidden md:block" />
+                                    <span className="text-[#d4af37] font-semibold">'거부할 수 없는 명분'</span>을 입혀드립니다.
+                                </p>
+                            </div>
+                        </div>
+                    </GlassCard>
+                </div>
+            </section>
+
             {/* 5-Step Process */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
@@ -93,8 +132,31 @@ export default function ConsultingPage() {
                 </div>
             </section>
 
+            {/* Bottom Philosophy Section */}
+            <section className="py-24 bg-[#050510] relative">
+                <div className="container mx-auto px-4 max-w-4xl text-center">
+                    <h2 className="text-2xl md:text-3xl font-serif text-white mb-6 leading-relaxed break-keep">
+                        WRA는 기업의 운명을 바꿀 <span className="text-[#d4af37]">'전략'</span>을 입안합니다.
+                    </h2>
+                    <p className="text-xl md:text-2xl text-gray-300 font-medium mb-10 break-keep">
+                        많은 기업이 기술만 믿고 도전하다 고배를 마십니다.
+                    </p>
+
+                    <div className="space-y-4 mb-16 px-4">
+                        <p className="text-lg md:text-xl text-gray-300 leading-relaxed break-keep">
+                            <span className="text-white font-serif font-semibold">World Royal Academy</span>는 왕실의 안목(Insight)으로 귀사의 숨겨진 가치를 발굴하고,<br className="hidden md:block" />
+                            가장 매혹적인 언어로 포장하여 세상에 내놓습니다.
+                        </p>
+                    </div>
+
+                    <p className="text-2xl md:text-3xl font-serif text-[#fceda6] font-medium break-keep tracking-wide">
+                        지금, 당신의 비즈니스를 <span className="text-white">'Royal Class'</span>로 격상시키십시오.
+                    </p>
+                </div>
+            </section>
+
             {/* CTA */}
-            <section className="py-16">
+            <section className="py-16 bg-gradient-to-t from-[#020205] to-[#050510]">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <GlassCard className="p-10 text-center !bg-gradient-to-br !from-[#d4af37]/5 !to-[#d4af37]/0 !border-[#d4af37]/20">
                         <Target className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
