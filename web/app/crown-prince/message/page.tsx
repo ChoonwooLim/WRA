@@ -23,7 +23,7 @@ function renderHighlightedText(text: string): React.ReactNode[] {
 }
 
 export default function MessagePage() {
-    const { dict, lang } = useLanguage();
+    const { dict } = useLanguage();
     const paragraphs = dict.home.greeting.message.split('\n\n');
 
     // Detect numbered/ordered items (첫째, 둘째, 셋째, 넷째 / First, Second, Third, Fourth)
