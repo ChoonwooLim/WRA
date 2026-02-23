@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 
@@ -11,6 +11,7 @@ const menuItems = [
     { icon: Users, label: '회원 관리', href: '/admin/members' },
     { icon: FileText, label: '게시글 관리', href: '/admin/posts' },
     { icon: Shield, label: '인증 관리', href: '/admin/certifications' },
+    { icon: BookOpen, label: '인증서 매뉴얼', href: '/admin/certifications/guide', indent: true },
     { icon: BarChart3, label: '통계', href: '/admin/analytics' },
     { icon: Bell, label: '알림', href: '/admin/notifications' },
     { icon: Settings, label: '설정', href: '/admin/settings' },
@@ -46,13 +47,15 @@ export function AdminSidebar() {
             <nav className="flex-1 p-4 space-y-1">
                 <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest px-4 mb-3">메뉴</p>
                 {menuItems.map((item) => {
-                    const isActive = pathname === item.href;
+                    const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href + '/'));
+                    const isIndented = 'indent' in item && item.indent;
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                "flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-medium text-sm group relative",
+                                "flex items-center gap-3 rounded-xl transition-all font-medium group relative",
+                                isIndented ? "px-4 py-2 pl-11 text-xs" : "px-4 py-2.5 text-sm",
                                 isActive
                                     ? "text-white"
                                     : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -69,7 +72,7 @@ export function AdminSidebar() {
                                     style={{ background: 'linear-gradient(90deg, #00d4ff, transparent)' }}
                                 />
                             )}
-                            <item.icon size={18} className={cn(
+                            <item.icon size={isIndented ? 14 : 18} className={cn(
                                 "transition-colors relative z-10",
                                 isActive ? "text-cyan-400" : "text-gray-500 group-hover:text-white"
                             )} />

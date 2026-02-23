@@ -17,7 +17,8 @@ export default function AdminLayout({
         if (status === 'loading') return;
 
         // @ts-ignore
-        if (!session || session?.user?.role !== 'admin') {
+        const role = session?.user?.role;
+        if (!session || (role !== 'admin' && role !== 'sub-admin')) {
             router.replace('/'); // Redirect unauthorized users
         }
     }, [session, status, router]);
@@ -27,7 +28,8 @@ export default function AdminLayout({
     }
 
     // @ts-ignore
-    if (!session || session?.user?.role !== 'admin') {
+    const userRole = session?.user?.role;
+    if (!session || (userRole !== 'admin' && userRole !== 'sub-admin')) {
         return null;
     }
 

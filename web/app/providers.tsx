@@ -11,7 +11,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <SessionProvider>
             <LanguageProvider>
-                <React.Suspense fallback={children}>
+                <React.Suspense fallback={null}>
                     <Web3Provider>
                         {children}
                     </Web3Provider>
