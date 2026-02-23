@@ -50,6 +50,7 @@ export type Dictionary = {
         greeting: {
             title: string;
             name: string;
+            role: string;
             message: string;
         };
         // Core Values
@@ -249,9 +250,10 @@ export const en: Dictionary = {
         scrollDown: 'Scroll to Discover',
         learnMore: 'Learn More',
         greeting: {
-            title: 'Welcome Message',
+            title: 'Greeting from the Chairman',
             name: 'HRH Crown Prince Lee Won',
-            message: '"Welcome to the World Royal Academy.\n\nWe inherit the noble spirit and enduring values of the Korean Imperial Family with a modern vision.\nWe are dedicated to fostering global leaders and brilliantly illuminating Korea\'s royal heritage to the world \nthrough exceptional education, culture, and innovation."',
+            role: 'Chairman, World Royal Academy\nKorean Imperial Cultural Foundation',
+            message: 'We extend our deepest gratitude to all who have found their way to the **World Royal Academy**.\n\nThe world has entered an era where the **dignity and identity** of nations are being redefined through **culture and education**. Historically, **royal families** have served as symbols of their nations and as **pillars of diplomacy**, connecting and fostering civilizations.\n\nThe World Royal Academy aspires to be a **public diplomacy education platform** built upon traditional values and linked with **international royal networks**. Going beyond simple exchanges, we aim to build a **governance of dignity** through mutual respect and cooperation in each nation\'s history, culture, and education.\n\nKorea\'s **K-Heritage** is a crystallization of the spirit and culture forged over a long history. Our people established a cultural nation upon two pillars: **astronomical philosophy** and **self-cultivation culture**. From stargazing astronomy emerged the **Cheon-Ji-In (Heaven-Earth-Humanity)** philosophy and the **Yin-Yang Five Elements** principles derived from observing the sun, moon, and five visible planets.\n\nFrom the culture of self-cultivation arose the exploration of the human body in **Korean traditional medicine** and the principle of **Yaksik-Dongwon** — that food and medicine share the same origin. Traditions such as **Seon philosophy** and **Danhak** originated from this cultivation culture.\n\nWe seek to **modernize and expand** the vast and profound origins of our culture, opening a **new chapter of civilizational exchange** with the international community.\n\nFirst, under the vision of \'**K-HUMAN** (Korea Human Report),\' we will build **cooperative networks** with international royal families and traditional cultural institutions.\n\nSecond, we will operate **global youth leader exchange programs**.\n\nThird, we will pursue joint projects in **cultural diplomacy** and **educational diplomacy**.\n\nFourth, through establishing **academic-industrial models** based on K-Heritage, we will contribute to Korea\'s leap as a **central nation for global talent** and civilizational exchange.\n\nNow, royal dignity arises not from authority but from **responsibility**. It aspires not to control but to **freedom**. The World Royal Academy will cooperate with the world through the responsibility of leading future society, becoming an **international platform** that designs its future based on its unique traditions.\n\nWe declare that we will move toward a more **nurturing, warm, and progressive future** — where tradition serves not as a relic of the past but as **spiritual roots**, and where the present embraces not cold science alone but the **humanistic foundations** of our spiritual heritage.\n\nFor a shared future, like the traditional Korean spirit of **Dure and Pumasi** — working together as one — we ask for your continued interest and participation. Thank you.',
         },
         coreValues: {
             title: 'WRA Introduction_Core Values',
@@ -449,8 +451,9 @@ export const ko: Dictionary = {
         learnMore: '자세히 보기',
         greeting: {
             title: '인 사 말',
-            name: '황태손 이원 전하',
-            message: '"세계왕립아카데미에 오신 것을 환영합니다.\n\n유구한 대한제국 황실의 고귀한 정신과 가치를 현대적 비전으로 계승하여,\n글로벌 리더를 양성하고 한국의 헤리티지를 세계 속에 찬란히 빛내고자 합니다."',
+            name: '이사장 황태손 이원',
+            role: '사)대한황실문화원\n세계왕립아카데미',
+            message: '**세계왕립아카데미**를 찾아주신 여러분께 깊은 감사의 뜻을 전합니다.\n\n세계는 지금 **문화와 교육**을 통해 국가의 **품격과 정체성**을 새롭게 정의하는 시대에 들어섰습니다. 역사적으로 **왕실**은 국가의 상징이자, 문명과 문명을 연결하고 생산하는 **외교의 축**이었습니다.\n\n세계왕립아카데미는 전통적 가치 위에 **국제 왕실 네트워크**와 연계한 **공공외교 교육 플랫폼**을 지향합니다. 단순한 교류를 넘어, 각국의 역사와 문화, 교육을 존중하며 상호 협력하고 **품격 있는 글로벌 거버넌스** 구축에 뜻을 담고 있습니다.\n\n대한민국의 **K-헤리티지**는 오랜 역사 속에서 형성된 정신과 문화의 결정체입니다. 우리민족은 고대에 **천문사상**과 **수행문화**라는 두 개의 축으로 하여 문화국가로 출발했습니다. 별자리를 연구하는 천문에서 **\'하늘 땅 사람\'**이라는 **천지인 사상**과 당대에 눈으로 관측가능한 태양과 달 그리고 5개의 행성으로 한 **음양오행**의 천문원리를 만들어냈습니다.\n\n수행문화에서 인체탐구의 **한의학**과 음식과 약초는 하나라는 **약식동원**의 원리가 출발했습니다. **선사상**과 **단학**같은 것이 수행문화에서 발원했습니다.\n\n우리는 광대하고 심오한 우리 문화의 원류를 현대적으로 **계승·확장**하여, 국제 사회와 함께하는 **새로운 문명 교류의 장**을 열고자 합니다.\n\n첫째 **\'K-HUMAN(한국인보고서)\'** 비전 아래, 세계왕립아카데미는 국제 왕실 및 전통 문화기관과의 **협력 네트워크 구축**\n\n둘째 **글로벌 청년 리더** 교류 프로그램 운영\n\n셋째 **문화외교** 및 **교육외교** 공동 프로젝트 추진\n\n넷째 **K-헤리티지** 기반 **학문·산업 연계 모델** 확립을 통해 대한민국이 세계 인재·문명 교류의 **중심 국가**로 도약하는데 기여하겠습니다.\n\n이제 왕실의 품격은 권위가 아니라 **책임**에서 비롯됩니다. 통제가 아니라 **자유**를 지향합니다. 세계왕립아카데미는 미래사회를 이끌어갈 책임으로 세계와 협력하며, 독자적인 전통을 기반으로 **미래설계**를 하는 **국제 플랫폼**이 되겠습니다.\n\n과거의 유물이 아니라 정신적인 토대인 **뿌리로써의 전통**과 과학이라는 차가움이 아니라 우리 전통의 정신적인 토대를 이루고 있는 **인본**을 품어 안은 현재가 만나 보다 **아늑하고 따뜻하면서도 발전적인 미래**로 나갈 것을 천명합니다.\n\n**두레**나 **품앗이**처럼 함께 하는 미래를 위하여 여러분의 지속적인 관심과 동참을 부탁드립니다. 감사합니다.',
         },
         coreValues: {
             title: 'WRA소개_핵심가치',

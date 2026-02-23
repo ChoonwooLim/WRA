@@ -3,9 +3,30 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Crown } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
+
+/** Parse **bold** markers into styled React elements */
+function renderHighlightedText(text: string): React.ReactNode[] {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            const inner = part.slice(2, -2);
+            return (
+                <span key={i} className="text-[#d4af37] font-semibold">
+                    {inner}
+                </span>
+            );
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+    });
+}
 
 export function GreetingSection() {
     const { dict } = useLanguage();
+
+    // Show only the first paragraph as preview on the homepage
+    const previewMessage = dict.home.greeting.message.split('\n\n')[0];
 
     return (
         <section className="relative py-24 overflow-hidden">
@@ -38,15 +59,26 @@ export function GreetingSection() {
                         <h2 className="text-sm uppercase tracking-[0.4em] text-[#d4af37] mb-2 font-medium">
                             {dict.home.greeting.title}
                         </h2>
-                        <h3 className="text-3xl md:text-4xl font-serif text-[#fceda6] mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                        <h3 className="text-3xl md:text-4xl font-serif text-[#fceda6] mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                             {dict.home.greeting.name}
                         </h3>
-                        <div className="text-gray-300 leading-[1.8] text-lg md:text-xl font-light whitespace-pre-line">
-                            {dict.home.greeting.message}
+                        <p className="text-gray-500 text-sm mb-6 whitespace-pre-line">
+                            {dict.home.greeting.role}
+                        </p>
+                        <div className="text-gray-300 leading-[1.8] text-lg md:text-xl font-light mb-6">
+                            &ldquo;{renderHighlightedText(previewMessage)}&rdquo;
                         </div>
+                        <Link
+                            href="/crown-prince/message"
+                            className="inline-flex items-center gap-2 text-[#d4af37] hover:text-[#fceda6] transition-colors text-sm font-medium"
+                        >
+                            {dict.home.learnMore} →
+                        </Link>
                     </motion.div>
                 </div>
             </div>
         </section>
     );
 }
+
+
