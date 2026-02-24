@@ -34,13 +34,14 @@ export default function LanguagePage() {
                         className="relative w-full max-w-[400px] mb-16 flex justify-center bg-transparent drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group"
                     >
                         <Image
-                            src="/images/hunmin_scroll_transparent.png"
-                            alt="훈민정음 (Hunminjeongeum)"
+                            src="/images/hunmin.png"
+                            alt="訓民正音 (Hunminjeongeum)"
                             width={400}
                             height={225}
                             className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105"
                             priority
                         />
+                        {/* Removed CSS overlay layer per user request */}
                     </motion.div>
 
                     {/* Typography Content */}
