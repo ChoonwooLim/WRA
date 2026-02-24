@@ -1,0 +1,16 @@
+.next/dev/types/app/api/auth/[...nextauth]/route.ts(14,13): error TS2344: Type 'OmitWithTag<typeof import("C:/WORK/WRA/web/app/api/auth/[...nextauth]/route"), "POST" | "config" | "GET" | "PATCH" | "DELETE" | "PUT" | "generateStaticParams" | "unstable_prefetch" | "revalidate" | ... 7 more ... | "OPTIONS", "">' does not satisfy the constraint '{ [x: string]: never; }'.
+  Property 'authOptions' is incompatible with index signature.
+    Type 'AuthOptions' is not assignable to type 'never'.
+app/api/upload/route.ts(25,39): error TS2339: Property 'get' does not exist on type 'FormData'.
+app/api/upload/route.ts(59,31): error TS2339: Property 'get' does not exist on type 'FormData'.
+app/education/studies/page.tsx(444,30): error TS2304: Cannot find name 'curriculumSteps'.
+app/education/studies/page.tsx(444,51): error TS7006: Parameter 'step' implicitly has an 'any' type.
+app/education/studies/page.tsx(444,57): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+app/education/studies/page.tsx(480,72): error TS7006: Parameter 'detail' implicitly has an 'any' type.
+app/education/studies/page.tsx(480,80): error TS7006: Parameter 'dIdx' implicitly has an 'any' type.
+app/education/studies/page.tsx(507,30): error TS2304: Cannot find name 'programFormats'.
+app/education/studies/page.tsx(507,50): error TS7006: Parameter 'fmt' implicitly has an 'any' type.
+app/education/studies/page.tsx(507,55): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+app/education/studies/page.tsx(583,30): error TS2304: Cannot find name 'expectedEffects'.
+app/education/studies/page.tsx(583,51): error TS7006: Parameter 'effect' implicitly has an 'any' type.
+app/education/studies/page.tsx(583,59): error TS7006: Parameter 'idx' implicitly has an 'any' type.
