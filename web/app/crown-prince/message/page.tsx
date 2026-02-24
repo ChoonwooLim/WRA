@@ -13,7 +13,7 @@ function renderHighlightedText(text: string): React.ReactNode[] {
         if (part.startsWith('**') && part.endsWith('**')) {
             const inner = part.slice(2, -2);
             return (
-                <span key={i} className="text-[#d4af37] font-semibold">
+                <span key={i} className="text-white font-semibold">
                     {inner}
                 </span>
             );
@@ -77,12 +77,12 @@ export default function MessagePage() {
                                     >
                                         {numbered ? (
                                             <div className="flex items-start gap-3 pl-4 border-l-2 border-[#d4af37]/30 py-1">
-                                                <p className="text-gray-300 text-base md:text-lg leading-[1.9] font-light">
+                                                <p className="text-white text-base md:text-lg leading-[1.9] font-light">
                                                     {renderHighlightedText(paragraph)}
                                                 </p>
                                             </div>
                                         ) : (
-                                            <p className="text-gray-300 text-base md:text-lg leading-[1.9] font-light">
+                                            <p className="text-white text-base md:text-lg leading-[1.9] font-light">
                                                 {renderHighlightedText(paragraph)}
                                             </p>
                                         )}

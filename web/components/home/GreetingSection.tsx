@@ -65,7 +65,7 @@ export function GreetingSection() {
                         <p className="text-gray-500 text-sm mb-6 whitespace-pre-line">
                             {dict.home.greeting.role}
                         </p>
-                        <div className="text-gray-300 leading-[1.8] text-lg md:text-xl font-light mb-6">
+                        <div className="text-white leading-[1.8] text-lg md:text-xl font-light mb-6">
                             &ldquo;{renderHighlightedText(previewMessage)}&rdquo;
                         </div>
                         <Link

@@ -282,7 +282,7 @@ export const en: Dictionary = {
         },
         warrantHighlights: {
             title: 'WRA Warrants',
-            subtitle: 'Three pillars of excellence',
+            subtitle: 'Four pillars of excellence',
             education: { title: 'Education', desc: 'K-Heritage Language, Literature, and Korean Studies programs with AI-powered learning.' },
             certification: { title: 'Certification', desc: 'K-Royal Warrant — the prestigious mark of Korean craftsmanship and philosophy.' },
             consulting: { title: 'Consulting', desc: 'Royal Management Consulting.' },
@@ -475,7 +475,7 @@ export const ko: Dictionary = {
         greeting: {
             title: '인 사 말',
             name: '이사장 황태손  이 원',
-            role: '세계왕립아카데미\n대한황실 황태손',
+            role: '세계왕립아카데미\n대한황실 황태손 이 원',
             message: '**세계왕립아카데미**를 찾아주신 여러분께 깊은 감사의 뜻을 전합니다.\n\n세계는 지금 **문화와 교육**을 통해 국가의 **품격과 정체성**을 새롭게 정의하는 시대에 들어섰습니다. 역사적으로 **왕실**은 국가의 상징이자, 문명과 문명을 연결하고 생산하는 **외교의 축**이었습니다.\n\n세계왕립아카데미는 전통적 가치 위에 **국제 왕실 네트워크**와 연계한 **공공외교 교육 플랫폼**을 지향합니다. 단순한 교류를 넘어, 각국의 역사와 문화, 교육을 존중하며 상호 협력하고 **품격 있는 글로벌 거버넌스** 구축에 뜻을 담고 있습니다.\n\n대한민국의 **K-헤리티지**는 오랜 역사 속에서 형성된 정신과 문화의 결정체입니다. 우리민족은 고대에 **천문사상**과 **수행문화**라는 두 개의 축으로 하여 문화국가로 출발했습니다. 별자리를 연구하는 천문에서 **\'하늘 땅 사람\'**이라는 **천지인 사상**과 당대에 눈으로 관측가능한 태양과 달 그리고 5개의 행성으로 한 **음양오행**의 천문원리를 만들어냈습니다.\n\n수행문화에서 인체탐구의 **한의학**과 음식과 약초는 하나라는 **약식동원**의 원리가 출발했습니다. **선사상**과 **단학**같은 것이 수행문화에서 발원했습니다.\n\n우리는 광대하고 심오한 우리 문화의 원류를 현대적으로 **계승·확장**하여, 국제 사회와 함께하는 **새로운 문명 교류의 장**을 열고자 합니다.\n\n첫째 **\'K-HUMAN(한국인보고서)\'** 비전 아래, 세계왕립아카데미는 국제 왕실 및 전통 문화기관과의 **협력 네트워크 구축**\n\n둘째 **글로벌 청년 리더** 교류 프로그램 운영\n\n셋째 **문화외교** 및 **교육외교** 공동 프로젝트 추진\n\n넷째 **K-헤리티지** 기반 **학문·산업 연계 모델** 확립을 통해 대한민국이 세계 인재·문명 교류의 **중심 국가**로 도약하는데 기여하겠습니다.\n\n이제 왕실의 품격은 권위가 아니라 **책임**에서 비롯됩니다. 통제가 아니라 **자유**를 지향합니다. 세계왕립아카데미는 미래사회를 이끌어갈 책임으로 세계와 협력하며, 독자적인 전통을 기반으로 **미래설계**를 하는 **국제 플랫폼**이 되겠습니다.\n\n과거의 유물이 아니라 정신적인 토대인 **뿌리로써의 전통**과 과학이라는 차가움이 아니라 우리 전통의 정신적인 토대를 이루고 있는 **인본**을 품어 안은 현재가 만나 보다 **아늑하고 따뜻하면서도 발전적인 미래**로 나갈 것을 천명합니다.\n\n**두레**나 **품앗이**처럼 함께 하는 미래를 위하여 여러분의 지속적인 관심과 동참을 부탁드립니다. 감사합니다.',
         },
         coreValues: {
@@ -491,7 +491,7 @@ export const ko: Dictionary = {
         },
         warrantHighlights: {
             title: 'WRA warrant',
-            subtitle: '세 가지 탁월함의 축',
+            subtitle: '네 가지 탁월함의 축',
             education: { title: '교육', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
             certification: { title: '인증', desc: 'K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.' },
             consulting: { title: '컨설팅', desc: '왕립 경영 컨설팅.' },
@@ -545,7 +545,7 @@ export const ko: Dictionary = {
     pages: {
         crownPrince: {
             heroTitle: '황태손 이원 전하',
-            heroSubtitle: '세계왕립아카데미 총재',
+            heroSubtitle: '세계왕립아카데미 이사장',
             fullName: '이원 (Lee Won)',
             title: '대한제국 5대 황태손',
             introduction: '고종 황제의 직계 후손으로, 황태손 이원 전하는 문화유산 환수와 글로벌 문화외교를 통해 대한민국 왕실의 유산을 이어가고 계십니다.',
