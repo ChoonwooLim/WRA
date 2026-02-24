@@ -16,7 +16,7 @@ export default function TextbooksPage() {
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
-                title="WRA 교재"
+                title="도서출판 및 교재"
                 subtitle="Textbooks & Materials"
             />
 
