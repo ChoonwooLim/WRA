@@ -6,9 +6,7 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const bookImages = [
-    "k휴먼-평면.jpg", "x9791189141035.jpg", "강궁이옥.jpg", "경영한류.jpg", "고진도사.PNG", "공자와열두.PNG", "그림1.png", "그림10.png", "그림11.jpg", "그림12.jpg", "그림13.jpg", "그림14.jpg", "그림15.png", "그림16.png", "그림17.png", "그림18.png", "그림2.jpg", "그림3.jpg", "그림4.jpg", "그림5.jpg", "그림6.jpg", "그림7.jpg", "그림8.png", "그림9.png", "긍웃2.PNG", "긍정이.PNG", "논어의재구성.jpg", "다산에게배우다.jpg", "아름다운우리한옥.PNG", "옛길.PNG", "인문형인간1.PNG", "인생십계명.PNG", "인생지도.PNG", "장보고.PNG", "징기스칸.jpg", "하브루타_표지.PNG", "한국세계 기록유산.jpg", "한국의세계문화유산.jpg", "한옥마을.PNG", "한옥설계집.png", "환단고기1,2.jpg", "힌옥의 멋.png"
-];
+
 
 export default function TextbooksPage() {
     const { dict } = useLanguage();
@@ -83,31 +81,6 @@ export default function TextbooksPage() {
                         </motion.div>
                     </div>
 
-                    <div className="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6 mt-12 pb-20">
-                        {bookImages.map((filename, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-50px" }}
-                                transition={{ duration: 0.5, delay: (idx % 8) * 0.1 }}
-                                className="break-inside-avoid relative group rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-[#d4af37]/20 bg-[#0c0f17] flex justify-center items-center"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-transparent to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-10 flex flex-col justify-end p-4">
-                                    <BookOpen className="w-8 h-8 text-[#d4af37] mb-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
-                                </div>
-                                <div className="relative w-full">
-                                    <img
-                                        src={`/images/books/${filename}`}
-                                        alt={`Published Book ${idx + 1}`}
-                                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div className="absolute inset-0 border-2 border-[#d4af37] opacity-0 group-hover:opacity-30 rounded-xl transition-opacity duration-300 pointer-events-none z-20" />
-                            </motion.div>
-                        ))}
-                    </div>
                 </div>
             </section>
         </div>
