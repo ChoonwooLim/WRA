@@ -8,6 +8,21 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+/** Parse **bold** markers into golden styled React elements */
+function renderHighlighted(text: string): React.ReactNode[] {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            return (
+                <span key={i} className="text-[#d4af37] font-semibold">
+                    {part.slice(2, -2)}
+                </span>
+            );
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+    });
+}
+
 /* ── Curriculum Data ── */
 const curriculumSteps = [
     {
@@ -165,7 +180,8 @@ export default function LiteraturePage() {
                         <BookOpen className="w-8 h-8 opacity-80" />
                     </div>
                 </div>
-            </div>
+            </div>
+
 
 
 
