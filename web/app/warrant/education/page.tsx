@@ -31,7 +31,7 @@ const programs = [
         desc: '한국의 역사, 문화, 유산에 대한\n학술 및 연구 프로그램.\n경영한류와의 융합.',
         href: '/warrant/education/studies',
         image: '/images/한국학.png',
-        features: ['한국학(경영한류)', '학술 연구 프로그램', 'K-헤리티지 기반'],
+        features: ['한국학', '학술 연구 프로그램', 'K-헤리티지 기반'],
     },
 ];
 

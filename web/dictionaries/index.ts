@@ -568,7 +568,7 @@ export const ko: Dictionary = {
         },
         education: {
             heroTitle: 'WRA 워런트 — 교육',
-            heroSubtitle: '한국어 · 왕립문예원 · 한국학(경영한류)',
+            heroSubtitle: '한국어 · 왕립문예원 · 한국학',
             languageTitle: '한국어',
             languageDesc: 'AI 기술 기반의 체계적인 한국어 교육을 제공합니다.',
             topikTitle: 'AI TOPIK 모의시험',
@@ -581,7 +581,7 @@ export const ko: Dictionary = {
             step2: '질문 (Questioning)',
             step3: '토론 (Discussion)',
             step4: '4단계: 인증서 수여 및 지속적인 모니터링',
-            studiesTitle: '한국학(경영한류)',
+            studiesTitle: '한국학',
             studiesDesc: '한국의 역사, 문화, 유산에 대한 학술 및 연구 프로그램입니다.',
             textbooksTitle: '발간 서적 및 교재',
             textbooksDesc: '',
