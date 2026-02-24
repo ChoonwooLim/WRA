@@ -20,9 +20,6 @@ export default function TextbooksPage() {
 
             <section className="py-20 relative z-10">
                 <div className="container mx-auto px-4 max-w-7xl">
-                    <SectionHeader
-                        title="Publications"
-                    />
 
                     {/* Featured Main Book Section */}
                     <div className="mb-16 md:mb-24 rounded-3xl bg-gradient-to-br from-[#1a140a]/90 via-[#0c0903]/90 to-[#050510]/90 border border-[#d4af37]/40 p-8 md:p-16 overflow-hidden relative shadow-[0_10px_50px_rgba(212,175,55,0.15)] flex flex-col md:flex-row items-center gap-12 group backdrop-blur-xl">

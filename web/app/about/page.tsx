@@ -3,7 +3,7 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
-import { CoreValuesSection } from '@/components/home/CoreValuesSection';
+
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Landmark, Handshake, Heart, Globe, Crown, BookOpen, Target, TrendingUp, Shield, Gem } from 'lucide-react';
 import Link from 'next/link';
@@ -104,8 +104,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Core Values — Slide 13 */}
-            <CoreValuesSection />
+
 
             {/* Quick Links */}
             <section className="py-20">
