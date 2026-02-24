@@ -3,13 +3,74 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Brain, Users, Target, Lightbulb, Heart, MessageSquare, Compass, Sparkles, Clock, Layers } from 'lucide-react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+
+/* ── Curriculum Data ── */
+const curriculumSteps = [
+    {
+        icon: BookOpen,
+        num: '①',
+        title: '독서 (Reading)',
+        activity: '《긍정이와 웃음이의 마음공부 여행》 기반',
+        details: ['하루 한 이야기, 365+1 사유 질문 활용', '인생 · 자존감 · 관계 · 용기 · 선택에 대한 이야기', '매 회차 핵심 질문 제시'],
+    },
+    {
+        icon: MessageSquare,
+        num: '②',
+        title: '토론 (Dialogue)',
+        activity: '소그룹 대화와 관점 전환',
+        details: ['소그룹 대화 & 경청 훈련', '관점 전환 토론', '리더의 질문 훈련'],
+    },
+    {
+        icon: Brain,
+        num: '③',
+        title: '뇌 과학 적용 (Neuroscience Insight)',
+        activity: '이론이 아닌 실생활 적용 중심',
+        details: ['감정은 어떻게 형성되는가?', '뇌의 가소성과 습관 형성', '공감 능력과 거울 뉴런', '스트레스와 전전두엽 기능', '긍정 정서가 창의성에 미치는 영향'],
+    },
+    {
+        icon: Target,
+        num: '④',
+        title: '자기경영 리더십 설계',
+        activity: '실천 중심 자기경영',
+        details: ['나의 사고패턴 진단', '감정관리 전략 수립', '나만의 리더십 선언문 작성', '30일 실천 로드맵 설계'],
+    },
+];
+
+const expectedEffects = [
+    { icon: Heart, text: '감정 조절 능력 향상' },
+    { icon: MessageSquare, text: '조직 내 소통 개선' },
+    { icon: Lightbulb, text: '창의적 문제 해결력 강화' },
+    { icon: Compass, text: '스트레스 대응 능력 향상' },
+    { icon: Sparkles, text: '자기성찰을 통한 내적 성장' },
+    { icon: Users, text: '긍정적 조직 분위기 형성' },
+];
+
+const programFormats = [
+    {
+        type: '기본형',
+        badge: '4주 과정',
+        details: ['주 1회 / 2시간', '강의 40% + 토론 40% + 실습 20%'],
+    },
+    {
+        type: '특강형',
+        badge: '4시간',
+        details: ['AI시대 인문학 리더십 특강', '뇌 과학 기반 자기경영 워크숍'],
+    },
+    {
+        type: '기업 맞춤형',
+        badge: 'Custom',
+        details: ['조직문화 진단 연계 가능', '팀 빌딩 프로그램 결합 가능'],
+    },
+];
 
 export default function LiteraturePage() {
     const { dict } = useLanguage();
     const d = dict.pages.education;
+    const [openStep, setOpenStep] = useState<number | null>(null);
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -104,70 +165,7 @@ export default function LiteraturePage() {
                         <BookOpen className="w-8 h-8 opacity-80" />
                     </div>
                 </div>
-            </div>
-
-            {/* Curriculum Section 1: 독서 & 토론 */}
-            <section className="py-16 bg-gradient-to-b from-[#050510] to-[#0a0f25] relative">
-                <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                    <div className="mb-12 text-center">
-                        <h2 className="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37] mb-4">
-                            독서 & 토론
-                        </h2>
-                        <p className="text-gray-400 text-lg">Reading & Discussion</p>
-                    </div>
-
-                    {/* Desktop/Tablet Table Layout */}
-                    <div className="hidden md:block overflow-hidden rounded-2xl border border-[#d4af37]/20 shadow-[0_10px_40px_rgba(0,0,0,0.5)] bg-[#0a1128]/80 backdrop-blur-xl">
-                        <div className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr] gap-px bg-[#d4af37]/20 border-b border-[#d4af37]/30">
-                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">단계</div>
-                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">단계 활동</div>
-                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">발달되는 능력</div>
-                            <div className="p-5 font-bold text-center text-[#d4af37] bg-[#050a1f] text-lg">토론·논술로의 연결</div>
-                        </div>
-
-                        {[
-                            { step: '① 독서', activity: '다양한 시·수필·논픽션 읽기', skills: '사고의 폭, 비판적 읽기', connection: '주제 해석·근거 인식' },
-                            { step: '② 글쓰기', activity: '시, 수필 창작', skills: '언어 표현력, 구조화', connection: '논리적 전개 연습' },
-                            { step: '③ 토론', activity: '작품·주제 토론', skills: '공감적 소통, 반론 훈련', connection: '논술의 구두형태' },
-                            { step: '④ 논술', activity: '글로 정리', skills: '종합적 사고·논증', connection: '사고의 완성 단계' },
-                        ].map((row, idx) => (
-                            <div key={idx} className="grid grid-cols-[1fr_2fr_1.5fr_1.5fr] gap-px bg-[#d4af37]/10 hover:bg-[#d4af37]/20 transition-colors">
-                                <div className="p-6 font-bold text-white bg-[#0a1128] text-center text-lg">{row.step}</div>
-                                <div className="p-6 text-gray-200 bg-[#0a1128] flex items-center font-medium">{row.activity}</div>
-                                <div className="p-6 text-gray-300 bg-[#0a1128] flex items-center justify-center text-center">{row.skills}</div>
-                                <div className="p-6 text-gray-300 bg-[#0a1128] flex items-center justify-center text-center font-medium text-[#fceda6]">{row.connection}</div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Mobile Card Layout for 독서 & 토론 */}
-                    <div className="md:hidden space-y-4">
-                        {[
-                            { step: '① 독서', activity: '다양한 시·수필·논픽션 읽기', skills: '사고의 폭, 비판적 읽기', connection: '주제 해석·근거 인식' },
-                            { step: '② 글쓰기', activity: '시, 수필 창작', skills: '언어 표현력, 구조화', connection: '논리적 전개 연습' },
-                            { step: '③ 토론', activity: '작품·주제 토론', skills: '공감적 소통, 반론 훈련', connection: '논술의 구두형태' },
-                            { step: '④ 논술', activity: '글로 정리', skills: '종합적 사고·논증', connection: '사고의 완성 단계' },
-                        ].map((item, idx) => (
-                            <GlassCard key={idx} delay={idx * 0.1}>
-                                <div className="flex items-center gap-3 mb-4 border-b border-[#d4af37]/20 pb-3">
-                                    <h3 className="font-bold text-xl text-[#d4af37]">{item.step}</h3>
-                                    <span className="text-white font-medium pl-3 border-l border-gray-600">{item.activity}</span>
-                                </div>
-                                <div className="space-y-2">
-                                    <div className="flex justify-between items-start">
-                                        <span className="text-gray-400 text-sm w-24 shrink-0">발달되는 능력</span>
-                                        <span className="text-gray-200 text-sm text-right break-keep">{item.skills}</span>
-                                    </div>
-                                    <div className="flex justify-between items-start">
-                                        <span className="text-gray-400 text-sm w-24 shrink-0">논술 연결</span>
-                                        <span className="text-[#fceda6] font-medium text-sm text-right break-keep">{item.connection}</span>
-                                    </div>
-                                </div>
-                            </GlassCard>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            </div>
 
             {/* Curriculum Section 2: 책 글쓰기 */}
             <section className="py-20 relative bg-[#050510]">

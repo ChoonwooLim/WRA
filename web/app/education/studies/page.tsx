@@ -3,7 +3,7 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { BookOpen, Brain, Users, Target, Lightbulb, Heart, MessageSquare, Compass, Sparkles, GraduationCap, Clock, Layers } from 'lucide-react';
+import { BookOpen, GraduationCap, Compass, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -22,65 +22,6 @@ function renderHighlighted(text: string): React.ReactNode[] {
         return <React.Fragment key={i}>{part}</React.Fragment>;
     });
 }
-
-/* ── Curriculum Data ── */
-const curriculumSteps = [
-    {
-        icon: BookOpen,
-        num: '①',
-        title: '독서 (Reading)',
-        activity: '《긍정이와 웃음이의 마음공부 여행》 기반',
-        details: ['하루 한 이야기, 365+1 사유 질문 활용', '인생 · 자존감 · 관계 · 용기 · 선택에 대한 이야기', '매 회차 핵심 질문 제시'],
-    },
-    {
-        icon: MessageSquare,
-        num: '②',
-        title: '토론 (Dialogue)',
-        activity: '소그룹 대화와 관점 전환',
-        details: ['소그룹 대화 & 경청 훈련', '관점 전환 토론', '리더의 질문 훈련'],
-    },
-    {
-        icon: Brain,
-        num: '③',
-        title: '뇌 과학 적용 (Neuroscience Insight)',
-        activity: '이론이 아닌 실생활 적용 중심',
-        details: ['감정은 어떻게 형성되는가?', '뇌의 가소성과 습관 형성', '공감 능력과 거울 뉴런', '스트레스와 전전두엽 기능', '긍정 정서가 창의성에 미치는 영향'],
-    },
-    {
-        icon: Target,
-        num: '④',
-        title: '자기경영 리더십 설계',
-        activity: '실천 중심 자기경영',
-        details: ['나의 사고패턴 진단', '감정관리 전략 수립', '나만의 리더십 선언문 작성', '30일 실천 로드맵 설계'],
-    },
-];
-
-const expectedEffects = [
-    { icon: Heart, text: '감정 조절 능력 향상' },
-    { icon: MessageSquare, text: '조직 내 소통 개선' },
-    { icon: Lightbulb, text: '창의적 문제 해결력 강화' },
-    { icon: Compass, text: '스트레스 대응 능력 향상' },
-    { icon: Sparkles, text: '자기성찰을 통한 내적 성장' },
-    { icon: Users, text: '긍정적 조직 분위기 형성' },
-];
-
-const programFormats = [
-    {
-        type: '기본형',
-        badge: '4주 과정',
-        details: ['주 1회 / 2시간', '강의 40% + 토론 40% + 실습 20%'],
-    },
-    {
-        type: '특강형',
-        badge: '4시간',
-        details: ['AI시대 인문학 리더십 특강', '뇌 과학 기반 자기경영 워크숍'],
-    },
-    {
-        type: '기업 맞춤형',
-        badge: 'Custom',
-        details: ['조직문화 진단 연계 가능', '팀 빌딩 프로그램 결합 가능'],
-    },
-];
 
 export default function StudiesPage() {
     const { dict } = useLanguage();
