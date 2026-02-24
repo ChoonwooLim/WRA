@@ -737,14 +737,14 @@ export default function ToursPage() {
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {palaceTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => setSelectedImage({ src, title })} />
+                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                         ))}
                         {/* 6th Slot: Palace Map Infographic */}
                         <GlassCard delay={palaceTours.length * 0.08}>
                             <div className="flex flex-col h-full -mx-6 -mt-6">
                                 <div
                                     className="relative h-56 w-full overflow-hidden cursor-pointer group shrink-0"
-                                    onClick={() => setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' })}
+                                    onClick={() => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' }); }}
                                 >
                                     <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                     <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
@@ -869,7 +869,7 @@ export default function ToursPage() {
                     />
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {ceremonyTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => setSelectedImage({ src, title })} />
+                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                         ))}
                     </div>
                 </div>
@@ -884,7 +884,7 @@ export default function ToursPage() {
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {museumTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => setSelectedImage({ src, title })} />
+                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                         ))}
                     </div>
                 </div>
@@ -930,7 +930,7 @@ export default function ToursPage() {
                                             <Crown className="w-6 h-6 text-[#d4af37]" />
                                         </div>
                                         <h1 className="text-3xl md:text-5xl font-bold text-white tracking-widest font-serif drop-shadow-lg">{selectedImage.title}</h1>
-                                        <p className="text-[#d4af37]/80 font-serif tracking-widest mt-2 text-sm md:text-base">{palaceData[selectedImage.title].subtitle}</p>
+                                        <p className="text-[#d4af37]/80 font-serif tracking-widest mt-2 text-sm md:text-base">{palaceData[selectedImage.title]?.subtitle}</p>
                                     </div>
 
                                     {/* Intro Text */}
