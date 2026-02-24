@@ -568,8 +568,8 @@ export const ko: Dictionary = {
         },
         education: {
             heroTitle: 'WRA 워런트 — 교육',
-            heroSubtitle: '왕립한국어학당 · 왕립문예원 · 한국학(경영한류)',
-            languageTitle: '왕립한국어학당',
+            heroSubtitle: '한국어 · 왕립문예원 · 한국학(경영한류)',
+            languageTitle: '한국어',
             languageDesc: 'AI 기술 기반의 체계적인 한국어 교육을 제공합니다.',
             topikTitle: 'AI TOPIK 모의시험',
             topikDesc: '한국어능력시험을 위한 개인 맞춤형 분석 및 모의고사 시스템.',

@@ -14,7 +14,7 @@ const programs = [
         desc: 'AI 기반 한국어 교육, TOPIK 대비, 클라우드 LMS를 통한 체계적인 언어 교육 프로그램.',
         href: '/warrant/education/language',
         icon: <Languages className="w-8 h-8" />,
-        features: ['왕립한국어학당', 'AI TOPIK 모의시험', '클라우드 LMS'],
+        features: ['한국어', 'AI TOPIK 모의시험', '클라우드 LMS'],
     },
     {
         title: '② 한국문학',

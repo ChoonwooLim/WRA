@@ -107,7 +107,7 @@ export default function OrganizationPage() {
                 <div className="container mx-auto px-4 max-w-6xl relative">
 
                     {/* 3D Floating Logo VFX & Text */}
-                    {/* Aligned horizontally with Level 1 (CEO) and vertically with Level 2 Left Pillar (왕립한국어학당) */}
+                    {/* Aligned horizontally with Level 1 (CEO) and vertically with Level 2 Left Pillar (한국어) */}
                     <div className="absolute top-[136px] left-[16.666%] transform -translate-x-1/2 ml-10 -translate-y-1/2 hidden md:flex flex-col items-center z-20">
                         <div className="relative">
                             <motion.div
@@ -214,7 +214,7 @@ export default function OrganizationPage() {
 
                             <div className="w-full md:w-1/3 flex justify-center px-2 mb-8 md:mb-0">
                                 <OrgNode
-                                    title="왕립한국어학당"
+                                    title="한국어"
                                     subTeams={["교수설계팀", "글로벌강사팀"]}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"

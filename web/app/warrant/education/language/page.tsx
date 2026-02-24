@@ -52,20 +52,8 @@ export default function LanguagePage() {
                             transition={{ duration: 0.8, delay: 0.3 }}
                             className="mb-10"
                         >
-                            <motion.h2
-                                initial={{ backgroundPosition: "0% 50%" }}
-                                animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                                transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-                                className="text-4xl md:text-[46px] font-serif font-bold tracking-widest mb-4 
-                                           text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37] 
-                                           background-size-200 drop-shadow-[0_2px_15px_rgba(212,175,55,0.4)]"
-                                style={{ backgroundSize: "200% auto" }}
-                            >
-                                한국어
-                            </motion.h2>
-                            <p className="text-[#d4af37] text-xl md:text-2xl font-serif tracking-widest mb-8 opacity-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                                -바른 가르침-
-                            </p>
+
+
                             <p className="text-white text-xl md:text-2xl font-serif tracking-wide leading-relaxed font-medium">
                                 "천지(天地)의 소리가 당신의 언어가 되는 순간,"
                             </p>
