@@ -3,7 +3,7 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { BookOpen, GraduationCap, Compass, Sparkles } from 'lucide-react';
+import { BookOpen, GraduationCap, Compass, Sparkles, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -219,7 +219,7 @@ export default function StudiesPage() {
                 </div>
             </div>
 
-            
+
         </div>
     );
 }
