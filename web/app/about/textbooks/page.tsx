@@ -65,7 +65,7 @@ export default function TextbooksPage() {
                             </h2>
 
                             <p className="text-gray-300 text-base md:text-lg leading-[1.8] mb-10 font-light max-w-xl">
-                                "한국의 찬란한 문화 유산과 현대 경영 철학이 만나는 기념비적인 저작"<br /><br />
+                                "한국의 찬란한 문화 유산과 경영 한류 철학이 만나는 기념비적인 저작"<br /><br />
                                 시대를 초월하는 지혜와 글로벌 리더십의 본질을 담아내어,<br />
                                 가장 한국적인 가치를 전 세계에 널리 알리고자 합니다.
                             </p>
