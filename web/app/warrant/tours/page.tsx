@@ -770,7 +770,7 @@ export default function ToursPage() {
                 <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none mix-blend-overlay" />
                 <div className="container mx-auto px-4 max-w-5xl relative z-10">
                     <SectionHeader
-                        title="왕릉/왕릉제향"
+                        title="왕릉제향"
                         subtitle="UNESCO World Heritage — 500년 왕조의 숨결이 깃든 신의 정원"
                     />
 
