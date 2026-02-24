@@ -602,7 +602,7 @@ export const ko: Dictionary = {
         },
         services: {
             heroTitle: 'WRA 워런트 — 서비스',
-            heroSubtitle: '경영한류컨설팅 · 왕립 투어',
+            heroSubtitle: '경영한류컨설팅 · K-헤리티지',
             consultingTitle: '경영한류컨설팅',
             consultingDesc: '글로벌 확장 전략과 국가 프로젝트 개발을 위한 전략 컨설팅.',
             step1: '진단 (Diagnosis)',
@@ -610,7 +610,7 @@ export const ko: Dictionary = {
             step3: '혁신 (Transformation)',
             step4: '실행 (Execution)',
             step5: '피드백 (Feedback)',
-            toursTitle: '왕립 투어 (Royal Tours)',
+            toursTitle: 'K-헤리티지',
             toursDesc: '국립고궁박물관, 주미대한제국공사관 등 프리미엄 궁궐/박물관 투어.',
         },
         community: {
