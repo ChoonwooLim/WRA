@@ -32,7 +32,7 @@ const warrantAreas = [
     {
         title: '컨설팅',
         titleEn: 'Consulting',
-        desc: '왕립 경영컨설팅으로 비즈니스에 품격과 전략을 더합니다.',
+        desc: '경영한류컨설팅으로 비즈니스에 품격과 전략을 더합니다.',
         href: '/warrant/consulting',
         icon: <Briefcase className="w-8 h-8" />,
     },
