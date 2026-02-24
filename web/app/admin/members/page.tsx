@@ -9,6 +9,7 @@ interface Member {
     id: string;
     name: string | null;
     email: string | null;
+    phone: string | null;
     role: string;
     createdAt: string;
     image: string | null;
@@ -228,6 +229,7 @@ export default function MembersPage() {
                                 <tr>
                                     <th className="px-6 py-4">회원</th>
                                     <th className="px-6 py-4">이메일</th>
+                                    <th className="px-6 py-4">전화번호</th>
                                     <th className="px-6 py-4">등급</th>
                                     <th className="px-6 py-4">가입일</th>
                                     {isAdmin && <th className="px-6 py-4 text-right">관리</th>}
@@ -250,6 +252,7 @@ export default function MembersPage() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 text-gray-400 text-sm">{member.email}</td>
+                                            <td className="px-6 py-4 text-gray-400 text-sm">{member.phone || '-'}</td>
                                             <td className="px-6 py-4">
                                                 <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border ${roleInfo.bg} ${roleInfo.color}`}>
                                                     <RoleIcon className="w-3 h-3" />

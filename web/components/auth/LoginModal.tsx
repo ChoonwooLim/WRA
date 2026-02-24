@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, User, ArrowRight, ArrowLeft, Search, KeyRound } from 'lucide-react';
+import { X, Mail, Lock, User, ArrowRight, ArrowLeft, Search, KeyRound, Phone } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { cn } from '@/lib/utils';
 
@@ -21,6 +21,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [countryCode, setCountryCode] = useState('+82');
 
     // Find email result
     const [findResult, setFindResult] = useState<{ found: boolean; accounts?: { name: string; email: string }[]; message: string } | null>(null);
@@ -32,6 +34,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
         setEmail('');
         setPassword('');
         setName('');
+        setPhone('');
+        setCountryCode('+82');
         setFindResult(null);
         setForgotResult(null);
     };
@@ -65,7 +69,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                     body: JSON.stringify({
                         name: name || 'New Student',
                         email,
-                        password
+                        password,
+                        phone: phone ? `${countryCode} ${phone}` : undefined,
                     })
                 });
 
@@ -284,23 +289,63 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                                     </motion.div>
                                 )}
 
-                                {/* ===== SIGNUP NAME FIELD ===== */}
+                                {/* ===== SIGNUP NAME & PHONE FIELDS ===== */}
                                 {activeTab === 'signup' && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: 'auto' }}
                                         exit={{ opacity: 0, height: 0 }}
-                                        className="overflow-hidden"
+                                        className="overflow-hidden space-y-4"
                                     >
                                         <div className="relative group">
                                             <User className="absolute left-3 top-3 text-gray-500 group-focus-within:text-primary transition-colors" size={18} />
                                             <input
                                                 type="text"
-                                                placeholder="Full Name"
+                                                placeholder="이름 (Full Name)"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
                                             />
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <div className="relative shrink-0">
+                                                <Phone className="absolute left-2.5 top-3 text-gray-500 z-10 pointer-events-none" size={16} />
+                                                <select
+                                                    value={countryCode}
+                                                    onChange={(e) => setCountryCode(e.target.value)}
+                                                    className="w-[130px] bg-white/5 border border-white/10 rounded-xl py-3 pl-9 pr-2 text-white text-sm focus:outline-none focus:border-primary/50 transition-colors appearance-none cursor-pointer"
+                                                >
+                                                    <option value="+82" className="bg-[#0a0a1a] text-white">🇰🇷 +82 한국</option>
+                                                    <option value="+1" className="bg-[#0a0a1a] text-white">🇺🇸 +1 미국</option>
+                                                    <option value="+81" className="bg-[#0a0a1a] text-white">🇯🇵 +81 일본</option>
+                                                    <option value="+86" className="bg-[#0a0a1a] text-white">🇨🇳 +86 중국</option>
+                                                    <option value="+44" className="bg-[#0a0a1a] text-white">🇬🇧 +44 영국</option>
+                                                    <option value="+49" className="bg-[#0a0a1a] text-white">🇩🇪 +49 독일</option>
+                                                    <option value="+33" className="bg-[#0a0a1a] text-white">🇫🇷 +33 프랑스</option>
+                                                    <option value="+61" className="bg-[#0a0a1a] text-white">🇦🇺 +61 호주</option>
+                                                    <option value="+65" className="bg-[#0a0a1a] text-white">🇸🇬 +65 싱가포르</option>
+                                                    <option value="+66" className="bg-[#0a0a1a] text-white">🇹🇭 +66 태국</option>
+                                                    <option value="+84" className="bg-[#0a0a1a] text-white">🇻🇳 +84 베트남</option>
+                                                    <option value="+62" className="bg-[#0a0a1a] text-white">🇮🇩 +62 인도네시아</option>
+                                                    <option value="+60" className="bg-[#0a0a1a] text-white">🇲🇾 +60 말레이시아</option>
+                                                    <option value="+63" className="bg-[#0a0a1a] text-white">🇵🇭 +63 필리핀</option>
+                                                    <option value="+91" className="bg-[#0a0a1a] text-white">🇮🇳 +91 인도</option>
+                                                    <option value="+7" className="bg-[#0a0a1a] text-white">🇷🇺 +7 러시아</option>
+                                                    <option value="+55" className="bg-[#0a0a1a] text-white">🇧🇷 +55 브라질</option>
+                                                    <option value="+52" className="bg-[#0a0a1a] text-white">🇲🇽 +52 멕시코</option>
+                                                    <option value="+971" className="bg-[#0a0a1a] text-white">🇦🇪 +971 UAE</option>
+                                                    <option value="+966" className="bg-[#0a0a1a] text-white">🇸🇦 +966 사우디</option>
+                                                </select>
+                                            </div>
+                                            <div className="relative group flex-1">
+                                                <input
+                                                    type="tel"
+                                                    placeholder="전화번호 (010-0000-0000)"
+                                                    value={phone}
+                                                    onChange={(e) => setPhone(e.target.value)}
+                                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
+                                                />
+                                            </div>
                                         </div>
                                     </motion.div>
                                 )}
