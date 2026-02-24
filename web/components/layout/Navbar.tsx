@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useSession, signOut } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { User, ChevronDown, Crown, Building2, GraduationCap, Award, Briefcase, Users } from 'lucide-react';
+import { User, ChevronDown, Crown, Building2, Award, Users } from 'lucide-react';
 
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 import { useLanguage } from '@/components/providers/LanguageProvider';
@@ -69,9 +69,8 @@ export function Navbar() {
             icon: <Crown className="w-4 h-4" />,
             submenu: [
                 { label: dict.navbar.profile, href: '/crown-prince' },
+                { label: dict.navbar.congratulations, href: '/crown-prince/message' },
                 { label: dict.navbar.lineage, href: '/crown-prince/lineage' },
-                { label: dict.navbar.activities, href: '/crown-prince/activities' },
-                { label: dict.navbar.message, href: '/crown-prince/message' },
             ],
         },
         {
@@ -79,40 +78,22 @@ export function Navbar() {
             href: '/about',
             icon: <Building2 className="w-4 h-4" />,
             submenu: [
+                { label: dict.navbar.foundingPhilosophy, href: '/about/founding-philosophy' },
                 { label: dict.navbar.vision, href: '/about' },
+                { label: dict.navbar.coreValuesPage, href: '/about/core-values' },
                 { label: dict.navbar.organization, href: '/about/organization' },
-                { label: dict.navbar.partners, href: '/about/partners' },
-                { label: dict.navbar.ceoProfile, href: '/about/ceo' },
+                { label: dict.navbar.textbooksPage, href: '/about/textbooks' },
             ],
         },
         {
-            label: dict.navbar.education,
-            href: '/education/language',
-            icon: <GraduationCap className="w-4 h-4" />,
-            submenu: [
-                { label: dict.navbar.kLanguage, href: '/education/language' },
-                { label: dict.navbar.kLiterature, href: '/education/literature' },
-                { label: dict.navbar.kStudies, href: '/education/studies' },
-                { label: dict.navbar.textbooks, href: '/education/books' },
-            ],
-        },
-        {
-            label: dict.navbar.certification,
-            href: '/certification',
+            label: dict.navbar.warrant,
+            href: '/warrant/education',
             icon: <Award className="w-4 h-4" />,
             submenu: [
-                { label: dict.navbar.royalWarrant, href: '/certification' },
-                { label: dict.navbar.royal33, href: '/certification/royal33' },
-                { label: dict.navbar.digitalSeal, href: '/certification/digital-seal' },
-            ],
-        },
-        {
-            label: dict.navbar.services,
-            href: '/services/consulting',
-            icon: <Briefcase className="w-4 h-4" />,
-            submenu: [
-                { label: dict.navbar.consulting, href: '/services/consulting' },
-                { label: dict.navbar.tours, href: '/services/tours' },
+                { label: dict.navbar.education, href: '/warrant/education' },
+                { label: dict.navbar.tours, href: '/warrant/tours' },
+                { label: dict.navbar.membership, href: '/warrant/membership' },
+                { label: dict.navbar.consulting, href: '/warrant/consulting' },
             ],
         },
         {
@@ -121,11 +102,9 @@ export function Navbar() {
             icon: <Users className="w-4 h-4" />,
             submenu: [
                 { label: dict.navbar.notices, href: '/community/notices' },
-                { label: '자유게시판', href: '/community/free-board' },
                 { label: '이미지 갤러리', href: '/community/gallery' },
                 { label: dict.navbar.newsletter, href: '/community/newsletter' },
                 { label: dict.navbar.qna, href: '/community/qna' },
-                { label: dict.navbar.contact, href: '/community/contact' },
             ],
         },
     ];

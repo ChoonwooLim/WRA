@@ -225,7 +225,7 @@ export function HeroSection() {
                             </button>
                         </Link>
 
-                        <Link href="/education/language">
+                        <Link href="/warrant/education">
                             <button className="px-10 py-5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
                                 {dict.home.exploreCurriculum}
                             </button>

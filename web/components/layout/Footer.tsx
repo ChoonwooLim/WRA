@@ -10,9 +10,7 @@ export function Footer() {
     const quickLinks = [
         { label: dict.navbar.crownPrince, href: '/crown-prince' },
         { label: dict.navbar.about, href: '/about' },
-        { label: dict.navbar.education, href: '/education/language' },
-        { label: dict.navbar.certification, href: '/certification' },
-        { label: dict.navbar.services, href: '/services/consulting' },
+        { label: dict.navbar.warrant, href: '/warrant/education' },
         { label: dict.navbar.community, href: '/community/notices' },
     ];
 

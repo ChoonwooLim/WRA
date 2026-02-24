@@ -2,9 +2,7 @@ export type Dictionary = {
     navbar: {
         crownPrince: string;
         about: string;
-        education: string;
-        certification: string;
-        services: string;
+        warrant: string;
         community: string;
         adminDashboard: string;
         startLogin: string;
@@ -12,28 +10,35 @@ export type Dictionary = {
         // Crown Prince submenu
         profile: string;
         lineage: string;
-        activities: string;
-        message: string;
+        congratulations: string;
         // About submenu
+        foundingPhilosophy: string;
         vision: string;
+        coreValuesPage: string;
         organization: string;
-        partners: string;
-        ceoProfile: string;
-        // Education submenu
+        textbooksPage: string;
+        // WRA Warrant submenu
+        education: string;
         kLanguage: string;
         kLiterature: string;
         kStudies: string;
-        // Certification submenu
-        royalWarrant: string;
-        royal33: string;
-        digitalSeal: string;
-        // Services submenu
-        consulting: string;
         tours: string;
+        membership: string;
+        consulting: string;
         // Community submenu
         notices: string;
         newsletter: string;
         qna: string;
+        // Legacy keys (kept for page content compatibility)
+        certification: string;
+        services: string;
+        activities: string;
+        message: string;
+        partners: string;
+        ceoProfile: string;
+        royalWarrant: string;
+        royal33: string;
+        digitalSeal: string;
         contact: string;
         textbooks: string;
     };
@@ -211,32 +216,39 @@ export const en: Dictionary = {
     navbar: {
         crownPrince: 'Crown Prince',
         about: 'About WRA',
-        education: 'Education',
-        certification: 'Certification',
-        services: 'Services',
+        warrant: 'WRA Warrant',
         community: 'Community',
         adminDashboard: 'Admin Dashboard',
         startLogin: 'Start Login',
         loginSignup: 'Login / Sign Up',
         profile: 'Profile',
         lineage: 'Royal Lineage',
-        activities: 'Activities',
-        message: 'Welcome Message',
+        congratulations: 'Congratulations & Welcome',
+        foundingPhilosophy: 'Founding Philosophy',
         vision: 'Vision & Mission',
+        coreValuesPage: 'Core Values',
         organization: 'Organization',
-        partners: 'Partners',
-        ceoProfile: 'CEO Profile',
+        textbooksPage: 'Textbooks',
+        education: 'Education',
         kLanguage: 'K-Heritage Language',
-        kLiterature: 'K-Literature & Writing',
+        kLiterature: 'Korean Literature',
         kStudies: 'K-Studies',
-        royalWarrant: 'K-Royal Warrant',
-        royal33: 'The Royal 33',
-        digitalSeal: 'Digital Seal',
-        consulting: 'Royal Consulting',
         tours: 'Royal Tours',
+        membership: 'Membership',
+        consulting: 'Royal Consulting',
         notices: 'Notices',
         newsletter: 'Newsletter',
         qna: 'Q&A',
+        // Legacy keys
+        certification: 'Certification',
+        services: 'Services',
+        activities: 'Activities',
+        message: 'Welcome Message',
+        partners: 'Partners',
+        ceoProfile: 'CEO Profile',
+        royalWarrant: 'K-Royal Warrant',
+        royal33: 'The Royal 33',
+        digitalSeal: 'Digital Seal',
         contact: 'Contact',
         textbooks: 'Published Books',
     },
@@ -409,34 +421,41 @@ export const en: Dictionary = {
 
 export const ko: Dictionary = {
     navbar: {
-        crownPrince: '황태손 소개',
+        crownPrince: '황대손 소개',
         about: 'WRA 소개',
-        education: '교육',
-        certification: '인증',
-        services: '컨설팅·투어',
+        warrant: 'WRA Warrant',
         community: '커뮤니티',
         adminDashboard: '관리자 대시보드',
         startLogin: '로그인 시작',
         loginSignup: '로그인 / 회원가입',
-        profile: '프로필',
-        lineage: '황실계보',
+        profile: '황대손',
+        lineage: '계보',
+        congratulations: '축사 및 환영사',
+        foundingPhilosophy: '설립이념',
+        vision: '비전 & 미션',
+        coreValuesPage: '핵심가치',
+        organization: '조직도',
+        textbooksPage: '교재',
+        education: '교육',
+        kLanguage: '한국어',
+        kLiterature: '한국문학',
+        kStudies: '한국학',
+        tours: '투어',
+        membership: '멤버십',
+        consulting: '컨설팅',
+        notices: '공지',
+        newsletter: '뉴스레터 구독',
+        qna: 'QnA',
+        // Legacy keys
+        certification: '인증',
+        services: '컨설팅·투어',
         activities: '활동',
         message: '인사말',
-        vision: '비전·미션',
-        organization: '조직도',
         partners: '제휴기관',
         ceoProfile: '대표이사 프로필',
-        kLanguage: '왕립한국어학당',
-        kLiterature: '왕립문예원',
-        kStudies: '한국학(경영한류)',
         royalWarrant: 'K-Royal 인증',
         royal33: 'The Royal 33',
         digitalSeal: '디지털 옥새',
-        consulting: '왕립 경영컨설팅',
-        tours: '왕립 투어',
-        notices: '공지사항',
-        newsletter: '뉴스레터',
-        qna: 'Q&A',
         contact: '연락처',
         textbooks: '발간 서적 및 교재',
     },
@@ -456,7 +475,7 @@ export const ko: Dictionary = {
             message: '**세계왕립아카데미**를 찾아주신 여러분께 깊은 감사의 뜻을 전합니다.\n\n세계는 지금 **문화와 교육**을 통해 국가의 **품격과 정체성**을 새롭게 정의하는 시대에 들어섰습니다. 역사적으로 **왕실**은 국가의 상징이자, 문명과 문명을 연결하고 생산하는 **외교의 축**이었습니다.\n\n세계왕립아카데미는 전통적 가치 위에 **국제 왕실 네트워크**와 연계한 **공공외교 교육 플랫폼**을 지향합니다. 단순한 교류를 넘어, 각국의 역사와 문화, 교육을 존중하며 상호 협력하고 **품격 있는 글로벌 거버넌스** 구축에 뜻을 담고 있습니다.\n\n대한민국의 **K-헤리티지**는 오랜 역사 속에서 형성된 정신과 문화의 결정체입니다. 우리민족은 고대에 **천문사상**과 **수행문화**라는 두 개의 축으로 하여 문화국가로 출발했습니다. 별자리를 연구하는 천문에서 **\'하늘 땅 사람\'**이라는 **천지인 사상**과 당대에 눈으로 관측가능한 태양과 달 그리고 5개의 행성으로 한 **음양오행**의 천문원리를 만들어냈습니다.\n\n수행문화에서 인체탐구의 **한의학**과 음식과 약초는 하나라는 **약식동원**의 원리가 출발했습니다. **선사상**과 **단학**같은 것이 수행문화에서 발원했습니다.\n\n우리는 광대하고 심오한 우리 문화의 원류를 현대적으로 **계승·확장**하여, 국제 사회와 함께하는 **새로운 문명 교류의 장**을 열고자 합니다.\n\n첫째 **\'K-HUMAN(한국인보고서)\'** 비전 아래, 세계왕립아카데미는 국제 왕실 및 전통 문화기관과의 **협력 네트워크 구축**\n\n둘째 **글로벌 청년 리더** 교류 프로그램 운영\n\n셋째 **문화외교** 및 **교육외교** 공동 프로젝트 추진\n\n넷째 **K-헤리티지** 기반 **학문·산업 연계 모델** 확립을 통해 대한민국이 세계 인재·문명 교류의 **중심 국가**로 도약하는데 기여하겠습니다.\n\n이제 왕실의 품격은 권위가 아니라 **책임**에서 비롯됩니다. 통제가 아니라 **자유**를 지향합니다. 세계왕립아카데미는 미래사회를 이끌어갈 책임으로 세계와 협력하며, 독자적인 전통을 기반으로 **미래설계**를 하는 **국제 플랫폼**이 되겠습니다.\n\n과거의 유물이 아니라 정신적인 토대인 **뿌리로써의 전통**과 과학이라는 차가움이 아니라 우리 전통의 정신적인 토대를 이루고 있는 **인본**을 품어 안은 현재가 만나 보다 **아늑하고 따뜻하면서도 발전적인 미래**로 나갈 것을 천명합니다.\n\n**두레**나 **품앗이**처럼 함께 하는 미래를 위하여 여러분의 지속적인 관심과 동참을 부탁드립니다. 감사합니다.',
         },
         coreValues: {
-            title: 'WRA소개_핵심가치',
+            title: 'WRA 핵심가치',
             subtitle: '세상을 이롭게 하는 한국인의 창조 정신(DNA)',
             hongik: { title: '홍익', desc: '세상을 이롭게 하는\n한국인의 창조 정신(DNA)' },
             wisdom: { title: '지혜', desc: '사유(생각), 성찰(반성),\n각성(깨달음)' },
@@ -531,12 +550,12 @@ export const ko: Dictionary = {
             messageTitle: '인사말',
         },
         about: {
-            heroTitle: '세계왕립아카데미 소개',
+            heroTitle: 'WRA 비전&미션',
             heroSubtitle: 'Gateway to Royal Heritage',
             visionTitle: '비전 · 미션',
             visionStatement: 'World Royal Academy: Gateway to Royal Heritage',
             missionStatement: '교육, 인증, 글로벌 파트너십을 통해 한국 왕실 문화의 유산을 세계에 전파합니다.',
-            orgTitle: '조직도',
+            orgTitle: 'WRA 조직도',
             orgDesc: '모든 영역에서 탁월함을 보장하는 조직 구조.',
             partnersTitle: '글로벌 파트너',
             partnersDesc: '세계 일류 기관 및 단체와의 협력.',

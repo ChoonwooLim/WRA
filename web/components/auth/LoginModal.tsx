@@ -342,7 +342,18 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                                                     type="tel"
                                                     placeholder="전화번호 (010-0000-0000)"
                                                     value={phone}
-                                                    onChange={(e) => setPhone(e.target.value)}
+                                                    onChange={(e) => {
+                                                        const digits = e.target.value.replace(/\D/g, '');
+                                                        let formatted = digits;
+                                                        if (digits.length <= 3) {
+                                                            formatted = digits;
+                                                        } else if (digits.length <= 7) {
+                                                            formatted = `${digits.slice(0, 3)}-${digits.slice(3)}`;
+                                                        } else {
+                                                            formatted = `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+                                                        }
+                                                        setPhone(formatted);
+                                                    }}
                                                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 transition-colors"
                                                 />
                                             </div>
