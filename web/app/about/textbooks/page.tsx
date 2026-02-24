@@ -24,7 +24,6 @@ export default function TextbooksPage() {
                 <div className="container mx-auto px-4 max-w-7xl">
                     <SectionHeader
                         title="Publications"
-                        subtitle="발간 서적 및 교재"
                     />
 
                     {/* Featured Main Book Section */}
