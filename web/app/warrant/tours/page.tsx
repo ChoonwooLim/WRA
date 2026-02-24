@@ -864,7 +864,7 @@ export default function ToursPage() {
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <SectionHeader
-                        title="대제 (Royal Ceremonies)"
+                        title='유네스코 "세계인류무형유산"'
                         subtitle="대한제국 황실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례"
                     />
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
