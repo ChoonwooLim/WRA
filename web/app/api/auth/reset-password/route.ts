@@ -57,7 +57,7 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error('Reset password error:', error);
         if (error instanceof z.ZodError) {
-            const message = error.errors?.[0]?.message || '입력값을 확인해주세요.';
+            const message = error.issues?.[0]?.message || '입력값을 확인해주세요.';
             return NextResponse.json({ message }, { status: 400 });
         }
         return NextResponse.json(
