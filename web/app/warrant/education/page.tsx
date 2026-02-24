@@ -22,7 +22,7 @@ const programs = [
         desc: '한국 문학과 예술을 통한 문학 교육. 독서, 질문, 토론, 인증의 4단계 창작 커리큘럼.',
         href: '/warrant/education/culture',
         icon: <Palette className="w-8 h-8" />,
-        features: ['왕립문예원', '4단계 창작 커리큘럼', '문학·예술 교육'],
+        features: ['한국문학', '4단계 창작 커리큘럼', '문학·예술 교육'],
     },
     {
         title: '③ 한국학',

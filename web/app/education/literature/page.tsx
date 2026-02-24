@@ -42,28 +42,7 @@ export default function LiteraturePage() {
                         />
                     </motion.div>
 
-                    {/* Glowing Typography */}
-                    <div className="text-center flex flex-col items-center max-w-3xl mb-4">
-                        <motion.h2
-                            initial={{ backgroundPosition: "0% 50%" }}
-                            animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                            transition={{ duration: 5, ease: "linear", repeat: Infinity }}
-                            className="text-4xl md:text-[46px] font-serif font-bold tracking-widest mb-4
-                                       text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]
-                                       bg-[length:200%_auto] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                        >
-                            한국문학
-                        </motion.h2>
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.1 }}
-                            className="text-[#d4af37]/80 font-light text-lg md:text-xl tracking-widest"
-                        >
-                            -시대의 옷을 갈아입은 문학-
-                        </motion.div>
-                    </div>
+
 
                     <motion.div
                         initial={{ opacity: 0, scaleY: 0 }}

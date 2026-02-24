@@ -222,7 +222,7 @@ export default function OrganizationPage() {
                             </div>
                             <div className="w-full md:w-1/3 flex justify-center px-2 mb-8 md:mb-0">
                                 <OrgNode
-                                    title="왕립문예원"
+                                    title="한국문학"
                                     subTeams={["창작교육팀", "콘텐츠창작팀"]}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
