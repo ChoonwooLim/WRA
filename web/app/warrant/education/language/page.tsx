@@ -22,7 +22,7 @@ export default function LanguagePage() {
                 {/* Background Pattern */}
                 <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.05] pointer-events-none mix-blend-overlay" />
 
-                <div className="container mx-auto px-4 max-w-5xl relative z-10 flex flex-col items-center">
+                <div className="container mx-auto px-4 max-w-6xl relative z-10 flex flex-col items-center">
                     {/* Removed Top Accent Line with Title per user request */}
 
                     {/* Scroll Image */}

@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const programs = [
     {
-        title: '① 한국어',
+        title: '한국어',
         titleEn: 'Korean Language',
         desc: 'AI 기반 한국어 교육, TOPIK 대비,\n클라우드 LMS를 통한 체계적인\n언어 교육 프로그램.',
         href: '/warrant/education/language',
@@ -18,7 +18,7 @@ const programs = [
         features: ['한국어', 'AI TOPIK 모의시험', '클라우드 LMS'],
     },
     {
-        title: '② 한국문학',
+        title: '한국문학',
         titleEn: 'Korean Literature',
         desc: '한국 문학과 예술을 통한 문학 교육.\n독서, 질문, 토론, 인증의\n4단계 창작 커리큘럼.',
         href: '/warrant/education/culture',
@@ -26,7 +26,7 @@ const programs = [
         features: ['한국문학', '4단계 창작 커리큘럼', '문학·예술 교육'],
     },
     {
-        title: '③ 한국학',
+        title: '한국학',
         titleEn: 'Korean Studies',
         desc: '한국의 역사, 문화, 유산에 대한\n학술 및 연구 프로그램.\n경영한류와의 융합.',
         href: '/warrant/education/studies',
@@ -44,7 +44,7 @@ export default function EducationLandingPage() {
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
                 title="교육"
-                subtitle="한국어 · 한국문학 · 한국학"
+                subtitle="K-헤리티지의 가치를 세계에 전하는 WRA 교육"
             />
 
             <section className="py-20">
@@ -62,7 +62,7 @@ export default function EducationLandingPage() {
                             >
                                 <GlassCard delay={i * 0.12} className="transition-all duration-300 group-hover:!border-[#d4af37]/40 !p-0 overflow-hidden">
                                     <div className="flex flex-col items-center text-center">
-                                        <div className="w-full h-48 overflow-hidden bg-[#0a0e1a]">
+                                        <div className="w-full h-48 overflow-hidden bg-[#0a0e1a] p-6">
                                             <img src={prog.image} alt={prog.titleEn} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                                         </div>
                                         <div className="p-6 pb-8">
@@ -103,7 +103,7 @@ export default function EducationLandingPage() {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 30 }}
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-5xl h-[90vh] rounded-2xl overflow-hidden bg-[#050510] border border-[#d4af37]/30 shadow-[0_0_60px_rgba(212,175,55,0.15)]"
+                            className="relative w-full max-w-7xl h-[90vh] rounded-2xl overflow-hidden bg-[#050510] border border-[#d4af37]/30 shadow-[0_0_60px_rgba(212,175,55,0.15)]"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Header Bar */}

@@ -58,7 +58,7 @@ export default function StudiesPage() {
             ═══════════════════════════════════════════════════════════════ */}
             <section className="py-14 relative overflow-hidden bg-gradient-to-b from-[#050510] to-[#0a0f25]">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[150px] rounded-full pointer-events-none" />
-                <div className="container mx-auto px-4 max-w-5xl relative z-10">
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
                     {/* Section Header */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
