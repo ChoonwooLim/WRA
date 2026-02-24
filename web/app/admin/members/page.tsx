@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Shield, Crown, Star, UserCheck, ChevronDown, Filter, Search } from 'lucide-react';
+import { Users, Shield, Crown, Star, UserCheck, ChevronDown, Filter, Search, KeyRound } from 'lucide-react';
 
 interface Member {
     id: string;
@@ -35,6 +35,8 @@ export default function MembersPage() {
     const [changingRole, setChangingRole] = useState<string | null>(null); // userId being changed
     const [confirmDialog, setConfirmDialog] = useState<{ userId: string; name: string; newRole: string } | null>(null);
     const [updateMessage, setUpdateMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+    const [pwDialog, setPwDialog] = useState<{ userId: string; name: string } | null>(null);
+    const [newPassword, setNewPassword] = useState('');
 
     // @ts-ignore
     const isAdmin = session?.user?.role === 'admin';
@@ -80,6 +82,32 @@ export default function MembersPage() {
         } finally {
             setChangingRole(null);
             setConfirmDialog(null);
+            setTimeout(() => setUpdateMessage(null), 3000);
+        }
+    }
+
+    async function handlePasswordChange() {
+        if (!pwDialog || newPassword.length < 6) {
+            setUpdateMessage({ type: 'error', text: '비밀번호는 최소 6자 이상이어야 합니다.' });
+            return;
+        }
+        try {
+            const res = await fetch('/api/auth/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode: 'admin', userId: pwDialog.userId, newPassword }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setUpdateMessage({ type: 'success', text: `${pwDialog.name}님의 비밀번호가 변경되었습니다.` });
+            } else {
+                setUpdateMessage({ type: 'error', text: data.message || '변경에 실패했습니다.' });
+            }
+        } catch {
+            setUpdateMessage({ type: 'error', text: '서버 연결에 실패했습니다.' });
+        } finally {
+            setPwDialog(null);
+            setNewPassword('');
             setTimeout(() => setUpdateMessage(null), 3000);
         }
     }
@@ -202,7 +230,7 @@ export default function MembersPage() {
                                     <th className="px-6 py-4">이메일</th>
                                     <th className="px-6 py-4">등급</th>
                                     <th className="px-6 py-4">가입일</th>
-                                    {isAdmin && <th className="px-6 py-4 text-right">등급 변경</th>}
+                                    {isAdmin && <th className="px-6 py-4 text-right">관리</th>}
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5">
@@ -233,29 +261,38 @@ export default function MembersPage() {
                                             </td>
                                             {isAdmin && (
                                                 <td className="px-6 py-4 text-right">
-                                                    <div className="relative inline-block">
-                                                        <select
-                                                            value={member.role}
-                                                            onChange={(e) => {
-                                                                const newRole = e.target.value;
-                                                                if (newRole !== member.role) {
-                                                                    setConfirmDialog({
-                                                                        userId: member.id,
-                                                                        name: member.name || member.email || 'Unknown',
-                                                                        newRole,
-                                                                    });
-                                                                }
-                                                            }}
-                                                            disabled={isChanging}
-                                                            className={`px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white text-xs appearance-none pr-7 cursor-pointer hover:border-white/20 focus:outline-none focus:border-white/30 transition-colors ${isChanging ? 'opacity-50' : ''}`}
+                                                    <div className="flex items-center justify-end gap-2">
+                                                        <div className="relative inline-block">
+                                                            <select
+                                                                value={member.role}
+                                                                onChange={(e) => {
+                                                                    const newRole = e.target.value;
+                                                                    if (newRole !== member.role) {
+                                                                        setConfirmDialog({
+                                                                            userId: member.id,
+                                                                            name: member.name || member.email || 'Unknown',
+                                                                            newRole,
+                                                                        });
+                                                                    }
+                                                                }}
+                                                                disabled={isChanging}
+                                                                className={`px-3 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white text-xs appearance-none pr-7 cursor-pointer hover:border-white/20 focus:outline-none focus:border-white/30 transition-colors ${isChanging ? 'opacity-50' : ''}`}
+                                                            >
+                                                                {ROLES.map(r => (
+                                                                    <option key={r.value} value={r.value} className="bg-[#0a0a1a]">
+                                                                        {r.label}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 pointer-events-none" />
+                                                        </div>
+                                                        <button
+                                                            onClick={() => setPwDialog({ userId: member.id, name: member.name || member.email || 'Unknown' })}
+                                                            title="비밀번호 변경"
+                                                            className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37]/30 transition-all"
                                                         >
-                                                            {ROLES.map(r => (
-                                                                <option key={r.value} value={r.value} className="bg-[#0a0a1a]">
-                                                                    {r.label}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                        <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 pointer-events-none" />
+                                                            <KeyRound className="w-3 h-3" />
+                                                        </button>
                                                     </div>
                                                 </td>
                                             )}
@@ -316,6 +353,53 @@ export default function MembersPage() {
                                     className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
                                 >
                                     {changingRole ? '변경 중...' : '확인'}
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Password Change Dialog */}
+            <AnimatePresence>
+                {pwDialog && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+                        onClick={() => { setPwDialog(null); setNewPassword(''); }}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-[#0f0f1a] border border-white/10 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl"
+                        >
+                            <h3 className="text-lg font-bold text-white mb-2">비밀번호 변경</h3>
+                            <p className="text-gray-400 text-sm mb-4">
+                                <span className="text-white font-medium">{pwDialog.name}</span>님의 비밀번호를 변경합니다.
+                            </p>
+                            <input
+                                type="password"
+                                placeholder="새 비밀번호 (6자 이상)"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                className="w-full mb-4 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder-gray-500 focus:outline-none focus:border-white/20"
+                            />
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => { setPwDialog(null); setNewPassword(''); }}
+                                    className="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-gray-400 text-sm hover:bg-white/5 transition-colors"
+                                >
+                                    취소
+                                </button>
+                                <button
+                                    onClick={handlePasswordChange}
+                                    className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black text-sm font-medium hover:opacity-90 transition-opacity"
+                                >
+                                    변경
                                 </button>
                             </div>
                         </motion.div>

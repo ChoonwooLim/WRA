@@ -7,50 +7,58 @@ export async function GET(
     request: NextRequest,
     context: any
 ) {
-    // Next.js 15+/16: params is a Promise, must await the whole object first
     const resolvedParams = await context.params;
     const filename = resolvedParams?.filename;
 
-    console.log('[IMAGE DEBUG] context.params resolved:', JSON.stringify(resolvedParams));
-    console.log('[IMAGE DEBUG] filename extracted:', filename);
-
     if (!filename || typeof filename !== 'string') {
-        console.error('[IMAGE DEBUG] filename is undefined or not a string:', filename);
         return new NextResponse('Bad request: missing filename', { status: 400 });
     }
 
-    // Use UPLOAD_DIR environment variable or fallback to public/uploads
+    // Try local file first
     const uploadDir = process.env.UPLOAD_DIR?.trim() || join(process.cwd(), 'public', 'uploads');
     const filePath = join(uploadDir, filename);
 
-    console.log('[IMAGE DEBUG] Request for filename:', filename);
-    console.log('[IMAGE DEBUG] Resolved filePath:', filePath);
+    if (existsSync(filePath)) {
+        try {
+            const fileBuffer = await readFile(filePath);
+            const ext = filename.split('.').pop()?.toLowerCase();
+            let contentType = 'application/octet-stream';
+            if (ext === 'jpg' || ext === 'jpeg') contentType = 'image/jpeg';
+            else if (ext === 'png') contentType = 'image/png';
+            else if (ext === 'gif') contentType = 'image/gif';
+            else if (ext === 'webp') contentType = 'image/webp';
+            else if (ext === 'svg') contentType = 'image/svg+xml';
 
-    if (!existsSync(filePath)) {
-        console.error('[IMAGE DEBUG] File does not exist at path:', filePath);
-        return new NextResponse('Image not found', { status: 404 });
+            return new NextResponse(fileBuffer, {
+                headers: {
+                    'Content-Type': contentType,
+                    'Cache-Control': 'public, max-age=31536000, immutable',
+                },
+            });
+        } catch (error) {
+            console.error('Error reading local image file:', error);
+        }
     }
 
-    try {
-        const fileBuffer = await readFile(filePath);
-
-        // Basic MIME type guessing based on file extension
-        const ext = filename.split('.').pop()?.toLowerCase();
-        let contentType = 'application/octet-stream';
-        if (ext === 'jpg' || ext === 'jpeg') contentType = 'image/jpeg';
-        else if (ext === 'png') contentType = 'image/png';
-        else if (ext === 'gif') contentType = 'image/gif';
-        else if (ext === 'webp') contentType = 'image/webp';
-        else if (ext === 'svg') contentType = 'image/svg+xml';
-
-        return new NextResponse(fileBuffer, {
-            headers: {
-                'Content-Type': contentType,
-                'Cache-Control': 'public, max-age=31536000, immutable',
-            },
-        });
-    } catch (error) {
-        console.error('Error reading image file:', error);
-        return new NextResponse('Internal Server Error', { status: 500 });
+    // Fallback: proxy from remote image server
+    const imageServerUrl = process.env.IMAGE_SERVER_URL;
+    if (imageServerUrl) {
+        try {
+            const remoteUrl = `${imageServerUrl}/api/images/${filename}`;
+            const res = await fetch(remoteUrl);
+            if (res.ok) {
+                const buffer = await res.arrayBuffer();
+                return new NextResponse(Buffer.from(buffer), {
+                    headers: {
+                        'Content-Type': res.headers.get('Content-Type') || 'image/jpeg',
+                        'Cache-Control': 'public, max-age=31536000, immutable',
+                    },
+                });
+            }
+        } catch (error) {
+            console.error('Error proxying image from remote server:', error);
+        }
     }
+
+    return new NextResponse('Image not found', { status: 404 });
 }

@@ -129,7 +129,7 @@ function WriteForm() {
     };
 
     // @ts-ignore
-    const isAdmin = session?.user?.role === 'admin';
+    const isAdmin = session?.user?.role === 'admin' || session?.user?.role === 'sub-admin';
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

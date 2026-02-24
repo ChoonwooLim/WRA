@@ -55,8 +55,8 @@ export async function PUT(
             return NextResponse.json({ error: '게시글을 찾을 수 없습니다.' }, { status: 404 });
         }
 
-        // Only author or admin can update
-        if (existingPost.authorId !== user.id && user.role !== 'admin') {
+        // Only author or admin/sub-admin can update
+        if (existingPost.authorId !== user.id && user.role !== 'admin' && user.role !== 'sub-admin') {
             return NextResponse.json({ error: '수정 권한이 없습니다.' }, { status: 403 });
         }
 
@@ -110,8 +110,8 @@ export async function DELETE(
             return NextResponse.json({ error: '게시글을 찾을 수 없습니다.' }, { status: 404 });
         }
 
-        // Only author or admin can delete
-        if (existingPost.authorId !== user.id && user.role !== 'admin') {
+        // Only author or admin/sub-admin can delete
+        if (existingPost.authorId !== user.id && user.role !== 'admin' && user.role !== 'sub-admin') {
             return NextResponse.json({ error: '삭제 권한이 없습니다.' }, { status: 403 });
         }
 

@@ -58,7 +58,7 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
     // @ts-ignore
     const isAuthor = session?.user?.email === post?.author?.email;
     // @ts-ignore
-    const isAdmin = session?.user?.role === 'admin';
+    const isAdmin = session?.user?.role === 'admin' || session?.user?.role === 'sub-admin';
     const canEdit = isAuthor || isAdmin;
 
     const handleDelete = async () => {
