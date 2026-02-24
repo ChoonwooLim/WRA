@@ -54,10 +54,6 @@ export function Royal33Section() {
                             ))}
                         </div>
 
-                        <button className="px-8 py-4 bg-transparent border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black font-bold rounded-lg transition-all uppercase tracking-wider flex items-center gap-2">
-                            {dict.home.royal33.cta}
-                            <ArrowRight className="w-5 h-5" />
-                        </button>
                     </motion.div>
 
                     {/* Visual Card */}

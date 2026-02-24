@@ -42,7 +42,7 @@ const ShinyText = ({ text, delayOffset = 0, isGold = false }: { text: string, de
 );
 
 export function HeroSection() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
 
@@ -109,10 +109,10 @@ export function HeroSection() {
 
             {/* Background Image (Parallax) */}
             <motion.div
-                className="absolute top-[-5%] left-[-8%] w-[120%] h-[120%] z-0 block"
+                className="absolute top-[-50%] left-[-8%] w-[120%] h-[150%] z-0 block"
                 style={{ y: backgroundY, x: bgX, scale: 1.15 }}
             >
-                <div className="absolute inset-0 bg-[#050510]/65 z-10" />
+                <div className="absolute inset-0 bg-[#050510]/75 z-10" />
                 <img
                     src="/images/new_bg.jpg"
                     alt="WRA Royal Background"
@@ -132,18 +132,18 @@ export function HeroSection() {
                     <div className="relative mb-16 lg:mb-20 perspective-500">
                         {/* Rotating Gold Aura */}
                         <motion.div
-                            className="absolute inset-0 -m-10 border-[2px] border-[#d4af37]/20 rounded-full"
+                            className="absolute inset-0 -m-10 border-[2px] border-[#d4af37]/10 rounded-full"
                             animate={{ rotate: 360, scale: [1, 1.05, 1] }}
                             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                         />
                         <motion.div
-                            className="absolute inset-0 -m-4 border-[1px] border-dashed border-[#d4af37]/30 rounded-full"
+                            className="absolute inset-0 -m-4 border-[1px] border-dashed border-[#d4af37]/10 rounded-full"
                             animate={{ rotate: -360 }}
                             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                         />
                         <motion.div
-                            className="absolute inset-0 bg-[#d4af37]/20 rounded-full blur-[50px]"
-                            animate={{ opacity: [0.5, 0.8, 0.5] }}
+                            className="absolute inset-0 bg-[#d4af37]/10 rounded-full blur-[50px]"
+                            animate={{ opacity: [0.2, 0.4, 0.2] }}
                             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                         />
 
@@ -163,21 +163,9 @@ export function HeroSection() {
                         </motion.div>
                     </div>
 
-                    {/* Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/40 border border-[#d4af37]/40 backdrop-blur-md mb-8 shadow-[0_0_20px_rgba(212,175,55,0.2)]"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse shadow-[0_0_10px_#d4af37]" />
-                        <span className="text-[#d4af37] text-sm font-semibold tracking-widest uppercase">
-                            {dict.home.welcome}
-                        </span>
-                    </motion.div>
 
                     {/* Title — Cinematic Reveal */}
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative flex justify-center gap-3">
+                    <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative flex justify-center ${language === 'en' ? 'gap-3' : 'gap-0'}`}>
                         <motion.span
                             className="block"
                             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
@@ -208,29 +196,7 @@ export function HeroSection() {
                         ))}
                     </motion.p>
 
-                    {/* CTA Buttons — Magnetic & Glow */}
-                    <motion.div
-                        className="flex flex-col sm:flex-row items-center justify-center gap-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1.8 }}
-                    >
-                        <Link href="/admissions" className="group relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-[#d4af37] to-[#EDC967] rounded-xl blur opacity-40 group-hover:opacity-100 transition duration-200"></div>
-                            <button className="relative px-10 py-5 bg-black rounded-xl leading-none flex items-center divide-x divide-gray-600">
-                                <span className="flex items-center gap-3 space-x-5">
-                                    <span className="text-[#d4af37] font-bold text-lg group-hover:text-white transition duration-200">{dict.home.startApplication}</span>
-                                    <ArrowRight className="w-6 h-6 text-[#d4af37] group-hover:text-white group-hover:translate-x-1 transition-transform duration-200" />
-                                </span>
-                            </button>
-                        </Link>
 
-                        <Link href="/warrant/education">
-                            <button className="px-10 py-5 rounded-xl border border-white/20 bg-white/5 backdrop-blur-md text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-                                {dict.home.exploreCurriculum}
-                            </button>
-                        </Link>
-                    </motion.div>
                 </div>
             </motion.div>
 

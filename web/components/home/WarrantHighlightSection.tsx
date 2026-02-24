@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { GraduationCap, Award, Briefcase, ArrowRight } from 'lucide-react';
+import { GraduationCap, MapPin, Users, Briefcase, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export function WarrantHighlightSection() {
@@ -12,23 +12,27 @@ export function WarrantHighlightSection() {
         {
             icon: <GraduationCap className="w-8 h-8" />,
             title: dict.home.warrantHighlights.education.title,
-            desc: dict.home.warrantHighlights.education.desc,
             href: '/warrant/education',
             color: 'from-emerald-500/20 to-teal-600/10',
             borderColor: 'hover:border-emerald-500/30',
         },
         {
-            icon: <Award className="w-8 h-8" />,
-            title: dict.home.warrantHighlights.certification.title,
-            desc: dict.home.warrantHighlights.certification.desc,
-            href: '/warrant',
+            icon: <MapPin className="w-8 h-8" />,
+            title: dict.home.warrantHighlights.tours.title,
+            href: '/warrant/tours',
+            color: 'from-sky-500/20 to-blue-600/10',
+            borderColor: 'hover:border-sky-500/30',
+        },
+        {
+            icon: <Users className="w-8 h-8" />,
+            title: dict.home.warrantHighlights.membership.title,
+            href: '/warrant/membership',
             color: 'from-[#d4af37]/20 to-amber-700/10',
             borderColor: 'hover:border-[#d4af37]/30',
         },
         {
             icon: <Briefcase className="w-8 h-8" />,
             title: dict.home.warrantHighlights.consulting.title,
-            desc: dict.home.warrantHighlights.consulting.desc,
             href: '/warrant/consulting',
             color: 'from-violet-500/20 to-purple-600/10',
             borderColor: 'hover:border-violet-500/30',
@@ -53,7 +57,7 @@ export function WarrantHighlightSection() {
                     <div className="mt-4 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent max-w-md mx-auto" />
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
                     {warrants.map((w, i) => (
                         <motion.div
                             key={i}
@@ -64,13 +68,12 @@ export function WarrantHighlightSection() {
                         >
                             <Link
                                 href={w.href}
-                                className={`group block relative rounded-2xl p-8 bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/5 ${w.borderColor} transition-all duration-300 h-full`}
+                                className={`group block relative rounded-2xl p-8 bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/5 ${w.borderColor} transition-all duration-300 h-full text-center`}
                             >
                                 <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${w.color} mb-6`}>
                                     <div className="text-[#d4af37]">{w.icon}</div>
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-3">{w.title}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed mb-4">{w.desc}</p>
+                                <h3 className="text-xl font-bold text-white mb-4">{w.title}</h3>
                                 <span className="inline-flex items-center gap-1 text-[#d4af37] text-sm font-medium group-hover:gap-2 transition-all">
                                     {dict.home.learnMore} <ArrowRight className="w-4 h-4" />
                                 </span>

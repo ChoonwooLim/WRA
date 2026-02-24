@@ -77,6 +77,8 @@ export type Dictionary = {
             education: { title: string; desc: string };
             certification: { title: string; desc: string };
             consulting: { title: string; desc: string };
+            tours: { title: string; desc: string };
+            membership: { title: string; desc: string };
         };
         features: {
             blockchain: { title: string; desc: string };
@@ -283,7 +285,9 @@ export const en: Dictionary = {
             subtitle: 'Three pillars of excellence',
             education: { title: 'Education', desc: 'K-Heritage Language, Literature, and Korean Studies programs with AI-powered learning.' },
             certification: { title: 'Certification', desc: 'K-Royal Warrant — the prestigious mark of Korean craftsmanship and philosophy.' },
-            consulting: { title: 'Consulting & Tours', desc: 'Royal Management Consulting and curated premium heritage tours.' },
+            consulting: { title: 'Consulting', desc: 'Royal Management Consulting.' },
+            tours: { title: 'Tours', desc: 'Curated premium heritage tours.' },
+            membership: { title: 'Membership', desc: 'Exclusive membership programs.' },
         },
         features: {
             blockchain: { title: 'Blockchain Verified', desc: 'Your credentials and achievements are mintable as Soulbound Tokens (SBTs), ensuring immutable proof of excellence.' },
@@ -470,8 +474,8 @@ export const ko: Dictionary = {
         learnMore: '자세히 보기',
         greeting: {
             title: '인 사 말',
-            name: '이사장 황태손 이원',
-            role: '사)대한황실문화원\n세계왕립아카데미',
+            name: '이사장 황태손  이 원',
+            role: '세계왕립아카데미\n대한황실 황태손',
             message: '**세계왕립아카데미**를 찾아주신 여러분께 깊은 감사의 뜻을 전합니다.\n\n세계는 지금 **문화와 교육**을 통해 국가의 **품격과 정체성**을 새롭게 정의하는 시대에 들어섰습니다. 역사적으로 **왕실**은 국가의 상징이자, 문명과 문명을 연결하고 생산하는 **외교의 축**이었습니다.\n\n세계왕립아카데미는 전통적 가치 위에 **국제 왕실 네트워크**와 연계한 **공공외교 교육 플랫폼**을 지향합니다. 단순한 교류를 넘어, 각국의 역사와 문화, 교육을 존중하며 상호 협력하고 **품격 있는 글로벌 거버넌스** 구축에 뜻을 담고 있습니다.\n\n대한민국의 **K-헤리티지**는 오랜 역사 속에서 형성된 정신과 문화의 결정체입니다. 우리민족은 고대에 **천문사상**과 **수행문화**라는 두 개의 축으로 하여 문화국가로 출발했습니다. 별자리를 연구하는 천문에서 **\'하늘 땅 사람\'**이라는 **천지인 사상**과 당대에 눈으로 관측가능한 태양과 달 그리고 5개의 행성으로 한 **음양오행**의 천문원리를 만들어냈습니다.\n\n수행문화에서 인체탐구의 **한의학**과 음식과 약초는 하나라는 **약식동원**의 원리가 출발했습니다. **선사상**과 **단학**같은 것이 수행문화에서 발원했습니다.\n\n우리는 광대하고 심오한 우리 문화의 원류를 현대적으로 **계승·확장**하여, 국제 사회와 함께하는 **새로운 문명 교류의 장**을 열고자 합니다.\n\n첫째 **\'K-HUMAN(한국인보고서)\'** 비전 아래, 세계왕립아카데미는 국제 왕실 및 전통 문화기관과의 **협력 네트워크 구축**\n\n둘째 **글로벌 청년 리더** 교류 프로그램 운영\n\n셋째 **문화외교** 및 **교육외교** 공동 프로젝트 추진\n\n넷째 **K-헤리티지** 기반 **학문·산업 연계 모델** 확립을 통해 대한민국이 세계 인재·문명 교류의 **중심 국가**로 도약하는데 기여하겠습니다.\n\n이제 왕실의 품격은 권위가 아니라 **책임**에서 비롯됩니다. 통제가 아니라 **자유**를 지향합니다. 세계왕립아카데미는 미래사회를 이끌어갈 책임으로 세계와 협력하며, 독자적인 전통을 기반으로 **미래설계**를 하는 **국제 플랫폼**이 되겠습니다.\n\n과거의 유물이 아니라 정신적인 토대인 **뿌리로써의 전통**과 과학이라는 차가움이 아니라 우리 전통의 정신적인 토대를 이루고 있는 **인본**을 품어 안은 현재가 만나 보다 **아늑하고 따뜻하면서도 발전적인 미래**로 나갈 것을 천명합니다.\n\n**두레**나 **품앗이**처럼 함께 하는 미래를 위하여 여러분의 지속적인 관심과 동참을 부탁드립니다. 감사합니다.',
         },
         coreValues: {
@@ -486,11 +490,13 @@ export const ko: Dictionary = {
             humanity: { title: '인류애', desc: '국경을 넘어 모든 사람을 향한\n연민과 사랑' },
         },
         warrantHighlights: {
-            title: 'WRA 워런트',
+            title: 'WRA warrant',
             subtitle: '세 가지 탁월함의 축',
             education: { title: '교육', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
             certification: { title: '인증', desc: 'K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.' },
-            consulting: { title: '컨설팅 · 투어', desc: '왕립 경영 컨설팅과 프리미엄 문화유산 투어.' },
+            consulting: { title: '컨설팅', desc: '왕립 경영 컨설팅.' },
+            tours: { title: '투어', desc: '프리미엄 문화유산 투어.' },
+            membership: { title: '멤버쉽', desc: '프리미엄 멤버쉽 프로그램.' },
         },
         features: {
             blockchain: { title: '블록체인 인증', desc: '모든 학위와 성과는 소울바운드 토큰(SBT)으로 발행되어, 위변조가 불가능한 영구적인 증명을 제공합니다.' },
@@ -507,7 +513,7 @@ export const ko: Dictionary = {
             cta: 'Royal 33 멤버십 신청',
         },
         digitalSeal: {
-            title: '디지털 옥새 (Digital Okiae)',
+            title: '디지털 옥새 (The Digital Seal)',
             subtitle: '블록체인 기반의 명품 브랜딩 전략',
             description: '"디지털 옥새"는 유산(Heritage)과 기술(Technology)의 완벽한 융합을 상징합니다. 아카데미가 발급하는 모든 인증과 파트너십에 대해 위변조 불가능한 진본성을 보증합니다.',
             feature1: '불멸의 권위 증명 (Immutable Proof)',

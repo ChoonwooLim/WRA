@@ -25,7 +25,7 @@ export default function Home() {
 
       <DigitalSealSection />
 
-      <CeoProgramSection />
+
     </div>
   );
 }
