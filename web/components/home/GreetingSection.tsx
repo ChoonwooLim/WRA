@@ -12,7 +12,7 @@ function renderHighlightedText(text: string): React.ReactNode[] {
         if (part.startsWith('**') && part.endsWith('**')) {
             const inner = part.slice(2, -2);
             return (
-                <span key={i} className="text-[#d4af37] font-semibold">
+                <span key={i} className="text-white font-semibold">
                     {inner}
                 </span>
             );
