@@ -298,6 +298,15 @@ export default function StudiesPage() {
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
+                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">6. 한국의 기록문화유산</h4>
+                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
+                                                                <li>가. 한글</li>
+                                                                <li>나. 직지심경</li>
+                                                                <li>다. 조선의궤</li>
+                                                                <li>라. 동의보감 등</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
                                                             <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">7. 한국의 무형문화유산</h4>
                                                             <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
                                                                 <li>가. 매사냥</li>
@@ -307,15 +316,6 @@ export default function StudiesPage() {
                                                                 <li>마. 강강술래</li>
                                                                 <li>바. 택견</li>
                                                                 <li>사. 종묘제례 등</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
-                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">6. 한국의 기록문화유산</h4>
-                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
-                                                                <li>가. 한글</li>
-                                                                <li>나. 직지심경</li>
-                                                                <li>다. 조선의궤</li>
-                                                                <li>라. 동의보감 등</li>
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
@@ -355,20 +355,20 @@ export default function StudiesPage() {
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
+                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">10. 일깔문화</h4>
+                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
+                                                                <li>가. 돈내기</li>
+                                                                <li>나. 한상</li>
+                                                                <li>다. 위임</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
                                                             <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">11. 한옥의 정신</h4>
                                                             <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
                                                                 <li>가. 남방문화와 북방문화</li>
                                                                 <li>나. 마당</li>
                                                                 <li>다. 중심의 원리</li>
                                                                 <li>라. 풍수원리</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
-                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">10. 일깔문화</h4>
-                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
-                                                                <li>가. 돈내기</li>
-                                                                <li>나. 한상</li>
-                                                                <li>다. 위임</li>
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
@@ -407,20 +407,20 @@ export default function StudiesPage() {
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
+                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">14. 한류와 드라마</h4>
+                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
+                                                                <li>가. 한국적인 정서의 세계화</li>
+                                                                <li>나. 가족 주의</li>
+                                                                <li>다. 공동체의식에서 동체화의식 발현</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
                                                             <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">15. 문화의 탄생과 역사의 한류화</h4>
                                                             <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
                                                                 <li>가. 다뉴세문경</li>
                                                                 <li>나. 천부경과 환단고기</li>
                                                                 <li>다. 피라미드</li>
                                                                 <li>라. 금관과 기병문화</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
-                                                            <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">14. 한류와 드라마</h4>
-                                                            <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
-                                                                <li>가. 한국적인 정서의 세계화</li>
-                                                                <li>나. 가족 주의</li>
-                                                                <li>다. 공동체의식에서 동체화의식 발현</li>
                                                             </ul>
                                                         </div>
                                                         <div className="glass-card rounded-xl p-6 !border-[#d4af37]/15 hover:!border-[#d4af37]/30 transition-colors">
