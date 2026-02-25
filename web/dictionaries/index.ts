@@ -425,14 +425,14 @@ export const en: Dictionary = {
 
 export const ko: Dictionary = {
     navbar: {
-        crownPrince: '황대손 소개',
+        crownPrince: '황태손 소개',
         about: 'WRA 소개',
         warrant: 'WRA Warrant',
         community: '커뮤니티',
         adminDashboard: '관리자 대시보드',
         startLogin: '로그인 시작',
         loginSignup: '로그인 / 회원가입',
-        profile: '황대손',
+        profile: '황태손',
         lineage: '계보',
         congratulations: '축사 및 환영사',
         foundingPhilosophy: '설립이념',
