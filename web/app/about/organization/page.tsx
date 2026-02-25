@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { HeroBanner } from '@/components/shared/HeroBanner';
@@ -479,11 +479,11 @@ export default function OrganizationPage() {
                                         <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-2">
                                             황태손 이 원 전하
                                         </h2>
-                                        <p className="text-[#d4af37] text-lg mb-1">대한제국황실 제5대 수장</p>
+                                        <p className="text-[#d4af37] text-lg mb-1">대한제국왕실 제5대 수장</p>
                                         <p className="text-gray-500 text-sm mb-4">皇太子 李 源 殿下, 1962~</p>
                                         <GlassCard className="p-5 relative !bg-gradient-to-br !from-[#d4af37]/5 !to-transparent">
                                             <p className="text-gray-300 text-sm leading-relaxed">
-                                                고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 황실의 법통을 이은 황사손(황위계승 1순위)입니다. 황실 문화유산을 세계적인 한류 콘텐츠로 만들어가고 있습니다.
+                                                고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손(황위계승 1순위)입니다. 왕실 문화유산을 세계적인 한류 콘텐츠로 만들어가고 있습니다.
                                             </p>
                                         </GlassCard>
                                     </div>
@@ -501,7 +501,7 @@ export default function OrganizationPage() {
                                                 <div>
                                                     <h4 className="text-white font-bold text-sm mb-1">신분 및 정통성</h4>
                                                     <p className="text-[#d4af37]/50 text-xs mb-2">Identity & Legitimacy</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">대한제국황실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 황실의 법통을 이은 황사손입니다.</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">대한제국왕실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손입니다.</p>
                                                 </div>
                                             </div>
                                         </GlassCard>
@@ -547,9 +547,9 @@ export default function OrganizationPage() {
                                 {/* Academic Activity Highlight */}
                                 <div className="bg-gradient-to-r from-[#120e26] via-[#1a1442] to-[#120e26] rounded-xl p-6 border border-white/10 text-center mb-8">
                                     <GraduationCap className="w-6 h-6 text-[#d4af37] mx-auto mb-3" />
-                                    <h4 className="text-white font-bold mb-2">조선 대한 황실 문화 계승 발전 세계화</h4>
+                                    <h4 className="text-white font-bold mb-2">조선 대한 왕실 문화 계승 발전 세계화</h4>
                                     <p className="text-gray-300 text-sm">
-                                        미국 컴럼비아대학교 강연 등을 통해 조선 대한 황실 문화의 계승 발전과 세계화를 위해 노력하고 계시며,
+                                        미국 컴럼비아대학교 강연 등을 통해 조선 대한 왕실 문화의 계승 발전과 세계화를 위해 노력하고 계시며,
                                         <span className="text-white font-semibold"> 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신</span>하고 계십니다.
                                     </p>
                                 </div>

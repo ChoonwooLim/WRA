@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
@@ -21,7 +21,7 @@ export default function CertificationPage() {
 
     const ceoEducation = [
         { icon: <Crown className="w-6 h-6" />, title: 'K-Identity 교육', desc: '한국인의 정체성과 왕실 문화유산을 통한 의식 전환 교육. 왕실의 가치를 제품과 서비스에 투영하는 전략.' },
-        { icon: <GraduationCap className="w-6 h-6" />, title: '왕실 에티켓 교육', desc: '대한제국 황실의 예법과 품격을 현대 비즈니스에 적용하는 프리미엄 에티켓 및 프로토콜 교육.' },
+        { icon: <GraduationCap className="w-6 h-6" />, title: '왕실 에티켓 교육', desc: '대한제국 왕실의 예법과 품격을 현대 비즈니스에 적용하는 프리미엄 에티켓 및 프로토콜 교육.' },
         { icon: <Target className="w-6 h-6" />, title: '한국적 경영철학', desc: '홍익인간 정신에 기반한 한국적 경영 철학 교육. K-뉴리더십 역량 강화 프로그램.' },
     ];
 
@@ -46,7 +46,7 @@ export default function CertificationPage() {
                             <Crown className="w-12 h-12 text-[#d4af37] mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
 
                             <h3 className="text-xl md:text-3xl font-serif text-[#fceda6] font-medium leading-[1.6] break-keep mb-10 tracking-wide">
-                                "대한민국의 혼(Spirit)을 담은 명품,<br className="hidden md:block" /> 황실이 그 가치를 보증합니다."
+                                "대한민국의 혼(Spirit)을 담은 명품,<br className="hidden md:block" /> 왕실이 그 가치를 보증합니다."
                             </h3>
 
                             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent mb-10"></div>
@@ -55,7 +55,7 @@ export default function CertificationPage() {
                                 <p>
                                     <strong className="text-white font-serif">World Royal Academy</strong>는 단순한 품질 인증을 넘어,<br className="hidden md:block" />
                                     기업가의 철학(Philosophy)과 제품의 장인정신(Craftsmanship)을 엄격히 심사하여<br className="hidden md:block" />
-                                    <span className="text-[#d4af37] font-semibold">'Royal Warrant(황실 인증)'</span> 자격을 부여합니다.
+                                    <span className="text-[#d4af37] font-semibold">'Royal Warrant(왕실 인증)'</span> 자격을 부여합니다.
                                 </p>
                                 <p>
                                     이는 대한민국을 대표하는 브랜드로서의 자부심이자,<br className="hidden md:block" />

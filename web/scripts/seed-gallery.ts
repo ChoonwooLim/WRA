@@ -1,4 +1,4 @@
-
+﻿
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -29,7 +29,7 @@ const images = [
         category: 'Royal Family'
     },
     {
-        title: '황실 문화 활동 (Royal Cultural Activities)',
+        title: '왕실 문화 활동 (Royal Cultural Activities)',
         src: '/images/crown-prince-activities.jpg',
         description: 'Group photo from a recent royal cultural event. (Crown Prince Page)',
         category: 'Event'

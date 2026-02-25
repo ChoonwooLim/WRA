@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { GlassCard } from '@/components/shared/GlassCard';
@@ -33,13 +33,23 @@ export default function StudiesPage() {
         curriculum: false,
         unesco: false,
     });
-    const toggleSection = (key: string) => setSectionOpen(prev => {
-        const isClosing = prev[key];
-        if (key === 'curriculum' && !isClosing) setCatOpen('cat1');
-        return { reason: false, curriculum: false, unesco: false, [key]: !isClosing };
-    });
+    const scrollToEl = (el: HTMLElement) => setTimeout(() => {
+        const y = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 350);
+    const toggleSection = (key: string, el?: HTMLElement) => {
+        setSectionOpen(prev => {
+            const isClosing = prev[key];
+            if (key === 'curriculum' && !isClosing) setCatOpen('cat1');
+            return { reason: false, curriculum: false, unesco: false, [key]: !isClosing };
+        });
+        if (el) scrollToEl(el);
+    };
     const [catOpen, setCatOpen] = useState<string | null>(null);
-    const toggleCat = (key: string) => setCatOpen(prev => prev === key ? null : key);
+    const toggleCat = (key: string, el?: HTMLElement) => {
+        setCatOpen(prev => prev === key ? null : key);
+        if (el) scrollToEl(el);
+    };
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -82,7 +92,7 @@ export default function StudiesPage() {
                         viewport={{ once: true }}
                     >
                         <button
-                            onClick={() => toggleSection('reason')}
+                            onClick={(e) => toggleSection('reason', e.currentTarget)}
                             className="w-full flex items-center justify-center gap-3 mb-10 group cursor-pointer"
                         >
                             <h3 className="text-2xl md:text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">
@@ -187,7 +197,7 @@ export default function StudiesPage() {
                     >
                         <p className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-3">CURRICULUM</p>
                         <button
-                            onClick={() => toggleSection('curriculum')}
+                            onClick={(e) => toggleSection('curriculum', e.currentTarget)}
                             className="flex items-center justify-center gap-3 mx-auto group cursor-pointer"
                         >
                             <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">
@@ -210,7 +220,7 @@ export default function StudiesPage() {
 
                                     {/* ─── 카테고리 1: 한국인과 한국 ─── */}
                                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                                        <button onClick={() => toggleCat('cat1')} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
+                                        <button onClick={(e) => toggleCat('cat1', e.currentTarget)} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
                                             <span className="w-2 h-8 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/30 rounded-full" />
                                             <h3 className="text-xl md:text-2xl font-bold text-white">한국인과 한국</h3>
                                             <span className={`text-[#d4af37] text-lg transition-transform duration-300 ml-auto ${catOpen === 'cat1' ? 'rotate-180' : ''}`}>▾</span>
@@ -269,7 +279,7 @@ export default function StudiesPage() {
 
                                     {/* ─── 카테고리 2: 한국의 문화유산 ─── */}
                                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                                        <button onClick={() => toggleCat('cat2')} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
+                                        <button onClick={(e) => toggleCat('cat2', e.currentTarget)} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
                                             <span className="w-2 h-8 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/30 rounded-full" />
                                             <h3 className="text-xl md:text-2xl font-bold text-white">한국의 문화유산</h3>
                                             <span className={`text-[#d4af37] text-lg transition-transform duration-300 ml-auto ${catOpen === 'cat2' ? 'rotate-180' : ''}`}>▾</span>
@@ -326,7 +336,7 @@ export default function StudiesPage() {
 
                                     {/* ─── 카테고리 3: 한국의 문화 ─── */}
                                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                                        <button onClick={() => toggleCat('cat3')} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
+                                        <button onClick={(e) => toggleCat('cat3', e.currentTarget)} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
                                             <span className="w-2 h-8 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/30 rounded-full" />
                                             <h3 className="text-xl md:text-2xl font-bold text-white">한국의 문화</h3>
                                             <span className={`text-[#d4af37] text-lg transition-transform duration-300 ml-auto ${catOpen === 'cat3' ? 'rotate-180' : ''}`}>▾</span>
@@ -377,7 +387,7 @@ export default function StudiesPage() {
 
                                     {/* ─── 카테고리 4: 한국인의 현재와 미래 ─── */}
                                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                                        <button onClick={() => toggleCat('cat4')} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
+                                        <button onClick={(e) => toggleCat('cat4', e.currentTarget)} className="w-full flex items-center gap-3 mb-6 cursor-pointer group">
                                             <span className="w-2 h-8 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/30 rounded-full" />
                                             <h3 className="text-xl md:text-2xl font-bold text-white">한국인의 현재와 미래</h3>
                                             <span className={`text-[#d4af37] text-lg transition-transform duration-300 ml-auto ${catOpen === 'cat4' ? 'rotate-180' : ''}`}>▾</span>
@@ -451,7 +461,7 @@ export default function StudiesPage() {
                     >
                         <p className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-3">UNESCO HERITAGE</p>
                         <button
-                            onClick={() => toggleSection('unesco')}
+                            onClick={(e) => toggleSection('unesco', e.currentTarget)}
                             className="flex items-center justify-center gap-3 mx-auto group cursor-pointer"
                         >
                             <h2 className="text-2xl md:text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">

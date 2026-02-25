@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
@@ -13,12 +13,12 @@ export default function Royal33Page() {
 
     const benefits = [
         { icon: <Globe className="w-8 h-8" />, title: r.benefit1, desc: '글로벌 왕실 네트워크에 직접 참여하고, 해외 왕실과의 비즈니스 교류 기회를 확보합니다.' },
-        { icon: <Crown className="w-8 h-8" />, title: r.benefit2, desc: '황실 공식 행사 초대 및 왕실 선물 우선 선정권을 부여받습니다.' },
+        { icon: <Crown className="w-8 h-8" />, title: r.benefit2, desc: '왕실 공식 행사 초대 및 왕실 선물 우선 선정권을 부여받습니다.' },
         { icon: <Gem className="w-8 h-8" />, title: r.benefit3, desc: '대한민국 상위 1% 프리미엄 네트워킹과 비즈니스 매칭 기회를 제공합니다.' },
     ];
 
     const tiers = [
-        { name: 'The Royal 33', desc: '최상위 33개 기업/개인 — 황실 직접 보증', badge: 'ULTRA PREMIUM', color: 'from-[#d4af37] to-[#aa771c]' },
+        { name: 'The Royal 33', desc: '최상위 33개 기업/개인 — 왕실 직접 보증', badge: 'ULTRA PREMIUM', color: 'from-[#d4af37] to-[#aa771c]' },
         { name: 'Royal Heritage Partners', desc: '정기 파트너십 — 왕실 브랜드 공유', badge: 'PREMIUM', color: 'from-[#8b5cf6] to-[#6d28d9]' },
         { name: 'K-Royal Warrant 인증 기업', desc: 'K-Royal 인증 획득 기업', badge: 'CERTIFIED', color: 'from-[#0ea5e9] to-[#0284c7]' },
     ];
@@ -75,7 +75,7 @@ export default function Royal33Page() {
                         <GlassCard delay={0.1}>
                             <Star className="w-8 h-8 text-[#d4af37] mb-3" />
                             <h3 className="font-bold text-white mb-2">프리미엄 이벤트 초대</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">궁중문화축전, 세계왕실전통문화엑스포 등 황실 공식 행사에 VVIP로 초대됩니다. 글로벌 왕실 네트워크와의 교류 기회.</p>
+                            <p className="text-gray-400 text-sm leading-relaxed">궁중문화축전, 세계왕실전통문화엑스포 등 왕실 공식 행사에 VVIP로 초대됩니다. 글로벌 왕실 네트워크와의 교류 기회.</p>
                         </GlassCard>
                     </div>
                 </div>

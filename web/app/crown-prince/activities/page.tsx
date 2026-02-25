@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
@@ -15,7 +15,7 @@ const activities = [
             '종묘대제 초헌관 봉직 (UNESCO 세계무형유산)',
             '사직대제 초헌관 봉직',
             '환구대제 초헌관 봉직 (대한제국 고유 황제의례)',
-            '왕실과 황실의 주요 5대 제향에서 국왕 역할 수행',
+            '왕실과 왕실의 주요 5대 제향에서 국왕 역할 수행',
         ],
     },
     {
@@ -24,7 +24,7 @@ const activities = [
         categoryEn: 'Heritage Restoration',
         items: [
             '명성황후 화조도접선 환수 (서울역사박물관 기증)',
-            '황실 노리개 등 국보급 문화재 환수',
+            '왕실 노리개 등 국보급 문화재 환수',
             '일제강점기 해외 유출 왕실 문화재 환수 활동',
             '국립고궁박물관 협력 보존 프로젝트',
         ],
@@ -45,7 +45,7 @@ const activities = [
         category: '궁중문화축전',
         categoryEn: 'Royal Culture Festival',
         items: [
-            '대한황실문화원 총재로서 2014년 기획',
+            '대한왕실문화원 총재로서 2014년 기획',
             '왕실 문화유산을 신한류 콘텐츠로 발전',
             '매년 개최되는 대한민국 대표 왕실 문화 행사',
         ],
@@ -56,7 +56,7 @@ const activities = [
         categoryEn: 'Academic Activities',
         items: [
             '미국 컬럼비아대학교 강연',
-            '조선 대한 황실 문화 계승 발전 세계화 연구',
+            '조선 대한 왕실 문화 계승 발전 세계화 연구',
             '한국 궁중문화의 글로벌 학술 활동',
         ],
     },
