@@ -476,7 +476,9 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', caption: '종묘대제 제향과 건축의 미학' }
+                { src: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', caption: '종묘대제 제향과 건축의 미학' },
+                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_1.png', caption: '종묘대제 의례 장면' },
+                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_2.png', caption: '종묘대제 봉행 전경' }
             ]
         },
         '사직대제': {
