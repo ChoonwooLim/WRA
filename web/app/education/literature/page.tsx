@@ -627,20 +627,20 @@ export default function LiteraturePage() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                             >
-                                {/* Masonry Columns Layout */}
-                                <div className="columns-1 md:columns-2 gap-6 space-y-6">
+                                {/* Grid Layout */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {[
                                         { num: 1, title: '단어와 문장에 상상력과 감성 길들이기', bullets: ['생활언어에 문학을', '멋지고 짧은 문장 만들어보기'] },
-                                        { num: 4, title: '문장을 늘이기, 호흡을 길게 하기', bullets: ['글을 늘이는 방법', '묘사와 기술의 차이'] },
                                         { num: 2, title: '6가지 글쓰기 방법', bullets: ['눈으로 본 것과 마음으로 본 것을 쓰기', '망원경으로 보기, 현미경으로 보기'] },
-                                        { num: 5, title: '비유법 활용하기', bullets: ['은유와 직유', '사물화 (형상화)'] },
                                         { num: 3, title: '기발함과 엉뚱함으로 문장 만들기', bullets: ['최고의 상상력은 기발함', '최고의 신선함은 엉뚱함'] },
+                                        { num: 4, title: '문장을 늘이기, 호흡을 길게 하기', bullets: ['글을 늘이는 방법', '묘사와 기술의 차이'] },
+                                        { num: 5, title: '비유법 활용하기', bullets: ['은유와 직유', '사물화 (형상화)'] },
                                         { num: 6, title: '문장과 문체 만들기', bullets: ['글쓰기 전에 정해야 할 것', '나만의 문장과 문체 만들기'] },
                                         { num: 7, title: '이야기 만들기 (Storytelling)', bullets: ['이야기의 요소', '실제 이야기 만들기'] },
-                                        { num: 10, title: '철학적 글쓰기', bullets: ['속 것을 끄집어 내기', '안보이는 것을 찾아내기'] },
                                         { num: 8, title: '글쓰기 실전', bullets: ['책을 내기 위한 글쓰기', '주제 정하기와 목차 만들기'] },
-                                        { num: 11, title: '글 감 찾아내기', bullets: ['주제를 선명하게 하기', '이야기에 숨 불어넣기'] },
                                         { num: 9, title: '책쓰기의 실전', bullets: ['단행본 완성에 필요한 기법', '전문적 글쓰기 방법'] },
+                                        { num: 10, title: '철학적 글쓰기', bullets: ['속 것을 끄집어 내기', '안보이는 것을 찾아내기'] },
+                                        { num: 11, title: '글 감 찾아내기', bullets: ['주제를 선명하게 하기', '이야기에 숨 불어넣기'] },
                                         { num: 12, title: '다시 기본으로 돌아가기', bullets: ['창조적 문장 만들기', '핵심을 지르는 문장 만들기'] }
                                     ].map((item, idx) => (
                                         <div key={idx} className="break-inside-avoid shadow-lg relative group">
