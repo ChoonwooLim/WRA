@@ -285,7 +285,7 @@ export function Navbar() {
                             {session ? (
                                 <div className="flex items-center gap-2 pl-3 border-l border-white/10">
                                     {/* @ts-ignore */}
-                                    {session.user?.role === 'admin' && (
+                                    {(session.user?.role === 'admin' || session.user?.role === 'sub-admin') && (
                                         <Link
                                             href="/admin"
                                             className="px-2.5 py-1 rounded-lg bg-red-600/20 text-red-500 border border-red-600/50 text-xs font-bold hover:bg-red-600/30 transition-colors"
@@ -413,7 +413,7 @@ export function Navbar() {
                                     <ConnectButton />
                                 </div>
                                 {/* @ts-ignore */}
-                                {session?.user?.role === 'admin' && (
+                                {(session?.user?.role === 'admin' || session?.user?.role === 'sub-admin') && (
                                     <Link href="/admin" className="block text-center text-red-400 font-bold py-2" onClick={() => setMobileMenuOpen(false)}>
                                         {dict.navbar.adminDashboard}
                                     </Link>
