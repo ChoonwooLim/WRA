@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const menuItems = [
     { icon: LayoutDashboard, label: '대시보드', href: '/admin' },
@@ -14,11 +14,14 @@ const menuItems = [
     { icon: BookOpen, label: '인증서 매뉴얼', href: '/admin/certifications/guide', indent: true },
     { icon: BarChart3, label: '통계', href: '/admin/analytics' },
     { icon: Bell, label: '알림', href: '/admin/notifications' },
-    { icon: Settings, label: '설정', href: '/admin/settings' },
+    { icon: Settings, label: '설정', href: '/admin/settings', adminOnly: true },
 ];
 
 export function AdminSidebar() {
     const pathname = usePathname();
+    const { data: session } = useSession();
+    // @ts-ignore
+    const userRole = session?.user?.role;
 
     return (
         <aside className="w-64 h-[calc(100vh-72px)] fixed left-0 top-[72px] overflow-y-auto flex flex-col border-r border-white/10"
@@ -46,7 +49,7 @@ export function AdminSidebar() {
             {/* Navigation */}
             <nav className="flex-1 p-4 space-y-1">
                 <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest px-4 mb-3">메뉴</p>
-                {menuItems.map((item) => {
+                {menuItems.filter(item => !item.adminOnly || userRole === 'admin').map((item) => {
                     const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href + '/'));
                     const isIndented = 'indent' in item && item.indent;
                     return (
