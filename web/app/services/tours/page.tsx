@@ -6,6 +6,7 @@ import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { MapPin, Clock, Users, Landmark, Crown, Globe, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const palaceTours = [
     {
@@ -182,6 +183,15 @@ export default function ToursPage() {
     const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
     const [expandedSection, setExpandedSection] = useState<number | null>(null);
     const [expandedTombSection, setExpandedTombSection] = useState<number | null>(null);
+    const [tourSection, setTourSection] = useState<string | null>('palaces');
+    const scrollToEl = (el: HTMLElement) => setTimeout(() => {
+        const y = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 350);
+    const toggleTourSection = (key: string, el?: HTMLElement) => {
+        setTourSection(prev => prev === key ? null : key);
+        if (el) scrollToEl(el);
+    };
 
     const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
 
@@ -731,37 +741,47 @@ export default function ToursPage() {
             {/* 5 Palaces Section */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-6xl">
-                    <SectionHeader
-                        title="5대궁 투어"
-                        subtitle="Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어"
-                    />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {palaceTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
-                        ))}
-                        {/* 6th Slot: Palace Map Infographic */}
-                        <GlassCard delay={palaceTours.length * 0.08}>
-                            <div className="flex flex-col h-full -mx-6 -mt-6">
-                                <div
-                                    className="relative h-56 w-full overflow-hidden cursor-pointer group shrink-0"
-                                    onClick={() => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' }); }}
-                                >
-                                    <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                    <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
-                                        <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">상세보기</span>
-                                    </div>
-                                </div>
-                                <div className="p-6 flex-grow flex flex-col items-center justify-center text-center">
-                                    <MapPin className="w-8 h-8 text-[#d4af37] mb-3 opacity-80" />
-                                    <h3 className="text-lg font-bold text-white mb-1">서울 5대궁 안내도</h3>
-                                    <p className="text-[#d4af37]/60 text-xs mb-3">Map of the 5 Royal Palaces</p>
-                                    <p className="text-gray-400 text-sm leading-relaxed">
-                                        경복궁, 창덕궁, 덕수궁, 창경궁, 경희궁의 전체 위치를 한눈에 확인할 수 있는 스페셜 안내 지도입니다.
-                                    </p>
-                                </div>
-                            </div>
-                        </GlassCard>
+                    <div className="text-center mb-12">
+                        <button onClick={(e) => toggleTourSection('palaces', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">5대궁 투어</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'palaces' ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                        <p className="text-gray-400 text-sm mt-3">Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어</p>
+                        <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
+                    <AnimatePresence initial={false}>
+                        {tourSection === 'palaces' && (
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {palaceTours.map((t, i) => (
+                                        <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
+                                    ))}
+                                    {/* 6th Slot: Palace Map Infographic */}
+                                    <GlassCard delay={palaceTours.length * 0.08}>
+                                        <div className="flex flex-col h-full -mx-6 -mt-6">
+                                            <div
+                                                className="relative h-56 w-full overflow-hidden cursor-pointer group shrink-0"
+                                                onClick={() => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' }); }}
+                                            >
+                                                <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                                <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
+                                                    <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">상세보기</span>
+                                                </div>
+                                            </div>
+                                            <div className="p-6 flex-grow flex flex-col items-center justify-center text-center">
+                                                <MapPin className="w-8 h-8 text-[#d4af37] mb-3 opacity-80" />
+                                                <h3 className="text-lg font-bold text-white mb-1">서울 5대궁 안내도</h3>
+                                                <p className="text-[#d4af37]/60 text-xs mb-3">Map of the 5 Royal Palaces</p>
+                                                <p className="text-gray-400 text-sm leading-relaxed">
+                                                    경복궁, 창덕궁, 덕수궁, 창경궁, 경희궁의 전체 위치를 한눈에 확인할 수 있는 스페셜 안내 지도입니다.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </GlassCard>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
 
@@ -769,124 +789,155 @@ export default function ToursPage() {
             <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1128] to-[#050510]">
                 <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none mix-blend-overlay" />
                 <div className="container mx-auto px-4 max-w-5xl relative z-10">
-                    <SectionHeader
-                        title="왕릉제향"
-                        subtitle="UNESCO World Heritage — 500년 왕조의 숨결이 깃든 신의 정원"
-                    />
-
-                    {/* Intro text */}
-                    <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/20 p-8 md:p-12 text-center mb-12 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                        <Crown className="w-10 h-10 text-[#d4af37] mx-auto mb-6 opacity-80" />
-                        <p className="text-[#fceda6] text-lg md:text-xl font-serif font-medium leading-relaxed break-keep mb-6">
-                            서양의 왕릉이 권력을 과시하기 위한 거대한 석조 기념물이라면,<br className="hidden md:block" /> 조선의 왕릉은 자연으로 돌아가고자 했던 겸손함이 빚어낸 '신의 정원'입니다.
-                        </p>
-                        <p className="text-gray-300 text-sm md:text-base leading-relaxed break-keep">
-                            이곳은 500년 조선 왕조의 역대 왕과 왕비 40기가 단 한 기의 훼손도 없이 보존된 세계 유일의 현장입니다. 하지만 유네스코가 진정으로 감동한 것은 이 무덤 자체가 아닙니다. 왕조가 사라진 지 100년이 지났음에도, 후손들이 매년 이곳에서 600년 전 방식 그대로 제사를 올리고 있다는 사실입니다.
-                        </p>
-                    </GlassCard>
-
-                    {/* Wangneung Image Gallery */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
-                            <img src="/images/tours/tombs/myungneung.png" alt="서오릉 내 명릉" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                        </div>
-                        <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
-                            <img src="/images/tours/tombs/hongsalmun.png" alt="속세의 지위를 내려놓는 홍살문" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                        </div>
-                        <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
-                            <img src="/images/tours/tombs/hyangro.png" alt="왕조차 조상 앞에서 예를 차렸던 향로" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                        </div>
+                    <div className="text-center mb-12">
+                        <button onClick={(e) => toggleTourSection('tombs', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">왕릉제향</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'tombs' ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                        <p className="text-gray-400 text-sm mt-3">UNESCO World Heritage — 500년 왕조의 숨결이 깃든 신의 정원</p>
+                        <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
 
-                    {/* Features Accordion */}
-                    <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify break-keep mb-8">
-                        {[
-                            {
-                                title: "자연을 섬기는 건축: 풍수와 합일",
-                                paragraphs: [
-                                    "조선왕릉의 입지는 풍수지리 사상에 기반합니다. 산을 등지고(背山) 물을 바라보는(臨水) 지형을 찾아, 인공적인 조형물이 자연의 선을 거스르지 않도록 배치했습니다.",
-                                    "능역을 조성하기 위해 산을 깎아내는 것이 아니라, 산의 품에 봉분이 안기도록 설계했습니다. 이는 자연을 정복의 대상이 아닌 공존의 대상으로 보았던 우리 민족의 '친환경적 세계관'을 보여줍니다. 도심 가까이에 이토록 울창한 숲이 원형 그대로 보존될 수 있었던 것은 이곳을 신성불가침의 성역으로 지켜온 덕분입니다."
-                                ]
-                            },
-                            {
-                                title: "공간의 철학: 속세에서 성역으로",
-                                paragraphs: [
-                                    "왕릉은 세 단계의 공간으로 나뉩니다. 관리자가 머무는 진입 공간, 산 자와 죽은 자가 만나는 제향 공간, 그리고 왕이 잠든 능침 공간입니다.",
-                                    "특히 홍살문을 지나는 순간, 우리는 속세의 지위를 내려놓아야 합니다. 왼쪽의 약간 높은 길은 조상의 혼령이 다니는 '향로'이고, 오른쪽의 낮은 길은 왕이 다니는 '어로'입니다. 왕조차도 조상 앞에서는 한 단계 낮은 길을 걸으며 겸손과 효를 실천했던, '예의 공간'입니다."
-                                ]
-                            },
-                            {
-                                title: "기록의 위대함: 의궤와 복원",
-                                paragraphs: [
-                                    "어떻게 500년 전의 모습을 그대로 유지할 수 있었을까요? 그 비결은 바로 기록에 있습니다. 왕릉을 조성할 때 투입된 인원, 재료, 석물의 위치, 심지어 못 하나까지 기록한 『산릉도감의궤』가 있었기에 가능했습니다.",
-                                    "이 기록 문화 덕분에 우리는 전쟁이나 재해로 일부가 훼손되어도 100% 완벽하게 원형을 복원할 수 있습니다. 조선왕릉은 돌로 만든 유산일 뿐만 아니라, 종이 위에 지은 '기록의 궁전'이기도 합니다."
-                                ]
-                            },
-                            {
-                                title: "살아있는 유산: 600년의 제례",
-                                paragraphs: [
-                                    "가장 중요한 점은 이곳이 '과거 완료형' 유적지가 아니라 '현재 진행형'의 공간이라는 것입니다. 조선은 멸망했지만, 제례는 멈추지 않았습니다. 일제 강점기와 한국전쟁이라는 참혹한 시련 속에서도 우리 후손들은 제사상을 차렸습니다.",
-                                    "매년 이곳에서 역대 제왕들께 술잔을 올립니다(초헌관). 이는 과거의 역사를 기억하고, 현재의 우리를 성찰하며, 미래의 번영을 기원하는 '정신적 대화'입니다. 이 끊이지 않는 의식이야말로 조선왕릉을 세계문화유산으로 만든 결정적인 근거입니다."
-                                ]
-                            }
-                        ].map((section, idx) => (
-                            <div
-                                key={idx}
-                                className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 shadow-lg"
-                            >
-                                <button
-                                    onClick={() => setExpandedTombSection(expandedTombSection === idx ? null : idx)}
-                                    className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-[#d4af37]/10 transition-colors"
-                                >
-                                    <h3 className="text-lg md:text-xl font-bold text-white flex items-center gap-3 break-keep">
-                                        <span className="text-[#d4af37] text-2xl font-serif italic">{idx + 1}.</span>
-                                        {section.title}
-                                    </h3>
-                                    <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedTombSection === idx ? 'rotate-180' : ''}`} />
-                                </button>
+                    <AnimatePresence initial={false}>
+                        {tourSection === 'tombs' && (
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
 
-                                <div
-                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedTombSection === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
-                                >
-                                    <div className="p-6 pt-0 border-t border-[#d4af37]/10 mt-2 space-y-6">
-                                        {section.paragraphs.map((p, pIdx) => (
-                                            <p key={pIdx} className="whitespace-pre-line text-gray-300 text-sm md:text-base leading-relaxed">{p}</p>
-                                        ))}
+                                {/* Intro text */}
+                                <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/20 p-8 md:p-12 text-center mb-12 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                                    <Crown className="w-10 h-10 text-[#d4af37] mx-auto mb-6 opacity-80" />
+                                    <p className="text-[#fceda6] text-lg md:text-xl font-serif font-medium leading-relaxed break-keep mb-6">
+                                        서양의 왕릉이 권력을 과시하기 위한 거대한 석조 기념물이라면,<br className="hidden md:block" /> 조선의 왕릉은 자연으로 돌아가고자 했던 겸손함이 빚어낸 '신의 정원'입니다.
+                                    </p>
+                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed break-keep">
+                                        이곳은 500년 조선 왕조의 역대 왕과 왕비 40기가 단 한 기의 훼손도 없이 보존된 세계 유일의 현장입니다. 하지만 유네스코가 진정으로 감동한 것은 이 무덤 자체가 아닙니다. 왕조가 사라진 지 100년이 지났음에도, 후손들이 매년 이곳에서 600년 전 방식 그대로 제사를 올리고 있다는 사실입니다.
+                                    </p>
+                                </GlassCard>
+
+                                {/* Wangneung Image Gallery */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                                    <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
+                                        <img src="/images/tours/tombs/myungneung.png" alt="서오릉 내 명릉" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                    </div>
+                                    <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
+                                        <img src="/images/tours/tombs/hongsalmun.png" alt="속세의 지위를 내려놓는 홍살문" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                    </div>
+                                    <div className="rounded-2xl overflow-hidden border border-[#d4af37]/20 relative group aspect-[4/3] shadow-lg">
+                                        <img src="/images/tours/tombs/hyangro.png" alt="왕조차 조상 앞에서 예를 차렸던 향로" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+
+                                {/* Features Accordion */}
+                                <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify break-keep mb-8">
+                                    {[
+                                        {
+                                            title: "자연을 섬기는 건축: 풍수와 합일",
+                                            paragraphs: [
+                                                "조선왕릉의 입지는 풍수지리 사상에 기반합니다. 산을 등지고(背山) 물을 바라보는(臨水) 지형을 찾아, 인공적인 조형물이 자연의 선을 거스르지 않도록 배치했습니다.",
+                                                "능역을 조성하기 위해 산을 깎아내는 것이 아니라, 산의 품에 봉분이 안기도록 설계했습니다. 이는 자연을 정복의 대상이 아닌 공존의 대상으로 보았던 우리 민족의 '친환경적 세계관'을 보여줍니다. 도심 가까이에 이토록 울창한 숲이 원형 그대로 보존될 수 있었던 것은 이곳을 신성불가침의 성역으로 지켜온 덕분입니다."
+                                            ]
+                                        },
+                                        {
+                                            title: "공간의 철학: 속세에서 성역으로",
+                                            paragraphs: [
+                                                "왕릉은 세 단계의 공간으로 나뉩니다. 관리자가 머무는 진입 공간, 산 자와 죽은 자가 만나는 제향 공간, 그리고 왕이 잠든 능침 공간입니다.",
+                                                "특히 홍살문을 지나는 순간, 우리는 속세의 지위를 내려놓아야 합니다. 왼쪽의 약간 높은 길은 조상의 혼령이 다니는 '향로'이고, 오른쪽의 낮은 길은 왕이 다니는 '어로'입니다. 왕조차도 조상 앞에서는 한 단계 낮은 길을 걸으며 겸손과 효를 실천했던, '예의 공간'입니다."
+                                            ]
+                                        },
+                                        {
+                                            title: "기록의 위대함: 의궤와 복원",
+                                            paragraphs: [
+                                                "어떻게 500년 전의 모습을 그대로 유지할 수 있었을까요? 그 비결은 바로 기록에 있습니다. 왕릉을 조성할 때 투입된 인원, 재료, 석물의 위치, 심지어 못 하나까지 기록한 『산릉도감의궤』가 있었기에 가능했습니다.",
+                                                "이 기록 문화 덕분에 우리는 전쟁이나 재해로 일부가 훼손되어도 100% 완벽하게 원형을 복원할 수 있습니다. 조선왕릉은 돌로 만든 유산일 뿐만 아니라, 종이 위에 지은 '기록의 궁전'이기도 합니다."
+                                            ]
+                                        },
+                                        {
+                                            title: "살아있는 유산: 600년의 제례",
+                                            paragraphs: [
+                                                "가장 중요한 점은 이곳이 '과거 완료형' 유적지가 아니라 '현재 진행형'의 공간이라는 것입니다. 조선은 멸망했지만, 제례는 멈추지 않았습니다. 일제 강점기와 한국전쟁이라는 참혹한 시련 속에서도 우리 후손들은 제사상을 차렸습니다.",
+                                                "매년 이곳에서 역대 제왕들께 술잔을 올립니다(초헌관). 이는 과거의 역사를 기억하고, 현재의 우리를 성찰하며, 미래의 번영을 기원하는 '정신적 대화'입니다. 이 끊이지 않는 의식이야말로 조선왕릉을 세계문화유산으로 만든 결정적인 근거입니다."
+                                            ]
+                                        }
+                                    ].map((section, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 shadow-lg"
+                                        >
+                                            <button
+                                                onClick={() => setExpandedTombSection(expandedTombSection === idx ? null : idx)}
+                                                className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-[#d4af37]/10 transition-colors"
+                                            >
+                                                <h3 className="text-lg md:text-xl font-bold text-white flex items-center gap-3 break-keep">
+                                                    <span className="text-[#d4af37] text-2xl font-serif italic">{idx + 1}.</span>
+                                                    {section.title}
+                                                </h3>
+                                                <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedTombSection === idx ? 'rotate-180' : ''}`} />
+                                            </button>
+
+                                            <div
+                                                className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedTombSection === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
+                                            >
+                                                <div className="p-6 pt-0 border-t border-[#d4af37]/10 mt-2 space-y-6">
+                                                    {section.paragraphs.map((p, pIdx) => (
+                                                        <p key={pIdx} className="whitespace-pre-line text-gray-300 text-sm md:text-base leading-relaxed">{p}</p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
 
             {/* Ceremonies Section */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-6xl">
-                    <SectionHeader
-                        title='유네스코 "세계인류무형유산"'
-                        subtitle="대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례"
-                    />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {ceremonyTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
-                        ))}
+                    <div className="text-center mb-12">
+                        <button onClick={(e) => toggleTourSection('ceremonies', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">유네스코 "세계인류무형유산"</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'ceremonies' ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                        <p className="text-gray-400 text-sm mt-3">대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례</p>
+                        <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
+                    <AnimatePresence initial={false}>
+                        {tourSection === 'ceremonies' && (
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {ceremonyTours.map((t, i) => (
+                                        <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
 
             {/* Museums Section */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-6xl">
-                    <SectionHeader
-                        title="박물관 투어"
-                        subtitle="Museums & Historical Sites — 왕실 문화유산을 만나는 프리미엄 박물관 투어"
-                    />
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {museumTours.map((t, i) => (
-                            <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
-                        ))}
+                    <div className="text-center mb-12">
+                        <button onClick={(e) => toggleTourSection('museums', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">박물관 투어</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'museums' ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                        <p className="text-gray-400 text-sm mt-3">Museums & Historical Sites — 왕실 문화유산을 만나는 프리미엄 박물관 투어</p>
+                        <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
+                    <AnimatePresence initial={false}>
+                        {tourSection === 'museums' && (
+                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {museumTours.map((t, i) => (
+                                        <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
             {/* Image Modal */}
