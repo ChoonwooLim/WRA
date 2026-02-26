@@ -22,7 +22,7 @@ export default function LineagePage() {
             <section className="pt-10 pb-0">
                 <div className="container mx-auto px-4 max-w-3xl text-center">
                     <p className="text-gray-500 text-xs">
-                        참조: 대한제국왕실문화원{' '}
+                        참조: 대한황실문화원{' '}
                         <a href="https://www.imperialhouse.kr/sub02/sub02_01.php" target="_blank" rel="noopener noreferrer" className="text-[#d4af37]/60 hover:text-[#d4af37] transition-colors">
                             imperialhouse.kr
                         </a>
