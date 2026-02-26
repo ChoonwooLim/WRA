@@ -506,10 +506,10 @@ export const ko: Dictionary = {
         royal33: {
             title: 'The Royal 33',
             subtitle: '대한민국 상위 1%를 위한 멤버십',
-            description: '미래를 정의하는 33인의 글로벌 리더를 위한 명예로운 자리입니다. Royal 33 멤버십은 왕립 네트워크에 대한 독점적 접근 권한과 WRA 재단의 거버넌스 권리를 부여합니다.',
-            benefit1: '글로벌 네트워킹 및 프라이빗 서밋 초청',
-            benefit2: '로열 아이덴티티 및 디지털 주권(Digital Sovereignty) 확보',
-            benefit3: 'Web3 프로젝트 및 글로벌 펀드 투자 기회',
+            description: '미래를 정의하는 33인의 글로벌 리더를 위한 명예로운 자리입니다.',
+            benefit1: '글로벌 네트워킹',
+            benefit2: '프라이빗 서밋 초청',
+            benefit3: '로열 아이덴티티 및 디지털 주권확보',
             cta: 'Royal 33 멤버십 신청',
         },
         digitalSeal: {
