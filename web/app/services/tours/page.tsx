@@ -237,7 +237,6 @@ export default function ToursPage() {
                 { src: '/images/palaces/gyeonghoeru_real.png', caption: '경복궁 전경' },
                 { src: '/images/palaces/gwanghwamun_real.png', caption: '경복궁의 정문인 광화문의 웅장한 모습' },
                 { src: '/images/palaces/real-gyeongbokgung.png', caption: '경복궁의 정전인 근정전의 장엄한 자태' },
-                { src: '/images/palaces/hyangwonjeong_real.png', caption: '국립고궁박물관' },
                 { src: '/images/palaces/dancheong_real.png', caption: '순종황제 어차', position: 'top' },
                 { src: '/images/palaces/gungjung_festival.png', caption: '다양한 국가에서 참석하는 궁중문화축전' },
                 { src: '/images/palaces/empire_120th.png', caption: '대한제국 선포 120주년 기념 행사' },
