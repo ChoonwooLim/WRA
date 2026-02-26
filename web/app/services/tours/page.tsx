@@ -758,28 +758,8 @@ export default function ToursPage() {
                                     {palaceTours.map((t, i) => (
                                         <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                                     ))}
-                                    {/* 6th Slot: Palace Map Infographic */}
-                                    <GlassCard delay={palaceTours.length * 0.08}>
-                                        <div className="flex flex-col h-full -mx-6 -mt-6">
-                                            <div
-                                                className="relative h-56 w-full overflow-hidden cursor-pointer group shrink-0"
-                                                onClick={() => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src: '/images/palaces/palaces-map.png', title: '서울 5대궁 안내도' }); }}
-                                            >
-                                                <img src="/images/palaces/palaces-map.png" alt="Map of 5 Royal Palaces" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                                <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
-                                                    <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">상세보기</span>
-                                                </div>
-                                            </div>
-                                            <div className="p-6 flex-grow flex flex-col items-center justify-center text-center">
-                                                <MapPin className="w-8 h-8 text-[#d4af37] mb-3 opacity-80" />
-                                                <h3 className="text-lg font-bold text-white mb-1">서울 5대궁 안내도</h3>
-                                                <p className="text-[#d4af37]/60 text-xs mb-3">Map of the 5 Royal Palaces</p>
-                                                <p className="text-gray-400 text-sm leading-relaxed">
-                                                    경복궁, 창덕궁, 덕수궁, 창경궁, 경희궁의 전체 위치를 한눈에 확인할 수 있는 스페셜 안내 지도입니다.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </GlassCard>
+
+
                                 </div>
                             </motion.div>
                         )}
