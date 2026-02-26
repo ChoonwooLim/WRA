@@ -26,10 +26,11 @@ import {
 const OrgNode = ({
     title,
     subtitle,
-    isMain = false, // Backwards compatibility
+    isMain = false,
     variant = 'default',
     className = "",
-    subTeams = []
+    subTeams = [],
+    showProfile = false
 }: {
     title: string;
     subtitle?: string;
@@ -37,6 +38,7 @@ const OrgNode = ({
     variant?: 'chancellor' | 'ceo' | 'main' | 'default';
     className?: string;
     subTeams?: string[];
+    showProfile?: boolean;
 }) => {
     // Determine effective variant
     const effectiveVariant = variant === 'default' && isMain ? 'main' : variant;
@@ -47,12 +49,12 @@ const OrgNode = ({
     let glowElement = null;
 
     if (effectiveVariant === 'chancellor') {
-        boxClasses = 'bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border-[2px] border-[#fceda6] px-8 py-5 rounded-2xl shadow-[0_4px_30px_rgba(252,237,166,0.2)] ring-1 ring-[#d4af37]/50 ring-offset-4 ring-offset-[#0c1024]';
+        boxClasses = 'bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#fceda6] px-8 py-5 rounded-2xl shadow-[0_4px_30px_rgba(252,237,166,0.2)] outline outline-[3px] outline-[#fceda6] outline-offset-[4px]';
         textClasses = 'text-[#fceda6] tracking-widest text-xl md:text-2xl drop-shadow-[0_2px_8px_rgba(252,237,166,0.6)]';
         subtitleClasses = 'text-[#d4af37] font-serif tracking-widest text-sm md:text-base opacity-90 mt-2';
         glowElement = <div className="absolute inset-0 bg-[#fceda6]/10 blur-2xl rounded-full scale-[1.3] animate-pulse pointer-events-none" style={{ animationDuration: '4s' }} />;
     } else if (effectiveVariant === 'ceo') {
-        boxClasses = 'bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37] px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.2)]';
+        boxClasses = 'bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37] px-8 py-4 rounded-xl shadow-[0_4px_20px_rgba(212,175,55,0.2)] outline outline-[2px] outline-[#d4af37]/70 outline-offset-[3px]';
         textClasses = 'text-[#e6c875] tracking-widest text-lg md:text-xl drop-shadow-[0_2px_4px_rgba(212,175,55,0.5)]';
         subtitleClasses = 'text-[#d4af37] font-serif tracking-widest text-sm md:text-base opacity-90 mt-1';
         glowElement = <div className="absolute inset-0 bg-[#d4af37]/10 blur-xl rounded-full scale-125 animate-pulse pointer-events-none" style={{ animationDuration: '4s' }} />;
@@ -83,6 +85,9 @@ const OrgNode = ({
                     <p className={`z-10 ${subtitleClasses}`}>
                         {subtitle}
                     </p>
+                )}
+                {showProfile && (
+                    <span className="mt-2 text-xs text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors z-10">프로필 보기 →</span>
                 )}
             </div>
             {subTeams.length > 0 && (
@@ -176,8 +181,7 @@ export default function OrganizationPage() {
                         {/* Level 0: Chancellor */}
                         <div className="relative flex flex-col items-center justify-center w-full z-10">
                             <div onClick={() => setShowChancellorModal(true)} className="cursor-pointer group flex flex-col items-center">
-                                <OrgNode title="황태손 이 원 전하" subtitle="Chancellor" variant="chancellor" className="cursor-pointer" />
-                                <span className="mt-2 text-xs text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors">프로필 보기 →</span>
+                                <OrgNode title="황태손 이 원 전하" subtitle="KING" variant="chancellor" className="cursor-pointer" showProfile />
                             </div>
                         </div>
 
@@ -186,62 +190,64 @@ export default function OrganizationPage() {
                             <div className="w-[2px] h-16 md:h-20 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
                         </div>
 
-                        {/* Level 1: CEO */}
+                        {/* Level 1: CEO + 전략기획실 */}
                         <div className="relative flex flex-col items-center w-full z-10">
                             <div onClick={() => setShowCeoModal(true)} className="cursor-pointer group flex flex-col items-center">
-                                <OrgNode title="제니 킴" subtitle="President & CEO" variant="ceo" />
-                                <span className="mt-2 text-xs text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors">프로필 보기 →</span>
+                                <OrgNode title="제니 킴" subtitle="CEO" variant="ceo" showProfile />
                             </div>
 
-                            {/* Attached Sub-team: 전략기획실 */}
-                            <div className="mt-3 bg-[#1a140a]/80 border border-[#d4af37]/40 text-[#d4af37] px-6 py-2 rounded-md backdrop-blur-md shadow-lg text-sm font-medium z-10 transition-colors hover:bg-[#d4af37]/20">
-                                전략기획실
+                            {/* 전략기획실 - absolute positioned to the right */}
+                            <div className="hidden md:flex absolute left-[calc(50%+90px)] top-1/2 -translate-y-1/2 items-center">
+                                <div className="w-8 h-[1px] bg-[#d4af37]/40" />
+                                <div className="bg-[#1a140a]/80 border border-[#d4af37]/40 text-[#d4af37] px-6 py-3 rounded-xl backdrop-blur-md shadow-lg text-sm font-medium z-10 transition-colors hover:bg-[#d4af37]/20 hover:shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                    전략기획실
+                                </div>
                             </div>
                         </div>
 
-                        {/* Main Branching Lines (CEO -> 3 Pillars) */}
-                        <div className="relative w-full max-w-5xl h-[60px] md:h-[90px] mb-8 hidden md:block">
+                        {/* Main Branching Lines (CEO -> 3 Pillars) - Desktop */}
+                        <div className="relative w-full max-w-5xl hidden md:flex flex-col items-center">
                             {/* Vertical drop from CEO */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-1/2 bg-[#d4af37]/50" />
-                            {/* Horizontal span */}
-                            <div className="absolute top-1/2 left-[16.666%] right-[16.666%] h-[2px] bg-[#d4af37]/50" />
-                            {/* Left drop */}
-                            <div className="absolute top-1/2 left-[16.666%] w-[2px] h-1/2 bg-[#d4af37]/50" />
-                            {/* Right drop */}
-                            <div className="absolute top-1/2 right-[16.666%] w-[2px] h-1/2 bg-[#d4af37]/50" />
-                            {/* Center drop (continuation) */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[2px] h-1/2 bg-[#d4af37]/50" />
+                            <div className="w-[2px] h-12 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
+                            {/* T-junction: horizontal bar + 3 drops */}
+                            <div className="relative w-full">
+                                {/* Horizontal bar spanning across all 3 columns */}
+                                <div className="absolute top-0 left-[16.666%] right-[16.666%] h-[2px] bg-[#d4af37]/40" />
+                                {/* 3 vertical drops */}
+                                <div className="absolute top-0 left-[16.666%] w-[2px] h-10 bg-[#d4af37]/40" />
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-10 bg-[#d4af37]/40" />
+                                <div className="absolute top-0 right-[16.666%] w-[2px] h-10 bg-[#d4af37]/40" />
+                                {/* Spacer */}
+                                <div className="h-10" />
+                            </div>
                         </div>
 
-                        {/* Mobile continuous vertical line */}
-                        <div className="md:hidden w-[2px] h-[60px] bg-[#d4af37]/50 -mt-8 mb-4" />
+                        {/* Mobile vertical line */}
+                        <div className="md:hidden w-[2px] h-10 bg-[#d4af37]/30" />
 
                         {/* Level 2: The Three Pillars */}
                         <div className="w-full max-w-5xl flex flex-col md:flex-row justify-between relative">
-                            {/* Mobile connection lines for grid items 2 and 3 */}
-                            <div className="md:hidden absolute top-[30%] left-1/2 -translate-x-1/2 w-[2px] h-[60px] bg-[#d4af37]/50 -mt-[40px]" />
-                            <div className="md:hidden absolute top-[65%] left-1/2 -translate-x-1/2 w-[2px] h-[60px] bg-[#d4af37]/50 -mt-[40px]" />
-
-                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-8 md:mb-0">
+                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
                                     title="한국어"
-                                    subTeams={["교수설계팀", "글로벌강사팀"]}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
                             </div>
-                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-8 md:mb-0">
+                            {/* Mobile spacer */}
+                            <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
+                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
                                     title="한국문학"
-                                    subTeams={["창작교육팀", "콘텐츠창작팀"]}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
                             </div>
+                            {/* Mobile spacer */}
+                            <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
                             <div className="w-full md:w-1/3 flex justify-center px-2">
                                 <OrgNode
-                                    title="미래인재개발원"
-                                    subTeams={["인문학교육팀", "토론/논술팀"]}
+                                    title="한국학"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -269,7 +275,7 @@ export default function OrganizationPage() {
                                         "미디어 홍보실"
                                     ].map((dept, idx) => (
                                         <div key={idx} className="w-full md:w-1/4 flex justify-center px-3 mb-4 md:mb-0">
-                                            <div className="w-full max-w-[220px] bg-[#0c0f17]/90 border border-[#d4af37]/30 text-gray-200 text-center py-5 px-3 rounded-xl shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-[#d4af37]/15 hover:border-[#d4af37]/80 text-sm md:text-base font-medium relative overflow-hidden group">
+                                            <div className="w-full max-w-[220px] bg-[#0c0f17]/90 border border-[#d4af37]/30 outline outline-[2px] outline-[#d4af37]/30 outline-offset-[3px] text-gray-200 text-center py-5 px-3 rounded-xl shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-[#d4af37]/15 hover:border-[#d4af37]/80 hover:outline-[#d4af37]/60 text-sm md:text-base font-medium relative overflow-visible group">
                                                 {/* Subtle highlight effect on hover */}
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                                                 {dept}
