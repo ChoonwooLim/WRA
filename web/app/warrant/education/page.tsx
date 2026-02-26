@@ -5,33 +5,37 @@ import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { Languages, Palette, BookOpen, ArrowRight, X } from 'lucide-react';
+import { BookText, Globe2, ArrowRight, X } from 'lucide-react';
+import React from 'react';
+
+/* Custom Hangul icon — styled '한' character */
+function HangeulIcon({ className }: { className?: string }) {
+    return (
+        <span className={`font-black select-none ${className ?? ''}`} style={{ fontFamily: 'serif', fontSize: '2rem', lineHeight: 1, color: '#d4af37' }}>
+            한
+        </span>
+    );
+}
 import { motion, AnimatePresence } from 'framer-motion';
 
 const programs = [
     {
         title: '한국어',
         titleEn: 'Korean Language',
-        desc: 'AI 기반 한국어 교육, TOPIK 대비,\n클라우드 LMS를 통한 체계적인\n언어 교육 프로그램.',
+        desc: 'AI 기술 기반의 체계적인 한국어 교육',
         href: '/warrant/education/language',
-        image: '/images/hunmin.png',
-        features: ['한국어', 'AI TOPIK 모의시험', '클라우드 LMS'],
     },
     {
         title: '한국문학',
         titleEn: 'Korean Literature',
-        desc: '한국 문학과 예술을 통한 문학 교육.\n독서, 질문, 토론, 인증의\n4단계 창작 커리큘럼.',
+        desc: 'AI시대 인문학과 놀자',
         href: '/warrant/education/culture',
-        image: '/images/k_literature_icon_v2.png',
-        features: ['한국문학', '4단계 창작 커리큘럼', '문학·예술 교육'],
     },
     {
         title: '한국학',
         titleEn: 'Korean Studies',
-        desc: '한국의 역사, 문화, 유산에 대한\n학술 및 연구 프로그램.\n경영한류와의 융합.',
+        desc: '한국학을 공부해야 하는 이유',
         href: '/warrant/education/studies',
-        image: '/images/한국학.png',
-        features: ['한국학', '학술 연구 프로그램', 'K-헤리티지 기반'],
     },
 ];
 
@@ -50,40 +54,59 @@ export default function EducationLandingPage() {
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {programs.map((prog, i) => (
-                            <div
-                                key={i}
-                                className="group block cursor-pointer"
-                                onClick={() => {
-                                    setModalUrl(prog.href);
-                                    setModalTitle(prog.title);
-                                }}
-                            >
-                                <GlassCard delay={i * 0.12} className="transition-all duration-300 group-hover:!border-[#d4af37]/40 !p-0 overflow-hidden">
-                                    <div className="flex flex-col items-center text-center">
-                                        <div className="w-full h-48 overflow-hidden bg-[#0a0e1a] p-6">
-                                            <img src={prog.image} alt={prog.titleEn} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
-                                        </div>
-                                        <div className="p-6 pb-8">
-                                            <div className="flex items-center justify-center gap-3 mb-1">
-                                                <h3 className="text-2xl font-bold text-white group-hover:text-[#d4af37] transition-colors">{prog.title}</h3>
-                                                <ArrowRight className="w-5 h-5 text-[#d4af37]/30 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {programs.map((prog, i) => {
+                            return (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: i * 0.15 }}
+                                    className="group block cursor-pointer"
+                                    onClick={() => {
+                                        setModalUrl(prog.href);
+                                        setModalTitle(prog.title);
+                                    }}
+                                >
+                                    <div className="relative h-full rounded-2xl overflow-hidden transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_0_40px_rgba(212,175,55,0.12)]"
+                                        style={{
+                                            background: 'linear-gradient(135deg, rgba(15,15,35,0.95), rgba(10,10,25,0.98))',
+                                            border: '1px solid rgba(212,175,55,0.15)',
+                                        }}
+                                    >
+                                        {/* Top gold accent line */}
+                                        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent group-hover:via-[#d4af37] transition-all duration-500" />
+
+                                        <div className="flex flex-col items-center text-center px-8 py-10 min-h-[220px] justify-center">
+
+                                            {/* Title */}
+                                            <h3 className="text-3xl md:text-4xl font-bold text-white group-hover:text-[#fceda6] transition-colors duration-300 tracking-wide">{prog.title}</h3>
+                                            <span className="text-[#d4af37]/70 text-xl md:text-2xl mt-2 group-hover:text-[#d4af37] transition-colors duration-300" style={{ fontFamily: 'var(--font-dancing), cursive' }}>{prog.titleEn}</span>
+
+                                            {/* Decorative divider */}
+                                            <div className="flex items-center gap-3 my-5">
+                                                <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]/50 group-hover:w-12 transition-all duration-500" />
+                                                <div className="w-2 h-2 rotate-45 bg-[#d4af37]/50 group-hover:bg-[#d4af37] transition-all duration-500" />
+                                                <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]/50 group-hover:w-12 transition-all duration-500" />
                                             </div>
-                                            <p className="text-[#d4af37]/60 text-sm mb-4">{prog.titleEn}</p>
-                                            <p className="text-gray-300 text-base leading-[1.9] mb-6 break-keep whitespace-pre-line">{prog.desc}</p>
-                                            <div className="flex flex-col items-center gap-2 w-full px-2">
-                                                {prog.features.map((f, j) => (
-                                                    <span key={j} className="w-full max-w-[200px] text-center px-5 py-1.5 rounded-full text-sm bg-[#d4af37]/10 text-[#d4af37]/80 border border-[#d4af37]/15">
-                                                        {f}
-                                                    </span>
-                                                ))}
+
+                                            {/* Description */}
+                                            <p className="text-gray-400 text-sm leading-[1.9] break-keep whitespace-pre-line group-hover:text-gray-300 transition-colors duration-300">{prog.desc}</p>
+
+                                            {/* Arrow */}
+                                            <div className="mt-6 flex items-center gap-2 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-all duration-300">
+                                                <span className="text-xs tracking-widest uppercase font-medium">자세히 보기</span>
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                                             </div>
                                         </div>
+
+                                        {/* Bottom gold accent line */}
+                                        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#d4af37]/20 to-transparent" />
                                     </div>
-                                </GlassCard>
-                            </div>
-                        ))}
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
