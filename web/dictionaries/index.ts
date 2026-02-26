@@ -282,7 +282,7 @@ export const en: Dictionary = {
         },
         warrantHighlights: {
             title: 'WRA Warrants',
-            subtitle: 'Four pillars of excellence',
+            subtitle: '',
             education: { title: 'Education', desc: 'K-Heritage Language, Literature, and Korean Studies programs with AI-powered learning.' },
             certification: { title: 'Certification', desc: 'K-Royal Warrant — the prestigious mark of Korean craftsmanship and philosophy.' },
             consulting: { title: 'Consulting', desc: 'Royal Management Consulting.' },
@@ -336,14 +336,14 @@ export const en: Dictionary = {
     pages: {
         crownPrince: {
             heroTitle: 'HRH Crown Prince Lee Won',
-            heroSubtitle: 'Chancellor of World Royal Academy',
+            heroSubtitle: '',
             fullName: 'Lee Won (이원)',
             title: '5th Crown Prince of the Korean Imperial Family',
-            introduction: 'Direct descendant of Emperor Gojong, HRH Crown Prince Lee Won continues the legacy of the Korean Empire through cultural heritage restoration and global diplomatic exchanges.',
-            lineageTitle: 'Royal Lineage',
-            lineageDesc: 'The genealogical heritage from Emperor Gojong to the present.',
+            introduction: '',
+            lineageTitle: 'Imperial Lineage',
+            lineageDesc: '',
             activitiesTitle: 'Activities',
-            activitiesDesc: 'Cultural heritage restoration and global diplomatic exchanges.',
+            activitiesDesc: '',
             messageTitle: 'Welcome Message',
         },
         about: {
@@ -433,8 +433,8 @@ export const ko: Dictionary = {
         startLogin: '로그인 시작',
         loginSignup: '로그인 / 회원가입',
         profile: '황태손',
-        lineage: '계보',
-        congratulations: '축사 및 환영사',
+        lineage: '황실계보',
+        congratulations: '인사말',
         foundingPhilosophy: '설립이념',
         vision: '비전 & 미션',
         coreValuesPage: '핵심가치',
@@ -491,7 +491,7 @@ export const ko: Dictionary = {
         },
         warrantHighlights: {
             title: 'WRA warrant',
-            subtitle: '네 가지 탁월함의 축',
+            subtitle: '',
             education: { title: '교육', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
             certification: { title: '인증', desc: 'K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.' },
             consulting: { title: '컨설팅', desc: '경영한류컨설팅.' },
@@ -545,14 +545,14 @@ export const ko: Dictionary = {
     pages: {
         crownPrince: {
             heroTitle: '황태손 이원 전하',
-            heroSubtitle: '세계왕립아카데미 이사장',
+            heroSubtitle: '',
             fullName: '이원 (Lee Won)',
             title: '대한제국 5대 황태손',
-            introduction: '고종 황제의 직계 후손으로, 황태손 이원 전하는 문화유산 환수와 글로벌 문화외교를 통해 대한민국 왕실의 유산을 이어가고 계십니다.',
-            lineageTitle: '왕실 계보',
-            lineageDesc: '고종 황제로부터 현재까지의 계보.',
+            introduction: '',
+            lineageTitle: '황실계보',
+            lineageDesc: '',
             activitiesTitle: '활동',
-            activitiesDesc: '문화유산 환수와 글로벌 문화외교 활동.',
+            activitiesDesc: '',
             messageTitle: '인사말',
         },
         about: {

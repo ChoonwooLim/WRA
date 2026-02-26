@@ -62,7 +62,7 @@ export default function CrownPrincePage() {
             {/* Profile Section */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <div className="flex flex-col md:flex-row items-center gap-12">
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                         <div className="flex-shrink-0">
                             <div
                                 className="relative w-64 h-64 rounded-full border-4 border-[#d4af37]/30 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.2)] cursor-pointer group"
@@ -79,10 +79,9 @@ export default function CrownPrincePage() {
                             </div>
                         </div>
                         <div className="text-center md:text-left">
-                            <h2 className="text-3xl font-bold text-white mb-2">{d.fullName}</h2>
-                            <p className="text-[#d4af37] text-lg mb-2">{d.title}</p>
-                            <p className="text-gray-500 text-sm mb-4">皇太子 李 源 殿下, 1962~</p>
-                            <p className="text-gray-400 leading-relaxed text-lg">{d.introduction}</p>
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">{d.fullName}</h2>
+                            <p className="text-[#d4af37] text-xl md:text-2xl mb-3">{d.title}</p>
+                            <p className="text-gray-500 text-base">皇太子 李 源 殿下, 1962~</p>
                         </div>
                     </div>
                 </div>

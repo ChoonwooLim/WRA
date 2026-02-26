@@ -32,9 +32,7 @@ export default function MessagePage() {
 
     return (
         <div className="bg-[#050510] min-h-screen">
-            <HeroBanner title={dict.pages.crownPrince.messageTitle} compact />
-
-            <section className="py-20">
+            <section className="pt-32 pb-20">
                 <div className="container mx-auto px-4 max-w-4xl">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -53,11 +51,11 @@ export default function MessagePage() {
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ duration: 0.6, delay: 0.2 }}
                             >
-                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border border-[#d4af37]/20 flex items-center justify-center mx-auto mb-6">
-                                    <Crown className="w-10 h-10 text-[#d4af37]" />
+                                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/5 border border-[#d4af37]/20 flex items-center justify-center mx-auto mb-6">
+                                    <Crown className="w-14 h-14 text-[#d4af37]" />
                                 </div>
                             </motion.div>
-                            <h2 className="text-sm uppercase tracking-[0.4em] text-[#d4af37] mb-3 font-medium">
+                            <h2 className="text-2xl md:text-3xl uppercase tracking-[0.3em] text-[#d4af37] mb-4 font-semibold">
                                 {dict.home.greeting.title}
                             </h2>
                             <div className="h-px w-32 mx-auto bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent" />
