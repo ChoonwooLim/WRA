@@ -52,9 +52,6 @@ export default function FoundingPhilosophyPage() {
                             <p className="w-full">
                                 세상을 널리 이롭게 하는 정신을 근본을 기초로 한, 세계 어느 나라도 따라할 수 없는
                             </p>
-                            <p className="w-full text-xl md:text-2xl font-bold text-white tracking-wider">
-                                위대한 건국이념,
-                            </p>
                             <p className="w-full text-base md:text-lg">
                                 전쟁과 갈등의 지구촌에 필요한 이타적인 건국이념입니다.
                             </p>
