@@ -234,10 +234,10 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/gwanghwamun_real.png', caption: '광화문의 웅장한 모습' },
+                { src: '/images/palaces/gwanghwamun_real.png', caption: '경복궁의 정문인 광화문의 웅장한 모습' },
+                { src: '/images/palaces/real-gyeongbokgung.png', caption: '경복궁의 정전인 근정전의 장엄한 자태' },
                 { src: '/images/palaces/gyeonghoeru_real.png', caption: '경회루의 고즈넉한 풍경' },
                 { src: '/images/palaces/hyangwonjeong_real.png', caption: '향원정의 아름다운 자태' },
-                { src: '/images/palaces/real-gyeongbokgung.png', caption: '근정전의 장엄한 자태' },
                 { src: '/images/palaces/dancheong_real.png', caption: '화려한 단청의 아름다움' }
             ]
         },
@@ -273,9 +273,9 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/changdeokgung_buyongjeong.png', caption: '창덕궁 후원에 있는 부용정' },
+                { src: '/images/palaces/changdeokgung_nakseonjae.png', caption: '낙선재 — 마지막까지 황세손이 거주하셨던 집' },
                 { src: '/images/palaces/changdeokgung_injeongjeon.png', caption: '인정전의 장엄한 전경' },
-                { src: '/images/palaces/changdeokgung_buyongjeong.png', caption: '비원 부용정의 아름다운 가을' },
-                { src: '/images/palaces/changdeokgung_nakseonjae.png', caption: '낙선재의 단아한 건축미' },
                 { src: '/images/palaces/changdeokgung_donhwamun.png', caption: '돈화문의 웅장한 야경' },
                 { src: '/images/palaces/changdeokgung_juhamnu.png', caption: '녹음이 우거진 주합루' }
             ]
@@ -366,7 +366,7 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/deoksugung_seokjojeon.png', caption: '석조전의 이국적인 야경' },
+                { src: '/images/palaces/deoksugung_seokjojeon.png', caption: '글로벌 비전을 품었던 석조전' },
                 { src: '/images/palaces/deoksugung_junghwajeon.png', caption: '중화전의 위엄 있는 자태' },
                 { src: '/images/palaces/deoksugung_jeonggwanheon.png', caption: '정관헌의 아름다운 낭만' },
                 { src: '/images/palaces/deoksugung_doldamgil.png', caption: '덕수궁 돌담길의 가을 정취' },
