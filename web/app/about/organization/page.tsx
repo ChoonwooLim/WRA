@@ -82,7 +82,7 @@ const OrgNode = ({
                     {title}
                 </h3>
                 {subtitle && (
-                    <p className={`z-10 ${subtitleClasses}`}>
+                    <p className={`z-10 ${subtitleClasses}`} style={{ fontFamily: 'var(--font-dancing), cursive' }}>
                         {subtitle}
                     </p>
                 )}
@@ -230,6 +230,7 @@ export default function OrganizationPage() {
                             <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
                                     title="한국어"
+                                    subtitle="Korean Language"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -239,6 +240,7 @@ export default function OrganizationPage() {
                             <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
                                     title="한국문학"
+                                    subtitle="Korean Literature"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -248,6 +250,7 @@ export default function OrganizationPage() {
                             <div className="w-full md:w-1/3 flex justify-center px-2">
                                 <OrgNode
                                     title="한국학"
+                                    subtitle="Korean Studies"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -259,9 +262,9 @@ export default function OrganizationPage() {
                             since this is a commonly shared operational group supporting the 3 pillars above. */}
 
                         {/* Level 3: Bottom Row (Unified Shared Container) */}
-                        <div className="w-full max-w-5xl mt-12 md:mt-24 relative p-[1px] rounded-2xl bg-gradient-to-b from-[#d4af37]/30 via-transparent to-transparent">
+                        <div className="w-full max-w-5xl mt-12 md:mt-24 relative p-[1px] rounded-2xl border border-[#d4af37]/20">
                             {/* Inner Glass Container */}
-                            <div className="w-full bg-[#1a140a]/60 backdrop-blur-xl rounded-2xl p-8 md:p-10 flex flex-col items-center">
+                            <div className="w-full bg-[#0c1024]/80 backdrop-blur-xl rounded-2xl p-8 md:p-10 flex flex-col items-center">
                                 {/* Bridging Top Label (Optional, but gives context) */}
                                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#0c1024] px-6 py-1 border border-[#d4af37]/40 rounded-full text-[#d4af37] text-xs md:text-sm tracking-widest font-medium whitespace-nowrap shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                                     공통 협력 · 지원 본부
@@ -275,10 +278,10 @@ export default function OrganizationPage() {
                                         "미디어 홍보실"
                                     ].map((dept, idx) => (
                                         <div key={idx} className="w-full md:w-1/4 flex justify-center px-3 mb-4 md:mb-0">
-                                            <div className="w-full max-w-[220px] bg-[#0c0f17]/90 border border-[#d4af37]/30 outline outline-[2px] outline-[#d4af37]/30 outline-offset-[3px] text-gray-200 text-center py-5 px-3 rounded-xl shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-[#d4af37]/15 hover:border-[#d4af37]/80 hover:outline-[#d4af37]/60 text-sm md:text-base font-medium relative overflow-visible group">
+                                            <div className="w-full max-w-[220px] bg-[#0c0f17]/90 border border-[#d4af37]/30 outline outline-[2px] outline-[#d4af37]/30 outline-offset-[3px] text-gray-200 text-center py-5 px-3 rounded-xl shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-[#d4af37]/15 hover:border-[#d4af37]/80 hover:outline-[#d4af37]/60 text-sm md:text-base font-medium relative overflow-hidden group">
                                                 {/* Subtle highlight effect on hover */}
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                                {dept}
+                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+                                                <span className="relative z-10">{dept}</span>
                                             </div>
                                         </div>
                                     ))}

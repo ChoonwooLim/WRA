@@ -50,6 +50,7 @@ export function HeroBanner({ title, subtitle, backgroundImage, className, compac
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto"
+
                     >
                         {subtitle}
                     </motion.p>

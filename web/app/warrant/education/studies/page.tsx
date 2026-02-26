@@ -29,7 +29,7 @@ export default function StudiesPage() {
     const [openStep, setOpenStep] = useState<number | null>(null);
     const [openKStudy, setOpenKStudy] = useState<number | null>(null);
     const [sectionOpen, setSectionOpen] = useState<Record<string, boolean>>({
-        reason: false,
+        reason: true,
         curriculum: false,
         unesco: false,
     });
@@ -59,31 +59,8 @@ export default function StudiesPage() {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[150px] rounded-full pointer-events-none" />
                 <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
-                    {/* Intro: 시간의 결을 잇는 문화의 재탄생 */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-16"
-                    >
-                        <h3 className="text-xl md:text-2xl text-white font-serif tracking-widest leading-relaxed mb-6 whitespace-nowrap">
-                            &ldquo;오래된 미래, 디지털 날개를 달고 비상하다.&rdquo;
-                        </h3>
-                        <p className="text-[#d4af37]/70 text-sm tracking-[0.2em] uppercase mb-8">
-                            시간의 결을 잇는 문화의 재탄생
-                        </p>
-                        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-gray-400 to-transparent mx-auto mb-8" />
-                        <div className="text-gray-300 text-base md:text-lg leading-[2.2] font-light space-y-1 max-w-3xl mx-auto break-keep">
-                            <p>5천 년 역사의 깊은 뿌리가 현대 기술이라는 줄기를 만났습니다.</p>
-                            <p>선조들의 지혜가 담긴 정신은 가장 트렌디한 콘텐츠가 되었고,</p>
-                            <p>고요하던 아침의 나라는 세계 문화를 이끄는 역동의 파도가 되었습니다.</p>
-                            <p>형식은 새로워도 그 안의 정신<span className="text-[#d4af37] font-semibold">(SPIRIT)</span>은 영원합니다.</p>
-                            <p>과거와 미래가 만나는 지점에서, 글로벌 스탠다드가 된 한국 문화를 읽어냅니다.</p>
-                        </div>
-                    </motion.div>
 
-                    <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent mx-auto mb-14" />
+
 
                     {/* 한국학을 공부해야 하는 이유 */}
                     <motion.div

@@ -177,7 +177,8 @@ export default function LiteraturePage() {
                             </h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${sectionOpen === 'humanities' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-lg mt-3">In the Age of AI, Let&apos;s Play with the Humanities</p>
+
+
                     </motion.div>
 
                     <AnimatePresence initial={false}>
