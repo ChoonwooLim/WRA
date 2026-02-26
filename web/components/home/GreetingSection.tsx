@@ -80,9 +80,13 @@ export function GreetingSection() {
                             <h3 className="text-3xl md:text-4xl font-serif text-[#fceda6] mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                                 {dict.home.greeting.name}
                             </h3>
-                            <p className="text-gray-500 text-sm mb-6 whitespace-pre-line">
-                                {dict.home.greeting.role}
-                            </p>
+                            <div className="text-base md:text-lg mb-6 tracking-wide">
+                                {dict.home.greeting.role.split('\n').map((line, i) => (
+                                    <p key={i} className={i === 0 ? 'text-gray-400' : 'text-[#d4af37] font-bold text-lg md:text-xl mt-1'}>
+                                        {line}
+                                    </p>
+                                ))}
+                            </div>
                             <div className="text-white leading-[1.8] text-lg md:text-xl font-light mb-6">
                                 &ldquo;{renderHighlightedText(previewMessage)}&rdquo;
                             </div>
