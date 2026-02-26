@@ -565,7 +565,7 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', caption: '환구단의 황궁우와 황제 의례' },
+                { src: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', caption: '환구단의 황궁우와 황제 의례', position: 'center 85%' },
                 { src: '/images/tours/hwanggungwoo_panorama.png', caption: '황궁우 전경' },
                 { src: '/images/tours/hwangudan_original.png', caption: '훼손되기 전 환구단과 황궁우의 모습' },
                 { src: '/images/tours/hwangudan_damaged.png', caption: '경성 철도호텔로 인해 훼손된 환구단' }
