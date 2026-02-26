@@ -99,7 +99,7 @@ export default function MessagePage() {
                             transition={{ duration: 0.8, delay: 1.2 }}
                             className="text-right relative z-10"
                         >
-                            <p className="text-gray-500 text-sm whitespace-pre-line leading-relaxed mb-3">
+                            <p className="text-[#d4af37] text-lg md:text-xl font-semibold whitespace-pre-line leading-relaxed mb-3">
                                 {dict.home.greeting.role}
                             </p>
                             <p className="text-[#d4af37] font-semibold text-xl">
