@@ -102,7 +102,7 @@ export function Navbar() {
             icon: <Users className="w-4 h-4" />,
             submenu: [
                 { label: dict.navbar.notices, href: '/community/notices' },
-                { label: '이미지 갤러리', href: '/community/gallery' },
+
                 { label: dict.navbar.newsletter, href: '/community/newsletter' },
                 { label: dict.navbar.qna, href: '/community/qna' },
             ],

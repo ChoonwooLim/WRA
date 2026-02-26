@@ -184,16 +184,15 @@ export function HeroSection() {
                         </motion.span>
                     </h1>
 
-                    {/* Subtitle */}
+                    {/* English Subtitle */}
                     <motion.p
-                        className="text-[14.4px] md:text-[19.2px] text-gray-300 max-w-4xl mx-auto mb-14 leading-relaxed font-light break-keep"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        className="text-base md:text-xl lg:text-2xl text-gray-400 tracking-[0.35em] uppercase font-light mb-14 italic"
+                        style={{ fontFamily: 'var(--font-playfair)' }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.6, duration: 1 }}
                     >
-                        {dict.home.subtitle.split('\n').map((line, i, arr) => (
-                            <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-                        ))}
+                        World Royal Academy
                     </motion.p>
 
 
