@@ -234,11 +234,14 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/gyeonghoeru_real.png', caption: '경복궁 전경' },
                 { src: '/images/palaces/gwanghwamun_real.png', caption: '경복궁의 정문인 광화문의 웅장한 모습' },
                 { src: '/images/palaces/real-gyeongbokgung.png', caption: '경복궁의 정전인 근정전의 장엄한 자태' },
-                { src: '/images/palaces/gyeonghoeru_real.png', caption: '경회루의 고즈넉한 풍경' },
-                { src: '/images/palaces/hyangwonjeong_real.png', caption: '향원정의 아름다운 자태' },
-                { src: '/images/palaces/dancheong_real.png', caption: '화려한 단청의 아름다움' }
+                { src: '/images/palaces/hyangwonjeong_real.png', caption: '국립고궁박물관' },
+                { src: '/images/palaces/dancheong_real.png', caption: '순종황제 어차', position: 'top' },
+                { src: '/images/palaces/gungjung_festival.png', caption: '다양한 국가에서 참석하는 궁중문화축전' },
+                { src: '/images/palaces/empire_120th.png', caption: '대한제국 선포 120주년 기념 행사' },
+                { src: '/images/palaces/joseon_chongdokbu.png', caption: '일제가 경복궁을 허물고 지은 조선총독부' }
             ]
         },
         '창덕궁': {
@@ -273,11 +276,12 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/changdeokgung_injeongjeon.png', caption: '창덕궁 전경' },
                 { src: '/images/palaces/changdeokgung_buyongjeong.png', caption: '창덕궁 후원에 있는 부용정' },
                 { src: '/images/palaces/changdeokgung_nakseonjae.png', caption: '낙선재 — 마지막까지 황세손이 거주하셨던 집' },
-                { src: '/images/palaces/changdeokgung_injeongjeon.png', caption: '인정전의 장엄한 전경' },
                 { src: '/images/palaces/changdeokgung_donhwamun.png', caption: '돈화문의 웅장한 야경' },
-                { src: '/images/palaces/changdeokgung_juhamnu.png', caption: '녹음이 우거진 주합루' }
+                { src: '/images/palaces/changdeokgung_juhamnu.png', caption: '녹음이 우거진 주합루' },
+                { src: '/images/palaces/changdeokgung_jongmyo_reconnected.png', caption: '90여년 만에 다시 연결된 창덕궁과 종묘' }
             ]
         },
         '창경궁': {
@@ -320,11 +324,11 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/changgyeonggung_panorama.png', caption: '창경궁 전경' },
                 { src: '/images/palaces/changgyeonggung_myeongjeongjeon.png', caption: '명정전의 우아한 자태' },
                 { src: '/images/palaces/changgyeonggung_daeonsil.png', caption: '대온실의 고풍스러운 식물원' },
                 { src: '/images/palaces/changgyeonggung_chundangji.png', caption: '춘당지의 환상적인 야경' },
-                { src: '/images/palaces/changgyeonggung_honghwamun.png', caption: '홍화문의 단청과 건축미' },
-                { src: '/images/palaces/changgyeonggung_tongmyeongjeon.png', caption: '통명전의 고즈넉한 풍경' }
+                { src: '/images/palaces/changgyeonggung_tongmyeongjeon.png', caption: '일제로 인해 창경원으로 불리며 치욕을 겪었던 창경궁' }
             ]
         },
         '덕수궁': {
@@ -366,9 +370,9 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
+                { src: '/images/palaces/deoksugung_jeonggwanheon.png', caption: '덕수궁 전경' },
                 { src: '/images/palaces/deoksugung_seokjojeon.png', caption: '글로벌 비전을 품었던 석조전' },
                 { src: '/images/palaces/deoksugung_junghwajeon.png', caption: '중화전의 위엄 있는 자태' },
-                { src: '/images/palaces/deoksugung_jeonggwanheon.png', caption: '정관헌의 아름다운 낭만' },
                 { src: '/images/palaces/deoksugung_doldamgil.png', caption: '덕수궁 돌담길의 가을 정취' },
                 { src: '/images/palaces/deoksugung_jungmyeongjeon.png', caption: '중명전의 고풍스러운 전경' }
             ]
@@ -412,10 +416,10 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/palaces/gyeonghuigung_sungjeongjeon.png', caption: '숭정전의 우아한 전경' },
-                { src: '/images/palaces/gyeonghuigung_taeryeongjeon.png', caption: '태령전의 고풍스러운 지붕' },
+                { src: '/images/palaces/gyeonghuigung_sungjeongjeon.png', caption: '경희궁 전경' },
+                { src: '/images/palaces/gyeonghuigung_taeryeongjeon.png', caption: '박문사의 정문이 되었던 경희궁의 정문 흥화문' },
                 { src: '/images/palaces/gyeonghuigung_jajeongjeon.png', caption: '자정전 앞의 고즈넉한 봄날' },
-                { src: '/images/palaces/gyeonghuigung_heunghwamun.png', caption: '흥화문의 당당한 모습' },
+                { src: '/images/palaces/gyeonghuigung_heunghwamun.png', caption: '콘크리트 건물에 둘러싸인 경희궁' },
                 { src: '/images/palaces/gyeonghuigung_seogwol_view.png', caption: '도심 속 서궐(경희궁)의 환상적인 야경' }
             ]
         },
@@ -476,9 +480,10 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', caption: '종묘대제 제향과 건축의 미학' },
                 { src: '/images/tours/ceremonies/jongmyo_daeje_detail_1.png', caption: '종묘대제 의례 장면' },
-                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_2.png', caption: '종묘대제 봉행 전경' }
+                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_2.png', caption: '종묘대제 봉행 전경' },
+                { src: '/images/tours/ceremonies/jongmyo_panorama.png', caption: '종묘 전경' },
+                { src: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', caption: '비움의 미학을 보여주는 종묘 정전' }
             ]
         },
         '사직대제': {
@@ -519,7 +524,8 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/tours/ceremonies/sajik_daeje_1771719257413.png', caption: '사직단과 전통 공예의 혼' }
+                { src: '/images/tours/ceremonies/sajik_daeje_1771719257413.png', caption: '사직대제' },
+                { src: '/images/tours/sajikdan_panorama.png', caption: '사직단 전경' }
             ]
         },
         '환구대제': {
@@ -560,7 +566,10 @@ export default function ToursPage() {
                 }
             ],
             gallery: [
-                { src: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', caption: '환구단의 황궁우와 황제 의례' }
+                { src: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', caption: '환구단의 황궁우와 황제 의례' },
+                { src: '/images/tours/hwanggungwoo_panorama.png', caption: '황궁우 전경' },
+                { src: '/images/tours/hwangudan_original.png', caption: '훼손되기 전 환구단과 황궁우의 모습' },
+                { src: '/images/tours/hwangudan_damaged.png', caption: '경성 철도호텔로 인해 훼손된 환구단' }
             ]
         },
         '국립고궁박물관': {
@@ -1021,11 +1030,12 @@ export default function ToursPage() {
 
                                         <div className="bg-[#0a1128]/80 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-[#d4af37]/20 shadow-xl max-w-4xl mx-auto">
                                             {/* Main Image */}
-                                            <div className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden mb-6 shadow-lg border border-[#d4af37]/30 bg-black/50">
+                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-6 shadow-lg border border-[#d4af37]/30 bg-black/50">
                                                 <img
                                                     src={palaceData[selectedImage.title].gallery[activeGalleryIndex].src}
                                                     alt={palaceData[selectedImage.title].gallery[activeGalleryIndex].caption}
-                                                    className="w-full h-full object-contain"
+                                                    className="w-full h-full object-cover"
+                                                    style={{ objectPosition: palaceData[selectedImage.title].gallery[activeGalleryIndex].position || 'center' }}
                                                 />
                                                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-12">
                                                     <p className="text-white text-center font-serif text-lg md:text-xl tracking-wide">
