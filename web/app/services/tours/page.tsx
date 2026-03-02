@@ -7,6 +7,7 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { MapPin, Clock, Users, Landmark, Crown, Globe, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { royalTombDistricts } from './tombData';
 
 const palaceTours = [
     {
@@ -182,7 +183,9 @@ export default function ToursPage() {
     const d = dict.pages.services;
     const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
     const [expandedSection, setExpandedSection] = useState<number | null>(null);
-    const [expandedTombSection, setExpandedTombSection] = useState<number | null>(null);
+    const [expandedTombSection, setExpandedTombSection] = useState<string | null>('0-0');
+    const [expandedDistrict, setExpandedDistrict] = useState<number | null>(0);
+    const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
     const [tourSection, setTourSection] = useState<string | null>('palaces');
     const scrollToEl = (el: HTMLElement) => setTimeout(() => {
         const y = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -443,10 +446,22 @@ export default function ToursPage() {
         },
         '종묘대제': {
             subtitle: "Jongmyo Daeje",
+            preIntro: {
+                title: '국가무형문화재 종묘제례',
+                paragraphs: [
+                    '종묘대제는 조선의 국가 사당이며 세계유산인 종묘에서 조선왕조 역대 왕과 왕비의 신위를 모시고 제사를 지내는 의식으로 제사 가운데 가장 규모가 크고 중요하기 때문에 종묘대제(宗廟大祭)라고도 한다. 종묘대제는 봄, 여름, 가을, 겨울, 납일 등 1년에 5번 지냈으나 현재는 매년 양력 5월 첫 번째 일요일과 11월 첫째주 토요일에 봉행되고 있다. 제향 의식뿐 아니라 제례악과 일무 등 유형과 무형의 세계유산을 함께 감상할 수 있는 종묘대제는 세계적으로 유례가 드문 종합적인 의례이다.',
+                    '종묘대제는 1969년부터 사단법인 국가무형문화재 종묘제례보존회(전주이씨대동종약원)에 의해 복원되었으며, 제향 행사는 제사 전의 준비과정과 임금이 출궁하여 종묘에 이르는 어가행렬, 제례 봉행(제례악 및 일무 포함)으로 나누어져 있다.',
+                    '1975년 국가무형문화재로 지정되었고, 2001년에는 유네스코 인류무형유산으로 등재되었다. 2006년부터 국제문화행사로 격상되어 거행되고 있다.'
+                ],
+                schedule: [
+                    { name: '宗廟春享大祭', date: '매년 5월 첫째주 일요일', location: '종묘 (서울시 종로구 종로 157)', times: ['영녕전 제향 10:00 ~ 12:00', '어가행렬 11:00 ~ 12:00', '정전 제향 14:00 ~ 16:30'] },
+                    { name: '宗廟秋享大祭', date: '매년 11월 첫째주 토요일', location: '종묘 (서울시 종로구 종로 157)', times: ['영녕전 제향 10:00 ~ 12:00', '정전 제향 13:30 ~ 16:00'] }
+                ]
+            },
             intro: [
                 "종묘는 조선 왕조의 역대 왕과 왕비들의 신주를 모신 왕실의 사당입니다.",
-                "1995년 유네스코는 이곳을 세계유산으로 지정하며 '건축적 아름다움과 제례 문화가 완벽하게 보존된 인류의 유산'이라고 평가했습니다.",
-                "화려한 장식으로 권위를 내세우는 서양의 신전과 달리, 종묘는 '절제'와 '침묵'을 통해 신성함을 드러냅니다. 100미터가 넘는 정전의 지붕 선이 만들어내는 장엄한 침묵 앞에서, 우리는 인간의 유한함과 역사의 영원함을 동시에 느끼게 됩니다."
+                "1995년 유네스코는 이곳을 세계유산으로 지정하며 '건축적 아름다움과 제례 문화가\n완벽하게 보존된 인류의 유산'이라고 평가했습니다.",
+                "화려한 장식으로 권위를 내세우는 서양의 신전과 달리, 종묘는 '절제'와 '침묵'을 통해 신성함을 드러냅니다.\n100미터가 넘는 정전의 지붕 선이 만들어내는 장엄한 침묵 앞에서,\n우리는 인간의 유한함과 역사의 영원함을 동시에 느끼게 됩니다."
             ],
             sections: [
                 {
@@ -487,6 +502,18 @@ export default function ToursPage() {
         },
         '사직대제': {
             subtitle: "Sajik Daeje",
+            preIntro: {
+                title: '국가무형문화재 사직대제 社稷大祭',
+                paragraphs: [
+                    '사직은 원래 토지신인 사(社)와 곡물신인 직(稷)에게 제사하는 단(壇)을 사직단(社稷壇)이라고 한다. 사단은 동쪽, 직단은 서쪽에 설치하였다. 토지와 곡식은 전근대 사회에서는 그 자체가 지배적인 생산수단과 그 생산물을 의미하였으므로, 토지신과 곡물신에 대한 숭앙은 이미 고대로부터 그 의미가 중시되어 개인적인 차원을 넘어선 국가제사로 정립되고 봉행되어 왔다. 사직이 종묘와 더불어 국가제사의 대종을 이루어 온 것은 그러한 인식의 자연스러운 발현이었다.',
+                    '우리 나라 역사에서 사직에 제사를 지낸 기원은 이미 삼국시대부터였다. 고려시대는 성종이 사직을 제도화한 이후로 고려 일대를 통하여 각종 제의와 기우제(祈雨祭)·기곡제(祈穀祭)·신농제(新農祭) 등을 여기에서 거행하였다. 조선왕조가 수립된 후, 태조 3년(1394) 11월에 경복궁의 서쪽 인달방(仁達坊)으로 사직의 위치가 결정되고, 다음해 정월부터 사직단의 축조를 착수하기 시작하였다. 사직단의 축조는 개경(開京) 환도로 공사가 일시 중단되었고, 또 종묘·궁궐·성곽 등 대규모 공역이 동시에 진행되는 관계로 백성들의 노동력이 여의치 않아, 태종 7년(1407) 5월에 이르러서야 비로소 완성되었다.',
+                    '사직단이 완성되자 단 위에 담장을 두르고 신실(神室)과 신문(神門)을 세웠다. 그리고 태종 16년에는 단 주변의 재실(齋室)을 마련하였다. 세종 8년(1426)에는 당(唐)의 옛제도에 의거하여 사직단의 사직서(社稷署)를 승격시키고, 그 관원으로 태종대 이래 사직단직(社稷壇直) 2인만을 두어온 것을 확대 개편하여 단직(壇直)을 녹사(錄事)로 삼고 그 위에 종 7품의 승(丞) 1인을 두었다. 그리고 이 사직서승은 종묘서승 아래에 서열시키고, 봉당시(奉當寺) 주부(注簿)로서 겸직하게 하였다.',
+                    '사직단에는 중춘(仲春)·중추(仲秋)의 첫 번째 \'무(戊)\'자가 든 날과 납일(臘日)에 제향을 받들어 국가와 민생의 안전을 기원하였고, 정월에는 기곡제를, 그리고 가뭄·한발 등 천재지변이 일어날 때마다 기우(祈雨)·기청(祈晴) 등 기양제(祈禳祭)를 가끔 행하였는데, 2000년 10월 사직대제가 국가무형문화재로 지정된 이후 매년 9월 넷째 토요일에 봉행하고 있다.'
+                ],
+                schedule: [
+                    { name: '사직대제', date: '매년 9월 4째주 토요일', location: '종로구 사직로 89 (사직단 : 사적 121호)', times: ['사직대제(12:00~13:30) 사직단', '어가행렬(11:00~12:00) 덕수궁 출발'] }
+                ]
+            },
             intro: [
                 "조선의 도읍 한양은 완벽한 계획도시였습니다. 법궁인 경복궁을 중심으로 왼쪽에는 왕실의 조상을 모신 '종묘'를, 오른쪽에는 이곳 '사직단'을 배치했습니다(좌묘우사, 左廟右社).",
                 "종묘가 과거의 역사를 기리는 곳이라면, 사직단은 현재 백성들의 먹고사는 문제 즉 '경제와 복지'를 기원하는 곳입니다.",
@@ -529,6 +556,17 @@ export default function ToursPage() {
         },
         '환구대제': {
             subtitle: "Hwangu Daeje",
+            preIntro: {
+                title: '조선시대 유교의식에 따라 하늘에 지내던 제사, 환구대제',
+                paragraphs: [
+                    '1897년 고종태황제께서는 대한제국의 천명(天命)을 국제사회에 선포하고 환구단을 설치하여 하늘에 제사를 지냈다. 유교문화권에서는 천신(天神)은 천명을 결정하는 지고(至高)의 신이다. 그러므로 천신에 대한제사의식은 국가의식 중 가장 크고 장엄한 절차를 수반하는 대사(大祀)이다.',
+                    '그러나 대한제국의 환구단은 일제가 헐어버리고 그 터에 철도호텔을 세우고 제천의식도 중단된 이후 황궁우만 보존되어 온 현실에서 전주이씨대동종약원은 2007년도에 우리의 제천의, 즉 환구단에 천신의 위패를 봉안하였던 황궁우의 역할을 복원하는 과정에서 우선 황궁우 내에 존재하였던 위관과 위패를 새로 만들어 봉안하면서부터 환구대제의 복원을 시작하였다.',
+                    '그러나 원형의 제천단이 있던 자리에 조선호텔이 있어 그 자리에서 제천의를 행할 수 없는 아쉬움은 남지만, 2008년도부터 매년 10월 12일에 고종태황제께서 거행하였던 자주 독립의 상징이며 국태민안을 기원하는 제향을 환구대제를 봉행하고 있다.'
+                ],
+                schedule: [
+                    { name: '환구대제', date: '매년 10월 12일', location: '서울 중구 소공동 (환구단 내 황궁우, 사적 157호)', times: ['정오'] }
+                ]
+            },
             intro: [
                 "환구단은 하늘과 땅이 만나는 가장 신성한 장소였습니다. 고종 광무태황제께서는 1897년 이곳에서 황제로 등극하시고 '대한제국'을 선포하셨습니다.",
                 "중국 사신이 머물던 곳(남별궁)을 허물고 하늘에 제사를 지내는 단을 쌓은 것은, 더 이상 누구의 간섭도 받지 않는 '완전한 자주 독립국'임을 전 세계에 알린 대사건이었습니다.",
@@ -784,24 +822,13 @@ export default function ToursPage() {
                             <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">왕릉제향</h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'tombs' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">UNESCO World Heritage — 500년 왕조의 숨결이 깃든 신의 정원</p>
+
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
 
                     <AnimatePresence initial={false}>
                         {tourSection === 'tombs' && (
                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-
-                                {/* Intro text */}
-                                <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/20 p-8 md:p-12 text-center mb-12 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                                    <Crown className="w-10 h-10 text-[#d4af37] mx-auto mb-6 opacity-80" />
-                                    <p className="text-[#fceda6] text-lg md:text-xl font-serif font-medium leading-relaxed break-keep mb-6">
-                                        서양의 왕릉이 권력을 과시하기 위한 거대한 석조 기념물이라면,<br className="hidden md:block" /> 조선의 왕릉은 자연으로 돌아가고자 했던 겸손함이 빚어낸 '신의 정원'입니다.
-                                    </p>
-                                    <p className="text-gray-300 text-sm md:text-base leading-relaxed break-keep">
-                                        이곳은 500년 조선 왕조의 역대 왕과 왕비 40기가 단 한 기의 훼손도 없이 보존된 세계 유일의 현장입니다. 하지만 유네스코가 진정으로 감동한 것은 이 무덤 자체가 아닙니다. 왕조가 사라진 지 100년이 지났음에도, 후손들이 매년 이곳에서 600년 전 방식 그대로 제사를 올리고 있다는 사실입니다.
-                                    </p>
-                                </GlassCard>
 
                                 {/* Wangneung Image Gallery */}
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -815,6 +842,89 @@ export default function ToursPage() {
                                         <img src="/images/tours/tombs/hyangro.png" alt="왕조차 조상 앞에서 예를 차렸던 향로" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                 </div>
+
+                                {/* 왕릉제향 상세 안내 - 지구별 콜랩스 형식 */}
+                                <div className="mb-12 space-y-3">
+                                    {royalTombDistricts.map((district, dIdx) => (
+                                        <div key={dIdx} className="border border-[#d4af37]/30 rounded-xl overflow-hidden bg-[#0a0f25]/80">
+                                            <button
+                                                onClick={() => setExpandedDistrict(expandedDistrict === dIdx ? null : dIdx)}
+                                                className="w-full flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-[#d4af37]/10 transition-colors text-left"
+                                            >
+                                                <span className="text-[#d4af37] font-serif font-bold text-base md:text-lg">&#x1F3EF; {district.district} ({district.tombs.length}기)</span>
+                                                <span className={`text-[#d4af37] text-lg transition-transform duration-300 ${expandedDistrict === dIdx ? 'rotate-180' : ''}`}>&#x25BE;</span>
+                                            </button>
+                                            <AnimatePresence initial={false}>
+                                                {expandedDistrict === dIdx && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, height: 0 }}
+                                                        animate={{ opacity: 1, height: 'auto' }}
+                                                        exit={{ opacity: 0, height: 0 }}
+                                                        transition={{ duration: 0.25 }}
+                                                        className="overflow-hidden"
+                                                    >
+                                                        <div className="px-3 pb-3 space-y-1">
+                                                            {district.tombs.map((tomb, tIdx) => {
+                                                                const tombKey = `${dIdx}-${tIdx}`;
+                                                                return (
+                                                                    <div key={tIdx} className="border border-[#d4af37]/15 rounded-lg overflow-hidden bg-[#0a0f25]/40">
+                                                                        <button
+                                                                            onClick={() => setExpandedTombSection(expandedTombSection === tombKey ? null : tombKey)}
+                                                                            className="w-full flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors text-left"
+                                                                        >
+                                                                            <span className="text-[#e8d48b] font-serif text-sm md:text-base">&#x25CE; {tomb.title}</span>
+                                                                            <span className={`text-[#d4af37] text-xs transition-transform duration-300 ${expandedTombSection === tombKey ? 'rotate-180' : ''}`}>&#x25BE;</span>
+                                                                        </button>
+                                                                        <AnimatePresence initial={false}>
+                                                                            {expandedTombSection === tombKey && (
+                                                                                <motion.div
+                                                                                    initial={{ opacity: 0, height: 0 }}
+                                                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                                                    exit={{ opacity: 0, height: 0 }}
+                                                                                    transition={{ duration: 0.2 }}
+                                                                                    className="overflow-hidden"
+                                                                                >
+                                                                                    <div className="px-5 pb-5 space-y-4 border-l-2 border-[#d4af37]/30 ml-4">
+                                                                                        {tomb.desc.map((p: string, pi: number) => (
+                                                                                            <p key={pi} className="text-gray-300 text-sm leading-[1.9] break-keep" style={{ textIndent: '1em' }}>{p}</p>
+                                                                                        ))}
+                                                                                        <div className="mt-4 bg-[#0a0f25]/60 rounded-lg p-4">
+                                                                                            <h4 className="text-[#d4af37] font-semibold text-xs mb-3">제향일 안내</h4>
+                                                                                            <table className="w-full text-xs text-gray-300 border-collapse">
+                                                                                                <thead>
+                                                                                                    <tr className="border-b border-[#d4af37]/30">
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">일시</th>
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">장소</th>
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">시간</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr className="border-b border-white/5">
+                                                                                                        <td className="py-1.5 px-2">{tomb.schedule.date}</td>
+                                                                                                        <td className="py-1.5 px-2">{tomb.schedule.place}</td>
+                                                                                                        <td className="py-1.5 px-2">{tomb.schedule.time}</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </motion.div>
+                                                                            )}
+                                                                        </AnimatePresence>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
+                                    ))}
+                                </div>
+
+
+
+
 
                                 {/* Features Accordion */}
                                 <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify break-keep mb-8">
@@ -853,18 +963,18 @@ export default function ToursPage() {
                                             className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 shadow-lg"
                                         >
                                             <button
-                                                onClick={() => setExpandedTombSection(expandedTombSection === idx ? null : idx)}
+                                                onClick={() => setExpandedFeature(expandedFeature === idx ? null : idx)}
                                                 className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-[#d4af37]/10 transition-colors"
                                             >
                                                 <h3 className="text-lg md:text-xl font-bold text-white flex items-center gap-3 break-keep">
                                                     <span className="text-[#d4af37] text-2xl font-serif italic">{idx + 1}.</span>
                                                     {section.title}
                                                 </h3>
-                                                <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedTombSection === idx ? 'rotate-180' : ''}`} />
+                                                <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedFeature === idx ? 'rotate-180' : ''}`} />
                                             </button>
 
                                             <div
-                                                className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedTombSection === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
+                                                className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedFeature === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
                                             >
                                                 <div className="p-6 pt-0 border-t border-[#d4af37]/10 mt-2 space-y-6">
                                                     {section.paragraphs.map((p, pIdx) => (
@@ -878,11 +988,11 @@ export default function ToursPage() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </div>
-            </section>
+                </div >
+            </section >
 
             {/* Ceremonies Section */}
-            <section className="py-20">
+            < section className="py-20" >
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('ceremonies', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
@@ -904,10 +1014,10 @@ export default function ToursPage() {
                         )}
                     </AnimatePresence>
                 </div>
-            </section>
+            </section >
 
             {/* Museums Section */}
-            <section className="py-20">
+            < section className="py-20" >
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('museums', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
@@ -929,167 +1039,214 @@ export default function ToursPage() {
                         )}
                     </AnimatePresence>
                 </div>
-            </section>
+            </section >
             {/* Image Modal */}
-            {selectedImage && (
-                <div
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050510]/80 backdrop-blur-md p-4 sm:p-6 animate-in fade-in duration-300"
-                    onClick={() => setSelectedImage(null)}
-                >
-                    {palaceData[selectedImage.title] ? (
-                        <div
-                            className="relative w-full max-w-5xl max-h-[85vh] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-500 border border-[#d4af37]/40 bg-[#0a1128] flex flex-col"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Close Button Inside Modal */}
-                            <button
-                                className="absolute top-4 right-4 z-[120] text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors backdrop-blur-sm"
-                                onClick={() => setSelectedImage(null)}
-                            >
-                                <X className="w-5 h-5" />
-                            </button>
-                            {/* Background Image Layer */}
+            {
+                selectedImage && (
+                    <div
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050510]/80 backdrop-blur-md p-4 sm:p-6 animate-in fade-in duration-300"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        {palaceData[selectedImage.title] ? (
                             <div
-                                className="absolute inset-0 z-0 opacity-20 mix-blend-screen"
-                                style={{
-                                    backgroundImage: `url(${selectedImage.src})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                }}
-                            />
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0a1128]/95 via-[#0a1128]/90 to-[#0a1128]" />
+                                className="relative w-full max-w-5xl max-h-[85vh] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-500 border border-[#d4af37]/40 bg-[#0a1128] flex flex-col"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* Close Button Inside Modal */}
+                                <button
+                                    className="absolute top-4 right-4 z-[120] text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors backdrop-blur-sm"
+                                    onClick={() => setSelectedImage(null)}
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                                {/* Background Image Layer */}
+                                <div
+                                    className="absolute inset-0 z-0 opacity-20 mix-blend-screen"
+                                    style={{
+                                        backgroundImage: `url(${selectedImage.src})`,
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                    }}
+                                />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0a1128]/95 via-[#0a1128]/90 to-[#0a1128]" />
 
-                            <div className="relative z-10 p-8 md:p-12 h-full overflow-y-auto custom-scrollbar flex-1">
-                                <div className="max-w-4xl mx-auto text-center space-y-8">
-                                    {/* Header Section */}
-                                    <div className="flex flex-col items-center justify-center border-b border-[#d4af37]/30 pb-8 mb-8 relative">
-                                        <div className="absolute -bottom-[1px] w-24 h-[2px] bg-[#d4af37]" />
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <Crown className="w-6 h-6 text-[#d4af37]" />
-                                            <h2 className="text-[#d4af37] font-semibold text-sm tracking-[0.2em] uppercase">WRA Warrant Tour</h2>
-                                            <Crown className="w-6 h-6 text-[#d4af37]" />
+                                <div className="relative z-10 p-8 md:p-12 h-full overflow-y-auto custom-scrollbar flex-1">
+                                    <div className="max-w-4xl mx-auto text-center space-y-8">
+                                        {/* Header Section */}
+                                        <div className="flex flex-col items-center justify-center border-b border-[#d4af37]/30 pb-8 mb-8 relative">
+                                            <div className="absolute -bottom-[1px] w-24 h-[2px] bg-[#d4af37]" />
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <Crown className="w-6 h-6 text-[#d4af37]" />
+                                                <h2 className="text-[#d4af37] font-semibold text-sm tracking-[0.2em] uppercase">WRA Warrant Tour</h2>
+                                                <Crown className="w-6 h-6 text-[#d4af37]" />
+                                            </div>
+                                            <h1 className="text-3xl md:text-5xl font-bold text-white tracking-widest font-serif drop-shadow-lg">{selectedImage.title}</h1>
+                                            <p className="text-[#d4af37]/80 font-serif tracking-widest mt-2 text-sm md:text-base">{palaceData[selectedImage.title]?.subtitle}</p>
                                         </div>
-                                        <h1 className="text-3xl md:text-5xl font-bold text-white tracking-widest font-serif drop-shadow-lg">{selectedImage.title}</h1>
-                                        <p className="text-[#d4af37]/80 font-serif tracking-widest mt-2 text-sm md:text-base">{palaceData[selectedImage.title]?.subtitle}</p>
-                                    </div>
 
-                                    {/* Intro Text */}
-                                    <div className="relative py-6 px-4">
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-12 opacity-20">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1"><path d="M10 11h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4l-2 8zm10 0h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4l-2 8z"></path></svg>
+                                        {/* Pre-Intro (종묘대제 등 상세 안내) */}
+                                        {palaceData[selectedImage.title].preIntro && (
+                                            <div className="border border-[#d4af37]/20 bg-[#0a0f25]/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-left">
+                                                <h3 className="text-base md:text-lg font-bold text-[#d4af37] mb-4 text-center tracking-wide">
+                                                    {palaceData[selectedImage.title].preIntro.title}
+                                                </h3>
+                                                <div className="space-y-3 mb-6">
+                                                    {palaceData[selectedImage.title].preIntro.paragraphs.map((p: string, idx: number) => (
+                                                        <p key={idx} className="text-gray-300 text-sm md:text-base leading-relaxed break-keep">{p}</p>
+                                                    ))}
+                                                </div>
+                                                {palaceData[selectedImage.title].preIntro.schedule && (
+                                                    <div>
+                                                        <h4 className="text-sm font-bold text-[#fceda6] mb-3 text-center">제향일 안내</h4>
+                                                        <div className="overflow-x-auto">
+                                                            <table className="w-full text-xs md:text-sm border-collapse">
+                                                                <thead>
+                                                                    <tr className="border-b border-[#d4af37]/30">
+                                                                        <th className="py-2 px-2 text-[#d4af37] font-medium text-left">제향</th>
+                                                                        <th className="py-2 px-2 text-[#d4af37] font-medium text-left">일시</th>
+                                                                        <th className="py-2 px-2 text-[#d4af37] font-medium text-left">장소</th>
+                                                                        <th className="py-2 px-2 text-[#d4af37] font-medium text-left">시간</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {palaceData[selectedImage.title].preIntro.schedule.map((s: any, idx: number) => (
+                                                                        <tr key={idx} className="border-b border-white/5">
+                                                                            <td className="py-2 px-2 text-gray-200 font-serif whitespace-nowrap">{s.name}</td>
+                                                                            <td className="py-2 px-2 text-gray-300 whitespace-nowrap">{s.date}</td>
+                                                                            <td className="py-2 px-2 text-gray-300 whitespace-nowrap">{s.location}</td>
+                                                                            <td className="py-2 px-2 text-gray-300">
+                                                                                {s.times.map((t: string, ti: number) => (
+                                                                                    <div key={ti}>{t}</div>
+                                                                                ))}
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        {/* Intro Text */}
+                                        <div className="relative py-6 px-4">
+                                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-12 opacity-20">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="1"><path d="M10 11h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4l-2 8zm10 0h-4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h4l-2 8z"></path></svg>
+                                            </div>
+                                            <p className="text-base md:text-lg font-serif font-medium text-[#fceda6] leading-[1.8] tracking-wide drop-shadow-md z-10 relative break-keep word-break-keep-all text-center">
+                                                {palaceData[selectedImage.title].intro.map((line: string, idx: number) => (
+                                                    <span key={idx} className="block mb-2 md:mb-1 last:mb-0 whitespace-pre-line">
+                                                        {line}
+                                                    </span>
+                                                ))}
+                                            </p>
                                         </div>
-                                        <p className="text-xl md:text-2xl font-serif font-medium text-[#fceda6] leading-[1.8] tracking-wide drop-shadow-md z-10 relative break-keep word-break-keep-all text-center">
-                                            {palaceData[selectedImage.title].intro.map((line: string, idx: number) => (
-                                                <span key={idx} className="block mb-2 md:mb-1 last:mb-0">
-                                                    {line}
-                                                </span>
-                                            ))}
-                                        </p>
-                                    </div>
 
-                                    {/* Detailed Content API */}
-                                    <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify px-4 md:px-8 break-keep">
-                                        {palaceData[selectedImage.title].sections.map((section: any, idx: number) => (
-                                            <div
-                                                key={idx}
-                                                className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300"
-                                            >
-                                                <button
-                                                    onClick={() => setExpandedSection(expandedSection === idx ? null : idx)}
-                                                    className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-[#d4af37]/10 transition-colors"
-                                                >
-                                                    <h3 className="text-lg md:text-xl font-bold text-white flex items-center gap-3 break-keep">
-                                                        <span className="text-[#d4af37] text-2xl font-serif italic">{idx + 1}.</span>
-                                                        {section.title}
-                                                    </h3>
-                                                    <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedSection === idx ? 'rotate-180' : ''}`} />
-                                                </button>
-
+                                        {/* Detailed Content API */}
+                                        <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify px-4 md:px-8 break-keep">
+                                            {palaceData[selectedImage.title].sections.map((section: any, idx: number) => (
                                                 <div
-                                                    className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedSection === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
+                                                    key={idx}
+                                                    className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300"
                                                 >
-                                                    <div className="p-6 pt-0 border-t border-[#d4af37]/10 mt-2 space-y-6">
-                                                        {section.paragraphs.map((p: string, pIdx: number) => (
-                                                            <p key={pIdx} className="whitespace-pre-line">{p}</p>
-                                                        ))}
+                                                    <button
+                                                        onClick={() => setExpandedSection(expandedSection === idx ? null : idx)}
+                                                        className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-[#d4af37]/10 transition-colors"
+                                                    >
+                                                        <h3 className="text-lg md:text-xl font-bold text-white flex items-center gap-3 break-keep">
+                                                            <span className="text-[#d4af37] text-2xl font-serif italic">{idx + 1}.</span>
+                                                            {section.title}
+                                                        </h3>
+                                                        <ChevronDown className={`w-5 h-5 text-[#d4af37] transition-transform duration-300 shrink-0 ${expandedSection === idx ? 'rotate-180' : ''}`} />
+                                                    </button>
+
+                                                    <div
+                                                        className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedSection === idx ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'}`}
+                                                    >
+                                                        <div className="p-6 pt-0 border-t border-[#d4af37]/10 mt-2 space-y-6">
+                                                            {section.paragraphs.map((p: string, pIdx: number) => (
+                                                                <p key={pIdx} className="whitespace-pre-line">{p}</p>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Thumbnail Image Gallery */}
-                                    <div className="pt-12 pb-8">
-                                        <div className="flex items-center justify-center gap-4 mb-8 opacity-60">
-                                            <div className="w-16 h-[1px] bg-[#d4af37]"></div>
-                                            <span className="text-[#d4af37] font-serif italic text-sm">{selectedImage.title} Gallery</span>
-                                            <div className="w-16 h-[1px] bg-[#d4af37]"></div>
+                                            ))}
                                         </div>
 
-                                        <div className="bg-[#0a1128]/80 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-[#d4af37]/20 shadow-xl max-w-4xl mx-auto">
-                                            {/* Main Image */}
-                                            <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-6 shadow-lg border border-[#d4af37]/30 bg-black/50">
-                                                <img
-                                                    src={palaceData[selectedImage.title].gallery[activeGalleryIndex].src}
-                                                    alt={palaceData[selectedImage.title].gallery[activeGalleryIndex].caption}
-                                                    className="w-full h-full object-cover"
-                                                    style={{ objectPosition: palaceData[selectedImage.title].gallery[activeGalleryIndex].position || 'center' }}
-                                                />
-                                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-12">
-                                                    <p className="text-white text-center font-serif text-lg md:text-xl tracking-wide">
-                                                        {palaceData[selectedImage.title].gallery[activeGalleryIndex].caption}
-                                                    </p>
+                                        {/* Thumbnail Image Gallery */}
+                                        <div className="pt-12 pb-8">
+                                            <div className="flex items-center justify-center gap-4 mb-8 opacity-60">
+                                                <div className="w-16 h-[1px] bg-[#d4af37]"></div>
+                                                <span className="text-[#d4af37] font-serif italic text-sm">{selectedImage.title} Gallery</span>
+                                                <div className="w-16 h-[1px] bg-[#d4af37]"></div>
+                                            </div>
+
+                                            <div className="bg-[#0a1128]/80 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-[#d4af37]/20 shadow-xl max-w-4xl mx-auto">
+                                                {/* Main Image */}
+                                                <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-6 shadow-lg border border-[#d4af37]/30 bg-black/50">
+                                                    <img
+                                                        src={palaceData[selectedImage.title].gallery[activeGalleryIndex].src}
+                                                        alt={palaceData[selectedImage.title].gallery[activeGalleryIndex].caption}
+                                                        className="w-full h-full object-cover"
+                                                        style={{ objectPosition: palaceData[selectedImage.title].gallery[activeGalleryIndex].position || 'center' }}
+                                                    />
+                                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 pt-12">
+                                                        <p className="text-white text-center font-serif text-lg md:text-xl tracking-wide">
+                                                            {palaceData[selectedImage.title].gallery[activeGalleryIndex].caption}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Thumbnails bg-[#050510]/50 rounded-xl p-3 */}
+                                                <div className="flex justify-center flex-wrap gap-3">
+                                                    {palaceData[selectedImage.title].gallery.map((img: any, idx: number) => (
+                                                        <button
+                                                            key={idx}
+                                                            onClick={() => setActiveGalleryIndex(idx)}
+                                                            className={`relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden transition-all duration-300 ${activeGalleryIndex === idx
+                                                                ? 'ring-2 ring-[#d4af37] ring-offset-2 ring-offset-[#0a1128] scale-105 opacity-100'
+                                                                : 'border border-white/10 opacity-60 hover:opacity-100 hover:scale-105'
+                                                                }`}
+                                                        >
+                                                            <img src={img.src} alt={img.caption} className="w-full h-full object-cover" />
+                                                        </button>
+                                                    ))}
                                                 </div>
                                             </div>
-
-                                            {/* Thumbnails bg-[#050510]/50 rounded-xl p-3 */}
-                                            <div className="flex justify-center flex-wrap gap-3">
-                                                {palaceData[selectedImage.title].gallery.map((img: any, idx: number) => (
-                                                    <button
-                                                        key={idx}
-                                                        onClick={() => setActiveGalleryIndex(idx)}
-                                                        className={`relative w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden transition-all duration-300 ${activeGalleryIndex === idx
-                                                            ? 'ring-2 ring-[#d4af37] ring-offset-2 ring-offset-[#0a1128] scale-105 opacity-100'
-                                                            : 'border border-white/10 opacity-60 hover:opacity-100 hover:scale-105'
-                                                            }`}
-                                                    >
-                                                        <img src={img.src} alt={img.caption} className="w-full h-full object-cover" />
-                                                    </button>
-                                                ))}
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div
-                            className="relative max-w-5xl max-h-[85vh] flex flex-col w-full rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-300 bg-[#050510]"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Close Button Inside Modal (For Standard Image Modal) */}
-                            <button
-                                className="absolute top-4 right-4 z-[120] text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors backdrop-blur-sm"
-                                onClick={() => setSelectedImage(null)}
+                        ) : (
+                            <div
+                                className="relative max-w-5xl max-h-[85vh] flex flex-col w-full rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] animate-in zoom-in-95 duration-300 bg-[#050510]"
+                                onClick={(e) => e.stopPropagation()}
                             >
-                                <X className="w-5 h-5" />
-                            </button>
-                            <div className="border-2 border-[#d4af37]/30 rounded-2xl p-2 relative flex flex-col items-center justify-center flex-1 overflow-hidden">
-                                <img
-                                    src={selectedImage.src}
-                                    alt={selectedImage.title}
-                                    className="w-full h-auto max-h-[80vh] object-contain rounded-xl"
-                                />
-                                <div className="absolute bottom-4 left-4 right-4 p-6 bg-gradient-to-t from-black via-black/80 to-transparent rounded-b-xl pointer-events-none">
-                                    <h3 className="text-3xl font-bold text-[#d4af37] tracking-wider mb-1">{selectedImage.title}</h3>
-                                    <p className="text-white/70">World Royal Academy Premium Tour</p>
+                                {/* Close Button Inside Modal (For Standard Image Modal) */}
+                                <button
+                                    className="absolute top-4 right-4 z-[120] text-white/70 hover:text-white bg-black/40 hover:bg-black/60 p-2 rounded-full transition-colors backdrop-blur-sm"
+                                    onClick={() => setSelectedImage(null)}
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                                <div className="border-2 border-[#d4af37]/30 rounded-2xl p-2 relative flex flex-col items-center justify-center flex-1 overflow-hidden">
+                                    <img
+                                        src={selectedImage.src}
+                                        alt={selectedImage.title}
+                                        className="w-full h-auto max-h-[80vh] object-contain rounded-xl"
+                                    />
+                                    <div className="absolute bottom-4 left-4 right-4 p-6 bg-gradient-to-t from-black via-black/80 to-transparent rounded-b-xl pointer-events-none">
+                                        <h3 className="text-3xl font-bold text-[#d4af37] tracking-wider mb-1">{selectedImage.title}</h3>
+                                        <p className="text-white/70">World Royal Academy Premium Tour</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                </div>
-            )}
-        </div>
+                        )}
+                    </div>
+                )
+            }
+        </div >
     );
 }
