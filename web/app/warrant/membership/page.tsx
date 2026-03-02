@@ -10,32 +10,17 @@ const membershipBenefits = [
     {
         icon: <Globe className="w-7 h-7" />,
         title: '글로벌 네트워킹',
-        desc: '전 세계 리더들과의 프라이빗 서밋 및 네트워킹 기회.',
+        desc: '',
     },
     {
         icon: <Crown className="w-7 h-7" />,
-        title: '로열 아이덴티티',
+        title: '왕실 이너서클 네트워킹',
         desc: 'WRA 공식 멤버 인증 및 디지털 주권(Digital Sovereignty) 확보.',
     },
     {
         icon: <Shield className="w-7 h-7" />,
-        title: '프리미엄 혜택',
+        title: 'DAO거버넌스',
         desc: '왕립 투어 우선 예약, 교육 프로그램 할인, 전용 라운지 이용.',
-    },
-    {
-        icon: <Star className="w-7 h-7" />,
-        title: '투자 기회',
-        desc: 'Web3 프로젝트 및 글로벌 펀드 투자 기회 제공.',
-    },
-    {
-        icon: <Users className="w-7 h-7" />,
-        title: '커뮤니티 접근',
-        desc: '멤버 전용 DAO(탈중앙화 자율 조직) 참여 및 거버넌스 권리.',
-    },
-    {
-        icon: <Gem className="w-7 h-7" />,
-        title: '왕실 선물 우선권',
-        desc: '공식 왕실 선물 선정 우선권 및 글로벌 시장 진출 지원.',
     },
 ];
 
@@ -44,11 +29,6 @@ export default function MembershipPage() {
 
     return (
         <div className="bg-[#050510] min-h-screen">
-            <HeroBanner
-                title="멤버십"
-                subtitle="Membership — 글로벌 리더를 위한 프리미엄 네트워크"
-            />
-
             {/* Overview */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
@@ -69,8 +49,7 @@ export default function MembershipPage() {
             <section className="pb-24">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <SectionHeader
-                        title="멤버십 혜택"
-                        subtitle="Exclusive Benefits for WRA Members"
+                        title="혜  택"
                     />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

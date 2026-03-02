@@ -58,9 +58,6 @@ export default function ConsultingPage() {
             <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1128] to-[#050510]">
                 <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none mix-blend-overlay" />
                 <div className="container mx-auto px-4 max-w-5xl relative z-10">
-                    <SectionHeader
-                        title="컨설팅 철학 (Philosophy)"
-                    />
 
                     <GlassCard delay={0.1} className="!bg-[#0a0f25]/80 !border-[#d4af37]/30 p-10 md:p-14 text-center shadow-[0_10px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
                         {/* Decorative Background Elements */}
@@ -71,7 +68,7 @@ export default function ConsultingPage() {
                             <Crown className="w-12 h-12 text-[#d4af37] mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
 
                             <h3 className="text-xl md:text-3xl font-serif text-[#fceda6] font-medium leading-[1.6] break-keep mb-10 tracking-wide">
-                                "비즈니스에 품격을 더해,<br className="hidden md:block" /> 국가의 자산이 되게 합니다."
+                                {`"비즈니스에 품격을 더해,`}<br className="hidden md:block" /> {`국가의 자산이 되게 합니다."`}
                             </h3>
 
                             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent mb-10"></div>
@@ -84,8 +81,8 @@ export default function ConsultingPage() {
                                 </p>
                                 <p>
                                     우리는 단순한 행정 지원을 넘어,<br className="hidden md:block" />
-                                    귀사의 기술과 제품에 <span className="text-[#d4af37] font-semibold">'이겨낼 수 없는 서사(Narrative)'</span>와<br className="hidden md:block" />
-                                    <span className="text-[#d4af37] font-semibold">'거부할 수 없는 명분'</span>을 입혀드립니다.
+                                    귀사의 기술과 제품에 <span className="text-[#d4af37] font-semibold">{`'이겨낼 수 없는 서사(Narrative)'`}</span>와<br className="hidden md:block" />
+                                    <span className="text-[#d4af37] font-semibold">{`'거부할 수 없는 명분'`}</span>을 입혀드립니다.
                                 </p>
                             </div>
                         </div>
@@ -93,13 +90,7 @@ export default function ConsultingPage() {
                 </div>
             </section>
 
-            {/* 5-Step Process */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <SectionHeader title="5-Step Strategic Process" subtitle="체계적인 5단계 전략 컨설팅 프로세스" />
-                    <ProcessDiagram steps={steps} />
-                </div>
-            </section>
+
 
             {/* Service Areas — Slides 67-70 */}
             <section className="py-20">

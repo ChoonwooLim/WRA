@@ -604,7 +604,7 @@ export const ko: Dictionary = {
             heroTitle: 'WRA 워런트 — 서비스',
             heroSubtitle: '경영한류컨설팅 · K-헤리티지',
             consultingTitle: '경영한류컨설팅',
-            consultingDesc: '글로벌 확장 전략과 국가 프로젝트 개발을 위한 전략 컨설팅.',
+            consultingDesc: '',
             step1: '진단 (Diagnosis)',
             step2: '처방 (Prescription)',
             step3: '혁신 (Transformation)',

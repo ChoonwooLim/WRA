@@ -55,7 +55,7 @@ export default function NoticesPage() {
         <div className="bg-[#050510] min-h-screen pt-[100px] pb-20 px-4">
             <div className="board-container">
                 <div className="board-header">
-                    <h1 className="board-title">📢 {dict.pages.community.noticesTitle}</h1>
+                    <h1 className="board-title">{dict.pages.community.noticesTitle}</h1>
                 </div>
 
                 <div className="board-controls">

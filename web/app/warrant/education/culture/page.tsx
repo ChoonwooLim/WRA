@@ -310,7 +310,7 @@ export default function LiteraturePage() {
                         viewport={{ once: true }}
                         className="text-center mb-6"
                     >
-                        <p className="text-[#d4af37] text-sm tracking-[0.3em] uppercase mb-3">📘 AI시대, 조용한 질문혁명</p>
+                        <p className="text-[#d4af37] text-sm tracking-[0.3em] uppercase mb-3">AI시대, 조용한 질문혁명</p>
                         <button
                             onClick={(e) => toggleSection('brainscience', e.currentTarget)}
                             className="flex items-center justify-center gap-3 mx-auto cursor-pointer"
