@@ -20,7 +20,7 @@ export function DigitalSealSection() {
                         transition={{ duration: 0.8 }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                            <span className="text-white">The Digital Seal</span>
+                            <span className="text-white">디지털 옥새</span>
                         </h2>
                         <p className="text-xl text-gray-400 leading-relaxed">
                             {dict.home.digitalSeal.description}

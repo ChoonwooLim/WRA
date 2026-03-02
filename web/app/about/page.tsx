@@ -28,7 +28,6 @@ export default function AboutPage() {
                     <div className="absolute inset-0 bg-[#050510]/90" />
                 </div>
                 <div className="relative z-10 container mx-auto px-4 max-w-5xl">
-                    <SectionHeader title={d.visionTitle} />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <GlassCard className="p-8">
                             <Target className="w-8 h-8 text-[#d4af37] mb-4" />

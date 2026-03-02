@@ -513,7 +513,7 @@ export const ko: Dictionary = {
             cta: 'Royal 33 멤버십 신청',
         },
         digitalSeal: {
-            title: '디지털 옥새 (The Digital Seal)',
+            title: 'The Digital Seal',
             subtitle: '블록체인 기반의 명품 브랜딩 전략',
             description: '"디지털 옥새"는 유산(Heritage)과 기술(Technology)의 완벽한 융합을 상징합니다. 아카데미가 발급하는 모든 인증과 파트너십에 대해 위변조 불가능한 진본성을 보증합니다.',
             feature1: '불멸의 권위 증명 (Immutable Proof)',
