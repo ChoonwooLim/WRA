@@ -10,8 +10,9 @@ import { Crown, MapPin, BookOpen, Landmark, Globe, GraduationCap, Shield, X } fr
 import Link from 'next/link';
 
 export default function CrownPrincePage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.crownPrince;
+    const isEn = language === 'en';
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState("/images/crown-prince-color.jpg");
 
@@ -31,27 +32,35 @@ export default function CrownPrincePage() {
     const profileSections = [
         {
             icon: <Shield className="w-6 h-6" />,
-            title: '신분 및 정통성',
-            titleEn: 'Identity & Legitimacy',
-            desc: '대한제국황실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 황실의 법통을 이은 황사손(황위계승 1순위)입니다.',
+            title: isEn ? 'Identity & Legitimacy' : '신분 및 정통성',
+            subtitle: isEn ? '신분 및 정통성' : 'Identity & Legitimacy',
+            desc: isEn
+                ? 'The 5th head of the Korean Imperial Household. As a great-grandson of Emperor Gojong and grandson of Imperial Prince Uichin, he was adopted by Crown Prince Yi Gu in 2003, inheriting the legitimate succession of the Imperial line.'
+                : '대한제국황실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 황실의 법통을 이은 황사손(황위계승 1순위)입니다.',
         },
         {
             icon: <Landmark className="w-6 h-6" />,
-            title: '제향 주관',
-            titleEn: 'Royal Rites & Ceremonies',
-            desc: '황제기증보유자로서 유네스코 세계유산으로 등재된 종묘대제와 사직대제, 그리고 환구대제의 초헌관(국왕의 역할)으로 봉직하고 계십니다.',
+            title: isEn ? 'Royal Rites & Ceremonies' : '제향 주관',
+            subtitle: isEn ? '제향 주관' : 'Royal Rites & Ceremonies',
+            desc: isEn
+                ? 'As the holder of the Imperial ancestral tablets, he serves as the Chief Officiant (the role of the King) at the UNESCO-listed Jongmyo Daeje, Sajik Daeje, and Hwangu Daeje ceremonies.'
+                : '황제기증보유자로서 유네스코 세계유산으로 등재된 종묘대제와 사직대제, 그리고 환구대제의 초헌관(국왕의 역할)으로 봉직하고 계십니다.',
         },
         {
             icon: <Globe className="w-6 h-6" />,
-            title: '문화재 환수 활동',
-            titleEn: 'Cultural Heritage Restoration',
-            desc: '일제강점기 등 해외로 유출된 왕실 문화재 환수에 매진하여, 명성황후의 화조도접선(서울역사박물관 기증), 황실 노리개 등 국보급 문화재를 환수하는 성과를 거두었습니다.',
+            title: isEn ? 'Cultural Heritage Restoration' : '문화재 환수 활동',
+            subtitle: isEn ? '문화재 환수 활동' : 'Cultural Heritage Restoration',
+            desc: isEn
+                ? 'Dedicated to recovering royal cultural assets lost overseas during Japanese colonial rule. Notable achievements include the return of Empress Myeongseong\'s painted folding fan (donated to Seoul Museum of History) and other national treasure-class artifacts.'
+                : '일제강점기 등 해외로 유출된 왕실 문화재 환수에 매진하여, 명성황후의 화조도접선(서울역사박물관 기증), 황실 노리개 등 국보급 문화재를 환수하는 성과를 거두었습니다.',
         },
         {
             icon: <GraduationCap className="w-6 h-6" />,
-            title: '대외 교류 및 문화 사업',
-            titleEn: 'International Relations & Cultural Projects',
-            desc: '인도네시아, 태국 등 해외 왕실과 교류하며, 2025년 세계왕실전통문화엑스포 개최를 추진하고 있습니다. 사단법인 대한황실문화원 총재로서 2014년 \'궁중문화축전\'을 기획하여 왕실 문화유산을 신한류 콘텐츠로 발전시켰습니다.',
+            title: isEn ? 'International Relations & Cultural Projects' : '대외 교류 및 문화 사업',
+            subtitle: isEn ? '대외 교류 및 문화 사업' : 'International Relations & Cultural Projects',
+            desc: isEn
+                ? 'Engaging in exchanges with royal families of Indonesia, Thailand, and other nations, while promoting the 2025 World Royal Traditional Culture Expo. As President of the Korean Imperial Cultural Foundation, he conceived the \'Royal Culture Festival\' in 2014, developing royal cultural heritage into new Hallyu content.'
+                : '인도네시아, 태국 등 해외 왕실과 교류하며, 2025년 세계왕실전통문화엑스포 개최를 추진하고 있습니다. 사단법인 대한황실문화원 총재로서 2014년 \'궁중문화축전\'을 기획하여 왕실 문화유산을 신한류 콘텐츠로 발전시켰습니다.',
         },
     ];
 
@@ -74,7 +83,7 @@ export default function CrownPrincePage() {
                                     className="w-full h-full object-cover object-top scale-[1.45] origin-top translate-y-6 transition-transform duration-500 group-hover:scale-[1.55]"
                                 />
                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <span className="text-white text-sm font-semibold tracking-wider border border-white/50 px-4 py-2 rounded-full backdrop-blur-sm">크게 보기</span>
+                                    <span className="text-white text-sm font-semibold tracking-wider border border-white/50 px-4 py-2 rounded-full backdrop-blur-sm">{isEn ? 'View Full' : '크게 보기'}</span>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +109,7 @@ export default function CrownPrincePage() {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-bold text-white mb-1">{section.title}</h3>
-                                        <p className="text-[#d4af37]/60 text-xs mb-3">{section.titleEn}</p>
+                                        <p className="text-[#d4af37]/60 text-xs mb-3">{section.subtitle}</p>
                                         <p className="text-gray-400 text-sm leading-relaxed">{section.desc}</p>
                                     </div>
                                 </div>
@@ -124,11 +133,12 @@ export default function CrownPrincePage() {
                         </div>
                         <GlassCard className="p-10 text-center md:text-left !bg-gradient-to-br !from-[#d4af37]/5 !to-[#d4af37]/0 !border-[#d4af37]/20 h-full flex flex-col justify-center">
                             <GraduationCap className="w-10 h-10 text-[#d4af37] mx-auto md:mx-0 mb-4" />
-                            <h3 className="text-xl font-bold text-white mb-3">조선 대한 황실 문화 계승 발전 세계화</h3>
-                            <p className="text-[#d4af37]/60 text-sm mb-3">Globalization of Korean Imperial Cultural Heritage</p>
+                            <h3 className="text-xl font-bold text-white mb-3">{isEn ? 'Globalization of Korean Imperial Cultural Heritage' : '조선 대한 황실 문화 계승 발전 세계화'}</h3>
+                            <p className="text-[#d4af37]/60 text-sm mb-3">{isEn ? '' : 'Globalization of Korean Imperial Cultural Heritage'}</p>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                미국 컬럼비아대학교 강연 등을 통해 조선 대한 황실 문화의 계승 발전과 세계화를 위해
-                                노력하고 계시며, 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신하고 계십니다.
+                                {isEn
+                                    ? 'Through lectures at Columbia University and other global engagements, he is dedicated to the preservation, development, and globalization of the Joseon-Korean Imperial cultural heritage, and committed to promoting Korean royal court culture as a world-class cultural legacy.'
+                                    : '미국 컬럼비아대학교 강연 등을 통해 조선 대한 황실 문화의 계승 발전과 세계화를 위해 노력하고 계시며, 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신하고 계십니다.'}
                             </p>
                         </GlassCard>
                     </div>
