@@ -786,32 +786,30 @@ export default function ToursPage() {
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner title={d.toursTitle} subtitle={d.toursDesc} />
 
-            {/* 5 Palaces Section */}
-            <section className="py-20">
+            {/* Ceremonies Section */}
+            < section className="py-20" >
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
-                        <button onClick={(e) => toggleTourSection('palaces', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">5대궁 투어</h2>
-                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'palaces' ? 'rotate-180' : ''}`}>▾</span>
+                        <button onClick={(e) => toggleTourSection('ceremonies', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">3대 제향</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'ceremonies' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어</p>
+                        <p className="text-gray-400 text-sm mt-3">대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례</p>
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
                     <AnimatePresence initial={false}>
-                        {tourSection === 'palaces' && (
+                        {tourSection === 'ceremonies' && (
                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {palaceTours.map((t, i) => (
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    {ceremonyTours.map((t, i) => (
                                         <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                                     ))}
-
-
                                 </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </div>
-            </section>
+            </section >
 
             {/* Royal Tombs Section */}
             <section className="py-20 relative overflow-hidden bg-gradient-to-b from-[#0a1128] to-[#050510]">
@@ -991,22 +989,22 @@ export default function ToursPage() {
                 </div >
             </section >
 
-            {/* Ceremonies Section */}
-            < section className="py-20" >
+            {/* 5 Palaces Section */}
+            <section className="py-20">
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
-                        <button onClick={(e) => toggleTourSection('ceremonies', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">유네스코 "세계인류무형유산"</h2>
-                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'ceremonies' ? 'rotate-180' : ''}`}>▾</span>
+                        <button onClick={(e) => toggleTourSection('palaces', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">5대궁 투어</h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'palaces' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례</p>
+                        <p className="text-gray-400 text-sm mt-3">Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어</p>
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
                     <AnimatePresence initial={false}>
-                        {tourSection === 'ceremonies' && (
+                        {tourSection === 'palaces' && (
                             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {ceremonyTours.map((t, i) => (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {palaceTours.map((t, i) => (
                                         <TourCard key={i} tour={t} index={i} onImageClick={(src, title) => { setActiveGalleryIndex(0); setExpandedSection(null); setSelectedImage({ src, title }); }} />
                                     ))}
                                 </div>
@@ -1014,7 +1012,7 @@ export default function ToursPage() {
                         )}
                     </AnimatePresence>
                 </div>
-            </section >
+            </section>
 
             {/* Museums Section */}
             < section className="py-20" >
