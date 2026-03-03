@@ -14,7 +14,7 @@ const monthlyData = [
 
 const topPages = [
     { path: '/', name: '메인 페이지', views: 3420, change: '+15%' },
-    { path: '/education/literature', name: '한국문학', views: 1280, change: '+42%' },
+    { path: '/education/literature', name: '한국 인문학', views: 1280, change: '+42%' },
     { path: '/tours', name: '왕립 투어', views: 980, change: '+8%' },
     { path: '/crown-prince/message', name: '황태손 인사말', views: 760, change: '+23%' },
     { path: '/education/korean', name: '한국어 교육', views: 540, change: '-3%' },

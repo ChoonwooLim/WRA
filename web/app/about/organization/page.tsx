@@ -239,8 +239,8 @@ export default function OrganizationPage() {
                             <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
                             <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
-                                    title="한국문학"
-                                    subtitle="Korean Literature"
+                                    title="한국 인문학"
+                                    subtitle="Korean Humanities"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
