@@ -186,7 +186,7 @@ export default function ToursPage() {
     const [expandedTombSection, setExpandedTombSection] = useState<string | null>('0-0');
     const [expandedDistrict, setExpandedDistrict] = useState<number | null>(0);
     const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
-    const [tourSection, setTourSection] = useState<string | null>('palaces');
+    const [tourSection, setTourSection] = useState<string | null>('ceremonies');
     const scrollToEl = (el: HTMLElement) => setTimeout(() => {
         const y = el.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({ top: y, behavior: 'smooth' });
