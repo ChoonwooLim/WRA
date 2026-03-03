@@ -26,8 +26,8 @@ const programs = [
         href: '/warrant/education/language',
     },
     {
-        title: '한국문학',
-        titleEn: 'Korean Literature',
+        title: '한국인문학',
+        titleEn: 'Korean Humanities',
         desc: 'AI시대 인문학과 놀자',
         href: '/warrant/education/culture',
     },
