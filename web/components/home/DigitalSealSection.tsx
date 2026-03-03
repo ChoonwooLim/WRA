@@ -20,7 +20,7 @@ export function DigitalSealSection() {
                         transition={{ duration: 0.8 }}
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                            <span className="text-white">디지털 옥새</span>
+                            <span className="text-white">{dict.home.digitalSeal.title}</span>
                         </h2>
                         <p className="text-xl text-gray-400 leading-relaxed">
                             {dict.home.digitalSeal.description}
@@ -40,7 +40,7 @@ export function DigitalSealSection() {
                             <Fingerprint className="w-32 h-32 text-primary" />
                         </div>
                         <ShieldCheck className="w-12 h-12 text-[#d4af37] mb-6" />
-                        <h3 className="text-2xl font-bold text-white mb-4">{dict.home.digitalSeal.title}</h3>
+                        <h3 className="text-2xl font-bold text-white mb-4">The Digital Seal</h3>
                         <p className="text-gray-400">{dict.home.digitalSeal.feature1}</p>
                     </motion.div>
 
