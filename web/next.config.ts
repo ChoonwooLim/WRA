@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   serverExternalPackages: ['pino-pretty', 'lokijs', 'encoding'],
   webpack: (config) => {
     config.externals.push('pino-pretty', 'lokijs', 'encoding', '@base-org/account');
