@@ -22,7 +22,7 @@ const programs = [
     {
         title: '한국어',
         titleEn: 'Korean Language',
-        desc: 'AI 기술 기반의 체계적인 한국어 교육',
+        desc: '訓 民 正 音',
         href: '/warrant/education/language',
     },
     {
@@ -92,7 +92,7 @@ export default function EducationLandingPage() {
                                             </div>
 
                                             {/* Description */}
-                                            <p className="text-gray-400 text-sm leading-[1.9] break-keep whitespace-pre-line group-hover:text-gray-300 transition-colors duration-300">{prog.desc}</p>
+                                            <p className="text-gray-400 text-base leading-[1.9] break-keep whitespace-pre-line group-hover:text-gray-300 transition-colors duration-300">{prog.desc}</p>
 
                                             {/* Arrow */}
                                             <div className="mt-6 flex items-center gap-2 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-all duration-300">
