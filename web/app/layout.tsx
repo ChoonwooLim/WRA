@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     // Naver verification is added via other tag below
   },
   other: {
-    'naver-site-verification': 'NAVER_VERIFICATION_CODE_HERE',
+    'naver-site-verification': 'f2a24429e0ec4d5140b6b00088ae20b800970a9c',
   },
   robots: {
     index: true,
