@@ -376,10 +376,10 @@ export function Navbar() {
                                                 <Link
                                                     key={sub.href}
                                                     href={sub.href}
-                                                    className="flex items-center gap-2 px-5 py-2 rounded-xl text-sm text-white/60 hover:text-[#64ffda] transition-all"
+                                                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm text-white/90 hover:text-[#64ffda] transition-all"
                                                     style={{
-                                                        background: 'linear-gradient(135deg, rgba(10,14,39,0.4) 0%, rgba(37,42,82,0.2) 100%)',
-                                                        border: '1px solid rgba(100,255,218,0.05)',
+                                                        background: 'linear-gradient(135deg, rgba(20,25,60,0.85) 0%, rgba(45,50,90,0.7) 100%)',
+                                                        border: '1px solid rgba(100,255,218,0.12)',
                                                     }}
                                                     onClick={() => setMobileMenuOpen(false)}
                                                 >

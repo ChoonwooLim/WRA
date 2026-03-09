@@ -492,10 +492,10 @@ export const ko: Dictionary = {
         warrantHighlights: {
             title: 'WRA warrant',
             subtitle: '',
-            education: { title: '교육', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
+            education: { title: '한국학공부', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
             certification: { title: '인증', desc: 'K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.' },
             consulting: { title: '컨설팅', desc: '경영한류컨설팅.' },
-            tours: { title: '투어', desc: '프리미엄 문화유산 투어.' },
+            tours: { title: 'K-헤리티지', desc: '프리미엄 문화유산 투어.' },
             membership: { title: '멤버쉽', desc: '프리미엄 멤버쉽 프로그램.' },
         },
         features: {
