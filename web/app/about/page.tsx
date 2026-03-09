@@ -35,15 +35,7 @@ export default function AboutPage() {
                             <ul className="space-y-3 text-gray-300 text-sm leading-relaxed">
                                 <li className="flex items-start gap-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/40 mt-2 flex-shrink-0" />
-                                    한국인의 진취적인 도전정신, 독창성, 문제해결능력, 창조능력으로 세계를 선도하는 한국형 인재 육성
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/40 mt-2 flex-shrink-0" />
-                                    1인 글로벌 임팩트 스타트업 육성
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]/40 mt-2 flex-shrink-0" />
-                                    세계를 선도하는 K-창의·융합형, K-뉴리더십 지도자 육성
+                                    한국인의 진취적인 도전정신, 독창성, 문제해결능력, 창조능력으로 세계를 선도하는 한국형 인력개발과 인재육성
                                 </li>
                             </ul>
                         </GlassCard>
@@ -53,12 +45,7 @@ export default function AboutPage() {
                             <p className="text-gray-300 text-sm leading-relaxed mb-4">
                                 위대한 한국과 위대한 한국인의 유전자, 한국인의 정체성을 확립하고 한류문화를 보급합니다.
                             </p>
-                            <div className="glass-card rounded-lg p-4 !border-[#d4af37]/20 text-center">
-                                <p className="text-[#d4af37] font-semibold text-sm italic">
-                                    &ldquo;대한민국 왕실의 정체성을 교육하며,<br />
-                                    브랜드의 명문화를 재탄생시키는 곳&rdquo;
-                                </p>
-                            </div>
+
                         </GlassCard>
                     </div>
                 </div>

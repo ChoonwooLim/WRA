@@ -11,7 +11,7 @@ const partners = [
     { name: 'ECCK', full: 'European Chamber of Commerce in Korea', desc: '주한유럽상공회의소' },
     { name: '국립고궁박물관', full: 'National Palace Museum of Korea', desc: 'National Palace Museum of Korea' },
     { name: '한국문화재재단', full: 'Korea Cultural Heritage Foundation', desc: 'Korea Cultural Heritage Foundation' },
-    { name: '대한제국왕실문화원', full: 'Imperial Culture Institute', desc: 'imperialhouse.kr' },
+    { name: '대한황실문화원', full: 'Imperial Culture Institute', desc: 'imperialhouse.kr' },
 ];
 
 export default function PartnersPage() {
