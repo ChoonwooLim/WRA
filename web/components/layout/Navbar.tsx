@@ -160,22 +160,10 @@ export function Navbar() {
                         ref={dropdownRef}
                     >
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+                        <Link href="/" className="flex items-center group flex-shrink-0">
                             <div className="relative w-12 h-12 group-hover:scale-110 transition-transform duration-300">
                                 <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
                             </div>
-                            <span
-                                className="text-[1.4rem] font-extrabold tracking-[0.12em]"
-                                style={{
-                                    background: 'linear-gradient(135deg, #00d4ff 0%, #64ffda 25%, #8b5cf6 50%, #a78bfa 75%, #06ffa5 100%)',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text',
-                                    filter: 'drop-shadow(0 2px 8px rgba(0, 212, 255, 0.3)) drop-shadow(0 0 20px rgba(100, 255, 218, 0.2))',
-                                }}
-                            >
-                                WRA
-                            </span>
                         </Link>
 
                         {/* Desktop Nav Menu — TwinVerse capsule style */}

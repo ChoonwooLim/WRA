@@ -47,7 +47,7 @@ export default function EducationLandingPage() {
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
-                title="교육"
+                title="한국학공부"
                 subtitle="K-헤리티지의 가치를 세계에 전하는 WRA 교육"
             />
 
