@@ -3,7 +3,7 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
-import { BookOpen, GraduationCap, Compass, Sparkles, Brain } from 'lucide-react';
+import { BookOpen, GraduationCap, Compass, Sparkles, Brain, Heart, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -30,6 +30,8 @@ export default function StudiesPage() {
     const [openKStudy, setOpenKStudy] = useState<number | null>(null);
     const [sectionOpen, setSectionOpen] = useState<Record<string, boolean>>({
         reason: true,
+        expected: false,
+        ripple: false,
         curriculum: false,
         unesco: false,
     });
@@ -41,7 +43,7 @@ export default function StudiesPage() {
         setSectionOpen(prev => {
             const isClosing = prev[key];
             if (key === 'curriculum' && !isClosing) setCatOpen('cat1');
-            return { reason: false, curriculum: false, unesco: false, [key]: !isClosing };
+            return { reason: false, expected: false, ripple: false, curriculum: false, unesco: false, [key]: !isClosing };
         });
         if (el) scrollToEl(el);
     };
@@ -144,6 +146,167 @@ export default function StudiesPage() {
                             )}
                         </AnimatePresence>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* ══════════════════════════════════════════
+                ♡ 기대효과
+            ══════════════════════════════════════════ */}
+            <section className="py-16 relative overflow-hidden bg-gradient-to-b from-[#0a0f25] to-[#0a0f25]">
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none" />
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-14"
+                    >
+                        <p className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-3">EXPECTED EFFECTS</p>
+                        <button
+                            onClick={(e) => toggleSection('expected', e.currentTarget)}
+                            className="flex items-center justify-center gap-3 mx-auto group cursor-pointer"
+                        >
+                            <Heart className="w-6 h-6 text-[#d4af37]" />
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">
+                                기대효과
+                            </h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${sectionOpen.expected ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                    </motion.div>
+
+                    <AnimatePresence initial={false}>
+                        {sectionOpen.expected && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
+                            >
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">1</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">한국에 대한 깊은 이해</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            주한 외국인들의 한국에 대한 막연한 경험이나 체험으로 한국인의 정신과 한국문화에 대한 깊은 이해와 안목을 가지게 된다.
+                                        </p>
+                                    </div>
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">2</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">한국문화 전도사 양성</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            한국문화가 가진 오랜 역사와 전통을 몸과 마음으로 체험하는 시간으로 한국문화 전도사를 양성하는 효과가 있다.
+                                        </p>
+                                    </div>
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">3</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">소통과 화해의 장</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            한국인에 대한 밀착도가 넓어져 다문화 가정에서는 소통과 화해의 장이 만들어지거나, 외국인의 경우에는 한국인과의 관계가 깊어진다.
+                                        </p>
+                                    </div>
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">4</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">한국의 정체성</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            해외 한국어과 학생들에게 한국학을 통해서 한국의 정체성을 심어줄 수 있다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </section>
+
+            {/* Divider */}
+            <div className="relative py-4 bg-[#0a0f25]">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-3/4 h-px bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" />
+                </div>
+                <div className="relative flex justify-center">
+                    <div className="bg-[#0a0f25] px-6 text-[#d4af37]">
+                        <Heart className="w-8 h-8 opacity-80" />
+                    </div>
+                </div>
+            </div>
+
+            {/* ══════════════════════════════════════════
+                ♡ 파급효과
+            ══════════════════════════════════════════ */}
+            <section className="py-16 relative overflow-hidden bg-gradient-to-b from-[#0a0f25] to-[#0a0f25]">
+                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none" />
+                <div className="container mx-auto px-4 max-w-6xl relative z-10">
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-14"
+                    >
+                        <p className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-3">RIPPLE EFFECTS</p>
+                        <button
+                            onClick={(e) => toggleSection('ripple', e.currentTarget)}
+                            className="flex items-center justify-center gap-3 mx-auto group cursor-pointer"
+                        >
+                            <Zap className="w-6 h-6 text-[#d4af37]" />
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">
+                                파급효과
+                            </h2>
+                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${sectionOpen.ripple ? 'rotate-180' : ''}`}>▾</span>
+                        </button>
+                    </motion.div>
+
+                    <AnimatePresence initial={false}>
+                        {sectionOpen.ripple && (
+                            <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
+                            >
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">1</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">자긍심 향상</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            한국인도 한국인에 대한 이해가 적다. 한국인에 대한 이해도가 넓어지고 자긍심도 커진다.
+                                        </p>
+                                    </div>
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">2</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">문화적 갈등 해소</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            외국인과 다문화가정의 일원인 경우는 한국전통의 이해로 한국에 대한 친한 외국인이 되고, 다문화가정의 경우는 서로 다른 문화적 갈등을 줄이는 계기가 된다.
+                                        </p>
+                                    </div>
+                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20 hover:!border-[#d4af37]/40 transition-colors">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <span className="w-8 h-8 rounded-full bg-[#d4af37]/10 flex items-center justify-center text-[#d4af37] text-sm font-bold">3</span>
+                                            <h4 className="text-[#fceda6] text-lg font-bold">정주효과</h4>
+                                        </div>
+                                        <p className="text-gray-300 text-base leading-[2] break-keep">
+                                            거주하는 마을 주민이 긍지를 가지게 되며 주도적으로 행사를 진행하여 마을에 대한 애정이 생긴다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
 
