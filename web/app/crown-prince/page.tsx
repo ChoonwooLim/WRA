@@ -24,7 +24,7 @@ export default function CrownPrincePage() {
     ];
 
     const subPages = [
-        { icon: <Crown className="w-6 h-6" />, title: d.lineageTitle, desc: d.lineageDesc, href: '/crown-prince/lineage' },
+        { icon: <Crown className="w-6 h-6" />, title: d.lineageTitle, desc: d.lineageDesc, href: 'https://www.imperialhouse.kr/sub02/sub02_01.php', external: true },
         { icon: <MapPin className="w-6 h-6" />, title: d.activitiesTitle, desc: d.activitiesDesc, href: '/crown-prince/activities' },
         { icon: <BookOpen className="w-6 h-6" />, title: d.messageTitle, desc: d.heroSubtitle, href: '/crown-prince/message' },
     ];
@@ -149,15 +149,20 @@ export default function CrownPrincePage() {
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {subPages.map((item, i) => (
-                            <Link key={i} href={item.href}>
+                        {subPages.map((item, i) => {
+                            const card = (
                                 <GlassCard delay={i * 0.1} className="text-center h-full cursor-pointer hover:border-[#d4af37]/50 transition-colors">
                                     <div className="text-[#d4af37] mb-4 flex justify-center">{item.icon}</div>
                                     <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
                                     <p className="text-gray-400 text-sm">{item.desc}</p>
                                 </GlassCard>
-                            </Link>
-                        ))}
+                            );
+                            return item.external ? (
+                                <a key={i} href={item.href} target="_blank" rel="noopener noreferrer">{card}</a>
+                            ) : (
+                                <Link key={i} href={item.href}>{card}</Link>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

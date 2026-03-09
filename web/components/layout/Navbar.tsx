@@ -70,7 +70,6 @@ export function Navbar() {
             submenu: [
                 { label: dict.navbar.profile, href: '/crown-prince' },
                 { label: dict.navbar.congratulations, href: '/crown-prince/message' },
-                { label: dict.navbar.lineage, href: '/crown-prince/lineage' },
             ],
         },
         {
