@@ -20,7 +20,7 @@ const membershipBenefits = [
     {
         icon: <Shield className="w-7 h-7" />,
         title: 'DAO거버넌스',
-        desc: '왕립 투어 우선 예약, 교육 프로그램 할인, 전용 라운지 이용.',
+        desc: '블록체인 스마트계약을 기반으로 운영되는 탈 중앙 조직.',
     },
 ];
 

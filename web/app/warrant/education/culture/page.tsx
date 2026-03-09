@@ -14,7 +14,7 @@ function renderHighlighted(text: string): React.ReactNode[] {
     return parts.map((part, i) => {
         if (part.startsWith('**') && part.endsWith('**')) {
             return (
-                <span key={i} className="text-[#d4af37] font-semibold">
+                <span key={i} className="text-white">
                     {part.slice(2, -2)}
                 </span>
             );
@@ -177,8 +177,6 @@ export default function LiteraturePage() {
                             </h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${sectionOpen === 'humanities' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-
-
                     </motion.div>
 
                     <AnimatePresence initial={false}>
@@ -190,6 +188,7 @@ export default function LiteraturePage() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                             >
+
                                 {/* Poetic Intro (from doc 2) */}
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
@@ -203,19 +202,10 @@ export default function LiteraturePage() {
                                         <p>지금 이 자리에 내가 실존하고 있는데 말입니다.<br />
                                             그렇지만 나 자신인 나를<br />
                                             너무 모른다는 것이 현실이기도 합니다.</p>
-                                        <p className="text-[#d4af37] font-semibold not-italic">영원한 숙제지요.</p>
-                                    </div>
-
-                                    <div className="max-w-2xl mx-auto mt-6 space-y-4 text-gray-300 text-base md:text-lg leading-[1.9]">
-                                        <p>
-                                            {renderHighlighted('**세상을 바라보고, 판단하는 존재**가 누구지요. **나 자신**입니다.')}
-                                        </p>
-                                        <p>
-                                            {renderHighlighted('나 자신을 모르면 세상을 판단하는 **척도**가 오류일 수밖에 없습니다.')}
-                                        </p>
-                                        <p>
-                                            {renderHighlighted('나를 발견하고 깨닫는 일입니다. 핵심은 **나를 찾는 것**입니다. 그것이 **인문학**입니다.')}
-                                        </p>
+                                        <p>영원한 숙제지요.</p>
+                                        <p>세상을 바라보고, 판단하는 존재가 누구지요. 나 자신입니다.</p>
+                                        <p>나 자신을 모르면 세상을 판단하는 척도가 오류일 수밖에 없습니다.</p>
+                                        <p>나를 발견하고 깨닫는 일입니다. 핵심은 나를 찾는 것입니다.<br />그것이 인문학입니다.</p>
                                     </div>
                                 </motion.div>
 

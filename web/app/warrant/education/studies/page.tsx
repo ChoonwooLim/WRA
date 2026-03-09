@@ -557,7 +557,7 @@ export default function StudiesPage() {
                                                             <h4 className="text-[#fceda6] font-semibold mb-4 text-lg">15. 문화의 탄생과 역사의 한류화</h4>
                                                             <ul className="text-gray-300 text-sm leading-[2] space-y-0.5 pl-1">
                                                                 <li>가. 다뉴세문경</li>
-                                                                <li>나. 천부경과 환단고기</li>
+                                                                <li>나. 천부경</li>
                                                                 <li>다. 피라미드</li>
                                                                 <li>라. 금관과 기병문화</li>
                                                             </ul>
