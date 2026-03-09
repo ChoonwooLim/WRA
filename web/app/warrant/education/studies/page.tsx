@@ -33,7 +33,6 @@ export default function StudiesPage() {
         expected: false,
         ripple: false,
         curriculum: false,
-        unesco: false,
     });
     const scrollToEl = (el: HTMLElement) => setTimeout(() => {
         const y = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -43,7 +42,7 @@ export default function StudiesPage() {
         setSectionOpen(prev => {
             const isClosing = prev[key];
             if (key === 'curriculum' && !isClosing) setCatOpen('cat1');
-            return { reason: false, expected: false, ripple: false, curriculum: false, unesco: false, [key]: !isClosing };
+            return { reason: false, expected: false, ripple: false, curriculum: false, [key]: !isClosing };
         });
         if (el) scrollToEl(el);
     };
@@ -582,68 +581,6 @@ export default function StudiesPage() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </div>
-            </section>
-
-            {/* ══════════════════════════════════════════
-                유네스코지정 한국의 세계문화유산, 세계기록유산
-            ══════════════════════════════════════════ */}
-            <section className="py-16 relative overflow-hidden bg-[#050510]">
-                <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.03] pointer-events-none" />
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#1e3a8a]/10 blur-[150px] rounded-full pointer-events-none" />
-                <div className="container mx-auto px-4 max-w-6xl relative z-10">
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-12"
-                    >
-                        <p className="text-[#d4af37]/60 text-sm tracking-[0.3em] uppercase mb-3">UNESCO HERITAGE</p>
-                        <button
-                            onClick={(e) => toggleSection('unesco', e.currentTarget)}
-                            className="flex items-center justify-center gap-3 mx-auto group cursor-pointer"
-                        >
-                            <h2 className="text-2xl md:text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">
-                                유네스코지정 한국의 세계문화유산·세계기록유산
-                            </h2>
-                            <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${sectionOpen.unesco ? 'rotate-180' : ''}`}>▾</span>
-                        </button>
-                    </motion.div>
-
-                    <AnimatePresence initial={false}>
-                        {sectionOpen.unesco && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                            >
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20">
-                                        <h4 className="text-[#fceda6] text-lg font-bold mb-4 flex items-center gap-2">
-                                            <span className="text-[#d4af37]">◆</span> 한국의 세계문화유산
-                                        </h4>
-                                        <div className="text-gray-300 text-base leading-[2] break-keep space-y-3">
-                                            <p>한국인의 정신과 기질로 만들어낸 가장 한국적이면서도 가장 세계적인 문화재들이다.</p>
-                                            <p>이러한 문화유산은 우리가 선조로부터 물려받아 앞으로 우리 후손들에게 물려주어야 할 자산으로 다른 어느 것으로도 대체할 수 없는 우리들의 삶과 영감의 원천이다.</p>
-                                        </div>
-                                    </div>
-                                    <div className="glass-card rounded-xl p-8 !bg-[#d4af37]/5 !border-[#d4af37]/20">
-                                        <h4 className="text-[#fceda6] text-lg font-bold mb-4 flex items-center gap-2">
-                                            <span className="text-[#d4af37]">◆</span> 한국의 세계기록유산
-                                        </h4>
-                                        <div className="text-gray-300 text-base leading-[2] break-keep space-y-3">
-                                            <p>세계적으로 뛰어난 사회적, 정신적, 문화적 가치를 지닌 자료이며, 인류의 문화를 계승하는 기록을 담고 있는 정보 또는 그 기록을 전하는 매개물이다.</p>
-                                            <p>한국의 세계기록유산은 우리 민족의 창조적 능력과 독창성 및 진취적인 도전정신을 그대로 문자화 한 기록문화의 결정체라 할 수 있다.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
                 </div>
             </section>
 
