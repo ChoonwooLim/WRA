@@ -132,7 +132,7 @@ export default function OrganizationPage() {
                 <div className="container mx-auto px-4 max-w-6xl relative">
 
                     {/* 3D Floating Logo VFX & Text */}
-                    {/* Aligned horizontally with Level 1 (CEO) and vertically with Level 2 Left Pillar (한국어) */}
+                    {/* Aligned horizontally with Level 1 (CEO) and vertically with Level 2 Left Pillar (국내운영본부) */}
                     <div className="absolute top-[136px] left-[16.666%] transform -translate-x-1/2 ml-10 -translate-y-1/2 hidden md:flex flex-col items-center z-20">
                         <div className="relative">
                             <motion.div
@@ -185,9 +185,28 @@ export default function OrganizationPage() {
                             </div>
                         </div>
 
-                        {/* Vertical line 0 -> 1 */}
-                        <div className="relative w-full flex flex-col items-center z-0">
-                            <div className="w-[2px] h-16 md:h-20 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
+                        {/* Vertical line 0 -> 1 with 브랜드윤리경영위원회 */}
+                        <div className="relative w-full flex flex-col items-center z-0" style={{ minHeight: '120px' }}>
+                            {/* Vertical golden line */}
+                            <div className="w-[2px] h-28 md:h-32 bg-gradient-to-b from-[#d4af37] via-[#d4af37]/60 to-[#d4af37]/40" />
+
+                            {/* 브랜드윤리경영위원회 - positioned to the right of the connecting line */}
+                            <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 items-center" style={{ left: 'calc(50% + 1px)' }}>
+                                <div className="w-12 h-[1.5px] bg-gradient-to-r from-[#d4af37]/60 to-[#d4af37]/30" />
+                                <div className="relative group">
+                                    <div className="absolute inset-0 bg-[#d4af37]/8 blur-xl rounded-2xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                    <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-[#e6c875] px-8 py-4 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.12)] text-base font-semibold tracking-wide z-10 transition-all duration-300 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/70 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] whitespace-nowrap">
+                                        브랜드윤리경영위원회
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Mobile: 브랜드윤리경영위원회 */}
+                            <div className="md:hidden flex items-center gap-2 my-2">
+                                <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/50 text-[#e6c875] px-6 py-3 rounded-xl text-sm font-semibold tracking-wide">
+                                    브랜드윤리경영위원회
+                                </div>
+                            </div>
                         </div>
 
                         {/* Level 1: CEO + 전략기획실 */}
@@ -197,26 +216,25 @@ export default function OrganizationPage() {
                             </div>
 
                             {/* 전략기획실 - absolute positioned to the right */}
-                            <div className="hidden md:flex absolute left-[calc(50%+90px)] top-1/2 -translate-y-1/2 items-center">
-                                <div className="w-8 h-[1px] bg-[#d4af37]/40" />
-                                <div className="bg-[#1a140a]/80 border border-[#d4af37]/40 text-[#d4af37] px-6 py-3 rounded-xl backdrop-blur-md shadow-lg text-sm font-medium z-10 transition-colors hover:bg-[#d4af37]/20 hover:shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 items-center" style={{ left: 'calc(50% + 90px)' }}>
+                                <div className="w-12 h-[1.5px] bg-gradient-to-r from-[#d4af37]/60 to-[#d4af37]/30" />
+                                <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/40 outline outline-[1.5px] outline-[#d4af37]/20 outline-offset-[3px] text-[#d4af37] px-8 py-4 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.1)] text-base font-medium z-10 transition-all duration-300 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/60 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
                                     전략기획실
                                 </div>
                             </div>
                         </div>
 
-                        {/* Main Branching Lines (CEO -> 3 Pillars) - Desktop */}
+                        {/* Main Branching Lines (CEO -> 2 Pillars) - Desktop */}
                         <div className="relative w-full max-w-5xl hidden md:flex flex-col items-center">
                             {/* Vertical drop from CEO */}
                             <div className="w-[2px] h-12 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
-                            {/* T-junction: horizontal bar + 3 drops */}
+                            {/* T-junction: horizontal bar + 2 drops */}
                             <div className="relative w-full">
-                                {/* Horizontal bar spanning across all 3 columns */}
-                                <div className="absolute top-0 left-[16.666%] right-[16.666%] h-[2px] bg-[#d4af37]/40" />
-                                {/* 3 vertical drops */}
-                                <div className="absolute top-0 left-[16.666%] w-[2px] h-10 bg-[#d4af37]/40" />
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-10 bg-[#d4af37]/40" />
-                                <div className="absolute top-0 right-[16.666%] w-[2px] h-10 bg-[#d4af37]/40" />
+                                {/* Horizontal bar spanning across 2 columns */}
+                                <div className="absolute top-0 left-[25%] right-[25%] h-[2px] bg-[#d4af37]/40" />
+                                {/* 2 vertical drops */}
+                                <div className="absolute top-0 left-[25%] w-[2px] h-10 bg-[#d4af37]/40" />
+                                <div className="absolute top-0 right-[25%] w-[2px] h-10 bg-[#d4af37]/40" />
                                 {/* Spacer */}
                                 <div className="h-10" />
                             </div>
@@ -225,32 +243,22 @@ export default function OrganizationPage() {
                         {/* Mobile vertical line */}
                         <div className="md:hidden w-[2px] h-10 bg-[#d4af37]/30" />
 
-                        {/* Level 2: The Three Pillars */}
-                        <div className="w-full max-w-5xl flex flex-col md:flex-row justify-between relative">
-                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
+                        {/* Level 2: The Two Pillars */}
+                        <div className="w-full max-w-5xl flex flex-col md:flex-row justify-center gap-8 relative">
+                            <div className="w-full md:w-1/2 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
-                                    title="한국어"
-                                    subtitle="Korean Language"
+                                    title="국내운영본부"
+                                    subtitle="Domestic Operations"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
                             </div>
                             {/* Mobile spacer */}
                             <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
-                            <div className="w-full md:w-1/3 flex justify-center px-2 mb-4 md:mb-0">
+                            <div className="w-full md:w-1/2 flex justify-center px-2">
                                 <OrgNode
-                                    title="한국 인문학"
-                                    subtitle="Korean Humanities"
-                                    variant="ceo"
-                                    className="w-full max-w-[280px]"
-                                />
-                            </div>
-                            {/* Mobile spacer */}
-                            <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
-                            <div className="w-full md:w-1/3 flex justify-center px-2">
-                                <OrgNode
-                                    title="한국학"
-                                    subtitle="Korean Studies"
+                                    title="국제운영본부"
+                                    subtitle="International Operations"
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />

@@ -52,15 +52,15 @@ export default function CrownPrincePage() {
             subtitle: isEn ? '문화재 환수 활동' : 'Cultural Heritage Restoration',
             desc: isEn
                 ? 'Dedicated to recovering royal cultural assets lost overseas during Japanese colonial rule. Notable achievements include the return of Empress Myeongseong\'s painted folding fan (donated to Seoul Museum of History) and other national treasure-class artifacts.'
-                : '일제강점기 등 해외로 유출된 왕실 문화재 환수에 매진하여, 명성황후의 화조도접선(서울역사박물관 기증), 황실 노리개 등 국보급 문화재를 환수하는 성과를 거두었습니다.',
+                : '일제강점기 등 해외로 유출된 황실 문화재 환수에 매진하여, 명성황후의 화조도접선(서울역사박물관 기증), 황실 노리개 등 국보급 문화재를 환수하는 성과를 거두었습니다.',
         },
         {
             icon: <GraduationCap className="w-6 h-6" />,
             title: isEn ? 'International Relations & Cultural Projects' : '대외 교류 및 문화 사업',
             subtitle: isEn ? '대외 교류 및 문화 사업' : 'International Relations & Cultural Projects',
             desc: isEn
-                ? 'Engaging in exchanges with royal families of Indonesia, Thailand, and other nations, while promoting the 2025 World Royal Traditional Culture Expo. As President of the Korean Imperial Cultural Foundation, he conceived the \'Royal Culture Festival\' in 2014, developing royal cultural heritage into new Hallyu content.'
-                : '인도네시아, 태국 등 해외 왕실과 교류하며, 2025년 세계왕실전통문화엑스포 개최를 추진하고 있습니다. 사단법인 대한황실문화원 총재로서 2014년 \'궁중문화축전\'을 기획하여 왕실 문화유산을 신한류 콘텐츠로 발전시켰습니다.',
+                ? 'Engaging in exchanges with royal families of Indonesia, Thailand, and other nations, while promoting the 2027 World Royal Traditional Culture Expo. As President of the Korean Imperial Cultural Foundation, he conceived the \'Royal Culture Festival\' in 2014, developing royal cultural heritage into new Hallyu content.'
+                : '인도네시아, 태국 등 해외 황실과 교류하며, 2027년 세계황실전통문화엑스포 개최를 추진하고 있습니다. 사단법인 대한황실문화원 총재로서 2014년 \'궁중문화축전\'을 기획하여 황실 문화유산을 신한류 콘텐츠로 발전시켰습니다.',
         },
     ];
 
