@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 import { HeroBanner } from '@/components/shared/HeroBanner';
@@ -6,7 +6,6 @@ import { SectionHeader } from '@/components/shared/SectionHeader';
 import { GlassCard } from '@/components/shared/GlassCard';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
     Award,
@@ -131,45 +130,6 @@ export default function OrganizationPage() {
             <section className="py-20 relative z-10 w-full">
                 <div className="container mx-auto px-4 max-w-6xl relative">
 
-                    {/* 3D Floating Logo VFX & Text */}
-                    {/* Aligned horizontally with Level 1 (CEO) and vertically with Level 2 Left Pillar (국내운영본부) */}
-                    <div className="absolute top-[136px] left-[16.666%] transform -translate-x-1/2 ml-10 -translate-y-1/2 hidden md:flex flex-col items-center z-20">
-                        <div className="relative">
-                            <motion.div
-                                animate={{ scale: [1, 1.15, 1] }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                }}
-                                className="relative w-32 h-32 md:w-36 md:h-36 filter drop-shadow-[0_0_15px_rgba(212,175,55,0.5)] z-10"
-                            >
-                                <Image
-                                    src="/wra_logo-1.png"
-                                    alt="WRA 3D Logo"
-                                    fill
-                                    className="object-contain"
-                                />
-                            </motion.div>
-                            <motion.div
-                                animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-4 bg-[#d4af37] blur-xl rounded-full z-0"
-                            />
-                        </div>
-
-                        {/* WRA Typography Signature */}
-                        <div className="mt-6 z-10 flex flex-col w-max">
-                            <h2 className="font-serif text-lg md:text-xl font-medium tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#e6c875] via-[#fff] to-[#e6c875] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase">
-                                WORLD ROYAL ACADEMY
-                            </h2>
-                            <h3 className="mt-1 w-full flex justify-between text-[#d4af37] text-lg md:text-[22px] font-bold drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]">
-                                {"세계왕립아카데미".split('').map((char, i) => (
-                                    <span key={i}>{char}</span>
-                                ))}
-                            </h3>
-                        </div>
-                    </div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -185,28 +145,61 @@ export default function OrganizationPage() {
                             </div>
                         </div>
 
-                        {/* Vertical line 0 -> 1 with 브랜드윤리경영위원회 */}
-                        <div className="relative w-full flex flex-col items-center z-0" style={{ minHeight: '120px' }}>
-                            {/* Vertical golden line */}
-                            <div className="w-[2px] h-28 md:h-32 bg-gradient-to-b from-[#d4af37] via-[#d4af37]/60 to-[#d4af37]/40" />
+                        {/* ── 수직선: 황태손 → 신광철 ── */}
+                        <div className="w-[2px] h-12 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
 
-                            {/* 브랜드윤리경영위원회 - positioned to the right of the connecting line */}
-                            <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 items-center" style={{ left: 'calc(50% + 1px)' }}>
-                                <div className="w-12 h-[1.5px] bg-gradient-to-r from-[#d4af37]/60 to-[#d4af37]/30" />
-                                <div className="relative group">
-                                    <div className="absolute inset-0 bg-[#d4af37]/8 blur-xl rounded-2xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                                    <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-[#e6c875] px-8 py-4 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.12)] text-base font-semibold tracking-wide z-10 transition-all duration-300 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/70 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] whitespace-nowrap">
-                                        브랜드윤리경영위원회
-                                    </div>
-                                </div>
+                        {/* ── 신광철 노드 (중앙) ── */}
+                        <div className="bg-[#0c1024]/90 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-center px-10 py-5 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-[#d4af37]/80 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] z-10">
+                            <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">한국문화창조학교</p>
+                            <p className="text-gray-300 text-sm mt-1">교장 <span className="text-[#d4af37] font-bold">신광철</span><span className="text-gray-400 text-xs">(작가)</span></p>
+                        </div>
+
+                        {/* ── Junction 행: absolute 포지셔닝으로 겹침 없이 배치 ── */}
+                        <div className="hidden md:block relative w-full z-10" style={{ height: '160px' }}>
+
+                            {/* 중앙 수직관통선 — left:50% 기준 */}
+                            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#d4af37]/60 via-[#d4af37]/70 to-[#d4af37]/60" />
+
+                            {/* 좌측 수평선 — 중앙에서 왼쪽으로 140px */}
+                            <div className="absolute top-1/2 -translate-y-1/2 h-[1.5px] bg-gradient-to-l from-[#d4af37]/70 to-[#d4af37]/40"
+                                style={{ right: '50%', width: '140px' }} />
+
+                            {/* 우측 수평선 — 중앙에서 오른쪽으로 140px */}
+                            <div className="absolute top-1/2 -translate-y-1/2 h-[1.5px] bg-gradient-to-r from-[#d4af37]/70 to-[#d4af37]/40"
+                                style={{ left: '50%', width: '140px' }} />
+
+                            {/* 왼쪽 박스: 수평선 끝 바로 왼쪽 */}
+                            <div className="absolute top-1/2 -translate-y-1/2 bg-[#0c1024]/80 border border-[#d4af37]/40 text-gray-200 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg text-center transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10"
+                                style={{ right: 'calc(50% + 140px)' }}>
+                                <p className="text-[#e6c875] font-semibold text-base">한국학 연구소</p>
+                                <p className="text-[#e6c875] font-semibold text-base mt-2">AI 브레인 헬스 연구소</p>
                             </div>
 
-                            {/* Mobile: 브랜드윤리경영위원회 */}
-                            <div className="md:hidden flex items-center gap-2 my-2">
-                                <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/50 text-[#e6c875] px-6 py-3 rounded-xl text-sm font-semibold tracking-wide">
-                                    브랜드윤리경영위원회
-                                </div>
+                            {/* 오른쪽 박스: 수평선 끝 바로 오른쪽 */}
+                            <div className="absolute top-1/2 -translate-y-1/2 bg-[#0c1024]/80 border border-[#d4af37]/40 text-gray-200 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10"
+                                style={{ left: 'calc(50% + 140px)' }}>
+                                <p className="text-[#e6c875] font-semibold text-base">한국문화창조학교</p>
+                                <p className="text-gray-300 text-sm mt-2">대표(창설자) <span className="text-white font-bold">이 호종</span></p>
+                                <p className="text-gray-400 text-sm mt-1.5">세계왕립아카데미(창설자)</p>
+                                <p className="text-gray-400 text-sm mt-1.5">브랜드윤리 경영 위원장</p>
                             </div>
+                        </div>
+
+                        {/* 모바일 레이아웃 */}
+                        <div className="md:hidden flex flex-col items-center gap-0 w-full z-10">
+                            <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
+                            <div className="bg-[#0c1024]/80 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl text-center w-full">
+                                <p className="text-[#e6c875] font-semibold">한국학 연구소</p>
+                                <p className="text-[#e6c875] font-semibold mt-1">AI 브레인 헬스 연구소</p>
+                            </div>
+                            <div className="self-center w-[1.5px] h-4 bg-[#d4af37]/40" />
+                            <div className="bg-[#0c1024]/80 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full">
+                                <p className="text-[#e6c875] font-semibold">한국문화창조학교</p>
+                                <p className="text-gray-300 text-xs mt-1">대표(창설자) <span className="text-white font-bold">이 호종</span></p>
+                                <p className="text-gray-400 text-xs mt-1">세계왕립아카데미(창설자)</p>
+                                <p className="text-gray-400 text-xs mt-1">브랜드윤리 경영 위원장</p>
+                            </div>
+                            <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
                         </div>
 
                         {/* Level 1: CEO + 전략기획실 */}
