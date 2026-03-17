@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { HeroBanner } from '@/components/shared/HeroBanner';
@@ -180,7 +180,6 @@ export default function OrganizationPage() {
                                 style={{ left: 'calc(50% + 140px)' }}>
                                 <p className="text-[#e6c875] font-semibold text-base">한국문화창조학교</p>
                                 <p className="text-[#d4af37] text-sm mt-2">대표(창설자) <span className="font-bold text-lg">이 호종</span></p>
-                                <p className="text-[#d4af37]/70 text-xs mt-1.5">세계왕립아카데미(창설자)</p>
                                 <p className="text-[#d4af37]/70 text-xs mt-1.5">브랜드윤리 경영 위원장</p>
                             </div>
                         </div>
@@ -196,7 +195,6 @@ export default function OrganizationPage() {
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full">
                                 <p className="text-[#e6c875] font-semibold">한국문화창조학교</p>
                                 <p className="text-gray-300 text-xs mt-1">대표(창설자) <span className="text-white font-bold">이 호종</span></p>
-                                <p className="text-gray-400 text-xs mt-1">세계왕립아카데미(창설자)</p>
                                 <p className="text-gray-400 text-xs mt-1">브랜드윤리 경영 위원장</p>
                             </div>
                             <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
