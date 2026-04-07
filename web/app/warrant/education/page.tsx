@@ -20,22 +20,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const programs = [
     {
-        title: '한국어',
-        titleEn: 'Korean Language',
-        desc: '訓 民 正 音',
-        href: '/warrant/education/language',
+        title: '한국학',
+        titleEn: 'Korean Studies',
+        desc: '한국문화가 가진 특별함을\n인류의 보편성으로 성장 동력화함',
+        details: ['-한국의 유형문화유산', '-한국의 기록문화유산', '-한국의 무형문화유산'],
+        href: '/warrant/education/studies',
     },
     {
-        title: '한국 인문학',
+        title: '한국인문학',
         titleEn: 'Korean Humanities',
-        desc: 'AI시대 인문학과 놀자',
+        desc: '한국인이 가진 개성적인 정신과\n철학을 세계화함',
+        details: ['-한국의 수행문화', '-한국의 유불선 정신'],
         href: '/warrant/education/culture',
     },
     {
-        title: '한국학',
-        titleEn: 'Korean Studies',
-        desc: '한국학을 공부해야 하는 이유',
-        href: '/warrant/education/studies',
+        title: '한국어',
+        titleEn: 'Korean Language',
+        desc: '과학적이고 쉬운 한국어를\n세계인의 일반화된 언어로 보급함',
+        details: ['-한국어 보급', '-한국의 일반문화 보급'],
+        href: '/warrant/education/language',
     },
 ];
 
@@ -48,7 +51,6 @@ export default function EducationLandingPage() {
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
                 title="한국학공부"
-                subtitle="K-헤리티지의 가치를 세계에 전하는 WRA 교육"
             />
 
             <section className="py-20">
@@ -93,6 +95,15 @@ export default function EducationLandingPage() {
 
                                             {/* Description */}
                                             <p className="text-gray-400 text-base leading-[1.9] break-keep whitespace-pre-line group-hover:text-gray-300 transition-colors duration-300">{prog.desc}</p>
+
+                                            {/* Details */}
+                                            {prog.details && (
+                                                <div className="mt-4 flex flex-col items-start gap-1 w-fit mx-auto">
+                                                    {prog.details.map((detail, j) => (
+                                                        <span key={j} className="text-gray-500 text-sm group-hover:text-gray-400 transition-colors duration-300">{detail}</span>
+                                                    ))}
+                                                </div>
+                                            )}
 
                                             {/* Arrow */}
                                             <div className="mt-6 flex items-center gap-2 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-all duration-300">

@@ -67,20 +67,20 @@ export default function FoundingPhilosophyPage() {
                         <GlassCard className="text-center">
                             <Globe className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
                             <h3 className="text-2xl font-bold text-white mb-2">World</h3>
-                            <p className="text-[#d4af37]/80 text-sm mb-3">글로벌 스탠다드</p>
-                            <p className="text-gray-400 text-sm">세계를 무대로 하는 글로벌 스탠다드</p>
+                            <p className="text-[#d4af37]/80 text-sm mb-3">하나의 세계</p>
+                            <p className="text-gray-400 text-sm">초 국가적 세계시민화</p>
                         </GlassCard>
                         <GlassCard className="text-center" delay={0.1}>
                             <Crown className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
                             <h3 className="text-2xl font-bold text-white mb-2">Royal</h3>
-                            <p className="text-[#d4af37]/80 text-sm mb-3">대한제국 왕실의 정통성</p>
-                            <p className="text-gray-400 text-sm">대한민국 왕실의 정통성을 잇는 대변인으로서의 위상</p>
+                            <p className="text-[#d4af37]/80 text-sm mb-3">개성적 왕립(ROYAL)화</p>
+                            <p className="text-gray-400 text-sm">전통, 품격, 책임의 정신문화</p>
                         </GlassCard>
                         <GlassCard className="text-center" delay={0.2}>
                             <BookOpen className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
                             <h3 className="text-2xl font-bold text-white mb-2">Academy</h3>
-                            <p className="text-[#d4af37]/80 text-sm mb-3">브랜드의 명문화</p>
-                            <p className="text-gray-400 text-sm">대한민국 왕실의 정체성을 교육하며, 브랜드의 명문화를 재탄생시키는 곳</p>
+                            <p className="text-[#d4af37]/80 text-sm mb-3">보편성의 아카데미</p>
+                            <p className="text-gray-400 text-sm">보편성 철학의 한국 정신에서<br />비롯된 창의적인 문명 창달</p>
                         </GlassCard>
                     </div>
                 </div>
