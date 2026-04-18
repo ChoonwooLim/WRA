@@ -86,7 +86,7 @@ const OrgNode = ({
                     </p>
                 )}
                 {showProfile && (
-                    <span className="mt-2 text-xs text-[#d4af37]/50 group-hover:text-[#d4af37] transition-colors z-10">프로필 보기 →</span>
+                    <span className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full group-hover:bg-[#d4af37]/15 group-hover:border-[#d4af37] transition-all z-10">프로필 →</span>
                 )}
             </div>
             {subTeams.length > 0 && (
@@ -152,6 +152,9 @@ export default function OrganizationPage() {
                         <div className="bg-[#0f111a]/85 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-center px-10 py-5 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-[#d4af37]/80 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] z-10">
                             <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">한국문화창조학교</p>
                             <p className="text-[#d4af37] text-sm mt-1">교장 <span className="font-bold text-lg">신광철</span><span className="text-[#d4af37]/70 text-xs">(작가)</span></p>
+                            <Link href="/about/profile/sinkwangchul" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
+                                프로필 →
+                            </Link>
                         </div>
 
                         {/* ── Junction 행: absolute 포지셔닝으로 겹침 없이 배치 ── */}
@@ -176,11 +179,14 @@ export default function OrganizationPage() {
                             </div>
 
                             {/* 오른쪽 박스: 수평선 끝 바로 오른쪽 */}
-                            <div className="absolute top-1/2 -translate-y-1/2 bg-[#0f111a]/85 border border-[#d4af37]/40 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10"
+                            <div className="absolute top-1/2 -translate-y-1/2 bg-[#0f111a]/85 border border-[#d4af37]/40 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10 text-center"
                                 style={{ left: 'calc(50% + 140px)' }}>
                                 <p className="text-[#e6c875] font-semibold text-base">한국문화창조학교</p>
                                 <p className="text-[#d4af37] text-sm mt-2">대표(창설자) <span className="font-bold text-lg">이 호종</span></p>
                                 <p className="text-[#d4af37]/70 text-xs mt-1.5">브랜드윤리 경영 위원장</p>
+                                <Link href="/about/progress-report" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
+                                    경과보고 →
+                                </Link>
                             </div>
                         </div>
 
@@ -192,10 +198,13 @@ export default function OrganizationPage() {
                                 <p className="text-[#e6c875] font-semibold mt-1">AI 브레인 헬스 연구소</p>
                             </div>
                             <div className="self-center w-[1.5px] h-4 bg-[#d4af37]/40" />
-                            <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full">
+                            <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full text-center">
                                 <p className="text-[#e6c875] font-semibold">한국문화창조학교</p>
                                 <p className="text-gray-300 text-xs mt-1">대표(창설자) <span className="text-white font-bold">이 호종</span></p>
                                 <p className="text-gray-400 text-xs mt-1">브랜드윤리 경영 위원장</p>
+                                <Link href="/about/progress-report" className="inline-block mt-2 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 transition-all">
+                                    경과보고 →
+                                </Link>
                             </div>
                             <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
                         </div>

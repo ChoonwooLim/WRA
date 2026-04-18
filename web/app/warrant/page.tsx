@@ -44,15 +44,15 @@ export default function WarrantPage() {
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
-                title="WRA Warrant"
+                title="WRA K-HUMAN"
                 subtitle="교육 · 투어 · 멤버십 · 컨설팅"
             />
 
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <SectionHeader
-                        title="WRA Warrant 프로그램"
-                        subtitle="Four Pillars of WRA Warrant Excellence"
+                        title="WRA K-HUMAN 프로그램"
+                        subtitle="Four Pillars of WRA K-HUMAN Excellence"
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

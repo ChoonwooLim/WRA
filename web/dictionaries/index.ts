@@ -218,7 +218,7 @@ export const en: Dictionary = {
     navbar: {
         crownPrince: 'Crown Prince',
         about: 'About WRA',
-        warrant: 'WRA Warrant',
+        warrant: 'WRA K-HUMAN',
         community: 'Community',
         adminDashboard: 'Admin Dashboard',
         startLogin: 'Start Login',
@@ -281,7 +281,7 @@ export const en: Dictionary = {
             humanity: { title: 'Humanity', desc: 'Compassion and love for all people\nbeyond borders' },
         },
         warrantHighlights: {
-            title: 'WRA Warrants',
+            title: 'WRA K-HUMAN',
             subtitle: '',
             education: { title: 'Education', desc: 'K-Heritage Language, Literature, and Korean Studies programs with AI-powered learning.' },
             certification: { title: 'Certification', desc: 'K-Royal Warrant — the prestigious mark of Korean craftsmanship and philosophy.' },
@@ -358,7 +358,7 @@ export const en: Dictionary = {
             partnersDesc: 'Collaborating with world-class institutions and organizations.',
         },
         education: {
-            heroTitle: 'WRA Warrant — Education',
+            heroTitle: 'WRA K-HUMAN — Education',
             heroSubtitle: 'K-Heritage Language · K-Literature · K-Studies',
             languageTitle: 'K-Heritage Language',
             languageDesc: 'The Royal Korean Language Institute offers comprehensive Korean language education powered by AI technology.',
@@ -378,7 +378,7 @@ export const en: Dictionary = {
             textbooksDesc: '',
         },
         certification: {
-            heroTitle: 'WRA Warrant — Certification',
+            heroTitle: 'WRA K-HUMAN — Certification',
             heroSubtitle: 'K-Royal Warrant · The Royal 33 · Digital Seal',
             warrantTitle: 'K-Royal Warrant',
             warrantDesc: 'A prestigious certification for brands that embody Korean craftsmanship and philosophy — the Korean equivalent of the British Royal Warrant.',
@@ -392,7 +392,7 @@ export const en: Dictionary = {
             sealDesc: 'Blockchain-based authentication for premium branding and value protection.',
         },
         services: {
-            heroTitle: 'WRA Warrant — Services',
+            heroTitle: 'WRA K-HUMAN — Services',
             heroSubtitle: 'Royal Consulting · Royal Tours',
             consultingTitle: 'Royal Management Consulting',
             consultingDesc: 'Strategic consulting for global expansion and national project development.',
@@ -427,7 +427,7 @@ export const ko: Dictionary = {
     navbar: {
         crownPrince: '황태손 소개',
         about: 'WRA 소개',
-        warrant: 'WRA Warrant',
+        warrant: 'WRA K-HUMAN',
         community: '커뮤니티',
         adminDashboard: '관리자 대시보드',
         startLogin: '로그인 시작',
@@ -490,7 +490,7 @@ export const ko: Dictionary = {
             humanity: { title: '인류애', desc: '국경을 넘어 모든 사람을 향한\n연민과 사랑' },
         },
         warrantHighlights: {
-            title: 'WRA warrant',
+            title: 'WRA K-HUMAN',
             subtitle: '',
             education: { title: '한국학공부', desc: 'AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.' },
             certification: { title: '인증', desc: 'K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.' },
@@ -567,7 +567,7 @@ export const ko: Dictionary = {
             partnersDesc: '세계 일류 기관 및 단체와의 협력.',
         },
         education: {
-            heroTitle: 'WRA 워런트 — 교육',
+            heroTitle: 'WRA K-HUMAN — 교육',
             heroSubtitle: '한국어 · 왕립문예원 · 한국학',
             languageTitle: '한국어',
             languageDesc: '',
@@ -587,7 +587,7 @@ export const ko: Dictionary = {
             textbooksDesc: '',
         },
         certification: {
-            heroTitle: 'WRA 워런트 — 인증',
+            heroTitle: 'WRA K-HUMAN — 인증',
             heroSubtitle: 'K-Royal 인증 · The Royal 33 · 디지털 옥새',
             warrantTitle: 'K-Royal Warrant 인증',
             warrantDesc: '한국의 장인정신과 철학을 체현하는 브랜드에 수여하는 명예 인증 — 영국 Royal Warrant의 한국 버전.',
@@ -601,7 +601,7 @@ export const ko: Dictionary = {
             sealDesc: '프리미엄 브랜딩과 가치 보호를 위한 블록체인 기반 인증.',
         },
         services: {
-            heroTitle: 'WRA 워런트 — 서비스',
+            heroTitle: 'WRA K-HUMAN — 서비스',
             heroSubtitle: '경영한류컨설팅 · K-헤리티지',
             consultingTitle: '경영한류컨설팅',
             consultingDesc: '',

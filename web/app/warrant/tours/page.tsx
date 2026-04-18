@@ -1137,7 +1137,7 @@ export default function ToursPage() {
                                             <div className="absolute -bottom-[1px] w-24 h-[2px] bg-[#d4af37]" />
                                             <div className="flex items-center gap-3 mb-4">
                                                 <Crown className="w-6 h-6 text-[#d4af37]" />
-                                                <h2 className="text-[#d4af37] font-semibold text-sm tracking-[0.2em] uppercase">WRA Warrant Tour</h2>
+                                                <h2 className="text-[#d4af37] font-semibold text-sm tracking-[0.2em] uppercase">WRA K-HUMAN Tour</h2>
                                                 <Crown className="w-6 h-6 text-[#d4af37]" />
                                             </div>
                                             <h1 className="text-3xl md:text-5xl font-bold text-white tracking-widest font-serif drop-shadow-lg">{selectedImage.title}</h1>
