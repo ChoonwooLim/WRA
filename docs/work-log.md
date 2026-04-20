@@ -80,4 +80,23 @@
 - 환영 메일(welcome email)은 미구현 — 필요 시 추후 추가.
 - 프론트 typecheck: 신규 파일은 clean. `authOptions` export 경고는 Next 16 + 기존 `[...nextauth]/route.ts` 구조상 발생하는 프로젝트 전역 기존 경고로, 이번 세션 변경과 무관.
 
+### 세션 후반 2 — 구독자 목록 버그 수정 + 관리자 알림 시스템 실DB 연동
+
+- **a1571aa** `fix: surface admin subscribers fetch errors instead of silent empty list`
+  - 증상: 관리자 구독자 페이지에서 실제 DB에 있는 행이 표시되지 않음. 사용자 피드백으로 발견.
+  - 원인: `web/app/admin/subscribers/page.tsx` 의 catch 블록이 에러(403/500/세션 만료)를 조용히 삼키고 `setSubscribers([])` 만 호출 → 에러 메시지 없이 "구독자가 없습니다" 로만 표시됨.
+  - 수정: catch 에서 에러 메시지를 상단 빨간 배너로 노출, `fetch` 에 `cache: 'no-store'` 추가해 항상 최신 데이터 조회.
+  - 프로덕션 curl 테스트로 subscribe/admin-subscribers 엔드포인트 모두 정상 배포·동작 확인 (`HTTP 200 {"ok":true}` / `HTTP 403` without auth).
+- **5b09652** `feat: 관리자 알림 시스템 실DB 연동`
+  - **DB 마이그레이션 `20260420125233_add_notification`**: `Notification` 모델 (id/type/title/message/detail/actionLabel/actionHref/isRead/createdAt + 2 indexes). Orbitron dev-postgres 에 적용 완료. Render 재배포 시 `prisma migrate deploy` 로 자동 적용.
+  - `web/lib/notifications.ts` 신규: `createNotification()` 헬퍼. 실패해도 메인 플로우 차단하지 않도록 try/catch 로 감쌈.
+  - **이벤트 훅 3곳**:
+    - `web/app/api/auth/signup/route.ts`: 회원가입 성공 후 'signup' 알림 적재 (이메일/전화 상세 포함)
+    - `web/app/api/posts/route.ts`: 게시글 생성 후 'post' (또는 Q&A의 경우 'comment') 알림 적재. `BOARD_LABEL` 맵으로 한글 라벨 표시.
+    - `web/app/api/newsletter/subscribe/route.ts`: 신규 구독 시 'subscribe' 알림 적재.
+  - `web/app/api/admin/notifications/route.ts` 신규: 관리자 권한 체크 → GET(filter=all/unread/signup/cert/post/subscribe) / PATCH(action=markRead|markAllRead) / DELETE(id|all:true). `findMany` take 200 cap.
+  - `web/app/admin/notifications/page.tsx` 전면 재작성: mock 제거. `useEffect` 로 실 API 페치, 필터 탭 6종(전체/읽지않음/회원가입/뉴스레터/게시글/인증), `timeAgo()` 로 상대시간 표시, 클릭 시 자동 읽음 + 낙관적 UI 업데이트, 개별/일괄 삭제, 모두 읽음, 새로고침 버튼, 에러 배너.
+- 인증(`cert`) 타입은 향후 인증 신청 API 추가되면 동일 방식으로 `createNotification({ type: 'cert', ... })` 호출하여 훅 걸면 됨. 지금은 훅 대상 API가 없으므로 필터 탭만 존재.
+- `/admin/subscribers` 에러 배너 노출 fix 덕분에 향후 유사한 403/세션 만료 이슈가 발생해도 사용자가 원인을 바로 식별 가능.
+
 ---

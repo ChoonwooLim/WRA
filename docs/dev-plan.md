@@ -16,6 +16,7 @@
 | 8 | 관리자 페이지 UX 개선 (인라인 확장, 필터, 개별 삭제) | 완료 | 2026-04-20 |
 | 9 | 뉴스레터 구독 시스템 (구독/해지/일괄발송/관리자 대시보드) | 완료 | 2026-04-20 |
 | 10 | wagmi RPC CORS 에러 제거 | 완료 | 2026-04-20 |
+| 11 | 관리자 알림 시스템 실DB 연동 (Notification 모델 + 이벤트 훅 + 관리자 페이지) | 완료 | 2026-04-20 |
 
 ## 기능 목록
 
@@ -33,3 +34,4 @@
 | 뉴스레터 구독 (`/community/newsletter` + `/api/newsletter/*`) | 완료 | - | 정보통신망법 동의 체크박스, Subscriber DB 저장 |
 | 뉴스레터 일괄 발송 (관리자 posts 페이지 Send 버튼) | 완료 | - | Resend Batch 100통/chunk, List-Unsubscribe 헤더 |
 | 관리자 구독자 관리 (`/admin/subscribers`) | 완료 | - | 검색/상태필터/CSV/개별토글/일괄삭제 |
+| 관리자 알림 시스템 (`/admin/notifications` + `/api/admin/notifications`) | 완료 | - | Notification 모델, 회원가입/게시글/구독 이벤트 자동 적재, 필터 탭 5종 |

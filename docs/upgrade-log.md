@@ -17,3 +17,6 @@
 | 2026-04-20 | 관리자 게시글 페이지에 뉴스레터 발송 Send 버튼 추가 (board='newsletter' 행 한정) | UX 개선 | web/app/admin/posts/page.tsx |
 | 2026-04-20 | 관리자 구독자 관리 페이지 신규 — 검색/상태필터/CSV/개별토글/일괄삭제 | 페이지 추가 | web/app/admin/subscribers/page.tsx, web/app/api/admin/subscribers/route.ts, web/components/admin/AdminSidebar.tsx |
 | 2026-04-20 | wagmi RPC 엔드포인트를 Cloudflare/publicnode 로 교체 — eth.merkle.io CORS 에러 제거 | 버그 수정 | web/lib/config.ts |
+| 2026-04-20 | 관리자 알림 시스템 실DB 연동 — Notification 모델 + createNotification() 헬퍼 + 관리자 전용 GET/PATCH/DELETE API | 기능 추가 | web/prisma/schema.prisma, web/lib/notifications.ts, web/app/api/admin/notifications/route.ts |
+| 2026-04-20 | 회원가입/게시글/Q&A/뉴스레터 구독 이벤트에서 알림 자동 적재 | 기능 추가 | web/app/api/auth/signup/route.ts, web/app/api/posts/route.ts, web/app/api/newsletter/subscribe/route.ts |
+| 2026-04-20 | 관리자 알림 페이지 전면 재작성 — mock 제거, 실 API 연동, 5종 필터 탭, 상대시간, 낙관적 업데이트, 에러 배너 | UX 개선 | web/app/admin/notifications/page.tsx |
