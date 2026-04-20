@@ -33,3 +33,35 @@
 - 로고 변경은 사용자가 파일 미수령 상태로 보류.
 
 ---
+
+## 2026-04-20
+
+### 작업 요약
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| feat | 연락처 폼을 Resend API 연동 — 고객 입력 → `/api/contact` → youna789@gmail.com 실수신 | 완료 |
+| feat | 관리자 게시글/알림 페이지 인라인 확장 UX (타이틀 클릭 시 본문 펼치기, 필터/개별삭제) | 완료 |
+| feat | 푸터 전화/이메일 `+82 010-2886-7392` / `youna789@gmail.com` 으로 갱신 (ko/en) | 완료 |
+| infra | Resend 도메인 인증 (`세계왕립아카데미.org` → Punycode `xn--989ao0kixfkpc53jxpgt2bj12a.org`), DKIM/SPF/MX 레코드 가비아 등록 | 완료 |
+| fix  | wagmi RPC 를 Cloudflare/publicnode 로 교체 — `eth.merkle.io` CORS 에러 제거 | 완료 |
+
+### 세부 내용
+
+- **58b19c2** `feat: wire contact form to Resend and add inline post/notification expand`
+  - `web/app/api/contact/route.ts` 신규: POST 핸들러 (필수 필드 검증, 이메일 정규식, 길이 제한 100/200/5000)
+  - `web/lib/email.ts`: Resend SDK 기반 `sendContactEmail` 추가. `replyTo: input.email` 로 관리자가 바로 회신 가능. 환경변수 미설정 시 console.log 폴백
+  - `web/app/community/contact/page.tsx`: `useState` 기반 폼 바인딩, async submit, "전송 중..." 상태, 에러 배너
+  - `web/app/admin/posts/page.tsx`: 타이틀을 버튼으로 감싸고 `ChevronDown` 아이콘 토글, `prose prose-invert` + `dangerouslySetInnerHTML` 로 본문 인라인 표시. `ExternalLink` 는 새 탭
+  - `web/app/admin/notifications/page.tsx` 전면 재작성: `useState` 로 상태화, 필터 탭(all/unread/signup/cert/post), 개별 삭제, 전체 삭제 확인, 모두 읽음, `AnimatePresence` 확장 애니메이션
+  - `web/dictionaries/index.ts`: 푸터 phone/email 갱신 (ko/en 모두)
+  - `web/package.json`: `resend` 의존성 추가
+- **819cf28** `fix: use CORS-enabled RPC endpoints for wagmi to silence eth.merkle.io errors`
+  - `web/lib/config.ts`: `getDefaultConfig` 에 `transports` 명시
+  - mainnet → `https://cloudflare-eth.com`, sepolia → `https://ethereum-sepolia-rpc.publicnode.com`
+  - 기본값 `eth.merkle.io` 는 CORS 차단 → 모든 페이지에서 콘솔이 빨갛게 찍히던 원인
+- Render 환경변수 3개 등록 완료: `RESEND_API_KEY`, `RESEND_FROM="World Royal Academy <noreply@xn--989ao0kixfkpc53jxpgt2bj12a.org>"`, `CONTACT_TO=youna789@gmail.com`
+- Resend 도메인 인증 과정: 한글 도메인을 Punycode 로 변환 후 가비아에 DKIM TXT / MX (trailing dot 필수) / SPF TXT 등록. 3개 레코드 모두 Verified.
+- Gmail 계정(youna789)은 받기 전용으로 유지. Resend 가 발송 주체이므로 Gmail SMTP 설정 불필요.
+
+---
