@@ -11,10 +11,31 @@ export default function ContactPage() {
     const d = dict.pages.community;
     const f = dict.footer;
     const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        setError(null);
+        setSubmitting(true);
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                setError(data.error || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+                return;
+            }
+            setSubmitted(true);
+        } catch {
+            setError('네트워크 오류가 발생했습니다.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
@@ -77,32 +98,50 @@ export default function ContactPage() {
                                         type="text"
                                         placeholder={d.namePlaceholder}
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors"
+                                        value={form.name}
+                                        onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
+                                        disabled={submitting}
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors disabled:opacity-60"
                                     />
                                     <input
                                         type="email"
                                         placeholder={d.emailPlaceholder}
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors"
+                                        value={form.email}
+                                        onChange={(e) => setForm(prev => ({ ...prev, email: e.target.value }))}
+                                        disabled={submitting}
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors disabled:opacity-60"
                                     />
                                     <input
                                         type="text"
                                         placeholder={d.subjectPlaceholder}
                                         required
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors"
+                                        value={form.subject}
+                                        onChange={(e) => setForm(prev => ({ ...prev, subject: e.target.value }))}
+                                        disabled={submitting}
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors disabled:opacity-60"
                                     />
                                     <textarea
                                         placeholder={d.messagePlaceholder}
                                         required
                                         rows={4}
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors resize-none"
+                                        value={form.message}
+                                        onChange={(e) => setForm(prev => ({ ...prev, message: e.target.value }))}
+                                        disabled={submitting}
+                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors resize-none disabled:opacity-60"
                                     />
+                                    {error && (
+                                        <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                                            {error}
+                                        </p>
+                                    )}
                                     <button
                                         type="submit"
-                                        className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2"
+                                        disabled={submitting}
+                                        className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         <Send className="w-4 h-4" />
-                                        {d.submit}
+                                        {submitting ? '전송 중...' : d.submit}
                                     </button>
                                 </form>
                             )}

@@ -1,18 +1,20 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Eye, ThumbsUp, Trash2, ExternalLink, Edit, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Eye, ThumbsUp, Trash2, ExternalLink, Edit, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
 interface Post {
     id: string;
     board: string;
     title: string;
+    content: string;
     category: string | null;
     views: number;
     likes: number;
     answered: boolean;
     createdAt: string;
+    updatedAt?: string;
     author: { name: string | null; email: string | null };
 }
 
@@ -40,6 +42,7 @@ export default function AdminPostsPage() {
     const [boardFilter, setBoardFilter] = useState('');
     const [loading, setLoading] = useState(true);
     const [selected, setSelected] = useState<Set<string>>(new Set());
+    const [expandedId, setExpandedId] = useState<string | null>(null);
 
     const fetchPosts = useCallback(async () => {
         setLoading(true);
@@ -195,71 +198,96 @@ export default function AdminPostsPage() {
                     ) : posts.length === 0 ? (
                         <div className="p-8 text-center text-gray-500">게시글이 없습니다.</div>
                     ) : (
-                        posts.map((post) => (
-                            <div key={post.id} className="px-4 py-3 hover:bg-white/5 transition-colors flex items-center gap-4 group">
-                                <div className="w-6">
-                                    <input
-                                        type="checkbox"
-                                        checked={selected.has(post.id)}
-                                        onChange={() => toggleSelect(post.id)}
-                                        className="rounded bg-white/10 border-white/20 cursor-pointer"
-                                    />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <h3 className="text-white font-medium text-sm truncate group-hover:text-primary transition-colors">
-                                        {post.title}
-                                    </h3>
-                                    <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
-                                        {post.category && (
-                                            <span className="bg-white/10 px-1.5 py-0.5 rounded text-gray-300">{post.category}</span>
-                                        )}
-                                        <span>{post.author?.name || '알 수 없음'}</span>
-                                        {post.board === 'qna' && (
-                                            <span className={`px-1.5 py-0.5 rounded text-[10px] ${post.answered ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'}`}>
-                                                {post.answered ? '답변완료' : '답변대기'}
-                                            </span>
-                                        )}
+                        posts.map((post) => {
+                            const isExpanded = expandedId === post.id;
+                            return (
+                            <div key={post.id} className="group">
+                                <div className="px-4 py-3 hover:bg-white/5 transition-colors flex items-center gap-4">
+                                    <div className="w-6">
+                                        <input
+                                            type="checkbox"
+                                            checked={selected.has(post.id)}
+                                            onChange={() => toggleSelect(post.id)}
+                                            className="rounded bg-white/10 border-white/20 cursor-pointer"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => setExpandedId(isExpanded ? null : post.id)}
+                                        className="flex-1 min-w-0 text-left flex items-center gap-2"
+                                    >
+                                        <ChevronDown
+                                            size={14}
+                                            className={`flex-shrink-0 text-gray-500 transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'}`}
+                                        />
+                                        <div className="flex-1 min-w-0">
+                                            <h3 className={`font-medium text-sm truncate transition-colors ${isExpanded ? 'text-primary' : 'text-white group-hover:text-primary'}`}>
+                                                {post.title}
+                                            </h3>
+                                            <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
+                                                {post.category && (
+                                                    <span className="bg-white/10 px-1.5 py-0.5 rounded text-gray-300">{post.category}</span>
+                                                )}
+                                                <span>{post.author?.name || '알 수 없음'}</span>
+                                                {post.board === 'qna' && (
+                                                    <span className={`px-1.5 py-0.5 rounded text-[10px] ${post.answered ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'}`}>
+                                                        {post.answered ? '답변완료' : '답변대기'}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <div className="w-20 text-center">
+                                        <span className={`text-[11px] px-2 py-0.5 rounded-full ${boardColors[post.board] || 'bg-white/10 text-gray-300'}`}>
+                                            {boardLabels[post.board] || post.board}
+                                        </span>
+                                    </div>
+                                    <div className="w-24 text-center text-xs text-gray-400">
+                                        {new Date(post.createdAt).toLocaleDateString('ko-KR')}
+                                    </div>
+                                    <div className="w-16 text-center text-xs text-gray-400 flex items-center justify-center gap-1">
+                                        <Eye size={12} /> {post.views}
+                                    </div>
+                                    <div className="w-16 text-center text-xs text-gray-400 flex items-center justify-center gap-1">
+                                        <ThumbsUp size={12} /> {post.likes}
+                                    </div>
+                                    <div className="w-28 flex items-center justify-center gap-1">
+                                        <Link
+                                            href={`/community/post/${post.id}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-1.5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-cyan-400 transition-all"
+                                            title="새 탭에서 전체 보기"
+                                        >
+                                            <ExternalLink size={14} />
+                                        </Link>
+                                        <Link
+                                            href={`/community/post/${post.id}/edit`}
+                                            className="p-1.5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-yellow-400 transition-all"
+                                            title="수정"
+                                        >
+                                            <Edit size={14} />
+                                        </Link>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); handleDeleteOne(post.id, post.title); }}
+                                            className="p-1.5 hover:bg-red-500/10 rounded-lg text-gray-400 hover:text-red-400 transition-all"
+                                            title="삭제"
+                                        >
+                                            <Trash2 size={14} />
+                                        </button>
                                     </div>
                                 </div>
-                                <div className="w-20 text-center">
-                                    <span className={`text-[11px] px-2 py-0.5 rounded-full ${boardColors[post.board] || 'bg-white/10 text-gray-300'}`}>
-                                        {boardLabels[post.board] || post.board}
-                                    </span>
-                                </div>
-                                <div className="w-24 text-center text-xs text-gray-400">
-                                    {new Date(post.createdAt).toLocaleDateString('ko-KR')}
-                                </div>
-                                <div className="w-16 text-center text-xs text-gray-400 flex items-center justify-center gap-1">
-                                    <Eye size={12} /> {post.views}
-                                </div>
-                                <div className="w-16 text-center text-xs text-gray-400 flex items-center justify-center gap-1">
-                                    <ThumbsUp size={12} /> {post.likes}
-                                </div>
-                                <div className="w-28 flex items-center justify-center gap-1">
-                                    <Link
-                                        href={`/community/post/${post.id}`}
-                                        className="p-1.5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-cyan-400 transition-all"
-                                        title="보기"
-                                    >
-                                        <ExternalLink size={14} />
-                                    </Link>
-                                    <Link
-                                        href={`/community/post/${post.id}/edit`}
-                                        className="p-1.5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-yellow-400 transition-all"
-                                        title="수정"
-                                    >
-                                        <Edit size={14} />
-                                    </Link>
-                                    <button
-                                        onClick={(e) => { e.stopPropagation(); handleDeleteOne(post.id, post.title); }}
-                                        className="p-1.5 hover:bg-red-500/10 rounded-lg text-gray-400 hover:text-red-400 transition-all"
-                                        title="삭제"
-                                    >
-                                        <Trash2 size={14} />
-                                    </button>
-                                </div>
+                                {isExpanded && (
+                                    <div className="px-4 pb-5 pt-1 pl-16 bg-black/30 border-t border-white/5">
+                                        <div
+                                            className="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed whitespace-pre-wrap [&_img]:rounded-lg [&_img]:max-h-96 [&_img]:my-3"
+                                            dangerouslySetInnerHTML={{ __html: post.content || '<p class="text-gray-500 italic">본문 없음</p>' }}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                        ))
+                            );
+                        })
                     )}
                 </div>
 
