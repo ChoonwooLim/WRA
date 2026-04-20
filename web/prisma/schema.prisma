@@ -87,3 +87,14 @@ model PasswordResetToken {
 
   @@unique([email, token])
 }
+
+model Subscriber {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  unsubscribeToken String    @unique @default(cuid())
+  consent          Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  unsubscribedAt   DateTime?
+
+  @@index([unsubscribedAt])
+}

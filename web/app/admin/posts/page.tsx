@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Search, Eye, ThumbsUp, Trash2, ExternalLink, Edit, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { Search, Eye, ThumbsUp, Trash2, ExternalLink, Edit, ChevronLeft, ChevronRight, ChevronDown, Send } from 'lucide-react';
 import Link from 'next/link';
 
 interface Post {
@@ -110,6 +110,32 @@ export default function AdminPostsPage() {
             if (res.ok) fetchPosts();
             else alert('삭제에 실패했습니다.');
         } catch { alert('네트워크 오류가 발생했습니다.'); }
+    };
+
+    const [sendingId, setSendingId] = useState<string | null>(null);
+
+    const handleSendNewsletter = async (id: string, title: string) => {
+        if (!confirm(`"${title}" 뉴스레터를 모든 활성 구독자에게 발송하시겠습니까?`)) return;
+        setSendingId(id);
+        try {
+            const res = await fetch('/api/admin/newsletter/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ postId: id }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert(data.error || '발송에 실패했습니다.');
+            } else if (data.total === 0) {
+                alert(data.message || '활성 구독자가 없습니다.');
+            } else {
+                alert(`발송 완료\n총 ${data.total}명 · 성공 ${data.sent}명 · 실패 ${data.failed}명`);
+            }
+        } catch {
+            alert('네트워크 오류가 발생했습니다.');
+        } finally {
+            setSendingId(null);
+        }
     };
 
     return (
@@ -252,6 +278,16 @@ export default function AdminPostsPage() {
                                         <ThumbsUp size={12} /> {post.likes}
                                     </div>
                                     <div className="w-28 flex items-center justify-center gap-1">
+                                        {post.board === 'newsletter' && (
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); handleSendNewsletter(post.id, post.title); }}
+                                                disabled={sendingId === post.id}
+                                                className="p-1.5 hover:bg-blue-500/10 rounded-lg text-gray-400 hover:text-blue-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                                title="구독자에게 발송"
+                                            >
+                                                <Send size={14} className={sendingId === post.id ? 'animate-pulse' : ''} />
+                                            </button>
+                                        )}
                                         <Link
                                             href={`/community/post/${post.id}`}
                                             target="_blank"

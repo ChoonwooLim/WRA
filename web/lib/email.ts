@@ -144,3 +144,81 @@ export async function sendContactEmail(input: {
         throw new Error(`Resend error: ${result.error.message || 'unknown'}`);
     }
 }
+
+function chunk<T>(arr: T[], size: number): T[][] {
+    const out: T[][] = [];
+    for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+    return out;
+}
+
+export async function sendNewsletterBatch(input: {
+    title: string;
+    content: string;
+    subscribers: { email: string; unsubscribeToken: string }[];
+    postId?: string;
+}): Promise<{ sent: number; failed: number }> {
+    const baseUrl = process.env.NEXTAUTH_URL || 'https://xn--989ao0kixfkpc53jxpgt2bj12a.org';
+    const apiKey = process.env.RESEND_API_KEY;
+    const from = process.env.RESEND_FROM || 'World Royal Academy <onboarding@resend.dev>';
+
+    if (!apiKey) {
+        console.log(`📧 NEWSLETTER (RESEND_API_KEY not configured) — would send "${input.title}" to ${input.subscribers.length} subscribers`);
+        return { sent: 0, failed: input.subscribers.length };
+    }
+
+    const resend = new Resend(apiKey);
+    const viewUrl = input.postId ? `${baseUrl}/community/post/${input.postId}` : `${baseUrl}/community/newsletter`;
+
+    const buildHtml = (unsubscribeUrl: string) => `
+    <div style="max-width: 640px; margin: 0 auto; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <div style="background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%); border-radius: 16px; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.3);">
+            <h1 style="color: #d4af37; text-align: center; margin-bottom: 8px; font-size: 26px;">
+                World Royal Academy
+            </h1>
+            <p style="color: #888; text-align: center; margin-bottom: 32px; font-size: 13px; letter-spacing: 0.15em;">NEWSLETTER</p>
+            <h2 style="color: #fff; font-size: 20px; line-height: 1.4; margin-bottom: 24px;">${input.title}</h2>
+            <div style="color: #ddd; line-height: 1.8; font-size: 15px;">${input.content}</div>
+            <div style="text-align: center; margin: 36px 0 8px;">
+                <a href="${viewUrl}" style="display: inline-block; padding: 12px 28px; background: linear-gradient(to right, #d4af37, #aa771c); color: #000; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;">
+                    웹에서 보기
+                </a>
+            </div>
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 32px 0 16px;" />
+            <p style="color: #666; font-size: 11px; text-align: center; line-height: 1.6;">
+                © World Royal Academy. 세계왕립아카데미의 뉴스레터를 구독하고 계십니다.<br>
+                더 이상 수신을 원치 않으시면 <a href="${unsubscribeUrl}" style="color: #888; text-decoration: underline;">수신 거부</a>를 클릭하세요.
+            </p>
+        </div>
+    </div>`;
+
+    let sent = 0;
+    let failed = 0;
+
+    for (const group of chunk(input.subscribers, 100)) {
+        const emails = group.map((s) => ({
+            from,
+            to: [s.email],
+            subject: input.title,
+            html: buildHtml(`${baseUrl}/api/newsletter/unsubscribe?token=${s.unsubscribeToken}`),
+            headers: {
+                'List-Unsubscribe': `<${baseUrl}/api/newsletter/unsubscribe?token=${s.unsubscribeToken}>`,
+                'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+            },
+        }));
+
+        try {
+            const result = await resend.batch.send(emails);
+            if (result.error) {
+                console.error('Resend batch error:', result.error);
+                failed += group.length;
+            } else {
+                sent += group.length;
+            }
+        } catch (err) {
+            console.error('Resend batch threw:', err);
+            failed += group.length;
+        }
+    }
+
+    return { sent, failed };
+}

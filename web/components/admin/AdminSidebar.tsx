@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Settings, LogOut, Shield, BarChart3, Bell, BookOpen, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -10,6 +10,7 @@ const menuItems = [
     { icon: LayoutDashboard, label: '대시보드', href: '/admin' },
     { icon: Users, label: '회원 관리', href: '/admin/members' },
     { icon: FileText, label: '게시글 관리', href: '/admin/posts' },
+    { icon: Mail, label: '뉴스레터 구독자', href: '/admin/subscribers' },
     { icon: Shield, label: '인증 관리', href: '/admin/certifications' },
     { icon: BookOpen, label: '인증서 매뉴얼', href: '/admin/certifications/guide', indent: true },
     { icon: BarChart3, label: '통계', href: '/admin/analytics' },

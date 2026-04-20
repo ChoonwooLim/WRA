@@ -23,12 +23,46 @@ export default function NewsletterPage() {
     const { dict } = useLanguage();
     const d = dict.pages.community;
     const [email, setEmail] = useState('');
+    const [consent, setConsent] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [resultMsg, setResultMsg] = useState<string>('구독 신청이 완료되었습니다. 감사합니다!');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
-        setEmail('');
+        setError(null);
+        if (!consent) {
+            setError('뉴스레터 수신 동의에 체크해주세요.');
+            return;
+        }
+        setSubmitting(true);
+        try {
+            const res = await fetch('/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, consent: true }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) {
+                setError(data.error || '구독 처리에 실패했습니다.');
+                return;
+            }
+            if (data.alreadySubscribed) {
+                setResultMsg('이미 구독 중인 이메일입니다. 감사합니다!');
+            } else if (data.resubscribed) {
+                setResultMsg('다시 구독되었습니다. 환영합니다!');
+            } else {
+                setResultMsg('구독 신청이 완료되었습니다. 감사합니다!');
+            }
+            setSubmitted(true);
+            setEmail('');
+            setConsent(false);
+        } catch {
+            setError('네트워크 오류가 발생했습니다.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const [newsletters, setNewsletters] = useState<Post[]>([]);
@@ -63,7 +97,7 @@ export default function NewsletterPage() {
 
                         {submitted ? (
                             <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm">
-                                ✓ 구독 신청이 완료되었습니다. 감사합니다!
+                                ✓ {resultMsg}
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,14 +107,34 @@ export default function NewsletterPage() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder={d.emailPlaceholder}
                                     required
-                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors"
+                                    disabled={submitting}
+                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:border-[#d4af37]/40 focus:outline-none transition-colors disabled:opacity-60"
                                 />
+                                <label className="flex items-start gap-3 text-left text-xs text-gray-400 cursor-pointer leading-relaxed">
+                                    <input
+                                        type="checkbox"
+                                        checked={consent}
+                                        onChange={(e) => setConsent(e.target.checked)}
+                                        disabled={submitting}
+                                        className="mt-0.5 rounded bg-white/10 border-white/20 cursor-pointer flex-shrink-0"
+                                    />
+                                    <span>
+                                        <span className="text-[#d4af37]">(필수)</span> 세계왕립아카데미의 뉴스레터 및 행사·프로그램 소식을 이메일로 수신하는 것에 동의합니다.
+                                        언제든지 메일 하단의 수신거부 링크로 해지할 수 있습니다.
+                                    </span>
+                                </label>
+                                {error && (
+                                    <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2 text-left">
+                                        {error}
+                                    </p>
+                                )}
                                 <button
                                     type="submit"
-                                    className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2"
+                                    disabled={submitting}
+                                    className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     <Send className="w-4 h-4" />
-                                    {d.subscribe}
+                                    {submitting ? '구독 신청 중...' : d.subscribe}
                                 </button>
                             </form>
                         )}
