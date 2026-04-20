@@ -64,4 +64,20 @@
 - Resend 도메인 인증 과정: 한글 도메인을 Punycode 로 변환 후 가비아에 DKIM TXT / MX (trailing dot 필수) / SPF TXT 등록. 3개 레코드 모두 Verified.
 - Gmail 계정(youna789)은 받기 전용으로 유지. Resend 가 발송 주체이므로 Gmail SMTP 설정 불필요.
 
+### 세션 후반 — 뉴스레터 구독 시스템 신규
+
+- **a422ef0** `feat: newsletter subscription system (Resend batch + admin subscriber management)`
+  - **DB 마이그레이션**: `Subscriber` 모델 신규 (`email` unique / `unsubscribeToken` unique default cuid / `consent` / `createdAt` / `unsubscribedAt`). 기존 마이그레이션 히스토리가 `db push` 로 생성되어 `add_password_reset_token` 이 failed 상태로 남아있어 `prisma migrate resolve --applied` 로 정리 후 `migrate deploy` 로 신규 마이그레이션 적용.
+  - `web/app/api/newsletter/subscribe/route.ts` 신규: POST (이메일 정규식·동의 플래그 검증, 기존 구독자는 `alreadySubscribed`, 해지자는 `resubscribed` 로 분기)
+  - `web/app/api/newsletter/unsubscribe/route.ts` 신규: GET (token 검증 → `unsubscribedAt` 세팅 → 완료 HTML 페이지 반환)
+  - `web/app/api/admin/newsletter/send/route.ts` 신규: 관리자 전용, `postId` 로 뉴스레터 게시글을 받아 활성 구독자 전원에 Resend Batch API 100통씩 chunk 발송
+  - `web/app/api/admin/subscribers/route.ts` 신규: GET(목록·카운트), DELETE(선택 일괄), PATCH(개별 수신거부↔재구독 토글)
+  - `web/app/admin/subscribers/page.tsx` 신규: 검색·상태 필터(전체/활성/수신거부)·CSV 다운로드·개별 토글·일괄 삭제
+  - `web/components/admin/AdminSidebar.tsx`: "뉴스레터 구독자" 메뉴 추가 (Mail 아이콘)
+  - `web/app/community/newsletter/page.tsx`: 가짜 submit → 실제 `/api/newsletter/subscribe` 호출. **정보통신망법 대응 필수 동의 체크박스** 추가 (체크 없으면 제출 차단). 이미구독/재구독 케이스별 메시지 분기
+  - `web/app/admin/posts/page.tsx`: `board='newsletter'` 게시글 행에 파란 Send 버튼 추가. 클릭 시 confirm → `/api/admin/newsletter/send` 호출 → `총 N · 성공 N · 실패 N` 결과 alert
+  - `web/lib/email.ts`: `sendNewsletterBatch()` 추가. 100통씩 chunk, 각 통마다 고유 unsubscribe 링크 + `List-Unsubscribe` 헤더 (Gmail/Outlook 네이티브 해지 UI 활성화)
+- 환영 메일(welcome email)은 미구현 — 필요 시 추후 추가.
+- 프론트 typecheck: 신규 파일은 clean. `authOptions` export 경고는 Next 16 + 기존 `[...nextauth]/route.ts` 구조상 발생하는 프로젝트 전역 기존 경고로, 이번 세션 변경과 무관.
+
 ---

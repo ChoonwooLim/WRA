@@ -14,6 +14,8 @@
 | 6 | 로고 파일 수령 및 적용 | 보류 | 파일 수령 대기 |
 | 7 | 연락처 폼 실제 이메일 발송 (Resend 도메인 인증 포함) | 완료 | 2026-04-20 |
 | 8 | 관리자 페이지 UX 개선 (인라인 확장, 필터, 개별 삭제) | 완료 | 2026-04-20 |
+| 9 | 뉴스레터 구독 시스템 (구독/해지/일괄발송/관리자 대시보드) | 완료 | 2026-04-20 |
+| 10 | wagmi RPC CORS 에러 제거 | 완료 | 2026-04-20 |
 
 ## 기능 목록
 
@@ -28,3 +30,6 @@
 | 로고 교체 | 보류 | - | 파일 미수령 |
 | 연락처 폼 (`/community/contact` + `/api/contact`) | 완료 | - | Resend → youna789@gmail.com |
 | 관리자 게시글/알림 인라인 UX | 완료 | - | AnimatePresence, 필터, 개별삭제 |
+| 뉴스레터 구독 (`/community/newsletter` + `/api/newsletter/*`) | 완료 | - | 정보통신망법 동의 체크박스, Subscriber DB 저장 |
+| 뉴스레터 일괄 발송 (관리자 posts 페이지 Send 버튼) | 완료 | - | Resend Batch 100통/chunk, List-Unsubscribe 헤더 |
+| 관리자 구독자 관리 (`/admin/subscribers`) | 완료 | - | 검색/상태필터/CSV/개별토글/일괄삭제 |
