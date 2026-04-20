@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { createNotification } from '@/lib/notifications';
 
 export async function POST(req: NextRequest) {
     try {
@@ -38,6 +39,15 @@ export async function POST(req: NextRequest) {
 
         await prisma.subscriber.create({
             data: { email, consent: true },
+        });
+
+        await createNotification({
+            type: 'subscribe',
+            title: '뉴스레터 구독',
+            message: `${email}님이 뉴스레터 구독을 신청했습니다.`,
+            detail: `정보통신망법 수신 동의 완료 · 차후 뉴스레터 발송 대상 자동 포함`,
+            actionLabel: '구독자 관리로 이동',
+            actionHref: '/admin/subscribers',
         });
 
         return NextResponse.json({ ok: true });

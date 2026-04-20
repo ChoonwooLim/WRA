@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { prisma } from '@/lib/prisma';
+import { createNotification } from '@/lib/notifications';
 import { z } from 'zod';
 
 // Input validation schema
@@ -44,6 +45,15 @@ export async function POST(req: Request) {
 
         // Remove password from response
         const { password: newUserPassword, ...rest } = newUser;
+
+        await createNotification({
+            type: 'signup',
+            title: '새 회원 가입',
+            message: `${name}님이 회원가입했습니다.`,
+            detail: `이메일: ${email}${phone ? ` · 전화: ${phone}` : ''}`,
+            actionLabel: '회원 관리로 이동',
+            actionHref: '/admin/members',
+        });
 
         return NextResponse.json(
             { user: rest, message: "User created successfully" },

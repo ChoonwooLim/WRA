@@ -1,6 +1,14 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
+import { createNotification, NotificationType } from '@/lib/notifications';
+
+const BOARD_LABEL: Record<string, string> = {
+    notices: '공지사항',
+    qna: 'Q&A',
+    'free-board': '자유게시판',
+    newsletter: '뉴스레터',
+};
 
 // GET /api/posts?board=notices&search=xxx&page=1&limit=10
 export async function GET(req: NextRequest) {
@@ -85,6 +93,17 @@ export async function POST(req: NextRequest) {
                     select: { id: true, name: true, email: true, role: true }
                 }
             }
+        });
+
+        const boardLabel = BOARD_LABEL[board] || board;
+        const notifType: NotificationType = board === 'qna' ? 'comment' : 'post';
+        await createNotification({
+            type: notifType,
+            title: board === 'qna' ? 'Q&A 질문' : '새 게시글',
+            message: `${user.name || user.email}님이 ${boardLabel}에 글을 작성했습니다.`,
+            detail: `제목: "${title}"${category ? ` · 카테고리: ${category}` : ''}`,
+            actionLabel: board === 'qna' ? 'Q&A 확인' : '게시글 관리로 이동',
+            actionHref: board === 'qna' ? '/community/qna' : '/admin/posts',
         });
 
         return NextResponse.json({ post }, { status: 201 });

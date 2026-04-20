@@ -1,29 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCheck, UserPlus, FileText, Shield, MessageSquare, Trash2, ChevronDown, ExternalLink } from 'lucide-react';
+import { CheckCheck, UserPlus, FileText, Shield, MessageSquare, Mail, Trash2, ChevronDown, ExternalLink, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 
-type NotifType = 'signup' | 'cert' | 'post' | 'comment';
+type NotifType = 'signup' | 'cert' | 'post' | 'comment' | 'subscribe';
 
 interface Notif {
-    id: number;
+    id: string;
     type: NotifType;
     title: string;
     message: string;
-    detail: string;
-    actionLabel?: string;
-    actionHref?: string;
-    time: string;
-    read: boolean;
+    detail: string | null;
+    actionLabel: string | null;
+    actionHref: string | null;
+    isRead: boolean;
+    createdAt: string;
 }
 
-const iconMap = {
+const iconMap: Record<NotifType, any> = {
     signup: UserPlus,
     cert: Shield,
     post: FileText,
     comment: MessageSquare,
+    subscribe: Mail,
 };
 
 const colorMap: Record<NotifType, { text: string; bg: string }> = {
@@ -31,69 +32,147 @@ const colorMap: Record<NotifType, { text: string; bg: string }> = {
     cert: { text: 'text-blue-400', bg: 'bg-blue-500/10' },
     post: { text: 'text-purple-400', bg: 'bg-purple-500/10' },
     comment: { text: 'text-yellow-400', bg: 'bg-yellow-500/10' },
+    subscribe: { text: 'text-cyan-400', bg: 'bg-cyan-500/10' },
 };
 
-const typeFilterMap: Record<string, (n: Notif) => boolean> = {
-    all: () => true,
-    unread: (n) => !n.read,
-    signup: (n) => n.type === 'signup',
-    cert: (n) => n.type === 'cert',
-    post: (n) => n.type === 'post' || n.type === 'comment',
-};
+type FilterKey = 'all' | 'unread' | 'signup' | 'cert' | 'post' | 'subscribe';
 
-const initialNotifications: Notif[] = [
-    { id: 1, type: 'signup', title: '새 회원 가입', message: 'Kim Min-su님이 회원가입했습니다.', detail: '이메일: kim.minsu@example.com · 가입 경로: 웹사이트 직접 가입 · 승인 대기 상태입니다.', actionLabel: '회원 관리로 이동', actionHref: '/admin/members', time: '2분 전', read: false },
-    { id: 2, type: 'cert', title: '인증 신청', message: 'Lee Se-yeon님이 K-Royal Warrant 인증을 신청했습니다.', detail: '신청 등급: Royal 33 · 제출 서류: 2건 · 승인 검토가 필요합니다.', actionLabel: '인증 관리로 이동', actionHref: '/admin/verifications', time: '15분 전', read: false },
-    { id: 3, type: 'post', title: '새 게시글', message: 'Park Ji-ho님이 자유게시판에 글을 작성했습니다.', detail: '제목: "2026년 상반기 행사 일정 정리해봤습니다" · 조회 425 · 추천 28', actionLabel: '게시글 관리로 이동', actionHref: '/admin/posts', time: '1시간 전', read: false },
-    { id: 4, type: 'comment', title: 'Q&A 질문', message: 'Choi Yu-na님이 Q&A에 질문을 등록했습니다.', detail: '카테고리: 인증 절차 · 답변 대기 상태 · 관리자 답변이 필요합니다.', actionLabel: 'Q&A 확인', actionHref: '/community/qna', time: '2시간 전', read: true },
-    { id: 5, type: 'signup', title: '새 회원 가입', message: 'Song Hye-min님이 회원가입했습니다.', detail: '이메일: song.hm@example.com · 가입 경로: 추천 링크 · 승인 완료.', actionLabel: '회원 관리로 이동', actionHref: '/admin/members', time: '3시간 전', read: true },
-    { id: 6, type: 'cert', title: '인증 승인 완료', message: 'Park Ji-ho님의 K-Royal Warrant 인증이 승인되었습니다.', detail: '승인 등급: Royal 33 · 승인자: admin@wra.com · 인증서 발급 완료.', actionLabel: '인증 관리로 이동', actionHref: '/admin/verifications', time: '5시간 전', read: true },
-    { id: 7, type: 'post', title: '새 게시글', message: 'Jung Do-yun님이 공지사항을 작성했습니다.', detail: '제목: "WRA 커뮤니티에 오신 것을 환영합니다!" · 공지사항 보드 · 전체 공개.', actionLabel: '게시글 관리로 이동', actionHref: '/admin/posts', time: '1일 전', read: true },
-    { id: 8, type: 'signup', title: '새 회원 가입', message: 'Oh Seo-jun님이 회원가입했습니다.', detail: '이메일: oh.seojun@example.com · 가입 경로: 웹사이트 직접 가입 · 승인 완료.', actionLabel: '회원 관리로 이동', actionHref: '/admin/members', time: '2일 전', read: true },
-];
+function timeAgo(iso: string): string {
+    const then = new Date(iso).getTime();
+    const diff = Date.now() - then;
+    const m = Math.floor(diff / 60000);
+    if (m < 1) return '방금 전';
+    if (m < 60) return `${m}분 전`;
+    const h = Math.floor(m / 60);
+    if (h < 24) return `${h}시간 전`;
+    const d = Math.floor(h / 24);
+    if (d < 7) return `${d}일 전`;
+    return new Date(iso).toLocaleDateString('ko-KR');
+}
 
 export default function NotificationsPage() {
-    const [notifications, setNotifications] = useState<Notif[]>(initialNotifications);
-    const [expandedId, setExpandedId] = useState<number | null>(null);
-    const [filter, setFilter] = useState<string>('all');
+    const [notifications, setNotifications] = useState<Notif[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [expandedId, setExpandedId] = useState<string | null>(null);
+    const [filter, setFilter] = useState<FilterKey>('all');
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [totalCount, setTotalCount] = useState(0);
+    const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-    const unreadCount = notifications.filter(n => !n.read).length;
-    const filtered = notifications.filter(typeFilterMap[filter]);
+    const fetchNotifications = useCallback(async () => {
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/admin/notifications?filter=${filter}`, { cache: 'no-store' });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+            setNotifications(data.notifications || []);
+            setUnreadCount(data.unreadCount || 0);
+            setTotalCount(data.totalCount || 0);
+        } catch (e: any) {
+            setNotifications([]);
+            setMessage({ type: 'error', text: `알림 조회 실패: ${e?.message || 'unknown'}` });
+        } finally {
+            setLoading(false);
+        }
+    }, [filter]);
 
-    const toggleExpand = (id: number) => {
-        setExpandedId(prev => (prev === id ? null : id));
-        setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+    useEffect(() => { fetchNotifications(); }, [fetchNotifications]);
+
+    useEffect(() => {
+        if (!message) return;
+        const t = setTimeout(() => setMessage(null), 3000);
+        return () => clearTimeout(t);
+    }, [message]);
+
+    const toggleExpand = async (id: string) => {
+        const willOpen = expandedId !== id;
+        setExpandedId(willOpen ? id : null);
+        if (!willOpen) return;
+        const target = notifications.find(n => n.id === id);
+        if (!target || target.isRead) return;
+        setNotifications(prev => prev.map(n => n.id === id ? { ...n, isRead: true } : n));
+        setUnreadCount(c => Math.max(0, c - 1));
+        try {
+            await fetch('/api/admin/notifications', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'markRead', id }),
+            });
+        } catch { /* non-fatal */ }
     };
 
-    const handleDeleteOne = (id: number, e: React.MouseEvent) => {
+    const handleDeleteOne = async (id: string, e: React.MouseEvent) => {
         e.stopPropagation();
+        const target = notifications.find(n => n.id === id);
         setNotifications(prev => prev.filter(n => n.id !== id));
+        setTotalCount(c => Math.max(0, c - 1));
+        if (target && !target.isRead) setUnreadCount(c => Math.max(0, c - 1));
         if (expandedId === id) setExpandedId(null);
+        try {
+            const res = await fetch('/api/admin/notifications', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id }),
+            });
+            if (!res.ok) throw new Error();
+        } catch {
+            setMessage({ type: 'error', text: '삭제에 실패했습니다.' });
+            fetchNotifications();
+        }
     };
 
-    const handleMarkAllRead = () => {
-        setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    const handleMarkAllRead = async () => {
+        if (unreadCount === 0) return;
+        setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+        setUnreadCount(0);
+        try {
+            const res = await fetch('/api/admin/notifications', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'markAllRead' }),
+            });
+            if (!res.ok) throw new Error();
+            setMessage({ type: 'success', text: '모두 읽음 처리됨' });
+        } catch {
+            setMessage({ type: 'error', text: '처리 실패' });
+            fetchNotifications();
+        }
     };
 
-    const handleDeleteAll = () => {
-        if (notifications.length === 0) return;
-        if (!confirm(`모든 알림 ${notifications.length}개를 삭제하시겠습니까?`)) return;
-        setNotifications([]);
-        setExpandedId(null);
+    const handleDeleteAll = async () => {
+        if (totalCount === 0) return;
+        if (!confirm(`모든 알림 ${totalCount}개를 삭제하시겠습니까? (복구 불가)`)) return;
+        try {
+            const res = await fetch('/api/admin/notifications', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ all: true }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error);
+            setMessage({ type: 'success', text: `${data.deleted}개 삭제됨` });
+            setNotifications([]);
+            setTotalCount(0);
+            setUnreadCount(0);
+            setExpandedId(null);
+        } catch (e: any) {
+            setMessage({ type: 'error', text: e?.message || '삭제 실패' });
+        }
     };
 
-    const tabs = [
-        { key: 'all', label: '전체', count: notifications.length },
-        { key: 'unread', label: '읽지 않음', count: unreadCount },
-        { key: 'signup', label: '회원가입', count: notifications.filter(n => n.type === 'signup').length },
-        { key: 'cert', label: '인증', count: notifications.filter(n => n.type === 'cert').length },
-        { key: 'post', label: '게시글', count: notifications.filter(n => n.type === 'post' || n.type === 'comment').length },
+    const tabs: { key: FilterKey; label: string }[] = [
+        { key: 'all', label: '전체' },
+        { key: 'unread', label: '읽지 않음' },
+        { key: 'signup', label: '회원가입' },
+        { key: 'subscribe', label: '뉴스레터' },
+        { key: 'post', label: '게시글' },
+        { key: 'cert', label: '인증' },
     ];
 
     return (
         <div className="space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
                     <h1 className="text-3xl font-bold flex items-center gap-3">
                         알림
@@ -103,9 +182,16 @@ export default function NotificationsPage() {
                             </span>
                         )}
                     </h1>
-                    <p className="text-gray-400 mt-1">시스템 알림 및 활동 내역</p>
+                    <p className="text-gray-400 mt-1">시스템 알림 및 활동 내역 · 총 <span className="text-white">{totalCount}</span>건</p>
                 </div>
                 <div className="flex gap-2">
+                    <button
+                        onClick={fetchNotifications}
+                        className="px-4 py-2 text-sm bg-white/5 border border-white/10 rounded-xl text-gray-400 hover:text-white hover:border-white/20 transition-colors flex items-center gap-2"
+                    >
+                        <RefreshCw className="w-4 h-4" />
+                        새로고침
+                    </button>
                     <button
                         onClick={handleMarkAllRead}
                         disabled={unreadCount === 0}
@@ -116,7 +202,7 @@ export default function NotificationsPage() {
                     </button>
                     <button
                         onClick={handleDeleteAll}
-                        disabled={notifications.length === 0}
+                        disabled={totalCount === 0}
                         className="px-4 py-2 text-sm bg-white/5 border border-white/10 rounded-xl text-gray-400 hover:text-red-400 hover:border-red-500/30 transition-colors flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                         <Trash2 className="w-4 h-4" />
@@ -124,6 +210,17 @@ export default function NotificationsPage() {
                     </button>
                 </div>
             </div>
+
+            {message && (
+                <div
+                    className={`p-3 rounded-xl text-sm ${message.type === 'success'
+                        ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
+                        : 'bg-red-500/10 border border-red-500/20 text-red-400'
+                        }`}
+                >
+                    {message.text}
+                </div>
+            )}
 
             {/* Filter Tabs */}
             <div className="flex gap-2 flex-wrap">
@@ -134,64 +231,64 @@ export default function NotificationsPage() {
                         className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${filter === tab.key ? 'bg-white/10 text-white border border-white/15' : 'bg-white/[0.02] text-gray-400 border border-white/5 hover:bg-white/5 hover:text-white'}`}
                     >
                         {tab.label}
-                        <span className="ml-1.5 text-xs text-gray-500">{tab.count}</span>
                     </button>
                 ))}
             </div>
 
             {/* Notifications List */}
             <div className="space-y-2">
-                {filtered.length === 0 ? (
-                    <div className="py-16 text-center text-gray-500 text-sm">알림이 없습니다.</div>
+                {loading ? (
+                    <div className="py-16 text-center text-gray-500 text-sm">불러오는 중...</div>
+                ) : notifications.length === 0 ? (
+                    <div className="py-16 text-center text-gray-500 text-sm">
+                        {filter === 'all' ? '알림이 없습니다.' : '해당 필터에 알림이 없습니다.'}
+                    </div>
                 ) : (
-                    filtered.map((notif, i) => {
-                        const Icon = iconMap[notif.type];
-                        const colors = colorMap[notif.type];
+                    notifications.map((notif, i) => {
+                        const Icon = iconMap[notif.type] || FileText;
+                        const colors = colorMap[notif.type] || colorMap.post;
                         const isExpanded = expandedId === notif.id;
                         return (
                             <motion.div
                                 key={notif.id}
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.04 }}
-                                className={`rounded-xl border transition-colors group ${notif.read ? 'bg-[#0a0a1a] border-white/5' : 'bg-white/[0.03] border-white/10'}`}
+                                transition={{ delay: Math.min(i * 0.03, 0.3) }}
+                                className={`rounded-xl border transition-colors group ${notif.isRead ? 'bg-[#0a0a1a] border-white/5' : 'bg-white/[0.03] border-white/10'}`}
                             >
                                 <button
                                     type="button"
                                     onClick={() => toggleExpand(notif.id)}
-                                    className={`w-full text-left flex items-start gap-4 p-4 rounded-xl transition-colors ${notif.read ? 'hover:bg-white/[0.03]' : 'hover:bg-white/[0.05]'}`}
+                                    className={`w-full text-left flex items-start gap-4 p-4 rounded-xl transition-colors ${notif.isRead ? 'hover:bg-white/[0.03]' : 'hover:bg-white/[0.05]'}`}
                                 >
                                     <ChevronDown
                                         size={14}
                                         className={`flex-shrink-0 mt-3.5 text-gray-500 transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'}`}
                                     />
 
-                                    {/* Icon */}
                                     <div className="relative shrink-0 mt-0.5">
                                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${colors.bg}`}>
                                             <Icon className={`w-5 h-5 ${colors.text}`} />
                                         </div>
-                                        {!notif.read && (
+                                        {!notif.isRead && (
                                             <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-red-500 border-2 border-[#0a0a1a]" />
                                         )}
                                     </div>
 
-                                    {/* Content */}
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-2 mb-1">
-                                            <h3 className={`text-sm font-semibold ${notif.read ? 'text-gray-300' : 'text-white'}`}>
+                                            <h3 className={`text-sm font-semibold ${notif.isRead ? 'text-gray-300' : 'text-white'}`}>
                                                 {notif.title}
                                             </h3>
-                                            {!notif.read && (
+                                            {!notif.isRead && (
                                                 <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-400">NEW</span>
                                             )}
                                         </div>
                                         <p className={`text-sm text-gray-400 ${isExpanded ? '' : 'truncate'}`}>{notif.message}</p>
                                     </div>
 
-                                    {/* Time + Delete */}
                                     <div className="flex items-center gap-2 shrink-0 mt-1">
-                                        <span className="text-xs text-gray-500 whitespace-nowrap">{notif.time}</span>
+                                        <span className="text-xs text-gray-500 whitespace-nowrap">{timeAgo(notif.createdAt)}</span>
                                         <button
                                             onClick={(e) => handleDeleteOne(notif.id, e)}
                                             className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-gray-500 hover:bg-red-500/10 hover:text-red-400 transition-all"
@@ -203,7 +300,6 @@ export default function NotificationsPage() {
                                     </div>
                                 </button>
 
-                                {/* Expanded Panel */}
                                 <AnimatePresence initial={false}>
                                     {isExpanded && (
                                         <motion.div
@@ -214,7 +310,9 @@ export default function NotificationsPage() {
                                             className="overflow-hidden"
                                         >
                                             <div className="px-4 pb-4 pl-[76px] border-t border-white/5 pt-3 space-y-3 bg-black/20">
-                                                <p className="text-sm text-gray-300 leading-relaxed">{notif.detail}</p>
+                                                {notif.detail && (
+                                                    <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">{notif.detail}</p>
+                                                )}
                                                 {notif.actionHref && (
                                                     <Link
                                                         href={notif.actionHref}
@@ -233,8 +331,6 @@ export default function NotificationsPage() {
                     })
                 )}
             </div>
-
-            <p className="text-center text-gray-600 text-xs">※ 샘플 데이터입니다. 실시간 알림 시스템 연동 후 교체됩니다.</p>
         </div>
     );
 }
