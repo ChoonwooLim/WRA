@@ -28,4 +28,8 @@ export const config = getDefaultConfig({
     storage: createStorage({
         storage: cookieStorage,
     }),
+    transports: {
+        [mainnet.id]: http('https://cloudflare-eth.com'),
+        [sepolia.id]: http('https://ethereum-sepolia-rpc.publicnode.com'),
+    },
 });
