@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { ArrowLeft, Edit, Trash2, Eye, Clock, User } from 'lucide-react';
+import { ArrowLeft, Edit, Trash2, Eye, Clock, User, MessageSquareReply, Check, X } from 'lucide-react';
 import Link from 'next/link';
 
 interface PostData {
@@ -15,10 +15,14 @@ interface PostData {
     views: number;
     likes: number;
     answered: boolean;
+    answerContent: string | null;
+    answererId: string | null;
+    answeredAt: string | null;
     authorId: string;
     createdAt: string;
     updatedAt: string;
     author: { id: string; name: string | null; email: string | null; role: string };
+    answerer?: { id: string; name: string | null; email: string | null; role: string } | null;
 }
 
 export default function PostDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -28,6 +32,9 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
     const [post, setPost] = useState<PostData | null>(null);
     const [loading, setLoading] = useState(true);
     const [deleting, setDeleting] = useState(false);
+    const [answerEditing, setAnswerEditing] = useState(false);
+    const [answerDraft, setAnswerDraft] = useState('');
+    const [answerSaving, setAnswerSaving] = useState(false);
 
     useEffect(() => {
         fetch(`/api/posts/${id}`)
@@ -91,6 +98,44 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
             if (data.post) setPost(data.post);
         } catch {
             alert('상태 변경에 실패했습니다.');
+        }
+    };
+
+    const startAnswerEdit = () => {
+        setAnswerDraft(post?.answerContent || '');
+        setAnswerEditing(true);
+    };
+
+    const cancelAnswerEdit = () => {
+        setAnswerDraft('');
+        setAnswerEditing(false);
+    };
+
+    const saveAnswer = async () => {
+        if (!post) return;
+        const trimmed = answerDraft.trim();
+        if (trimmed === '') {
+            if (!confirm('답변을 삭제하시겠습니까?')) return;
+        }
+        setAnswerSaving(true);
+        try {
+            const res = await fetch(`/api/posts/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answerContent: trimmed }),
+            });
+            const data = await res.json();
+            if (res.ok && data.post) {
+                setPost(data.post);
+                setAnswerEditing(false);
+                setAnswerDraft('');
+            } else {
+                alert(data.error || '답변 저장에 실패했습니다.');
+            }
+        } catch {
+            alert('네트워크 오류가 발생했습니다.');
+        } finally {
+            setAnswerSaving(false);
         }
     };
 
@@ -165,6 +210,100 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
                     className="min-h-[200px] text-gray-300 leading-relaxed whitespace-pre-wrap mb-8 prose prose-invert max-w-none"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
+
+                {/* Q&A Answer Section */}
+                {post.board === 'qna' && (
+                    <div className="mb-8 border-t border-white/10 pt-6">
+                        {/* Existing answer display */}
+                        {post.answerContent && !answerEditing && (
+                            <div className="bg-cyan-500/5 border border-cyan-500/20 rounded-xl p-5 mb-4">
+                                <div className="flex items-center justify-between mb-3 pb-3 border-b border-cyan-500/10">
+                                    <div className="flex items-center gap-2">
+                                        <MessageSquareReply className="w-4 h-4 text-cyan-400" />
+                                        <span className="text-cyan-400 font-semibold text-sm">관리자 답변</span>
+                                        {post.answerer && (
+                                            <span className="text-gray-400 text-xs">
+                                                · {post.answerer.name || '관리자'}
+                                            </span>
+                                        )}
+                                        {post.answeredAt && (
+                                            <span className="text-gray-500 text-xs">
+                                                · {new Date(post.answeredAt).toLocaleString('ko-KR')}
+                                            </span>
+                                        )}
+                                    </div>
+                                    {isAdmin && (
+                                        <button
+                                            onClick={startAnswerEdit}
+                                            className="flex items-center gap-1 text-xs text-cyan-300 hover:text-cyan-200"
+                                        >
+                                            <Edit className="w-3 h-3" />
+                                            수정
+                                        </button>
+                                    )}
+                                </div>
+                                <div
+                                    className="text-gray-200 leading-relaxed whitespace-pre-wrap prose prose-invert max-w-none"
+                                    dangerouslySetInnerHTML={{ __html: post.answerContent }}
+                                />
+                            </div>
+                        )}
+
+                        {/* Admin editor */}
+                        {isAdmin && answerEditing && (
+                            <div className="bg-white/5 border border-cyan-500/30 rounded-xl p-5 mb-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <MessageSquareReply className="w-4 h-4 text-cyan-400" />
+                                    <span className="text-cyan-400 font-semibold text-sm">
+                                        {post.answerContent ? '답변 수정' : '답변 작성'}
+                                    </span>
+                                </div>
+                                <textarea
+                                    value={answerDraft}
+                                    onChange={(e) => setAnswerDraft(e.target.value)}
+                                    placeholder="답변 내용을 입력하세요. HTML 태그(예: <br>, <strong>) 사용 가능."
+                                    rows={6}
+                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400/50 resize-y"
+                                />
+                                <div className="flex justify-end gap-2 mt-3">
+                                    <button
+                                        onClick={cancelAnswerEdit}
+                                        disabled={answerSaving}
+                                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-white/20 text-sm disabled:opacity-50"
+                                    >
+                                        <X className="w-3.5 h-3.5" />
+                                        취소
+                                    </button>
+                                    <button
+                                        onClick={saveAnswer}
+                                        disabled={answerSaving}
+                                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/30 text-sm disabled:opacity-50"
+                                    >
+                                        <Check className="w-3.5 h-3.5" />
+                                        {answerSaving ? '저장 중...' : '저장'}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* No answer yet — admin write button */}
+                        {!post.answerContent && !answerEditing && (
+                            <div className="text-center py-6">
+                                {isAdmin ? (
+                                    <button
+                                        onClick={startAnswerEdit}
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all text-sm"
+                                    >
+                                        <MessageSquareReply className="w-4 h-4" />
+                                        답변 작성
+                                    </button>
+                                ) : (
+                                    <p className="text-gray-500 text-sm">아직 답변이 등록되지 않았습니다.</p>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 {/* Action Buttons */}
                 <div className="flex justify-between items-center pt-5 border-t border-white/10">

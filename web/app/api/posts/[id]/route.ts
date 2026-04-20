@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
+import { createNotification } from '@/lib/notifications';
 
 // GET /api/posts/[id] — get single post + increment views
 export async function GET(
@@ -15,6 +16,9 @@ export async function GET(
             data: { views: { increment: 1 } },
             include: {
                 author: {
+                    select: { id: true, name: true, email: true, role: true }
+                },
+                answerer: {
                     select: { id: true, name: true, email: true, role: true }
                 }
             }
@@ -61,7 +65,9 @@ export async function PUT(
         }
 
         const body = await req.json();
-        const { title, content, category, answered } = body;
+        const { title, content, category, answered, answerContent } = body;
+
+        const isAdmin = user.role === 'admin' || user.role === 'sub-admin';
 
         const updateData: any = {};
         if (title !== undefined) updateData.title = title;
@@ -69,15 +75,55 @@ export async function PUT(
         if (category !== undefined) updateData.category = category;
         if (answered !== undefined) updateData.answered = answered;
 
+        // Answer handling — admin/sub-admin only, QnA only
+        let answerChanged = false;
+        if (answerContent !== undefined) {
+            if (!isAdmin) {
+                return NextResponse.json({ error: '답변 작성 권한이 없습니다.' }, { status: 403 });
+            }
+            if (existingPost.board !== 'qna') {
+                return NextResponse.json({ error: 'Q&A 게시글만 답변할 수 있습니다.' }, { status: 400 });
+            }
+            const trimmed = String(answerContent).trim();
+            if (trimmed === '') {
+                // Clear answer
+                updateData.answerContent = null;
+                updateData.answererId = null;
+                updateData.answeredAt = null;
+                updateData.answered = false;
+            } else {
+                updateData.answerContent = trimmed;
+                updateData.answererId = user.id;
+                updateData.answeredAt = new Date();
+                updateData.answered = true;
+                answerChanged = !existingPost.answerContent || existingPost.answerContent !== trimmed;
+            }
+        }
+
         const post = await prisma.post.update({
             where: { id },
             data: updateData,
             include: {
                 author: {
                     select: { id: true, name: true, email: true, role: true }
+                },
+                answerer: {
+                    select: { id: true, name: true, email: true, role: true }
                 }
             }
         });
+
+        // Notification when a new/updated answer is posted
+        if (answerChanged && updateData.answerContent) {
+            await createNotification({
+                type: 'answer',
+                title: 'Q&A 답변 등록',
+                message: post.title,
+                detail: `답변자: ${user.name || user.email || '관리자'}`,
+                actionLabel: '답변 보기',
+                actionHref: `/community/post/${post.id}`,
+            });
+        }
 
         return NextResponse.json({ post });
     } catch (error) {

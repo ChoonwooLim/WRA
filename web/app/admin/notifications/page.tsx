@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCheck, UserPlus, FileText, Shield, MessageSquare, Mail, Trash2, ChevronDown, ExternalLink, RefreshCw } from 'lucide-react';
+import { CheckCheck, UserPlus, FileText, Shield, MessageSquare, Mail, Trash2, ChevronDown, ExternalLink, RefreshCw, MessageSquareReply } from 'lucide-react';
 import Link from 'next/link';
 
-type NotifType = 'signup' | 'cert' | 'post' | 'comment' | 'subscribe';
+type NotifType = 'signup' | 'cert' | 'post' | 'comment' | 'subscribe' | 'answer';
 
 interface Notif {
     id: string;
@@ -25,6 +25,7 @@ const iconMap: Record<NotifType, any> = {
     post: FileText,
     comment: MessageSquare,
     subscribe: Mail,
+    answer: MessageSquareReply,
 };
 
 const colorMap: Record<NotifType, { text: string; bg: string }> = {
@@ -33,9 +34,10 @@ const colorMap: Record<NotifType, { text: string; bg: string }> = {
     post: { text: 'text-purple-400', bg: 'bg-purple-500/10' },
     comment: { text: 'text-yellow-400', bg: 'bg-yellow-500/10' },
     subscribe: { text: 'text-cyan-400', bg: 'bg-cyan-500/10' },
+    answer: { text: 'text-cyan-300', bg: 'bg-cyan-400/10' },
 };
 
-type FilterKey = 'all' | 'unread' | 'signup' | 'cert' | 'post' | 'subscribe';
+type FilterKey = 'all' | 'unread' | 'signup' | 'cert' | 'post' | 'subscribe' | 'answer';
 
 function timeAgo(iso: string): string {
     const then = new Date(iso).getTime();
@@ -166,6 +168,7 @@ export default function NotificationsPage() {
         { key: 'signup', label: '회원가입' },
         { key: 'subscribe', label: '뉴스레터' },
         { key: 'post', label: '게시글' },
+        { key: 'answer', label: 'Q&A 답변' },
         { key: 'cert', label: '인증' },
     ];
 

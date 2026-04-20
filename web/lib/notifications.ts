@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 
-export type NotificationType = 'signup' | 'cert' | 'post' | 'comment' | 'subscribe';
+export type NotificationType = 'signup' | 'cert' | 'post' | 'comment' | 'subscribe' | 'answer';
 
 interface CreateNotificationInput {
     type: NotificationType;

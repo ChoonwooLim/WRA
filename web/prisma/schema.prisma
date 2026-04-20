@@ -49,25 +49,31 @@ model User {
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  answeredPosts Post[]    @relation("PostAnswerer")
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  board     String   // 'notices', 'qna', 'free-board'
-  title     String
-  content   String
-  category  String?  // For notices: '활동','인증','투어','교육' etc
-  views     Int      @default(0)
-  likes     Int      @default(0)
-  answered  Boolean  @default(false) // For QnA only
-  authorId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(cuid())
+  board         String    // 'notices', 'qna', 'free-board'
+  title         String
+  content       String
+  category      String?   // For notices: '활동','인증','투어','교육' etc
+  views         Int       @default(0)
+  likes         Int       @default(0)
+  answered      Boolean   @default(false) // For QnA only
+  answerContent String?   // For QnA answer body (rich text HTML)
+  answererId    String?
+  answeredAt    DateTime?
+  authorId      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author    User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  answerer  User?  @relation("PostAnswerer", fields: [answererId], references: [id], onDelete: SetNull)
 
   @@index([board])
   @@index([authorId])
+  @@index([answererId])
 }
 
 model VerificationToken {

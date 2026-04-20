@@ -18,6 +18,7 @@ const TYPE_FILTERS: Record<string, any> = {
     cert: { type: 'cert' },
     post: { type: { in: ['post', 'comment'] } },
     subscribe: { type: 'subscribe' },
+    answer: { type: 'answer' },
 };
 
 export async function GET(req: NextRequest) {
