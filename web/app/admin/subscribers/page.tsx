@@ -29,14 +29,15 @@ export default function AdminSubscribersPage() {
         try {
             const params = new URLSearchParams({ status });
             if (searchTerm) params.set('search', searchTerm);
-            const res = await fetch(`/api/admin/subscribers?${params}`);
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || 'failed');
+            const res = await fetch(`/api/admin/subscribers?${params}`, { cache: 'no-store' });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
             setSubscribers(data.subscribers || []);
             setActiveCount(data.activeCount || 0);
             setUnsubCount(data.unsubscribedCount || 0);
-        } catch {
+        } catch (e: any) {
             setSubscribers([]);
+            setMessage({ type: 'error', text: `목록 조회 실패: ${e?.message || 'unknown'}` });
         } finally {
             setLoading(false);
         }
