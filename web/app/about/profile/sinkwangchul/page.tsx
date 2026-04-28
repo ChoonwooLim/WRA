@@ -6,16 +6,14 @@ import { BookOpen, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const bookImages = [
-    "k휴먼-평면.jpg", "x9791189141035.jpg", "강궁이옥.jpg", "경영한류.jpg",
-    "고진도사.PNG", "공자와열두.PNG", "그림1.png", "그림10.png", "그림11.jpg",
-    "그림12.jpg", "그림13.jpg", "그림14.jpg", "그림15.png", "그림16.png",
-    "그림17.png", "그림18.png", "그림2.jpg", "그림3.jpg", "그림4.jpg",
-    "그림5.jpg", "그림6.jpg", "그림7.jpg", "그림8.png", "그림9.png",
-    "긍웃2.PNG", "긍정이.PNG", "논어의재구성.jpg", "다산에게배우다.jpg",
-    "아름다운우리한옥.PNG", "옛길.PNG", "인문형인간1.PNG", "인생십계명.PNG",
-    "인생지도.PNG", "장보고.PNG", "징기스칸.jpg", "하브루타_표지.PNG",
-    "한국세계 기록유산.jpg", "한국의세계문화유산.jpg", "한옥마을.PNG",
-    "한옥설계집.png", "환단고기1,2.jpg", "힌옥의 멋.png"
+    "그림2.png", "그림3.png", "그림1.png", "그림5.png", "그림6.png",
+    "그림7.png", "그림8.png", "그림9.png", "그림10.jpg", "그림11.png",
+    "그림12.png", "그림13.jpg", "그림14.png", "그림15.png", "그림16.jpg",
+    "그림17.jpg", "그림18.png", "그림19.png", "그림20.jpg", "그림21.jpg",
+    "그림22.png", "그림23.png", "그림24.png", "그림25.png", "그림26.jpg",
+    "그림27.jpg", "그림28.jpg", "그림29.png", "그림30.png", "그림31.jpg",
+    "그림32.jpg", "그림33.png", "그림35.png", "그림36.png", "그림37.png",
+    "그림38.png"
 ];
 
 export default function SinkwangchulProfilePage() {
@@ -55,11 +53,11 @@ export default function SinkwangchulProfilePage() {
                     </div>
 
                     <SectionHeader
-                        title="저서 모음"
-                        subtitle="Published Works by 신광철"
+                        title="도서 출판 및 아카데미(강연)"
+                        subtitle="Published Works & Academy Lectures by 신광철"
                     />
 
-                    <div className="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6 mt-12 pb-20">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 mt-12 pb-20">
                         {bookImages.map((filename, idx) => (
                             <motion.div
                                 key={idx}
@@ -67,20 +65,30 @@ export default function SinkwangchulProfilePage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
                                 transition={{ duration: 0.5, delay: (idx % 8) * 0.1 }}
-                                className="break-inside-avoid relative group rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)] border border-[#d4af37]/20 bg-[#0c0f17] flex justify-center items-center"
+                                className="group relative"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-transparent to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 z-10 flex flex-col justify-end p-4">
-                                    <BookOpen className="w-8 h-8 text-[#d4af37] mb-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
+                                {/* Outer gold frame */}
+                                <div className="relative p-[10px] md:p-[14px] rounded-[6px] bg-gradient-to-br from-[#f6e27a] via-[#c9a227] to-[#7a5a0f] shadow-[0_12px_30px_rgba(0,0,0,0.55),0_2px_8px_rgba(212,175,55,0.25)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.65),0_4px_14px_rgba(212,175,55,0.45)]">
+                                    {/* Inner bevel ridge */}
+                                    <div className="absolute inset-[6px] md:inset-[8px] rounded-[3px] pointer-events-none ring-1 ring-[#3a2a08]/70 shadow-[inset_0_1px_0_rgba(255,235,170,0.55),inset_0_-1px_0_rgba(0,0,0,0.6)]" />
+                                    {/* Mat (passe-partout) */}
+                                    <div className="relative aspect-[3/4] rounded-[2px] bg-gradient-to-br from-[#15110a] to-[#080604] overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
+                                        <div className="absolute inset-3 md:inset-4 overflow-hidden bg-[#0c0903] rounded-[1px] flex items-center justify-center">
+                                            <img
+                                                src={`/images/books/sinkwangchul/${filename}`}
+                                                alt={`신광철 작가 저서 ${idx + 1}`}
+                                                className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        {/* Hover overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#050510]/90 via-[#050510]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4 pointer-events-none">
+                                            <BookOpen className="w-7 h-7 text-[#d4af37] transform translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="relative w-full">
-                                    <img
-                                        src={`/images/books/${filename}`}
-                                        alt={`신광철 작가 저서 ${idx + 1}`}
-                                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div className="absolute inset-0 border-2 border-[#d4af37] opacity-0 group-hover:opacity-30 rounded-xl transition-opacity duration-300 pointer-events-none z-20" />
+                                {/* Floor reflection / shadow */}
+                                <div className="mx-auto mt-2 h-2 w-3/4 rounded-full bg-black/60 blur-md opacity-70" />
                             </motion.div>
                         ))}
                     </div>
