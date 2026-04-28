@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>세계왕립아카데미 · 실행 미리보기</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@500&family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --gold:#d4af37;
+    --ink:#050510;
+    --paper:#eae2c8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--ink);color:#fff;font-family:'Noto Sans KR',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  /* ---- Top preview bar ---- */
+  .bar{position:sticky;top:0;z-index:50;background:rgba(5,5,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,.25);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;letter-spacing:.08em}
+  .bar strong{color:var(--gold)}
+  .bar .tag{padding:3px 10px;border:1px solid rgba(212,175,55,.4);border-radius:999px;font-size:11px;color:var(--gold)}
+
+  /* ---- Hero ---- */
+  .hero{position:relative;height:100vh;min-height:720px;overflow:hidden;display:flex;align-items:center;justify-content:center;perspective:1000px}
+  .hero .bg{position:absolute;inset:-8% -4%;background:url('preview_assets/bg.jpg') center/cover no-repeat;filter:brightness(.55) saturate(1.05);transform:scale(1.15);animation:drift 20s ease-in-out infinite alternate}
+  .hero .veil{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(5,5,16,.25) 0%,rgba(5,5,16,.9) 80%)}
+  @keyframes drift{from{transform:scale(1.15) translate(0,0)}to{transform:scale(1.2) translate(-3%,2%)}}
+
+  .hero .content{position:relative;z-index:2;text-align:center;padding:0 24px}
+  .ring{position:relative;width:clamp(220px,28vw,320px);height:clamp(220px,28vw,320px);margin:0 auto 56px}
+  .ring .glow{position:absolute;inset:-24px;border-radius:50%;background:rgba(212,175,55,.18);filter:blur(40px);animation:pulse 3s ease-in-out infinite}
+  .ring .r1{position:absolute;inset:-30px;border:2px solid rgba(212,175,55,.25);border-radius:50%;animation:spin 20s linear infinite}
+  .ring .r2{position:absolute;inset:-14px;border:1px dashed rgba(212,175,55,.4);border-radius:50%;animation:spin 30s linear reverse infinite}
+  .ring img{position:relative;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 50px rgba(212,175,55,.55))}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.55}}
+
+  h1.title{font-size:clamp(42px,7vw,108px);font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0 0 26px;display:flex;gap:0;justify-content:center;flex-wrap:wrap}
+  h1.title .w{display:inline-block;color:#fff;text-shadow:0 0 30px rgba(255,255,255,.15)}
+  h1.title .g{display:inline-block;color:var(--gold);text-shadow:0 0 40px rgba(212,175,55,.6)}
+  .subtitle{font-family:'Playfair Display',serif;font-style:italic;font-weight:300;color:#cbbf9a;letter-spacing:.35em;text-transform:uppercase;font-size:clamp(14px,1.6vw,22px);margin:0 0 72px}
+  .scroll-hint{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);z-index:3;text-align:center;color:rgba(255,255,255,.5);font-size:10px;letter-spacing:.35em;text-transform:uppercase}
+  .scroll-hint .line{width:1px;height:48px;margin:10px auto 0;background:linear-gradient(to bottom,transparent,var(--gold),transparent);animation:drop 2s infinite}
+  @keyframes drop{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(8px)}}
+
+  /* ---- Sections wrapper ---- */
+  section.block{position:relative;padding:120px 24px;overflow:hidden}
+  .wrap{max-width:1200px;margin:0 auto}
+  .eyebrow{color:var(--gold);letter-spacing:.3em;font-size:12px;text-transform:uppercase;margin-bottom:14px}
+  h2.h{font-family:'Playfair Display','Noto Serif KR',serif;font-weight:700;font-size:clamp(30px,4vw,52px);margin:0 0 18px;line-height:1.15}
+  p.lede{color:#aaa5b4;font-size:17px;line-height:1.75;max-width:720px}
+
+  /* greeting */
+  .greet{background:linear-gradient(180deg,#050510 0%,#0b0a1a 100%);border-top:1px solid rgba(212,175,55,.15);border-bottom:1px solid rgba(212,175,55,.15)}
+  .greet .grid{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:center}
+  .greet .portrait{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(212,175,55,.3)}
+  .greet .portrait img{width:100%;height:100%;object-fit:cover;filter:sepia(.15) saturate(1.1)}
+  .greet .portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(5,5,16,.55) 100%)}
+  .greet .role{color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;margin-top:10px;white-space:pre-line}
+  .greet .msg{color:#c8c2d4;line-height:1.9;font-size:15px;white-space:pre-line}
+  .greet .msg strong{color:#fff;font-weight:700;background:linear-gradient(180deg,transparent 55%,rgba(212,175,55,.2) 55%)}
+
+  /* values */
+  .values{background:#070714}
+  .values .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:48px}
+  .card{position:relative;padding:32px 26px;border:1px solid rgba(212,175,55,.18);background:linear-gradient(180deg,rgba(22,20,40,.85),rgba(10,9,20,.9));border-radius:6px;transition:transform .3s,border-color .3s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,.55)}
+  .card .num{position:absolute;top:14px;right:16px;font-family:'Playfair Display',serif;font-size:40px;color:rgba(212,175,55,.25);font-weight:700}
+  .card h4{font-family:'Noto Serif KR',serif;font-size:22px;margin:0 0 10px;color:var(--gold)}
+  .card p{color:#aaa;font-size:13.5px;line-height:1.7;margin:0;white-space:pre-line}
+
+  /* warrant highlights */
+  .warrant{background:linear-gradient(180deg,#0b0a1a 0%,#050510 100%)}
+  .warrant .pills{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:40px}
+  .pill{padding:24px 20px;border-radius:12px;background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.2)}
+  .pill h5{margin:0 0 8px;font-size:17px;color:#fff}
+  .pill p{margin:0;color:#938d9f;font-size:13px;line-height:1.65}
+
+  /* royal 33 */
+  .royal{background:radial-gradient(ellipse at top,#1a1430 0%,#050510 70%);border-top:1px solid rgba(212,175,55,.2)}
+  .royal .hero33{display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:center}
+  .royal .num33{font-family:'Playfair Display',serif;font-size:clamp(120px,20vw,260px);line-height:.85;color:var(--gold);text-shadow:0 0 80px rgba(212,175,55,.5);margin:0;text-align:center}
+  .royal ul{margin:24px 0 0;padding:0;list-style:none}
+  .royal li{padding:12px 0;border-bottom:1px dashed rgba(212,175,55,.2);color:#d2cbe0;display:flex;gap:14px;align-items:center}
+  .royal li::before{content:"◆";color:var(--gold)}
+  .cta{display:inline-block;margin-top:28px;padding:14px 34px;border:1px solid var(--gold);color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-size:13px;border-radius:2px;cursor:pointer;transition:all .2s}
+  .cta:hover{background:var(--gold);color:#050510}
+
+  /* digital seal */
+  .seal{background:#050510}
+  .seal .flex{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .seal .stamp{position:relative;width:320px;height:320px;margin:0 auto;border-radius:18px;background:linear-gradient(135deg,#8b0000,#c41e3a);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 40px rgba(0,0,0,.4),0 30px 60px rgba(139,0,0,.4);transform:rotate(-6deg);font-family:'Noto Serif KR',serif;color:#ffe9b8;font-size:48px;font-weight:700;letter-spacing:6px;text-shadow:2px 2px 6px rgba(0,0,0,.4)}
+  .seal .stamp::after{content:"";position:absolute;inset:14px;border:3px double rgba(255,233,184,.6);border-radius:10px}
+
+  /* sitemap */
+  .sitemap{background:#070714;border-top:1px solid rgba(212,175,55,.2)}
+  .sitemap .cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px 32px;margin-top:36px}
+  .sitemap .col h5{color:var(--gold);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(212,175,55,.2)}
+  .sitemap ul{margin:0;padding:0;list-style:none}
+  .sitemap li{padding:5px 0;color:#b8b2c4;font-size:14px}
+  .sitemap li code{font-family:'Geist Mono','JetBrains Mono',monospace;color:#7d7590;font-size:12px;margin-left:6px}
+
+  /* meta footer */
+  .meta{background:#03030a;padding:36px 24px;text-align:center;color:#6d6580;font-size:12px;letter-spacing:.08em}
+  .meta strong{color:var(--gold)}
+
+  /* tech stack chips */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .chips span{padding:6px 12px;border-radius:999px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.3);color:#d4af37;font-size:12px;letter-spacing:.03em}
+
+  @media (max-width:860px){
+    .greet .grid,.royal .hero33,.seal .flex{grid-template-columns:1fr;gap:40px}
+    section.block{padding:80px 20px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span><strong>▲ WRA 미리보기</strong> · <span style="color:#8e86a0">web/ (Next.js 16 · React 19 · Prisma · Web3)</span></span>
+  <span class="tag">HOME · /</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="content">
+    <div class="ring">
+      <div class="glow"></div>
+      <div class="r1"></div>
+      <div class="r2"></div>
+      <img src="preview_assets/logo.png" alt="World Royal Academy Emblem" />
+    </div>
+    <h1 class="title">
+      <span class="w">세계왕립</span><span class="g">아카데미</span>
+    </h1>
+    <p class="subtitle">World Royal Academy</p>
+  </div>
+  <div class="scroll-hint">
+    아래로 스크롤하여 더 알아보기
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- GREETING -->
+<section class="block greet">
+  <div class="wrap">
+    <div class="grid">
+      <div class="portrait"><img src="preview_assets/crown_prince.jpg" alt="황태손 이원" /></div>
+      <div>
+        <div class="eyebrow">Greeting</div>
+        <h2 class="h">인 사 말</h2>
+        <div class="role">세계왕립아카데미
+대한황실 황태손 이 원</div>
+        <p class="msg" style="margin-top:28px">
+<strong>세계왕립아카데미</strong>를 찾아주신 여러분께 깊은 감사의 뜻을 전합니다.
+
+세계는 지금 <strong>문화와 교육</strong>을 통해 국가의 <strong>품격과 정체성</strong>을 새롭게 정의하는 시대에 들어섰습니다. 역사적으로 <strong>왕실</strong>은 국가의 상징이자, 문명과 문명을 연결하고 생산하는 <strong>외교의 축</strong>이었습니다.
+
+대한민국의 <strong>K-헤리티지</strong>는 오랜 역사 속에서 형성된 정신과 문화의 결정체입니다. 우리는 광대하고 심오한 우리 문화의 원류를 현대적으로 <strong>계승·확장</strong>하여, 국제 사회와 함께하는 <strong>새로운 문명 교류의 장</strong>을 열고자 합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="block values">
+  <div class="wrap">
+    <div class="eyebrow">Core Values</div>
+    <h2 class="h">WRA 핵심가치</h2>
+    <p class="lede">세상을 이롭게 하는 한국인의 창조 정신 (DNA)</p>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h4>홍익</h4><p>세상을 이롭게 하는
+한국인의 창조 정신(DNA)</p></div>
+      <div class="card"><div class="num">02</div><h4>지혜</h4><p>사유(생각), 성찰(반성),
+각성(깨달음)</p></div>
+      <div class="card"><div class="num">03</div><h4>평화</h4><p>문화의 다양성,
+포용과 조화</p></div>
+      <div class="card"><div class="num">04</div><h4>창조</h4><p>서로 다름을 존중하며
+융복합을 통한 문제해결력 증진</p></div>
+      <div class="card"><div class="num">05</div><h4>유산</h4><p>평화유산을
+후대에게 계승</p></div>
+      <div class="card"><div class="num">06</div><h4>조화</h4><p>문화의 다양성,
+포용과 조화로운 공존</p></div>
+      <div class="card"><div class="num">07</div><h4>인류애</h4><p>국경을 넘어 모든 사람을 향한
+연민과 사랑</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WARRANT HIGHLIGHTS -->
+<section class="block warrant">
+  <div class="wrap">
+    <div class="eyebrow">Programs</div>
+    <h2 class="h">WRA Warrant — K-Royal Warrant 인증</h2>
+    <div class="pills">
+      <div class="pill"><h5>한국학공부</h5><p>AI 기반 학습을 갖춘 K-Heritage Language, 문예, 한국학 프로그램.</p></div>
+      <div class="pill"><h5>인증</h5><p>K-Royal Warrant — 한국의 장인정신과 철학의 명예로운 인증.</p></div>
+      <div class="pill"><h5>컨설팅</h5><p>경영한류컨설팅.</p></div>
+      <div class="pill"><h5>K-헤리티지</h5><p>프리미엄 문화유산 투어.</p></div>
+      <div class="pill"><h5>멤버쉽</h5><p>프리미엄 멤버쉽 프로그램.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROYAL 33 -->
+<section class="block royal">
+  <div class="wrap">
+    <div class="hero33">
+      <div>
+        <div class="eyebrow">Premium Membership</div>
+        <h2 class="h">The Royal 33</h2>
+        <p class="lede">대한민국 상위 1%를 위한 멤버십 — 미래를 정의하는 33인의 글로벌 리더를 위한 명예로운 자리입니다.</p>
+        <ul>
+          <li>글로벌 네트워킹</li>
+          <li>프라이빗 서밋 초청</li>
+          <li>로열 아이덴티티 및 디지털 주권확보</li>
+        </ul>
+        <span class="cta">Royal 33 멤버십 신청</span>
+      </div>
+      <div class="num33">33</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL SEAL -->
+<section class="block seal">
+  <div class="wrap">
+    <div class="flex">
+      <div>
+        <div class="eyebrow">Authenticity</div>
+        <h2 class="h">디지털 옥새</h2>
+        <p class="lede">블록체인 기반의 명품 브랜딩 전략. "디지털 옥새"는 유산(Heritage)과 기술(Technology)의 완벽한 융합을 상징하며, 아카데미가 발급하는 모든 인증과 파트너십에 위변조 불가능한 진본성을 보증합니다.</p>
+        <ul style="margin-top:20px;padding:0;list-style:none;color:#d2cbe0">
+          <li style="padding:8px 0">◆ 불멸의 권위 증명 (Immutable Proof)</li>
+          <li style="padding:8px 0">◆ 글로벌 표준 블록체인 통합</li>
+        </ul>
+      </div>
+      <div class="stamp">玉璽</div>
+    </div>
+  </div>
+</section>
+
+<!-- SITEMAP -->
+<section class="block sitemap">
+  <div class="wrap">
+    <div class="eyebrow">App Router</div>
+    <h2 class="h">전체 라우트 (web/app)</h2>
+    <p class="lede">앱에 구성된 페이지 41개. 공개 / 인증 / 관리자 / API 섹션.</p>
+    <div class="cols">
+      <div class="col"><h5>About</h5><ul>
+        <li>/about <code>page.tsx</code></li>
+        <li>/about/ceo</li>
+        <li>/about/core-values</li>
+        <li>/about/founding-philosophy</li>
+        <li>/about/organization</li>
+        <li>/about/partners</li>
+        <li>/about/textbooks</li>
+      </ul></div>
+      <div class="col"><h5>Certification</h5><ul>
+        <li>/certification</li>
+        <li>/certification/royal33</li>
+        <li>/certification/digital-seal</li>
+        <li>/verify</li>
+        <li>/warrant</li>
+      </ul></div>
+      <div class="col"><h5>Education</h5><ul>
+        <li>/education/books</li>
+        <li>/education/language</li>
+        <li>/education/literature</li>
+        <li>/education/studies</li>
+      </ul></div>
+      <div class="col"><h5>Services</h5><ul>
+        <li>/services/consulting</li>
+        <li>/services/tours</li>
+      </ul></div>
+      <div class="col"><h5>Crown Prince</h5><ul>
+        <li>/crown-prince</li>
+        <li>/crown-prince/message</li>
+        <li>/crown-prince/activities</li>
+      </ul></div>
+      <div class="col"><h5>Community</h5><ul>
+        <li>/community/notices</li>
+        <li>/community/free-board</li>
+        <li>/community/qna</li>
+        <li>/community/gallery</li>
+        <li>/community/gallery/write</li>
+        <li>/community/newsletter</li>
+        <li>/community/contact</li>
+        <li>/community/post/[id]</li>
+        <li>/community/post/[id]/edit</li>
+        <li>/community/write</li>
+      </ul></div>
+      <div class="col"><h5>Admin</h5><ul>
+        <li>/admin</li>
+        <li>/admin/analytics</li>
+        <li>/admin/certifications</li>
+        <li>/admin/certifications/guide</li>
+        <li>/admin/members</li>
+        <li>/admin/notifications</li>
+        <li>/admin/posts</li>
+        <li>/admin/settings</li>
+      </ul></div>
+      <div class="col"><h5>Auth</h5><ul>
+        <li>/auth/reset-password</li>
+        <li>+ NextAuth routes /api/auth/*</li>
+      </ul></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:64px">Tech Stack</div>
+    <div class="chips">
+      <span>Next.js 16.1.6 (App Router)</span>
+      <span>React 19.2.3</span>
+      <span>TypeScript 5</span>
+      <span>Tailwind CSS v4</span>
+      <span>Framer Motion 12</span>
+      <span>Prisma 5 + PostgreSQL</span>
+      <span>NextAuth 4</span>
+      <span>RainbowKit · wagmi · viem</span>
+      <span>Coinbase Wallet SDK</span>
+      <span>Nodemailer</span>
+      <span>Zod</span>
+    </div>
+  </div>
+</section>
+
+<div class="meta">
+  <div>Rendered from <strong>web/.next</strong> production build · 이미지 자산: <strong>web/public/images</strong></div>
+  <div style="margin-top:8px">© 2026 세계왕립아카데미 (World Royal Academy). All Rights Reserved.</div>
+</div>
+
+</body>
+</html>

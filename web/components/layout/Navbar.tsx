@@ -161,7 +161,11 @@ export function Navbar() {
                         {/* Logo */}
                         <Link href="/" className="flex items-center group flex-shrink-0">
                             <div className="relative w-12 h-12 group-hover:scale-110 transition-transform duration-300">
-                                <img src="/images/wra_logo_main.png" alt="WRA Logo" className="relative w-full h-full object-contain" />
+                                <img
+                                    src="/images/wra-crown.png?v=4"
+                                    alt="WRA Logo"
+                                    className="relative w-full h-full object-contain"
+                                />
                             </div>
                         </Link>
 

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //PID 35400)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ]
+  }
+}

@@ -3,12 +3,23 @@
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
 import { motion } from 'framer-motion';
-import { Landmark, Rocket, GraduationCap, Flag, Sparkles } from 'lucide-react';
+import {
+    Landmark,
+    Rocket,
+    GraduationCap,
+    Flag,
+    Sparkles,
+    Globe,
+    BookOpen,
+    Library,
+} from 'lucide-react';
+
+type Bullet = string | { heading: string; items: string[] };
 
 type Milestone = {
     year: string;
     title: string;
-    points: string[];
+    points: Bullet[];
     icon: React.ReactNode;
 };
 
@@ -26,7 +37,7 @@ const milestones: Milestone[] = [
         title: '한국형 창업·리더십 연구',
         points: [
             '한국인의 창업가 정신 및 글로벌 리더십 연구·개발',
-            '중소기업연구원 공동연구 — 여성의 일자리 창출을 위한 선진국 여성창업 아이템 발굴 및 사업화 방안 연구',
+            '중소기업연구원 공동연구 — 여성 일자리 창출을 위한 선진국 여성창업 아이템 발굴 및 사업화 방안 연구',
             '해외 뉴 비즈니스의 한국형 모델 개발',
         ],
         icon: <Landmark className="w-6 h-6" />,
@@ -36,7 +47,7 @@ const milestones: Milestone[] = [
         title: '한국문화창조 아카데미 1기 개강',
         points: [
             '한국학연구소 주최',
-            '한국형 인적자원개발(HRD) 및 인재육성 체계 구축',
+            '인적자원개발(HRD) 및 한국형 인재육성 체계 구축',
         ],
         icon: <GraduationCap className="w-6 h-6" />,
     },
@@ -45,7 +56,7 @@ const milestones: Milestone[] = [
         title: '한국문화창조학교 창설 및 개교',
         points: [
             '「사람 안에 문화, 문화 안에 사람」',
-            '위대한 한국과 위대한 한국인의 문화 유전자를 품다',
+            '위대한 한국과 위대한 한국인의 문화유전자를 품다',
             '한국인의 정체성을 확립하고 한류문화를 보급하는 거점이 되고자 한다',
         ],
         icon: <Flag className="w-6 h-6" />,
@@ -55,9 +66,56 @@ const milestones: Milestone[] = [
         title: '미래 비전 제시',
         points: [
             '「200년의 익숙한 것들과의 이별」 시대 선언',
-            '창작·창직 — 시대를 여는 새로운 창조',
+            '창작·창직·창업 — 자기 스스로 고용 (Self-Employment)',
+            '글로벌 임팩트 스타트업 — 비상장 기업 1인 유니콘 기업 (10억 달러) 육성',
+            '인간의 모든 능력을 초월하는 AGI(범용인공지능) 시대 — 조용한 질문 혁명 비전 제시 (독서 + 글쓰기)',
+            '한·아세안 순방 출정식 — 필리핀 일로일로 콘셉션시 폴리테크닉 칼리지 강연 (주제: 한국인의 창조적 DNA와 BTS)',
+            '한국형 인문학 개발 — 긍정이와 웃음이 캐릭터 공모 / 철학마을 / 긍정이와 웃음이 마음공부 여행 (사유 + 성찰 + 각성) / 꿈은 이루어서 자신에게 선물하는 거야',
+            'AI 브레인헬스연구소 — 뉴로피드백 기술 기반 / 뇌 과학 명상치유 프로그램 개발',
         ],
         icon: <Sparkles className="w-6 h-6" />,
+    },
+    {
+        year: '2026. 03  ·  2025–2030',
+        title: '프로젝트 경영한류 — 한국인의 창조, 안으로 세계화',
+        points: [
+            '비전 선포 및 세계왕립아카데미 · 세계왕립헤리티지 설립 출범식',
+            '문화강국을 넘어 문명의 중심 대한민국',
+            '국가 브랜드 K-HUMAN 전략',
+            'K-컬처 하이브리드 소프트웨어 산업화',
+            '전통·기술 융합 플랫폼 구축',
+            'K-로얄 헤리티지 기반 공공외교 거버넌스 — 세계 왕실·황실 및 전통문화 기관 협력 네트워크',
+            '글로벌 청년 K-뉴 리더십 프로그램 운영 — 문화·지식 외교 통합 프로젝트 추진',
+            'K-로얄 헤리티지 기반 학문·산업 연계',
+        ],
+        icon: <Globe className="w-6 h-6" />,
+    },
+    {
+        year: '2026. 06',
+        title: 'K-로얄 헤리티지 에듀팝',
+        points: [
+            '세계왕립아카데미 주요 분야 — 한국학 · 한국인문학 · 한국어 (해외 인적자원개발 및 한국형 인재육성)',
+            'K-로얄 헤리티지 · K-Tourism & MICE',
+            '세계왕립헤리티지 (전시 · 관광 · 국제회의 · 포럼)',
+        ],
+        icon: <BookOpen className="w-6 h-6" />,
+    },
+    {
+        year: '2026. 11',
+        title: '세계 왕립 도서관 미국 런칭',
+        points: [
+            '세계 최초 실시간 MARC 자동 생성 시스템 구축',
+            'The World’s First Real-Time MARC Solution',
+            {
+                heading: 'E-CIP (Electronic Cataloging in Publication)',
+                items: [
+                    '국내·외 7개국 약 2,400만 종 도서 정보 보유',
+                    '도서관 소장 도서의 복본 상태 실시간 표시',
+                    '약 1억 1천만 종 논문 및 저널의 90% 제공',
+                ],
+            },
+        ],
+        icon: <Library className="w-6 h-6" />,
     },
 ];
 
@@ -71,18 +129,21 @@ export default function ProgressReportPage() {
 
             <section className="py-20 relative z-10">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    {/* Author card */}
+                    {/* Founder card */}
                     <div className="mb-20 rounded-3xl bg-gradient-to-br from-[#1a140a]/90 via-[#0c0903]/90 to-[#050510]/90 border border-[#d4af37]/40 p-8 md:p-12 shadow-[0_10px_50px_rgba(212,175,55,0.15)] backdrop-blur-xl">
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center gap-3 mb-5">
                             <div className="h-[1px] w-8 bg-[#d4af37]" />
                             <h3 className="text-[#d4af37] text-sm uppercase tracking-[0.4em] font-semibold">Founder</h3>
                         </div>
-                        <h2 className="text-2xl md:text-3xl font-serif text-[#fceda6] leading-tight mb-3">
-                            한국문화창조학교 대표(창설자) · 세계왕립아카데미 창설자
-                        </h2>
-                        <p className="text-[#d4af37] text-lg md:text-xl">
-                            Assembly Foundation 설립준비 위원장 <span className="font-bold ml-2">이 호 종</span>
-                        </p>
+                        <ul className="space-y-2 text-[#fceda6] font-serif text-lg md:text-2xl leading-snug mb-5">
+                            <li>한국문화창조학교 대표 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
+                            <li>세계왕립아카데미 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
+                            <li>세계왕립헤리티지 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
+                        </ul>
+                        <div className="flex items-baseline gap-3 pt-4 border-t border-[#d4af37]/20">
+                            <span className="text-[#d4af37] text-sm md:text-base tracking-widest">설립 위원장</span>
+                            <span className="text-[#fceda6] text-2xl md:text-3xl font-bold tracking-[0.2em]">이 호 종</span>
+                        </div>
                     </div>
 
                     <SectionHeader
@@ -101,7 +162,7 @@ export default function ProgressReportPage() {
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: '-80px' }}
-                                    transition={{ duration: 0.6, delay: i * 0.08 }}
+                                    transition={{ duration: 0.6, delay: i * 0.05 }}
                                     className={`relative flex flex-col md:flex-row ${
                                         i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                                     } items-start gap-6 md:gap-12`}
@@ -112,7 +173,7 @@ export default function ProgressReportPage() {
                                     </div>
 
                                     <div className="pl-20 md:pl-0 md:w-1/2 md:px-12">
-                                        <div className={`rounded-2xl bg-[#0f111a]/90 border border-[#d4af37]/30 p-6 md:p-8 backdrop-blur-md shadow-lg hover:border-[#d4af37]/60 transition-all`}>
+                                        <div className="rounded-2xl bg-[#0f111a]/90 border border-[#d4af37]/30 p-6 md:p-8 backdrop-blur-md shadow-lg hover:border-[#d4af37]/60 transition-all">
                                             <div className="text-[#d4af37] font-bold text-sm tracking-[0.3em] mb-3">
                                                 {m.year}
                                             </div>
@@ -120,12 +181,29 @@ export default function ProgressReportPage() {
                                                 {m.title}
                                             </h3>
                                             <ul className="space-y-2">
-                                                {m.points.map((p, j) => (
-                                                    <li key={j} className="text-gray-300 text-sm md:text-base leading-relaxed flex items-start gap-2">
-                                                        <span className="text-[#d4af37] mt-1 shrink-0">•</span>
-                                                        <span>{p}</span>
-                                                    </li>
-                                                ))}
+                                                {m.points.map((p, j) =>
+                                                    typeof p === 'string' ? (
+                                                        <li key={j} className="text-gray-300 text-sm md:text-base leading-relaxed flex items-start gap-2">
+                                                            <span className="text-[#d4af37] mt-1 shrink-0">•</span>
+                                                            <span>{p}</span>
+                                                        </li>
+                                                    ) : (
+                                                        <li key={j} className="space-y-1.5 pt-1">
+                                                            <div className="flex items-start gap-2">
+                                                                <span className="text-[#d4af37] mt-1 shrink-0">•</span>
+                                                                <span className="text-[#e6c875] font-semibold text-base md:text-lg">{p.heading}</span>
+                                                            </div>
+                                                            <ul className="ml-5 space-y-1">
+                                                                {p.items.map((item, k) => (
+                                                                    <li key={k} className="text-gray-400 text-sm leading-relaxed flex items-start gap-2">
+                                                                        <span className="text-[#d4af37]/60 mt-[5px] shrink-0 text-[10px]">◦</span>
+                                                                        <span>{item}</span>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </li>
+                                                    )
+                                                )}
                                             </ul>
                                         </div>
                                     </div>

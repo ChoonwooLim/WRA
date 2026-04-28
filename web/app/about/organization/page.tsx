@@ -125,7 +125,7 @@ export default function OrganizationPage() {
                 className="absolute top-[40%] right-[15%] w-3 h-3 rounded-full bg-[#d4af37] blur-[3px]"
             />
 
-            <HeroBanner title={dict.pages.about.orgTitle} subtitle={dict.pages.about.orgDesc} compact />
+            <HeroBanner title={dict.pages.about.orgTitle} compact />
 
             <section className="py-20 relative z-10 w-full">
                 <div className="container mx-auto px-4 max-w-6xl relative">
@@ -181,9 +181,7 @@ export default function OrganizationPage() {
                             {/* 오른쪽 박스: 수평선 끝 바로 오른쪽 */}
                             <div className="absolute top-1/2 -translate-y-1/2 bg-[#0f111a]/85 border border-[#d4af37]/40 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10 text-center"
                                 style={{ left: 'calc(50% + 140px)' }}>
-                                <p className="text-[#e6c875] font-semibold text-base">한국문화창조학교</p>
-                                <p className="text-[#d4af37] text-sm mt-2">대표(창설자) <span className="font-bold text-lg">이 호종</span></p>
-                                <p className="text-[#d4af37]/70 text-xs mt-1.5">브랜드윤리 경영 위원장</p>
+                                <p className="text-[#e6c875] font-semibold text-base">브랜드경영 윤리위원회</p>
                                 <Link href="/about/progress-report" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
                                     경과보고 →
                                 </Link>
@@ -199,9 +197,7 @@ export default function OrganizationPage() {
                             </div>
                             <div className="self-center w-[1.5px] h-4 bg-[#d4af37]/40" />
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full text-center">
-                                <p className="text-[#e6c875] font-semibold">한국문화창조학교</p>
-                                <p className="text-gray-300 text-xs mt-1">대표(창설자) <span className="text-white font-bold">이 호종</span></p>
-                                <p className="text-gray-400 text-xs mt-1">브랜드윤리 경영 위원장</p>
+                                <p className="text-[#e6c875] font-semibold">브랜드경영 윤리위원회</p>
                                 <Link href="/about/progress-report" className="inline-block mt-2 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 transition-all">
                                     경과보고 →
                                 </Link>

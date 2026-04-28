@@ -9,38 +9,6 @@ import { useEffect, useState, useRef } from 'react';
 // Random number generator for particles
 const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
-const ShinyText = ({ text, delayOffset = 0, isGold = false }: { text: string, delayOffset?: number, isGold?: boolean }) => (
-    <span className="flex">
-        {text.split('').map((char, index) => {
-            const baseDelay = delayOffset + index * 0.15;
-            return (
-                <motion.span
-                    key={index}
-                    className={`inline-block whitespace-pre font-bold ${isGold ? 'text-[#d4af37]' : 'text-white'}`}
-                    animate={{
-                        color: isGold
-                            ? ['#d4af37', '#ffffff', '#d4af37']
-                            : ['#ffffff', '#d4af37', '#ffffff'],
-                        textShadow: isGold
-                            ? ['0 0 20px rgba(212,175,55,0.4)', '0 0 60px rgba(255,255,255,0.9)', '0 0 20px rgba(212,175,55,0.4)']
-                            : ['0 0 10px rgba(255,255,255,0.1)', '0 0 50px rgba(212,175,55,0.9)', '0 0 10px rgba(255,255,255,0.1)'],
-                        y: [0, -3, 0],
-                        scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: baseDelay,
-                        ease: "easeIn"
-                    }}
-                >
-                    {char}
-                </motion.span>
-            );
-        })}
-    </span>
-);
-
 export function HeroSection() {
     const { dict, language } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
@@ -156,44 +124,55 @@ export function HeroSection() {
                             }}
                         >
                             <img
-                                src="/images/wra_logo_main.png"
+                                src="/images/wra-crown.png?v=4"
                                 alt="World Royal Academy Emblem"
-                                className="relative w-48 h-48 md:w-64 md:h-64 lg:w-[19rem] lg:h-[19rem] object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.6)]"
+                                className="relative w-48 md:w-64 lg:w-[19rem] object-contain"
                             />
                         </motion.div>
                     </div>
 
 
-                    {/* Title — Cinematic Reveal */}
-                    <h1 className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter leading-tight text-white relative flex justify-center ${language === 'en' ? 'gap-3' : 'gap-0'}`}>
-                        <motion.span
-                            className="block"
-                            initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
-                            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.8 }}
-                        >
-                            <ShinyText text={dict.home.titleLine1} delayOffset={0} />
-                        </motion.span>
-                        <motion.span
-                            className="block pb-2"
-                            initial={{ opacity: 0, filter: "blur(10px)", scale: 0.9 }}
-                            animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-                            transition={{ duration: 1, delay: 1.2 }}
-                        >
-                            <ShinyText text={dict.home.titleLine2} delayOffset={(dict.home.titleLine1?.length || 4) * 0.15} isGold={true} />
-                        </motion.span>
-                    </h1>
+                    {/* Title — Cinematic Reveal (image-based logo) */}
+                    <motion.div
+                        className="mb-8 flex justify-center w-full"
+                        initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+                        animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                        transition={{ duration: 1, delay: 0.8 }}
+                    >
+                        {language === 'en' ? (
+                            <img
+                                src="/images/wra-title-en.png?v=2"
+                                alt="World Royal Academy"
+                                className="h-16 md:h-24 lg:h-28 w-auto object-contain"
+                                style={{
+                                    filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(212,175,55,0.35))',
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src="/images/wra-title-ko.png?v=2"
+                                alt="세계왕립아카데미"
+                                className="h-16 md:h-24 lg:h-28 w-auto object-contain"
+                            />
+                        )}
+                    </motion.div>
 
-                    {/* English Subtitle */}
-                    <motion.p
-                        className="text-base md:text-xl lg:text-2xl text-gray-400 tracking-[0.35em] uppercase font-light mb-14 italic"
-                        style={{ fontFamily: 'var(--font-playfair)' }}
+                    {/* English Subtitle (gold wordmark) */}
+                    <motion.div
+                        className="mb-14 flex justify-center w-full"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.6, duration: 1 }}
                     >
-                        World Royal Academy
-                    </motion.p>
+                        <img
+                            src="/images/wra-title-en.png?v=2"
+                            alt="World Royal Academy"
+                            className="h-5 md:h-7 lg:h-8 w-auto object-contain"
+                            style={{
+                                filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.5)) drop-shadow(0 0 12px rgba(212,175,55,0.25))',
+                            }}
+                        />
+                    </motion.div>
 
 
                 </div>
