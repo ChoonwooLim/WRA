@@ -113,8 +113,8 @@ export default function ToursPage() {
 
     const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
 
-    // Dynamic data for all 5 palaces
-    const palaceData: Record<string, any> = {
+    // Dynamic data for all 5 palaces (KO source kept inline; EN provided via palaceDataEn)
+    const palaceDataKoInline: Record<string, any> = {
         '경복궁': {
             subtitle: "Gyeongbokgung Palace",
             intro: [
@@ -696,6 +696,591 @@ export default function ToursPage() {
             ]
         }
     };
+
+    const palaceDataEnInline: Record<string, any> = {
+        '경복궁': {
+            subtitle: 'Gyeongbokgung Palace',
+            intro: [
+                'The brilliant founding ideal of 500-year Joseon, the bitter setback of a Korean Empire that cried out for self-reliance,',
+                "and the “living heart of the Republic of Korea” that rose again from the wounds of colonial rule."
+            ],
+            sections: [
+                {
+                    title: 'Creation & Dignity: A Main Palace That Stood Equal to the World',
+                    paragraphs: [
+                        'Gyeongbokgung was founded in 1395 by Taejo, the Great Emperor, as the principal palace of Joseon. Especially in the time of Emperor Gojong (Gwangmu), the palace as rebuilt in 1867 by Heungseon Daewongun stood at the very peak of East Asian architecture.',
+                        'With over 500 buildings arranged like a labyrinth, it was as grand as the Forbidden City of China, but where the Forbidden City projected overwhelming authority, Gyeongbokgung carried a philosophical depth that prized the union of nature and humanity. It is testimony to a noble spirit that revered culture and harmony over force.'
+                    ]
+                },
+                {
+                    title: 'Trial & Brutality: An Imperial Violence That Tried to Erase Culture',
+                    paragraphs: [
+                        'And yet Gyeongbokgung was also a site of cultural destruction without parallel in world history. After being burned down in the Imjin War of 1592, it rose again — only to have over 90% of its halls deliberately demolished during Japanese occupation.',
+                        "In 1895, Empress Myeongseong was assassinated at Geoncheonggung by Japanese ronin, and Emperor Sunjong was forced to bear humiliation. The Japanese authorities placed the Government-General of Joseon directly across the most sacred axis of the palace. This was an attempt to go beyond toppling a dynasty — to erase a people’s spirit and identity."
+                    ]
+                },
+                {
+                    title: 'Revival & Pride: A History Rebuilt by a Great People',
+                    paragraphs: [
+                        'But our people did not break. In the 1990s, the Korean government and citizens began the great undertaking of demolishing the colonial-era Government-General building and recovering Gyeongbokgung. This was not a mere architectural restoration — it was a “spiritual liberation” that restored the wounded pride of a nation and reconnected a severed historical lineage.',
+                        'Today, with over 40% of the palace restored, Gyeongbokgung stands as a worldwide symbol of the perseverance and resolve of a Korean people who, even in ruins, made culture bloom anew.'
+                    ]
+                },
+                {
+                    title: 'Future & Diplomacy: A Living Heritage — the Royal Culture Festival',
+                    paragraphs: [
+                        'A dead heritage site cannot move the heart. That is why we reinterpreted the broken royal rites and culture into a modern <Royal Culture Festival>.',
+                        'This annual festival is no mere tourism product. It shares the very best of dignified royal culture with people from across the globe, sublimating past pain into a stage of peace and celebration — a true site of “cultural diplomacy.” Proving that the most Korean is the most universal, Gyeongbokgung is now a global destination where the world comes to experience the beauty and spirit of Korea.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/gyeonghoeru_real.png', caption: 'Panoramic view of Gyeongbokgung' },
+                { src: '/images/palaces/gwanghwamun_real.png', caption: 'Gwanghwamun — the grand main gate of Gyeongbokgung' },
+                { src: '/images/palaces/real-gyeongbokgung.png', caption: 'The majestic Geunjeongjeon, throne hall of Gyeongbokgung' },
+                { src: '/images/palaces/dancheong_real.png', caption: 'Imperial automobile of Emperor Sunjong', position: 'top' },
+                { src: '/images/palaces/gungjung_festival.png', caption: 'The Royal Culture Festival, attended by guests from many nations' },
+                { src: '/images/palaces/empire_120th.png', caption: 'Commemoration of the 120th anniversary of the Korean Empire' },
+                { src: '/images/palaces/joseon_chongdokbu.png', caption: 'The Government-General of Joseon, built by the Japanese after demolishing parts of Gyeongbokgung' }
+            ]
+        },
+        '창덕궁': {
+            subtitle: 'Changdeokgung Palace',
+            intro: [
+                'Changdeokgung was the palace most beloved by Joseon kings — a masterpiece of the perfect union of nature and humanity.',
+                'In 1997, UNESCO designated it a World Heritage Site, praising it as “a paragon of East Asian palace architecture and landscape.”',
+                'Where Western gardens carved nature artificially, Changdeokgung was built without disturbing the natural terrain — as if cradled in nature’s embrace.',
+                'It already realized 600 years ago the philosophy of “coexisting with the environment” that humanity now seeks in the 21st century.'
+            ],
+            sections: [
+                {
+                    title: 'Center Stage of History: A 500-Year Cradle of Power',
+                    paragraphs: [
+                        'Founded in 1405 under King Taejong, Changdeokgung effectively served as the working principal palace for the longest stretch (about 270 years) of Joseon’s 500-year history — where kings lived and governed.',
+                        'It suffered the pain of being burned down in the 1592 Imjin War, but on those ruins our people raised culture once more. From the rebuilding under Gwanghaegun until Gyeongbokgung’s 1867 restoration, this was the heart of Joseon politics, diplomacy, and culture.'
+                    ]
+                },
+                {
+                    title: 'The Last Breath of the Royal Family: Nakseonjae and the Korean Empire',
+                    paragraphs: [
+                        'This is no mere relic. It was a “living home” where the last Crown Princess of the Korean Empire — Empress Lady Yi Bangja (Crown Princess Uimin) and the tragic Princess Deokhye — lived until 1989, and where the last Crown Prince Yi Gu (Heoeun) lived until 2005.',
+                        'Empress Sunjeonghyo, who never lost her dignity even amid the pain of a fallen kingdom; Lady Yi Bangja, who devoted her life to Korean social service; and Crown Prince Heoeun and his wife Julia Mullock, who agonized through the storms of history. Because joy and sorrow and ordinary daily life all linger here, Changdeokgung resonates with a depth no other palace can.'
+                    ]
+                },
+                {
+                    title: 'Continuing the Lineage: Three Years of Mourning and a New Promise',
+                    paragraphs: [
+                        'This place carries an even more singular meaning. In 2003, HRH Lee Won was adopted as heir to Crown Prince Heoeun (Yi Gu), inheriting the imperial succession of the Korean Empire. And in 2005, when the last Crown Prince passed away, he observed three years of mourning at Nakseonjae here in accordance with traditional rites.',
+                        'It became a place where the spirit of filial piety (hyo) and propriety (ye) — fast disappearing from modern society — is practiced in person. Changdeokgung is not a relic of the past but a living, present-tense history alive in our people’s spirit.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/changdeokgung_injeongjeon.png', caption: 'Panoramic view of Changdeokgung' },
+                { src: '/images/palaces/changdeokgung_buyongjeong.png', caption: 'Buyongjeong pavilion in the Secret Garden' },
+                { src: '/images/palaces/changdeokgung_nakseonjae.png', caption: 'Nakseonjae — the home of the last Crown Prince to the very end' },
+                { src: '/images/palaces/changdeokgung_donhwamun.png', caption: 'The grand night view of Donhwamun gate' },
+                { src: '/images/palaces/changdeokgung_juhamnu.png', caption: 'Juhamnu, surrounded by lush forest' },
+                { src: '/images/palaces/changdeokgung_jongmyo_reconnected.png', caption: 'Changdeokgung and Jongmyo, reconnected after 90 years' }
+            ]
+        },
+        '창경궁': {
+            subtitle: 'Changgyeonggung Palace',
+            intro: [
+                'Changgyeonggung was built in 1483 by King Seongjong to honor three royal grandmothers.',
+                'It was not built to flaunt power but to revere mothers and grandmothers —',
+                "a space in which the universal human love of “filial piety” was sublimated into architecture.",
+                'And yet this beautiful place became the stage for some of the most tragic events in Korean history,',
+                'and the greatest victim among the palaces of imperial violence.'
+            ],
+            sections: [
+                {
+                    title: 'A Stage of Tragedy: Bearing the Weight of the Crown',
+                    paragraphs: [
+                        'Because this was the intimate living space of the Joseon royal family, the most human tragedies took place here too. The story of Queen Inhyeon and Lady Jang Hui-bin in King Sukjong’s era, and the heartbreaking event of Crown Prince Sado — son of King Yeongjo — being locked in a rice chest, all unfolded right here in the courtyard of Munjeongjeon.',
+                        'The air of this place — heavy with the weight of power and human anguish hidden behind royal splendor — resonates more deeply than any Shakespearean tragedy.'
+                    ]
+                },
+                {
+                    title: 'Imperial Atrocity: From Palace to Zoo (Changgyeongwon)',
+                    paragraphs: [
+                        "But the gravest tragedy was inflicted by others. In 1909, the Japanese Residency-General and pro-Japanese collaborators reduced this sacred palace to a zoo and botanical garden — under the pretext of comforting Emperor Sunjong. They even degraded the name from “Changgyeonggung” to “Changgyeongwon.”",
+                        'Halls where the king governed were torn down; in their place cherry blossoms — symbols of Japan — were planted; and at night the lights of revelry flickered over Japanese-style ponds. This was a calibrated political violence that aimed to erase a nation’s soul by turning its spiritual center into an object of amusement.'
+                    ]
+                },
+                {
+                    title: 'Severed Vein, Forgotten Time',
+                    paragraphs: [
+                        'The Japanese atrocities did not end there. They cut through the mountain ridge between Changgyeonggung and Jongmyo — the sacred shrine enshrining the spirit tablets of Joseon kings — and laid Yulgok Road across it. They physically severed the vein along which the energy of a people flowed.',
+                        'Even after liberation, in poverty and turmoil we could not right this wound; for a time, this place was even neglected as a drinking ground. It is a sharp lesson on how mercilessly history can be ravaged when a people loses its strength.'
+                    ]
+                },
+                {
+                    title: 'A Great Restoration: Reconnecting the Soul of a Nation',
+                    paragraphs: [
+                        'But the Republic of Korea did not stop there. The restoration projects begun in the 1980s relocated the zoo to Gwacheon and replaced the cherry blossoms with pine trees once again. And finally, in 2022, after 90 years, the forest path between Changgyeonggung and Jongmyo was reconnected.',
+                        'With our own hands, we joined back together what the Japanese had cut apart. The Changgyeonggung you see today is no mere old building — it is the Republic of Korea’s “unbroken heart” itself, healing the wounds of colonization and reclaiming its battered dignity.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/changgyeonggung_panorama.png', caption: 'Panoramic view of Changgyeonggung' },
+                { src: '/images/palaces/changgyeonggung_myeongjeongjeon.png', caption: 'The elegant figure of Myeongjeongjeon' },
+                { src: '/images/palaces/changgyeonggung_daeonsil.png', caption: 'The classical botanical garden inside the Grand Greenhouse' },
+                { src: '/images/palaces/changgyeonggung_chundangji.png', caption: 'The dreamlike night view of Chundangji pond' },
+                { src: '/images/palaces/changgyeonggung_tongmyeongjeon.png', caption: 'Changgyeonggung — once humiliated under the Japanese name “Changgyeongwon”' }
+            ]
+        },
+        '덕수궁': {
+            subtitle: 'Deoksugung Palace (Gyeongungung)',
+            intro: [
+                'Deoksugung was originally called “Gyeongungung.”',
+                'In 1907, after Japan exploited the Hague Emissary affair to force Emperor Gojong off the throne,',
+                'the name was changed in mocking implication: “Step down, quietly cultivate virtue, and live long.”'
+            ],
+            sections: [
+                {
+                    title: 'Proclaiming an Empire: Korean Empire as a Symbol of Sovereignty',
+                    paragraphs: [
+                        'In 1896, fleeing under Japanese threat, Emperor Gojong sought refuge in the Russian Legation (Agwan-pacheon). In 1897, he returned here to Gyeongungung and proclaimed the “Korean Empire.”',
+                        'This was no mere royal restoration. It was a great transition into a modern state — declaring to the world that Korea was no Chinese vassal but a “fully sovereign and independent nation,” ready to engage the great Western powers as equals. Gyeongungung is the sacred ground where that new history began.'
+                    ]
+                },
+                {
+                    title: 'Tradition & Modernity Side by Side: Seokjojeon and a Global Vision',
+                    paragraphs: [
+                        'Designed in 1910 by the Englishman Harding, Seokjojeon is more than a building.',
+                        '“Joseon is not an old, decaying nation. We too are ready to embrace Western civilization and achieve modernization.”\nThrough this grand Western-style palace, Emperor Gojong sought to declare to the world a will of “openness and reform.”',
+                        'After liberation, this was the site of the U.S.–Soviet Joint Commission — a witness that bore the turbulent waves of modern Korean history with its whole body.'
+                    ]
+                },
+                {
+                    title: 'Tragedy & Resistance: The Eulsa Treaty and the Emperor’s Death',
+                    paragraphs: [
+                        'But the empire’s dream was crushed under Japanese force. At Junghwajeon (Junmyeongjeon) in 1905, the Eulsa Treaty was forcibly imposed, stripping Korea of diplomatic sovereignty. In 1919, Emperor Gojong died here at Hamnyeongjeon under suspicious circumstances (poisoning is widely suspected).',
+                        'And yet the Emperor’s death was not the end. That sorrow became the spark of the March 1st Independence Movement, which led to the founding of the Provisional Government of the Republic of Korea. Gyeongungung is not the period at the end of an empire — it is the soil in which the seeds of the democratic Republic of Korea were sown.'
+                    ]
+                },
+                {
+                    title: 'Reenacting History: Reconnecting the Lineage',
+                    paragraphs: [
+                        'In 2017, on the 120th anniversary of the Korean Empire’s proclamation, we reenacted Emperor Gojong’s enthronement here. It was not a return to the past but a solemn report at the Emperor’s spirit — that today we have built the “strong and self-reliant nation” our forebears so deeply longed for 120 years ago.',
+                        'Now Gyeongungung has become a place where, beyond past pain, we affirm the pride of a Korea that has grown into one of the world’s top ten economies.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/deoksugung_jeonggwanheon.png', caption: 'Panoramic view of Deoksugung' },
+                { src: '/images/palaces/deoksugung_seokjojeon.png', caption: 'Seokjojeon — bearing a global vision' },
+                { src: '/images/palaces/deoksugung_junghwajeon.png', caption: 'The dignified figure of Junghwajeon' },
+                { src: '/images/palaces/deoksugung_doldamgil.png', caption: 'Autumn mood at the Deoksugung stone-wall path' },
+                { src: '/images/palaces/deoksugung_jungmyeongjeon.png', caption: 'A classical view of Jungmyeongjeon' }
+            ]
+        },
+        '경희궁': {
+            subtitle: 'Gyeonghuigung Palace',
+            intro: [
+                'Gyeonghuigung was built in 1617 under King Gwanghaegun and was called the “West Palace” (Seogwol),',
+                'a vast political center where ten kings — including Sukjong and Yeongjo — governed.'
+            ],
+            sections: [
+                {
+                    title: 'An Era of Glory: A Place Where the Dreams of Kings Lived',
+                    paragraphs: [
+                        'Originally Gyeonghuigung covered 72,000 pyeong, with over 100 grand halls. Sungjeongjeon, where the reformist King Jeongjo ascended the throne, was a cradle of the late-Joseon renaissance.',
+                        'In its day, Gyeonghuigung was connected to Deoksugung by a covered bridge (hong-gyo) and was the most beautiful detached palace, harmonizing with the contours of Mount Inwangsan.'
+                    ]
+                },
+                {
+                    title: 'A Record of Destruction: Scars Left by Imperialism',
+                    paragraphs: [
+                        'The tragedy of Gyeonghuigung peaked under Japanese occupation. Of all our palaces, Gyeonghuigung was destroyed most thoroughly and most viciously.',
+                        'Sungjeongjeon was sold off as a Buddhist temple hall and moved inside Dongguk University. Heunghwamun gate suffered the humiliation of being used as the main gate of a shrine commemorating Itō Hirobumi — the very architect of the colonization of Korea.',
+                        'The remaining halls were sold off cheaply, and a vast Japanese military bunker was tunneled beneath the palace grounds. The land where royal energy once gathered was reduced to a tool of war. This was no simple destruction — it was “cultural terrorism” that trampled the dignity of a people.'
+                    ]
+                },
+                {
+                    title: 'A Modern Self-Portrait: The Shadow of Growth and Reflection',
+                    paragraphs: [
+                        'Yet the more painful chapter is what we did to ourselves after liberation. In an era when “survival” and “economic growth” were the only priorities, we had no margin to safeguard history.',
+                        'On the palace grounds rose the Seoul Office of Education, the Meteorological Administration, churches, and high-rise apartments. Even the Seoul Museum of History — which is supposed to preserve history — was built atop the palace. This was the “harsh price” paid by a Korea miraculously rising from one of the world’s poorest nations to an economic power.'
+                    ]
+                },
+                {
+                    title: 'A Proposal for the Future: The Aesthetics of Empty Space',
+                    paragraphs: [
+                        'What has been restored is only a fragment of the whole.',
+                        'The discord between this empty space and the surrounding concrete towers is itself an exhibit of contemporary art that proclaims: “A people that forgets its history has no future.”',
+                        'We are now moving beyond economic strength toward becoming a “true advanced nation” that recovers lost values and stands its history upright. Gyeonghuigung is the very site of that resolve.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/gyeonghuigung_sungjeongjeon.png', caption: 'Panoramic view of Gyeonghuigung' },
+                { src: '/images/palaces/gyeonghuigung_taeryeongjeon.png', caption: 'Heunghwamun — the main gate of Gyeonghuigung, once converted into the gate of Bakmunsa shrine' },
+                { src: '/images/palaces/gyeonghuigung_jajeongjeon.png', caption: 'A serene spring day before Jajeongjeon' },
+                { src: '/images/palaces/gyeonghuigung_heunghwamun.png', caption: 'Gyeonghuigung surrounded by concrete buildings' },
+                { src: '/images/palaces/gyeonghuigung_seogwol_view.png', caption: 'A breathtaking night view of the West Palace (Gyeonghuigung) within the city' }
+            ]
+        },
+        '서울 5대궁 안내도': {
+            subtitle: 'Map of the 5 Royal Palaces',
+            intro: [
+                'A special guide map that lets you grasp at a glance the locations and routes of Seoul’s five grand palaces, all at the heart of the city.'
+            ],
+            sections: [
+                {
+                    title: 'An Intuitive Classic Map and a Detailed Guide Map',
+                    paragraphs: [
+                        'The first map is a classic guide that intuitively shows approximate routes and nearby subway stations.',
+                        'The second map is a detailed integrated guide that clearly shows the precincts and locations of all five palaces.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/palaces/palaces-map.png', caption: 'Classic guide map of Seoul’s 5 royal palaces' },
+                { src: '/images/palaces/seoul-royal-palaces-map.png', caption: 'Detailed integrated guide map of Seoul’s 5 royal palaces' }
+            ]
+        },
+        '종묘대제': {
+            subtitle: 'Jongmyo Daeje',
+            preIntro: {
+                title: 'National Intangible Heritage — Jongmyo Jerye',
+                paragraphs: [
+                    'Jongmyo Daeje is the rite at Jongmyo — the national shrine of Joseon and a UNESCO World Heritage Site — where the spirit tablets of all kings and queens of the Joseon dynasty are honored. As the largest and most important of all rites, it is also called the Grand Jongmyo Daeje (宗廟大祭). Originally observed five times a year (spring, summer, autumn, winter, and the seasonal day Napil), it is today held twice annually — on the first Sunday of May and the first Saturday of November (Gregorian calendar). With its rite music (Jerye-ak) and dance (Ilmu) alongside the rite itself, Jongmyo Daeje is a comprehensive ceremony combining tangible and intangible heritage of the world — exceedingly rare in scope.',
+                    'Since 1969, Jongmyo Daeje has been restored by the Jongmyo Jerye Preservation Society (the Jeonju Yi Royal Family Association). The ceremony is divided into preparation, the royal procession (Eoga Haengnyeol) from the palace to Jongmyo, and the rite itself (with Jerye-ak and Ilmu).',
+                    'It was designated a National Intangible Cultural Heritage in 1975 and inscribed by UNESCO as Intangible Heritage of Humanity in 2001. From 2006 it has been elevated to an international cultural event.'
+                ],
+                schedule: [
+                    { name: '宗廟春享大祭 (Spring Rite)', date: 'First Sunday of May, every year', location: 'Jongmyo (157 Jong-ro, Jongno-gu, Seoul)', times: ['Yeongnyeongjeon Rite 10:00 – 12:00', 'Royal Procession 11:00 – 12:00', 'Main Hall (Jeongjeon) Rite 14:00 – 16:30'] },
+                    { name: '宗廟秋享大祭 (Autumn Rite)', date: 'First Saturday of November, every year', location: 'Jongmyo (157 Jong-ro, Jongno-gu, Seoul)', times: ['Yeongnyeongjeon Rite 10:00 – 12:00', 'Main Hall (Jeongjeon) Rite 13:30 – 16:00'] }
+                ]
+            },
+            intro: [
+                'Jongmyo is the royal shrine of Joseon, enshrining the spirit tablets of all kings and queens of the dynasty.',
+                'In 1995, UNESCO designated it a World Heritage Site, calling it “a heritage of humanity in which architectural beauty and rite culture are perfectly preserved.”',
+                'Unlike Western temples that announce authority through ornament, Jongmyo reveals the sacred through “restraint” and “silence.” Before the solemn silence of a roof line that runs more than 100 meters, we feel at once the finitude of human life and the eternity of history.'
+            ],
+            sections: [
+                {
+                    title: '1. Living for 600 Years: Identity in the Jongmyo Rite',
+                    paragraphs: [
+                        'What makes Jongmyo truly special is not the architecture but the people. The dynasty is gone, but we still wear the same robes as 600 years ago, play the same music (Jongmyo Jerye-ak), and dance the same dance (Ilmu).',
+                        'This is the Jongmyo Jerye — National Intangible Cultural Heritage No. 1 and a UNESCO Intangible Heritage of Humanity. Each May and November, the Chief Officiant (Choheongwan) performs the rite here. It is “living history” — a conversation with the ancestors, a prayer for the safety of the nation.'
+                    ]
+                },
+                {
+                    title: '2. The Aesthetics of Architecture: Jeongjeon and Yeongnyeongjeon',
+                    paragraphs: [
+                        'The heart of Jongmyo is the Jeongjeon (Main Hall) and the Yeongnyeongjeon. The National-Treasure Jeongjeon enshrines 19 kings of high virtue — beginning with Taejo, the Great Emperor — and 30 queens; the Yeongnyeongjeon enshrines posthumously honored kings.',
+                        'The simple, repeated row of pillars and the seemingly endless horizontal roof line symbolize the dynasty’s eternal prosperity. Even world-class architects like Frank Gehry have praised this overwhelming “aesthetics of emptiness.”'
+                    ]
+                },
+                {
+                    title: '3. Wound and Healing: Reconnecting the Severed Vein',
+                    paragraphs: [
+                        'Even this sacred space could not escape the wounds of imperialism. To “sever Joseon’s spirit,” the Japanese cut through the forest between Changdeokgung and Jongmyo and laid Yulgok Road.',
+                        'But we did not give up. In 2022, we tunneled that road underground and restored the forest above, reconnecting the palace and Jongmyo after 90 years. The ground beneath your feet today is no mere soil — it symbolizes the resilience of a Korea that has healed the wounds of history.'
+                    ]
+                },
+                {
+                    title: '4. The Spirit of Inclusion: The Shrine of King Gongmin',
+                    paragraphs: [
+                        'Curiously, Jongmyo also contains the “Shrine of King Gongmin,” a king of the Goryeo dynasty. Taejo Yi Seong-gye, founder of Joseon, built a shrine to honor a king of the previous dynasty.',
+                        'This embodies a spirit of harmony and inclusion — neither denying the previous dynasty nor excluding it from history. To honor a predecessor rather than erase a defeated one — this is the true dignity of a king.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_1.png', caption: 'Scene from the Jongmyo Daeje rite' },
+                { src: '/images/tours/ceremonies/jongmyo_daeje_detail_2.png', caption: 'A panoramic view of the Jongmyo Daeje' },
+                { src: '/images/tours/ceremonies/jongmyo_panorama.png', caption: 'Panoramic view of Jongmyo' },
+                { src: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', caption: 'The Main Hall of Jongmyo, embodying the aesthetics of emptiness' }
+            ]
+        },
+        '사직대제': {
+            subtitle: 'Sajik Daeje',
+            preIntro: {
+                title: 'National Intangible Heritage — Sajik Daeje 社稷大祭',
+                paragraphs: [
+                    'The Sajikdan was the altar where rites were performed to the god of Land (Sa, 社) and the god of Grain (Jik, 稷); the Sa altar was placed to the east and the Jik altar to the west. In pre-modern society, land and grain represented the dominant means of production and its yield, and reverence for the gods of land and grain was treated as far beyond a personal matter — established and observed as a national rite from antiquity. That Sajik together with Jongmyo formed the central pillars of state ritual was a natural expression of this consciousness.',
+                    'In Korean history, rites to Sajik trace back as early as the Three Kingdoms period. In Goryeo, rites of all kinds — including rain prayers (giuje), grain prayers (gigokje), and new-agriculture rites (sinnongje) — were performed at Sajik after King Seongjong institutionalized it. After the founding of Joseon, in 1394 (Taejo 3) the location of Sajik was set in Indalbang to the west of Gyeongbokgung, and the construction of the Sajikdan began the following January. Construction was paused during the temporary return to Gaegyeong, and because such large-scale projects as Jongmyo, palaces, and city walls proceeded simultaneously, demands on the people delayed completion until May of 1407 (Taejong 7).',
+                    'When the Sajikdan was completed, walls were placed around it and the spirit chamber (sinsil) and spirit gate (sinmun) were erected. In Taejong 16, ritual quarters (jaesil) were prepared near the altar. In King Sejong 8 (1426), based on Tang precedent, the Sajik Office (Sajikseo) was elevated and reorganized: the existing two altar attendants (Dakdan-jik) were expanded; the attendants were promoted to nokmsa, and a Senior 7th-rank seung was placed above them. Because the Sajikseo seung was ranked just below the Jongmyo seung, the post was held concurrently by an officer of Bongdangsi.',
+                    'Rites at the Sajikdan were performed twice a year on the first “Mu” day of mid-spring and mid-autumn, and on Napil — praying for the safety of the state and the people. Grain rites were held in the new year, and rain or weather prayers (gi-yang-je) were occasionally performed in times of drought or heavy rain. Since being designated a National Intangible Cultural Heritage in October 2000, Sajik Daeje has been observed annually on the fourth Saturday of September.'
+                ],
+                schedule: [
+                    { name: 'Sajik Daeje', date: 'Fourth Saturday of September, every year', location: '89 Sajik-ro, Jongno-gu (Sajikdan, Historic Site No. 121)', times: ['Sajik Daeje (12:00–13:30) at Sajikdan', 'Royal Procession (11:00–12:00) departing from Deoksugung'] }
+                ]
+            },
+            intro: [
+                'Joseon’s capital, Hanyang, was a perfectly planned city. Around the principal palace Gyeongbokgung, the royal ancestral shrine (Jongmyo) was placed on the left and the Sajikdan on the right (Jwa-myo Wu-sa).',
+                'Where Jongmyo honors the past, the Sajikdan prays for the people’s present — for “economy and welfare.”',
+                'Performing rites to the gods of Land (Sa) and Grain (Jik) was not for the rulers’ enjoyment of power but a pledge to the people: “We will think only of the people’s well-being.”'
+            ],
+            sections: [
+                {
+                    title: '1. Heaven Round, Earth Square: The Cosmology Behind the Altar',
+                    paragraphs: [
+                        'Look at the altar of Sajikdan: roofless and square. This reflects the cosmology of Cheonwon-jibang — that heaven is round and earth is square.',
+                        'The absence of an ornate building is intentional, so the energy of the earth flows directly. Without any artificial decoration, focused only on soil and grain — within this simplicity lies an Eastern “ecologism” humble before nature.'
+                    ]
+                },
+                {
+                    title: '2. A Wounded Land: Development Dictatorship and Damage',
+                    paragraphs: [
+                        'Yet this sacred land bore the wounds of modern history. Under Japanese occupation it was demoted to a public park and lost its original form; in the post-war era of rapid growth, it was sliced through by tunnels and roads driven by urban development.',
+                        'Even libraries and government buildings were built on the grounds, narrowing and shrinking the altar. It is a piercing self-portrait of a time when, struggling to escape poverty, we briefly forgot the “spiritual foundation” we should have preserved.'
+                    ]
+                },
+                {
+                    title: '3. The Sajik Daeje: Renewing the Prayer',
+                    paragraphs: [
+                        'But we have raised the altar and restored the rite. Each September, the Sajik Daeje is observed here. Leading the royal procession to the altar and offering wine (Choheongwan) is no mere reenactment.',
+                        'It is a prayer for the food security, environmental conservation, and peace of our age. In 2019, a Mexican government delegation observed the Sajik Daeje and was so moved they presented traditional crafts as a gift. Reverence for agriculture and the earth is a value common to all humanity, transcending borders.'
+                    ]
+                },
+                {
+                    title: '4. Heritage for the Future: An Altar of Life and Peace',
+                    paragraphs: [
+                        'Restoration work at the Sajikdan is in full swing — recovering lost ground and reconnecting severed lineages.',
+                        'In an age when climate change brings suffering across the world, our forebears’ wisdom of revering land and grain can be an answer for a “sustainable future.” The Sajikdan will become an open sanctuary — beyond Korea — that prays for the life and peace of the global village.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/ceremonies/sajik_daeje_1771719257413.png', caption: 'The Sajik Daeje' },
+                { src: '/images/tours/sajikdan_panorama.png', caption: 'Panoramic view of the Sajikdan' }
+            ]
+        },
+        '환구대제': {
+            subtitle: 'Hwangu Daeje',
+            preIntro: {
+                title: 'Hwangu Daeje — A Joseon Confucian Rite Offered to Heaven',
+                paragraphs: [
+                    'In 1897, Emperor Gojong (Gwangmu) proclaimed the Heavenly Mandate of the Korean Empire to the international community and established the Hwangudan, performing rites to Heaven. In the Confucian world, Heaven is the supreme deity that determines the Heavenly Mandate. For this reason, rites to Heaven are the grandest of all state ceremonies — entailing the most solemn and elaborate procedures.',
+                    'However, the Korean Empire’s Hwangudan was demolished by the Japanese; in its place a railway hotel was built and the Heaven rite ceased. Only Hwanggungwoo remained. From 2007, the Jeonju Yi Royal Family Association began restoring the Heaven rite — first by re-creating and enshrining the spirit tablets that had been kept in Hwanggungwoo, recovering the role of the building that had once enshrined the spirit of Heaven within Hwangudan, and so beginning the restoration of the Hwangu Daeje.',
+                    'Although the original Heaven altar can no longer be used because the Joseon Hotel now stands on its site, since 2008 the Hwangu Daeje — a symbol of independence and a prayer for the peace of the nation and its people — has been observed each year on October 12, the day Emperor Gojong performed it.'
+                ],
+                schedule: [
+                    { name: 'Hwangu Daeje', date: 'October 12, every year', location: 'Hwangudan precinct (Hwanggungwoo), Sogong-dong, Jung-gu, Seoul (Historic Site No. 157)', times: ['Noon'] }
+                ]
+            },
+            intro: [
+                'The Hwangudan was the most sacred place where heaven and earth met. In 1897, Emperor Gojong (Gwangmu) ascended the throne here as Emperor and proclaimed the Korean Empire.',
+                'Demolishing Nambyeolgung — where Chinese envoys had stayed — and building an altar to perform Heaven rites was a great event that announced to the world a “fully sovereign and independent nation,” no longer subject to anyone’s interference.',
+                'Today, however, that grand altar is gone, and what remains is more like a decoration in a hotel garden.'
+            ],
+            sections: [
+                {
+                    title: '1. A Declaration of Independence: The Korean Empire',
+                    paragraphs: [
+                        'The Hwangudan is no ordinary rite ground. On October 12, 1897, Emperor Gojong offered rites to Heaven (Hwangu Daeje) here and proclaimed the new state name — Korean Empire (Daehan Jeguk).',
+                        'It broke the old Sinocentric order in which only the Chinese emperor could perform rites to Heaven and declared that we, too, were an empire equal to others. If the Independence Gate is the visible symbol, the Hwangudan is the “spiritual completion of independence.” The three-tiered round altar was as solemn as the Roman Colosseum or the Temple of Heaven in Beijing.'
+                    ]
+                },
+                {
+                    title: '2. A Destroyed Sanctuary: Imperialism and the Railway Hotel',
+                    paragraphs: [
+                        'But in 1912 the Japanese thoroughly destroyed this sacred place. To erase the soul of Joseon, they demolished the altar and built a Western-style entertainment facility — the Railway Hotel — on top of it.',
+                        'A space meant to be the most sacred for rites to Heaven was reduced to an entertainment quarter where Japanese and Westerners ate, drank, and amused themselves. This was a barbarism that crushed the dignity and identity of a people, beyond mere physical destruction. What remains today is only Hwanggungwoo, the three-tiered octagonal building that enshrined the spirit tablets.'
+                    ]
+                },
+                {
+                    title: '3. A Modern Tragedy: A History Encircled by Capital',
+                    paragraphs: [
+                        'Even more painful is what came after liberation. Instead of removing the Japanese-built hotel and restoring the altar, we built an even larger modern hotel (the Westin Chosun). On the former site of Daegwanjeong, the State Guest House, another high-rise hotel (Booyoung) is planned.',
+                        'Hotel guests sip coffee through their windows looking at Hwanggungwoo and use it as a wedding backdrop. That a sacred site of history is consumed as a “commercial view” is a “shadow of capitalism” showing how much we sacrificed for economic growth.'
+                    ]
+                },
+                {
+                    title: '4. A Revived Spirit: Restoring the Hwangu Daeje',
+                    paragraphs: [
+                        'The buildings were destroyed, but the spirit did not vanish. The Hwangu Daeje, banned by the Japanese, was restored in 2008 — 100 years later.',
+                        'Each October the rite is offered to Heaven here (Choheongwan). Though the space is narrow, surrounded by hotel towers that block even the sky, the cup raised at this altar carries the firm pledge: “Never again will we lose our history.” We will not stop until the Hwangudan is fully restored to its original form. That is the true liberation of the Republic of Korea.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', caption: 'Hwanggungwoo and the imperial rite at the Hwangudan', position: 'center 85%' },
+                { src: '/images/tours/hwanggungwoo_panorama.png', caption: 'Panoramic view of Hwanggungwoo' },
+                { src: '/images/tours/hwangudan_original.png', caption: 'Hwangudan and Hwanggungwoo before destruction' },
+                { src: '/images/tours/hwangudan_damaged.png', caption: 'The Hwangudan after damage from the Gyeongseong Railway Hotel' }
+            ]
+        },
+        '국립고궁박물관': {
+            subtitle: 'National Palace Museum of Korea',
+            intro: [
+                'The National Palace Museum of Korea is a treasury that gathers the history and culture of the Joseon and Korean Empire courts.',
+                'But the museum’s own history mirrors the wounds of modern Korean history.',
+                'Founded in 1908 as the “Imperial Household Museum,” it was demoted under Japanese occupation to the “Yi Royal Family Museum of Art” and exiled to Seokjojeon at Deoksugung. After liberation, it bounced from one name to another, finally returning to Gyeongbokgung only in 2005. In every artifact here lingers the tears of a royal family that bore the sorrow of a fallen kingdom while striving to preserve its legitimacy.'
+            ],
+            sections: [
+                {
+                    title: '1. Sovereignty Recovered: Eobo and Cultural Sovereignty',
+                    paragraphs: [
+                        'The highlight here is the eobo (royal seal), the symbol of royal authority. In 2014, during President Obama’s visit, we secured the return of the State Seal of the Korean Empire and nine eobo that had been illegally exported.',
+                        'This was not merely the return of objects. It was the recovery of national “sovereignty” and “dignity.” Cultural artifacts shine brightest in their proper place.'
+                    ]
+                },
+                {
+                    title: '2. Evidence of Modernity: Emperor Sunjong’s Limousine',
+                    paragraphs: [
+                        'At the center of the gallery sits a great Cadillac limousine. Built by GM in 1918, this car was the imperial automobile of Emperor Sunjong and Empress Sunjeonghyo. Rare worldwide, it proves that the Korean Empire was no isolationist nation.',
+                        'We actively embraced Western civilization to advance toward becoming a modern state. Though that dream was crushed by colonization, this car still stands before us today, carrying “the dream of an empire that wished to stand shoulder to shoulder with the world.”'
+                    ]
+                },
+                {
+                    title: '3. A Family’s Story: Princess Deokhye’s Garments and Princess Haegyeong',
+                    paragraphs: [
+                        'That small dangui (jacket-and-skirt) you see is a garment worn by Emperor Gojong’s beloved daughter, Princess Deokhye, who lost her country and was taken to Japan, living a life of solitude. Her sorrow lingers in this single garment.',
+                        'In 2012, Princess Haegyeong (Lady Yi Hae-gyeong), daughter of Prince Imperial Uichin, visited and grew tearful before her father’s automobile and his belongings. The museum is not a place of dead history — it is a space breathing with living memory.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/national_palace_museum_1771721177147.png', caption: 'Royal artifacts on display at the National Palace Museum' }
+            ]
+        },
+        '서울역사박물관': {
+            subtitle: 'Seoul Museum of History',
+            intro: [
+                'The Seoul Museum of History stands on the former grounds of Gyeonghuigung, a Joseon palace.',
+                'When it opened in 2002, many criticized building a modern museum on a site that should have been restored as a palace — a museum meant to preserve history paradoxically damaging the very site of history.'
+            ],
+            sections: [
+                {
+                    title: '1. A Royal Legacy: Unhyeongung and the Donations of Prince Yi U',
+                    paragraphs: [
+                        'Although the building’s history was painful, its content was filled by royal devotion. In 1991, the artifacts of Unhyeongung — the home of Heungseon Daewongun — were donated by Prince Yi Cheong, the eldest son of Prince Yi U.',
+                        'These donations express the royal family’s conviction that royal artifacts are not personal property but “public assets to be shared by all the people.”'
+                    ]
+                },
+                {
+                    title: '2. Evidence of Diplomacy: The Allen Collection and Empress Myeongseong’s Fan',
+                    paragraphs: [
+                        'The most notable item here is the Allen Collection. Dr. Horace Allen — the first American diplomat and missionary to Korea, who arrived in 1884 — shared a profound friendship with Emperor Gojong.',
+                        'In 2018, we visited the United States and persuaded Allen’s great-granddaughter Lydia C. Allen and other descendants to entrust precious artifacts to us, which were then donated here. Among them is Empress Myeongseong’s Hwajodo folding fan.',
+                        'This ivory fan, presented by Empress Myeongseong to Mrs. Allen, is the only royal Joseon ivory fan known to exist anywhere. In this small fan linger the “global mind” of a royal family that engaged the great Western powers in pursuit of independence — and the lingering presence of an empress whose life ended in tragedy.'
+                    ]
+                },
+                {
+                    title: '3. Recovering Cultural Sovereignty: The Value of Donation',
+                    paragraphs: [
+                        'The reason these artifacts were donated to a museum rather than kept privately is clear. Cultural assets show their full value when they are in their rightful place — and when future generations can see and learn from them.',
+                        'Records such as Dr. Allen’s personal letters and the Korea–U.S. Foreign Relations Annals are vivid evidence of a century of diplomatic history. Recovering them is to fit lost pieces of the puzzle of history — a declaration that the Republic of Korea is a sovereign nation culturally as well.'
+                    ]
+                },
+                {
+                    title: '4. A Promise for the Future: A School of History',
+                    paragraphs: [
+                        'Built on the grounds of Gyeonghuigung, this museum paradoxically asks how we should treat history. May this place become a school where children grow up proud that “our nation is a people who treasures culture.”',
+                        'May it spark a “second and third Allen Collection” movement that brings home the countless Korean cultural treasures still scattered abroad.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/seoul_museum_history_1771721194719.png', caption: 'The Allen Collection on display at the Seoul Museum of History' }
+            ]
+        },
+        '대한제국역사관': {
+            subtitle: 'Korean Empire History Museum',
+            intro: [
+                'Located inside Seokjojeon at Deoksugung, the Korean Empire History Museum holds the vision of a royal family that dreamed of a modern, sovereign state.',
+                'The Western-style furniture and diplomatic documents on display vividly testify to the Korean Empire’s fierce efforts to engage the world even amid the storm of imperialism.'
+            ],
+            sections: [
+                {
+                    title: '1. A Modern Dream Embodied in Western Architecture',
+                    paragraphs: [
+                        'Seokjojeon is a stately stone building in 19th-century neo-classical style, with interiors adorned by chandeliers and carpets. This was no mere Western mimicry but a deliberate creation of diplomatic space — essential to be treated as a civilized nation in international society.'
+                    ]
+                },
+                {
+                    title: '2. The Emperor’s Office and Banquet Hall',
+                    paragraphs: [
+                        'The reception room and the grand dining room — where envoys from every nation were received — have been splendidly restored. In these spaces, Emperor Gojong welcomed envoys and proclaimed the Korean Empire’s will of independence and sovereignty to the world.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/korean_empire_history_museum_1771721421146.png', caption: 'The Korean Empire History Museum within Seokjojeon' }
+            ]
+        },
+        '국립중앙박물관': {
+            subtitle: 'National Museum of Korea',
+            intro: [
+                'The National Museum of Korea — Korea’s flagship museum — embraces millennia of brilliant cultural heritage.',
+                'From Paleolithic stone tools to the splendid art of Joseon, it is a world-class cultural space where the long history and aesthetic sensibility of the Korean Peninsula can be experienced in one place.'
+            ],
+            sections: [
+                {
+                    title: '1. A Vast Collection Across Eras and Disciplines',
+                    paragraphs: [
+                        'Hundreds of national treasures — spanning prehistory to modernity, from metalwork and ceramics to painting and calligraphy — present the very essence of Korean culture. Experience the original aesthetics of Silla’s gold crowns, Goryeo celadon, and Joseon white porcelain.'
+                    ]
+                },
+                {
+                    title: '2. Hall of Contemplation and the Immersive Digital Gallery',
+                    paragraphs: [
+                        'The “Hall of Contemplation,” where two pensive Bodhisattva statues sit side by side, offers the deep stillness of Eastern philosophy. The cutting-edge immersive digital gallery further proves that the museum is not just a storehouse of artifacts but a living space that converses with the modern world.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/national_museum_korea_1771721439376.png', caption: 'A grand exhibition view at the National Museum of Korea' }
+            ]
+        },
+        '국립민속박물관': {
+            subtitle: 'National Folk Museum of Korea',
+            intro: [
+                'Inside the Gyeongbokgung precinct, the National Folk Museum is the place where the lives and culture of ordinary people on this land can be experienced most intimately.',
+                'It is a beautiful space where the candid daily life of the people, their food, clothing, and shelter, and their seasonal customs unfold beneath the splendor of royal culture.'
+            ],
+            sections: [
+                {
+                    title: '1. The Korean Life Cycle and the Four Seasons',
+                    paragraphs: [
+                        'From the rituals of birth to death and the seasonal customs rooted in agricultural society — spring, summer, autumn, winter — are vividly displayed. Follow the wise footsteps of forebears who lived in harmony with nature’s order.'
+                    ]
+                },
+                {
+                    title: '2. The Aesthetics of Traditional Dress and Dwelling',
+                    paragraphs: [
+                        'From the dignified hanbok to the humble garments of commoners, and the structures of traditional hanok houses in harmony with nature — discover a different facet of Korean beauty: the modest yet refined archetype that complements the splendor of court culture.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/national_folk_museum_1771721456474.png', caption: 'The warm exhibition halls of the National Folk Museum' }
+            ]
+        },
+        '주미대한제국공사관': {
+            subtitle: 'Old Korean Legation in Washington D.C.',
+            intro: [
+                'On Logan Circle in Washington, D.C., the Old Korean Legation is a symbolic site of the Korean Empire’s noble effort to pursue independent diplomacy among the Western powers at the close of the 19th century.',
+                'Lost to the agony of a fallen kingdom, this miraculous site of history was returned a century later through the strength of the Republic of Korea’s government and its people.'
+            ],
+            sections: [
+                {
+                    title: '1. The Revival of the Oldest Diplomatic Mission',
+                    paragraphs: [
+                        'This Victorian-style red-brick building is the only diplomatic legation of its era in Washington that retains its original form. Established in 1889, the breath of the diplomats who devoted themselves to defending sovereignty far from home still lingers in the first-floor reception rooms and second-floor offices.'
+                    ]
+                },
+                {
+                    title: '2. The Joy of a Return After 102 Years',
+                    paragraphs: [
+                        'Though the legation was forcibly sold for a mere five dollars under the 1910 annexation, in 2012 it was returned to our hands. Beyond a sorrowful history of sovereign diplomacy denied, it has been reborn as a proud cultural heritage that symbolizes the dignity of a Korea now among the world’s top ten economies.'
+                    ]
+                }
+            ],
+            gallery: [
+                { src: '/images/tours/museums/old_korean_legation_1771721475089.png', caption: 'The Old Korean Legation in Washington, D.C.' }
+            ]
+        }
+    };
+
+    const palaceData: Record<string, any> = ko ? palaceDataKoInline : palaceDataEnInline;
 
     return (
         <div className="bg-[#050510] min-h-screen">
