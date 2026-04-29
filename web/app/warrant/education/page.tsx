@@ -18,39 +18,29 @@ function HangeulIcon({ className }: { className?: string }) {
 }
 import { motion, AnimatePresence } from 'framer-motion';
 
-const programs = [
-    {
-        title: '한국학',
-        titleEn: 'Korean Studies',
-        desc: '한국문화가 가진 특별함을\n인류의 보편성으로 성장 동력화함',
-        details: ['-한국의 유형문화유산', '-한국의 기록문화유산', '-한국의 무형문화유산'],
-        href: '/warrant/education/studies',
-    },
-    {
-        title: '한국인문학',
-        titleEn: 'Korean Humanities',
-        desc: '한국인이 가진 개성적인 정신과\n철학을 세계화함',
-        details: ['-한국의 수행문화', '-한국의 유불선 정신'],
-        href: '/warrant/education/culture',
-    },
-    {
-        title: '한국어',
-        titleEn: 'Korean Language',
-        desc: '과학적이고 쉬운 한국어를\n세계인의 일반화된 언어로 보급함',
-        details: ['-한국어 보급', '-한국의 일반문화 보급'],
-        href: '/warrant/education/language',
-    },
+const programsKo = [
+    { title: '한국학', titleEn: 'Korean Studies', desc: '한국문화가 가진 특별함을\n인류의 보편성으로 성장 동력화함', details: ['-한국의 유형문화유산', '-한국의 기록문화유산', '-한국의 무형문화유산'], href: '/warrant/education/studies' },
+    { title: '한국인문학', titleEn: 'Korean Humanities', desc: '한국인이 가진 개성적인 정신과\n철학을 세계화함', details: ['-한국의 수행문화', '-한국의 유불선 정신'], href: '/warrant/education/culture' },
+    { title: '한국어', titleEn: 'Korean Language', desc: '과학적이고 쉬운 한국어를\n세계인의 일반화된 언어로 보급함', details: ['-한국어 보급', '-한국의 일반문화 보급'], href: '/warrant/education/language' },
+];
+
+const programsEn = [
+    { title: 'Korean Studies', titleEn: '한국학', desc: 'Channeling the uniqueness of Korean culture\ninto a growth engine for shared human values.', details: ['– Korean tangible cultural heritage', '– Korean documentary heritage', '– Korean intangible cultural heritage'], href: '/warrant/education/studies' },
+    { title: 'Korean Humanities', titleEn: '한국인문학', desc: 'Bringing the distinctive spirit and philosophy\nof the Korean people to the world.', details: ['– Korean self-cultivation tradition', '– The Confucian–Buddhist–Taoist spirit of Korea'], href: '/warrant/education/culture' },
+    { title: 'Korean Language', titleEn: '한국어', desc: 'Sharing the scientific, accessible Korean language\nas a common tongue for the world.', details: ['– Korean language outreach', '– Korean everyday culture outreach'], href: '/warrant/education/language' },
 ];
 
 export default function EducationLandingPage() {
-    const { dict } = useLanguage();
+    const { language } = useLanguage();
+    const ko = language === 'ko';
+    const programs = ko ? programsKo : programsEn;
     const [modalUrl, setModalUrl] = useState<string | null>(null);
     const [modalTitle, setModalTitle] = useState('');
 
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
-                title="한국학공부"
+                title={ko ? '한국학공부' : 'Korean Studies'}
             />
 
             <section className="py-20">
@@ -107,7 +97,7 @@ export default function EducationLandingPage() {
 
                                             {/* Arrow */}
                                             <div className="mt-6 flex items-center gap-2 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-all duration-300">
-                                                <span className="text-xs tracking-widest uppercase font-medium">자세히 보기</span>
+                                                <span className="text-xs tracking-widest uppercase font-medium">{ko ? '자세히 보기' : 'Learn More'}</span>
                                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                                             </div>
                                         </div>

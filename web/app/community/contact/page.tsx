@@ -7,9 +7,10 @@ import { Phone, Mail, Crown, Send } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.community;
     const f = dict.footer;
+    const ko = language === 'ko';
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -27,12 +28,12 @@ export default function ContactPage() {
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok) {
-                setError(data.error || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+                setError(data.error || (ko ? '전송에 실패했습니다. 잠시 후 다시 시도해주세요.' : 'Send failed. Please try again shortly.'));
                 return;
             }
             setSubmitted(true);
         } catch {
-            setError('네트워크 오류가 발생했습니다.');
+            setError(ko ? '네트워크 오류가 발생했습니다.' : 'A network error occurred.');
         } finally {
             setSubmitting(false);
         }
@@ -53,7 +54,7 @@ export default function ContactPage() {
                                         <Phone className="w-5 h-5 text-[#d4af37]" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-medium text-sm">전화</h3>
+                                        <h3 className="text-white font-medium text-sm">{ko ? '전화' : 'Phone'}</h3>
                                         <p className="text-gray-400">{f.phone}</p>
                                     </div>
                                 </div>
@@ -64,7 +65,7 @@ export default function ContactPage() {
                                         <Mail className="w-5 h-5 text-[#d4af37]" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-medium text-sm">이메일</h3>
+                                        <h3 className="text-white font-medium text-sm">{ko ? '이메일' : 'Email'}</h3>
                                         <p className="text-gray-400">{f.email}</p>
                                     </div>
                                 </div>
@@ -89,8 +90,8 @@ export default function ContactPage() {
                                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                                         <Send className="w-7 h-7 text-emerald-400" />
                                     </div>
-                                    <h3 className="text-white font-bold text-lg mb-2">전송 완료</h3>
-                                    <p className="text-gray-400 text-sm">문의가 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.</p>
+                                    <h3 className="text-white font-bold text-lg mb-2">{ko ? '전송 완료' : 'Sent Successfully'}</h3>
+                                    <p className="text-gray-400 text-sm">{ko ? '문의가 접수되었습니다. 빠른 시일 내 답변 드리겠습니다.' : 'Your inquiry has been received. We will respond as soon as possible.'}</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -141,7 +142,7 @@ export default function ContactPage() {
                                         className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         <Send className="w-4 h-4" />
-                                        {submitting ? '전송 중...' : d.submit}
+                                        {submitting ? (ko ? '전송 중...' : 'Sending...') : d.submit}
                                     </button>
                                 </form>
                             )}

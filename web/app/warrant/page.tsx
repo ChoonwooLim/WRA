@@ -7,51 +7,36 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { GraduationCap, Map, Users, Briefcase, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-const warrantAreas = [
-    {
-        title: '교육',
-        titleEn: 'Education',
-        desc: '한국어, 한국문화, 한국학 프로그램을 통해 K-헤리티지의 가치를 세계에 전파합니다.',
-        href: '/warrant/education',
-        icon: <GraduationCap className="w-8 h-8" />,
-    },
-    {
-        title: '투어',
-        titleEn: 'Royal Tours',
-        desc: '5대궁, 왕릉, 박물관 등 프리미엄 문화유산 투어를 제공합니다.',
-        href: '/warrant/tours',
-        icon: <Map className="w-8 h-8" />,
-    },
-    {
-        title: '멤버십',
-        titleEn: 'Membership',
-        desc: '글로벌 리더를 위한 프리미엄 네트워크 멤버십 프로그램.',
-        href: '/warrant/membership',
-        icon: <Users className="w-8 h-8" />,
-    },
-    {
-        title: '컨설팅',
-        titleEn: 'Consulting',
-        desc: '경영한류컨설팅으로 비즈니스에 품격과 전략을 더합니다.',
-        href: '/warrant/consulting',
-        icon: <Briefcase className="w-8 h-8" />,
-    },
+const warrantAreasKo = [
+    { title: '교육', titleEn: 'Education', desc: '한국어, 한국문화, 한국학 프로그램을 통해 K-헤리티지의 가치를 세계에 전파합니다.', href: '/warrant/education', icon: <GraduationCap className="w-8 h-8" /> },
+    { title: '투어', titleEn: 'Royal Tours', desc: '5대궁, 왕릉, 박물관 등 프리미엄 문화유산 투어를 제공합니다.', href: '/warrant/tours', icon: <Map className="w-8 h-8" /> },
+    { title: '멤버십', titleEn: 'Membership', desc: '글로벌 리더를 위한 프리미엄 네트워크 멤버십 프로그램.', href: '/warrant/membership', icon: <Users className="w-8 h-8" /> },
+    { title: '컨설팅', titleEn: 'Consulting', desc: '경영한류컨설팅으로 비즈니스에 품격과 전략을 더합니다.', href: '/warrant/consulting', icon: <Briefcase className="w-8 h-8" /> },
+];
+
+const warrantAreasEn = [
+    { title: 'Education', titleEn: '한국학공부', desc: 'Korean language, culture, and K-Studies programs that share the value of K-Heritage with the world.', href: '/warrant/education', icon: <GraduationCap className="w-8 h-8" /> },
+    { title: 'Royal Tours', titleEn: 'K-헤리티지', desc: 'Premium heritage tours of the five grand palaces, royal tombs, and major museums.', href: '/warrant/tours', icon: <Map className="w-8 h-8" /> },
+    { title: 'Membership', titleEn: '멤버십', desc: 'A premium networking membership program for global leaders.', href: '/warrant/membership', icon: <Users className="w-8 h-8" /> },
+    { title: 'Consulting', titleEn: '컨설팅', desc: 'Korean Wave management consulting that adds dignity and strategy to your business.', href: '/warrant/consulting', icon: <Briefcase className="w-8 h-8" /> },
 ];
 
 export default function WarrantPage() {
-    const { dict } = useLanguage();
+    const { language } = useLanguage();
+    const ko = language === 'ko';
+    const warrantAreas = ko ? warrantAreasKo : warrantAreasEn;
 
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
                 title="WRA K-HUMAN"
-                subtitle="교육 · 투어 · 멤버십 · 컨설팅"
+                subtitle={ko ? '교육 · 투어 · 멤버십 · 컨설팅' : 'Education · Tours · Membership · Consulting'}
             />
 
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
                     <SectionHeader
-                        title="WRA K-HUMAN 프로그램"
+                        title={ko ? 'WRA K-HUMAN 프로그램' : 'WRA K-HUMAN Programs'}
                         subtitle="Four Pillars of WRA K-HUMAN Excellence"
                     />
 

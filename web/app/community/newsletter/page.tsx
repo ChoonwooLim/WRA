@@ -20,20 +20,21 @@ interface Post {
 }
 
 export default function NewsletterPage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.community;
+    const ko = language === 'ko';
     const [email, setEmail] = useState('');
     const [consent, setConsent] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [resultMsg, setResultMsg] = useState<string>('구독 신청이 완료되었습니다. 감사합니다!');
+    const [resultMsg, setResultMsg] = useState<string>(ko ? '구독 신청이 완료되었습니다. 감사합니다!' : 'Your subscription has been completed. Thank you!');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
         if (!consent) {
-            setError('뉴스레터 수신 동의에 체크해주세요.');
+            setError(ko ? '뉴스레터 수신 동의에 체크해주세요.' : 'Please check the consent box to receive the newsletter.');
             return;
         }
         setSubmitting(true);
@@ -45,21 +46,21 @@ export default function NewsletterPage() {
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok) {
-                setError(data.error || '구독 처리에 실패했습니다.');
+                setError(data.error || (ko ? '구독 처리에 실패했습니다.' : 'Subscription failed. Please try again.'));
                 return;
             }
             if (data.alreadySubscribed) {
-                setResultMsg('이미 구독 중인 이메일입니다. 감사합니다!');
+                setResultMsg(ko ? '이미 구독 중인 이메일입니다. 감사합니다!' : 'This email is already subscribed. Thank you!');
             } else if (data.resubscribed) {
-                setResultMsg('다시 구독되었습니다. 환영합니다!');
+                setResultMsg(ko ? '다시 구독되었습니다. 환영합니다!' : 'You have been resubscribed. Welcome back!');
             } else {
-                setResultMsg('구독 신청이 완료되었습니다. 감사합니다!');
+                setResultMsg(ko ? '구독 신청이 완료되었습니다. 감사합니다!' : 'Your subscription has been completed. Thank you!');
             }
             setSubmitted(true);
             setEmail('');
             setConsent(false);
         } catch {
-            setError('네트워크 오류가 발생했습니다.');
+            setError(ko ? '네트워크 오류가 발생했습니다.' : 'A network error occurred.');
         } finally {
             setSubmitting(false);
         }
@@ -119,8 +120,10 @@ export default function NewsletterPage() {
                                         className="mt-0.5 rounded bg-white/10 border-white/20 cursor-pointer flex-shrink-0"
                                     />
                                     <span>
-                                        <span className="text-[#d4af37]">(필수)</span> 세계왕립아카데미의 뉴스레터 및 행사·프로그램 소식을 이메일로 수신하는 것에 동의합니다.
-                                        언제든지 메일 하단의 수신거부 링크로 해지할 수 있습니다.
+                                        <span className="text-[#d4af37]">{ko ? '(필수)' : '(Required)'}</span>{' '}
+                                        {ko
+                                            ? '세계왕립아카데미의 뉴스레터 및 행사·프로그램 소식을 이메일로 수신하는 것에 동의합니다. 언제든지 메일 하단의 수신거부 링크로 해지할 수 있습니다.'
+                                            : 'I consent to receive newsletters, event, and program updates from World Royal Academy by email. You can unsubscribe at any time via the link at the bottom of any email.'}
                                     </span>
                                 </label>
                                 {error && (
@@ -134,7 +137,7 @@ export default function NewsletterPage() {
                                     className="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     <Send className="w-4 h-4" />
-                                    {submitting ? '구독 신청 중...' : d.subscribe}
+                                    {submitting ? (ko ? '구독 신청 중...' : 'Subscribing...') : d.subscribe}
                                 </button>
                             </form>
                         )}
@@ -146,12 +149,12 @@ export default function NewsletterPage() {
             <section className="py-20 bg-gradient-to-b from-[#0a1128] to-[#050510] relative border-t border-white/5">
                 <div className="absolute inset-0 bg-[url('/images/royal_navy_damask_bg.png')] bg-repeat opacity-[0.02] pointer-events-none mix-blend-overlay" />
                 <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                    <SectionHeader title="Published Newsletters" subtitle="발간된 뉴스레터 모아보기" />
+                    <SectionHeader title="Published Newsletters" subtitle={ko ? '발간된 뉴스레터 모아보기' : 'Browse all published newsletters'} />
 
                     {loading ? (
-                        <div className="text-center py-10 text-[#d4af37]/60">불러오는 중...</div>
+                        <div className="text-center py-10 text-[#d4af37]/60">{ko ? '불러오는 중...' : 'Loading...'}</div>
                     ) : newsletters.length === 0 ? (
-                        <div className="text-center py-10 text-gray-500">아직 발간된 뉴스레터가 없습니다.</div>
+                        <div className="text-center py-10 text-gray-500">{ko ? '아직 발간된 뉴스레터가 없습니다.' : 'No newsletters have been published yet.'}</div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {newsletters.map((item) => (
@@ -172,7 +175,7 @@ export default function NewsletterPage() {
                                             </p>
 
                                             <div className="flex items-center text-[#d4af37] text-sm font-semibold mt-auto pt-4 border-t border-white/10 group-hover:border-[#d4af37]/30 transition-colors">
-                                                뉴스레터 읽기 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
+                                                {ko ? '뉴스레터 읽기' : 'Read Newsletter'} <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
                                             </div>
                                         </div>
                                     </GlassCard>
@@ -184,7 +187,7 @@ export default function NewsletterPage() {
                     {!loading && newsletters.length > 0 && (
                         <div className="mt-16 text-center">
                             <Link href="/community" className="px-8 py-3 rounded-full border border-[#d4af37]/50 text-[#d4af37] font-medium hover:bg-[#d4af37]/10 transition-colors inline-block">
-                                커뮤니티 홈으로 가기
+                                {ko ? '커뮤니티 홈으로 가기' : 'Back to Community Home'}
                             </Link>
                         </div>
                     )}
