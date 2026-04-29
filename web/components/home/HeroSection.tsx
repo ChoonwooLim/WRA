@@ -10,7 +10,7 @@ import { useEffect, useState, useRef } from 'react';
 const random = (min: number, max: number) => Math.random() * (max - min) + min;
 
 export function HeroSection() {
-    const { dict, language } = useLanguage();
+    const { dict } = useLanguage();
     const containerRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
 
@@ -139,56 +139,45 @@ export function HeroSection() {
                         animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                         transition={{ duration: 1, delay: 0.8 }}
                     >
-                        {language === 'en' ? (
-                            <img
-                                src="/images/wra-title-en.png?v=2"
-                                alt="World Royal Academy"
-                                className="h-16 md:h-24 lg:h-28 w-auto object-contain"
-                                style={{
-                                    filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.55)) drop-shadow(0 0 28px rgba(212,175,55,0.35))',
-                                }}
-                            />
-                        ) : (
-                            <motion.div
-                                role="img"
-                                aria-label="세계왕립아카데미"
-                                className="w-[19rem] md:w-[28.5rem] lg:w-[33.3rem]"
-                                style={{
-                                    aspectRatio: '2403 / 404',
-                                    WebkitMaskImage: 'url(/images/wra-title-ko.png?v=3)',
-                                    WebkitMaskSize: 'contain',
-                                    WebkitMaskRepeat: 'no-repeat',
-                                    WebkitMaskPosition: 'center',
-                                    maskImage: 'url(/images/wra-title-ko.png?v=3)',
-                                    maskSize: 'contain',
-                                    maskRepeat: 'no-repeat',
-                                    maskPosition: 'center',
-                                    backgroundImage:
-                                        'linear-gradient(90deg, #ffffff 0%, #ffffff 25%, #fceda6 42%, #d4af37 50%, #fceda6 58%, #ffffff 75%, #ffffff 100%)',
-                                    backgroundSize: '200% 100%',
-                                    backgroundRepeat: 'repeat',
-                                }}
-                                animate={{
-                                    backgroundPosition: ['200% 0%', '0% 0%'],
-                                    filter: [
-                                        'hue-rotate(0deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
-                                        'hue-rotate(360deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
-                                    ],
-                                }}
-                                transition={{
-                                    backgroundPosition: {
-                                        duration: 6,
-                                        repeat: Infinity,
-                                        ease: 'linear',
-                                    },
-                                    filter: {
-                                        duration: 18,
-                                        repeat: Infinity,
-                                        ease: 'linear',
-                                    },
-                                }}
-                            />
-                        )}
+                        <motion.div
+                            role="img"
+                            aria-label="세계왕립아카데미"
+                            className="w-[19rem] md:w-[28.5rem] lg:w-[33.3rem]"
+                            style={{
+                                aspectRatio: '2403 / 404',
+                                WebkitMaskImage: 'url(/images/wra-title-ko.png?v=3)',
+                                WebkitMaskSize: 'contain',
+                                WebkitMaskRepeat: 'no-repeat',
+                                WebkitMaskPosition: 'center',
+                                maskImage: 'url(/images/wra-title-ko.png?v=3)',
+                                maskSize: 'contain',
+                                maskRepeat: 'no-repeat',
+                                maskPosition: 'center',
+                                backgroundImage:
+                                    'linear-gradient(90deg, #ffffff 0%, #ffffff 25%, #fceda6 42%, #d4af37 50%, #fceda6 58%, #ffffff 75%, #ffffff 100%)',
+                                backgroundSize: '200% 100%',
+                                backgroundRepeat: 'repeat',
+                            }}
+                            animate={{
+                                backgroundPosition: ['200% 0%', '0% 0%'],
+                                filter: [
+                                    'hue-rotate(0deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                    'hue-rotate(360deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                ],
+                            }}
+                            transition={{
+                                backgroundPosition: {
+                                    duration: 6,
+                                    repeat: Infinity,
+                                    ease: 'linear',
+                                },
+                                filter: {
+                                    duration: 18,
+                                    repeat: Infinity,
+                                    ease: 'linear',
+                                },
+                            }}
+                        />
                     </motion.div>
 
                     {/* English Subtitle (gold wordmark) */}
