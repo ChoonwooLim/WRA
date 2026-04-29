@@ -18,7 +18,7 @@ const ConnectButton = dynamic(
         ssr: false,
         loading: () => (
             <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-gray-500 animate-pulse">
-                지갑 로딩...
+                Loading...
             </div>
         ),
     }

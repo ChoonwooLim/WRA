@@ -9,8 +9,9 @@ import { Award, Shield, Star, ArrowRight, Crown, GraduationCap, Users, Gem, Targ
 import Link from 'next/link';
 
 export default function CertificationPage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.certification;
+    const ko = language === 'ko';
 
     const processSteps = [
         { label: d.processApply },
@@ -19,11 +20,17 @@ export default function CertificationPage() {
         { label: d.processRenew },
     ];
 
-    const ceoEducation = [
-        { icon: <Crown className="w-6 h-6" />, title: 'K-Identity 교육', desc: '한국인의 정체성과 왕실 문화유산을 통한 의식 전환 교육. 왕실의 가치를 제품과 서비스에 투영하는 전략.' },
-        { icon: <GraduationCap className="w-6 h-6" />, title: '왕실 에티켓 교육', desc: '대한제국 왕실의 예법과 품격을 현대 비즈니스에 적용하는 프리미엄 에티켓 및 프로토콜 교육.' },
-        { icon: <Target className="w-6 h-6" />, title: '한국적 경영철학', desc: '홍익인간 정신에 기반한 한국적 경영 철학 교육. K-뉴리더십 역량 강화 프로그램.' },
-    ];
+    const ceoEducation = ko
+        ? [
+            { icon: <Crown className="w-6 h-6" />, title: 'K-Identity 교육', desc: '한국인의 정체성과 왕실 문화유산을 통한 의식 전환 교육. 왕실의 가치를 제품과 서비스에 투영하는 전략.' },
+            { icon: <GraduationCap className="w-6 h-6" />, title: '왕실 에티켓 교육', desc: '대한제국 왕실의 예법과 품격을 현대 비즈니스에 적용하는 프리미엄 에티켓 및 프로토콜 교육.' },
+            { icon: <Target className="w-6 h-6" />, title: '한국적 경영철학', desc: '홍익인간 정신에 기반한 한국적 경영 철학 교육. K-뉴리더십 역량 강화 프로그램.' },
+        ]
+        : [
+            { icon: <Crown className="w-6 h-6" />, title: 'K-Identity Education', desc: 'Consciousness transformation through Korean identity and royal cultural heritage. Strategies for embedding royal values into products and services.' },
+            { icon: <GraduationCap className="w-6 h-6" />, title: 'Royal Etiquette Training', desc: 'Premium etiquette and protocol training applying the dignity and customs of the Korean Imperial Court to modern business.' },
+            { icon: <Target className="w-6 h-6" />, title: 'Korean Management Philosophy', desc: 'Korean management philosophy education rooted in the Hongik-Ingan spirit. K-NewLeadership capability-building program.' },
+        ];
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -46,21 +53,39 @@ export default function CertificationPage() {
                             <Crown className="w-12 h-12 text-[#d4af37] mb-8 opacity-90 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
 
                             <h3 className="text-xl md:text-3xl font-serif text-[#fceda6] font-medium leading-[1.6] break-keep mb-10 tracking-wide">
-                                "대한민국의 혼(Spirit)을 담은 명품,<br className="hidden md:block" /> 왕실이 그 가치를 보증합니다."
+                                {ko
+                                    ? <>&ldquo;대한민국의 혼(Spirit)을 담은 명품,<br className="hidden md:block" /> 왕실이 그 가치를 보증합니다.&rdquo;</>
+                                    : <>&ldquo;Premium goods that embody the Spirit of Korea —<br className="hidden md:block" /> certified by the dignity of the Royal Court.&rdquo;</>}
                             </h3>
 
                             <div className="w-16 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent mb-10"></div>
 
                             <div className="space-y-4 text-gray-300 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide break-keep">
-                                <p>
-                                    <strong className="text-white font-serif">World Royal Academy</strong>는 단순한 품질 인증을 넘어,<br className="hidden md:block" />
-                                    기업가의 철학(Philosophy)과 제품의 장인정신(Craftsmanship)을 엄격히 심사하여<br className="hidden md:block" />
-                                    <span className="text-[#d4af37] font-semibold">'Royal Warrant(왕실 인증)'</span> 자격을 부여합니다.
-                                </p>
-                                <p>
-                                    이는 대한민국을 대표하는 브랜드로서의 자부심이자,<br className="hidden md:block" />
-                                    세계 시장을 향한 신뢰의 징표입니다.
-                                </p>
+                                {ko ? (
+                                    <>
+                                        <p>
+                                            <strong className="text-white font-serif">World Royal Academy</strong>는 단순한 품질 인증을 넘어,<br className="hidden md:block" />
+                                            기업가의 철학(Philosophy)과 제품의 장인정신(Craftsmanship)을 엄격히 심사하여<br className="hidden md:block" />
+                                            <span className="text-[#d4af37] font-semibold">&lsquo;Royal Warrant(왕실 인증)&rsquo;</span> 자격을 부여합니다.
+                                        </p>
+                                        <p>
+                                            이는 대한민국을 대표하는 브랜드로서의 자부심이자,<br className="hidden md:block" />
+                                            세계 시장을 향한 신뢰의 징표입니다.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>
+                                            <strong className="text-white font-serif">World Royal Academy</strong> goes beyond mere quality certification —<br className="hidden md:block" />
+                                            we rigorously evaluate an entrepreneur&rsquo;s <em>Philosophy</em> and a product&rsquo;s <em>Craftsmanship</em><br className="hidden md:block" />
+                                            to confer the <span className="text-[#d4af37] font-semibold">&lsquo;Royal Warrant&rsquo;</span> qualification.
+                                        </p>
+                                        <p>
+                                            This is both a mark of pride as a brand representing Korea<br className="hidden md:block" />
+                                            and a symbol of trust on the global stage.
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </GlassCard>
@@ -81,18 +106,18 @@ export default function CertificationPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <GlassCard className="text-center">
                             <Award className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
-                            <h3 className="font-bold text-white mb-2">프리미엄 브랜딩</h3>
-                            <p className="text-gray-400 text-sm">글로벌 시장(영국, 유럽)을 위한 프리미엄 스토리텔링 지원. 왕실 보증이라는 강력한 신뢰 자본(Trust Capital) 확보.</p>
+                            <h3 className="font-bold text-white mb-2">{ko ? '프리미엄 브랜딩' : 'Premium Branding'}</h3>
+                            <p className="text-gray-400 text-sm">{ko ? '글로벌 시장(영국, 유럽)을 위한 프리미엄 스토리텔링 지원. 왕실 보증이라는 강력한 신뢰 자본(Trust Capital) 확보.' : 'Premium storytelling support for global markets (UK, Europe). Build powerful Trust Capital backed by royal endorsement.'}</p>
                         </GlassCard>
                         <GlassCard className="text-center" delay={0.1}>
                             <Shield className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
-                            <h3 className="font-bold text-white mb-2">인증 마크</h3>
-                            <p className="text-gray-400 text-sm">한국 장인정신과 철학을 체현하는 공식 K-Royal 인증 마크 부여. 제품과 서비스에 왕실의 품격을 부여합니다.</p>
+                            <h3 className="font-bold text-white mb-2">{ko ? '인증 마크' : 'Certification Mark'}</h3>
+                            <p className="text-gray-400 text-sm">{ko ? '한국 장인정신과 철학을 체현하는 공식 K-Royal 인증 마크 부여. 제품과 서비스에 왕실의 품격을 부여합니다.' : 'Official K-Royal certification mark embodying Korean craftsmanship and philosophy — bringing royal dignity to products and services.'}</p>
                         </GlassCard>
                         <GlassCard className="text-center" delay={0.2}>
                             <Star className="w-10 h-10 text-[#d4af37] mx-auto mb-4" />
-                            <h3 className="font-bold text-white mb-2">VVIP 네트워킹</h3>
-                            <p className="text-gray-400 text-sm">공식 왕실 선물 우선 선정권 및 VVIP 네트워킹 기회. Royal 33 및 Heritage Partners 멤버십 혜택.</p>
+                            <h3 className="font-bold text-white mb-2">{ko ? 'VVIP 네트워킹' : 'VVIP Networking'}</h3>
+                            <p className="text-gray-400 text-sm">{ko ? '공식 왕실 선물 우선 선정권 및 VVIP 네트워킹 기회. Royal 33 및 Heritage Partners 멤버십 혜택.' : 'Priority selection rights for official royal gifts and VVIP networking opportunities. Royal 33 and Heritage Partners membership benefits.'}</p>
                         </GlassCard>
                     </div>
                 </div>
@@ -101,7 +126,7 @@ export default function CertificationPage() {
             {/* CEO Education (필수 이수) — Slides 56-58 */}
             <section className="py-20">
                 <div className="container mx-auto px-4 max-w-5xl">
-                    <SectionHeader title="CEO 필수 교육" subtitle="K-Royal Warrant 인증을 위한 CEO 필수 이수 과정" />
+                    <SectionHeader title={ko ? 'CEO 필수 교육' : 'Mandatory CEO Education'} subtitle={ko ? 'K-Royal Warrant 인증을 위한 CEO 필수 이수 과정' : 'Required courses for CEOs pursuing K-Royal Warrant certification'} />
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         {ceoEducation.map((item, i) => (
                             <GlassCard key={i} delay={i * 0.1}>
@@ -119,7 +144,9 @@ export default function CertificationPage() {
                     </div>
                     <div className="text-center">
                         <p className="text-gray-500 text-sm italic">
-                            ※ K-Royal Warrant 인증 신청 시, CEO가 반드시 이수해야 하는 교육 과정입니다.
+                            {ko
+                                ? '※ K-Royal Warrant 인증 신청 시, CEO가 반드시 이수해야 하는 교육 과정입니다.'
+                                : '※ These courses are mandatory for CEOs applying for K-Royal Warrant certification.'}
                         </p>
                     </div>
                 </div>
@@ -151,9 +178,9 @@ export default function CertificationPage() {
                         </Link>
                         <GlassCard className="h-full !border-dashed !border-[#d4af37]/20" delay={0.2}>
                             <Users className="w-8 h-8 text-[#d4af37] mb-3" />
-                            <h3 className="text-xl font-bold text-[#d4af37] mb-2">로열 헤리티지 파트너스</h3>
-                            <p className="text-[#d4af37]/60 text-xs mb-2">Royal Heritage Partners</p>
-                            <p className="text-gray-400 text-sm mb-4">정기 파트너십 프로그램을 통해 왕실 브랜드의 가치를 공유하는 비즈니스 파트너 네트워크.</p>
+                            <h3 className="text-xl font-bold text-[#d4af37] mb-2">{ko ? '로열 헤리티지 파트너스' : 'Royal Heritage Partners'}</h3>
+                            <p className="text-[#d4af37]/60 text-xs mb-2">{ko ? 'Royal Heritage Partners' : '로열 헤리티지 파트너스'}</p>
+                            <p className="text-gray-400 text-sm mb-4">{ko ? '정기 파트너십 프로그램을 통해 왕실 브랜드의 가치를 공유하는 비즈니스 파트너 네트워크.' : 'A business partner network that shares the value of the royal brand through structured partnership programs.'}</p>
                             <span className="inline-flex items-center gap-1 text-gray-500 text-sm italic">
                                 Coming Soon
                             </span>
