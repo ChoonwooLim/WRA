@@ -9,139 +9,50 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { royalTombDistricts } from './tombData';
 
-const palaceTours = [
-    {
-        name: '경복궁',
-        nameEn: 'Gyeongbokgung Palace',
-        desc: '조선시대 정궁의 위엄을 체험하는 특별 가이드 투어. 근정전, 경회루, 자경전 등 주요 전각 탐방.',
-        highlight: '조선 정궁 · 근정전 · 경회루',
-        duration: '3시간', capacity: '15명',
-        image: '/images/palaces/gyeongbokgung.png',
-        modalImage: '/images/palaces/real-gyeongbokgung.png'
-    },
-    {
-        name: '창덕궁',
-        nameEn: 'Changdeokgung Palace',
-        desc: 'UNESCO 세계유산으로 등재된 궁궐. 자연과의 조화로운 배치가 돋보이는 비원(후원) 특별 투어.',
-        highlight: 'UNESCO 세계유산 · 비원 후원',
-        duration: '3시간', capacity: '15명',
-        image: '/images/palaces/changdeokgung.png',
-        modalImage: '/images/palaces/real-changdeokgung.png'
-    },
-    {
-        name: '덕수궁',
-        nameEn: 'Deoksugung Palace',
-        desc: '대한제국의 역사가 살아 숨 쉬는 근대 왕실 투어. 석조전과 서양식 정원이 특징.',
-        highlight: '대한제국 · 석조전 · 서양식 정원',
-        duration: '2시간', capacity: '15명',
-        image: '/images/palaces/deoksugung.png',
-        modalImage: '/images/palaces/real-deoksugung.png'
-    },
-    {
-        name: '창경궁',
-        nameEn: 'Changgyeonggung Palace',
-        desc: '왕과 왕비의 생활궁궐. 대온실 등 근대적 시설과 전통 건축이 공존하는 독특한 공간.',
-        highlight: '생활궁궐 · 대온실',
-        duration: '2시간', capacity: '15명',
-        image: '/images/palaces/changgyeonggung.png',
-        modalImage: '/images/palaces/real-changgyeonggung.png'
-    },
-    {
-        name: '경희궁',
-        nameEn: 'Gyeonghuigung Palace',
-        desc: '서궐(西闕)로 불리던 도심 속 왕궁. 조선 후기 왕실의 역사와 건축미를 느낄 수 있습니다.',
-        highlight: '서궐 · 도심 속 왕궁',
-        duration: '1.5시간', capacity: '20명',
-        image: '/images/palaces/gyeonghuigung.png',
-        modalImage: '/images/palaces/real-gyeonghuigung.png'
-    },
+const palaceToursKo = [
+    { name: '경복궁', nameEn: 'Gyeongbokgung Palace', desc: '조선시대 정궁의 위엄을 체험하는 특별 가이드 투어. 근정전, 경회루, 자경전 등 주요 전각 탐방.', highlight: '조선 정궁 · 근정전 · 경회루', duration: '3시간', capacity: '15명', image: '/images/palaces/gyeongbokgung.png', modalImage: '/images/palaces/real-gyeongbokgung.png' },
+    { name: '창덕궁', nameEn: 'Changdeokgung Palace', desc: 'UNESCO 세계유산으로 등재된 궁궐. 자연과의 조화로운 배치가 돋보이는 비원(후원) 특별 투어.', highlight: 'UNESCO 세계유산 · 비원 후원', duration: '3시간', capacity: '15명', image: '/images/palaces/changdeokgung.png', modalImage: '/images/palaces/real-changdeokgung.png' },
+    { name: '덕수궁', nameEn: 'Deoksugung Palace', desc: '대한제국의 역사가 살아 숨 쉬는 근대 왕실 투어. 석조전과 서양식 정원이 특징.', highlight: '대한제국 · 석조전 · 서양식 정원', duration: '2시간', capacity: '15명', image: '/images/palaces/deoksugung.png', modalImage: '/images/palaces/real-deoksugung.png' },
+    { name: '창경궁', nameEn: 'Changgyeonggung Palace', desc: '왕과 왕비의 생활궁궐. 대온실 등 근대적 시설과 전통 건축이 공존하는 독특한 공간.', highlight: '생활궁궐 · 대온실', duration: '2시간', capacity: '15명', image: '/images/palaces/changgyeonggung.png', modalImage: '/images/palaces/real-changgyeonggung.png' },
+    { name: '경희궁', nameEn: 'Gyeonghuigung Palace', desc: '서궐(西闕)로 불리던 도심 속 왕궁. 조선 후기 왕실의 역사와 건축미를 느낄 수 있습니다.', highlight: '서궐 · 도심 속 왕궁', duration: '1.5시간', capacity: '20명', image: '/images/palaces/gyeonghuigung.png', modalImage: '/images/palaces/real-gyeonghuigung.png' },
 ];
 
-const ceremonyTours = [
-    {
-        name: '종묘대제',
-        nameEn: 'Jongmyo Daeje',
-        desc: 'UNESCO 세계무형유산으로 등재된 조선왕조 역대 왕과 왕비의 신위를 모신 종묘에서 거행되는 대제. 황태손 이원 전하가 초헌관으로 봉직.',
-        highlight: 'UNESCO 세계무형유산',
-        duration: '매년', capacity: '특별 초대',
-        image: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png',
-        modalImage: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png'
-    },
-    {
-        name: '사직대제',
-        nameEn: 'Sajik Daeje',
-        desc: '토지의 신(사, 社)과 곡식의 신(직, 稷)에게 올리는 국가 제향. 나라의 안녕과 풍요를 기원하는 신동 의례.',
-        highlight: '토지신 · 곡식신 제향',
-        duration: '매년', capacity: '특별 초대',
-        image: '/images/tours/ceremonies/sajik_daeje_1771719257413.png',
-        modalImage: '/images/tours/ceremonies/sajik_daeje_1771719257413.png'
-    },
-    {
-        name: '환구대제',
-        nameEn: 'Hwangu Daeje',
-        desc: '대한제국 고유의 황제 의례. 하늘에 제사를 올리는 천제로, 황제국으로서의 위상을 보여주는 대규모 의식.',
-        highlight: '대한제국 황제의례 · 선제',
-        duration: '매년', capacity: '특별 초대',
-        image: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png',
-        modalImage: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png'
-    },
+const palaceToursEn = [
+    { name: '경복궁', nameEn: 'Gyeongbokgung Palace', desc: 'A guided tour through the dignity of the main Joseon palace — exploring Geunjeongjeon, Gyeonghoeru, Jagyeongjeon, and other principal halls.', highlight: 'Joseon Main Palace · Geunjeongjeon · Gyeonghoeru', duration: '3 hours', capacity: '15 guests', image: '/images/palaces/gyeongbokgung.png', modalImage: '/images/palaces/real-gyeongbokgung.png' },
+    { name: '창덕궁', nameEn: 'Changdeokgung Palace', desc: 'A UNESCO World Heritage palace celebrated for its harmony with nature — including a special tour of the Secret Garden (Biwon).', highlight: 'UNESCO World Heritage · Secret Garden', duration: '3 hours', capacity: '15 guests', image: '/images/palaces/changdeokgung.png', modalImage: '/images/palaces/real-changdeokgung.png' },
+    { name: '덕수궁', nameEn: 'Deoksugung Palace', desc: 'A modern royal tour where the Korean Empire still breathes — featuring Seokjojeon and its Western-style gardens.', highlight: 'Korean Empire · Seokjojeon · Western Gardens', duration: '2 hours', capacity: '15 guests', image: '/images/palaces/deoksugung.png', modalImage: '/images/palaces/real-deoksugung.png' },
+    { name: '창경궁', nameEn: 'Changgyeonggung Palace', desc: 'The royal family residence palace — a unique space where modern facilities like the Grand Greenhouse coexist with traditional architecture.', highlight: 'Royal Residence · Grand Greenhouse', duration: '2 hours', capacity: '15 guests', image: '/images/palaces/changgyeonggung.png', modalImage: '/images/palaces/real-changgyeonggung.png' },
+    { name: '경희궁', nameEn: 'Gyeonghuigung Palace', desc: 'The “West Palace” (西闕) at the heart of the city — feel the architecture and history of the late Joseon court.', highlight: 'West Palace · Urban Royal Palace', duration: '1.5 hours', capacity: '20 guests', image: '/images/palaces/gyeonghuigung.png', modalImage: '/images/palaces/real-gyeonghuigung.png' },
 ];
 
-const museumTours = [
-    {
-        name: '국립고궁박물관',
-        nameEn: 'National Palace Museum of Korea',
-        desc: '조선왕실과 대한제국 왕실의 역사를 집대성한 보물창고. 어보, 순종황제 어차 등 왕실의 눈물이 배어 있는 역사적 유물 전시.',
-        highlight: '조선·대한제국 왕실 보물창고',
-        duration: '2시간', capacity: '20명',
-        image: '/images/tours/museums/national_palace_museum_1771721177147.png',
-        modalImage: '/images/tours/museums/national_palace_museum_1771721177147.png'
-    },
-    {
-        name: '서울역사박물관',
-        nameEn: 'Seoul Museum of History',
-        desc: '경희궁 터에 자리한 박물관. 알렌 컬렉션, 명성황후의 부채 등 외교와 문화 주권 회복의 생생한 증거를 만날 수 있는 곳.',
-        highlight: '경희궁 터 · 알렌 컬렉션',
-        duration: '2시간', capacity: '20명',
-        image: '/images/tours/museums/seoul_museum_history_1771721194719.png',
-        modalImage: '/images/tours/museums/seoul_museum_history_1771721194719.png'
-    },
-    {
-        name: '대한제국역사관',
-        nameEn: 'Korean Empire History Museum',
-        desc: '덕수궁 석조전 내에 위치한 특별 전시. 근대 왕실의 외교, 군사, 문화 활동을 소개합니다.',
-        highlight: '덕수궁 석조전 · 근대 왕실 전시',
-        duration: '1.5시간', capacity: '20명',
-        image: '/images/tours/museums/korean_empire_history_museum_1771721421146.png',
-        modalImage: '/images/tours/museums/korean_empire_history_museum_1771721421146.png'
-    },
-    {
-        name: '국립중앙박물관',
-        nameEn: 'National Museum of Korea',
-        desc: '한국의 5천년 역사와 문화유산을 총망라하는 세계적 규모의 박물관. 신라 금관부터 조선 백자까지 아우르는 정수.',
-        highlight: '5천년 역사 · 세계적 박물관',
-        duration: '3시간', capacity: '15명',
-        image: '/images/tours/museums/national_museum_korea_1771721439376.png',
-        modalImage: '/images/tours/museums/national_museum_korea_1771721439376.png'
-    },
-    {
-        name: '국립민속박물관',
-        nameEn: 'National Folk Museum of Korea',
-        desc: '한국인의 일상생활, 의식주, 세시풍속을 전시. 원형대로 보전된 왕실과 민간 문화를 생생히 기록.',
-        highlight: '전통 생활상 · 의식주 문화',
-        duration: '2시간', capacity: '20명',
-        image: '/images/tours/museums/national_folk_museum_1771721456474.png',
-        modalImage: '/images/tours/museums/national_folk_museum_1771721456474.png'
-    },
-    {
-        name: '주미대한제국공사관',
-        nameEn: 'Old Korean Legation in Washington D.C.',
-        desc: '미국 워싱턴 D.C.에 위치한 19세기 대한제국 자주외교의 상징. 외교관들의 발자취가 서린 빅토리아풍 공사관.',
-        highlight: '워싱턴 D.C. · 자주외교의 장',
-        duration: '2시간', capacity: '10명',
-        image: '/images/tours/museums/old_korean_legation_1771721475089.png',
-        modalImage: '/images/tours/museums/old_korean_legation_1771721475089.png'
-    },
+const ceremonyToursKo = [
+    { name: '종묘대제', nameEn: 'Jongmyo Daeje', desc: 'UNESCO 세계무형유산으로 등재된 조선왕조 역대 왕과 왕비의 신위를 모신 종묘에서 거행되는 대제. 황태손 이원 전하가 초헌관으로 봉직.', highlight: 'UNESCO 세계무형유산', duration: '매년', capacity: '특별 초대', image: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', modalImage: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png' },
+    { name: '사직대제', nameEn: 'Sajik Daeje', desc: '토지의 신(사, 社)과 곡식의 신(직, 稷)에게 올리는 국가 제향. 나라의 안녕과 풍요를 기원하는 신동 의례.', highlight: '토지신 · 곡식신 제향', duration: '매년', capacity: '특별 초대', image: '/images/tours/ceremonies/sajik_daeje_1771719257413.png', modalImage: '/images/tours/ceremonies/sajik_daeje_1771719257413.png' },
+    { name: '환구대제', nameEn: 'Hwangu Daeje', desc: '대한제국 고유의 황제 의례. 하늘에 제사를 올리는 천제로, 황제국으로서의 위상을 보여주는 대규모 의식.', highlight: '대한제국 황제의례 · 선제', duration: '매년', capacity: '특별 초대', image: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', modalImage: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png' },
+];
+
+const ceremonyToursEn = [
+    { name: '종묘대제', nameEn: 'Jongmyo Daeje', desc: 'A grand rite at Jongmyo — the UNESCO Intangible Heritage shrine enshrining the spirit tablets of all Joseon kings and queens. HRH Crown Prince Lee Won serves as Chief Officiant (Choheongwan).', highlight: 'UNESCO Intangible Heritage', duration: 'Annual', capacity: 'By Invitation', image: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png', modalImage: '/images/tours/ceremonies/jongmyo_daeje_1771719234508.png' },
+    { name: '사직대제', nameEn: 'Sajik Daeje', desc: 'A national rite to the gods of Land (社) and Grain (稷) — a solemn ceremony praying for the peace and abundance of the nation.', highlight: 'Land & Grain Deities', duration: 'Annual', capacity: 'By Invitation', image: '/images/tours/ceremonies/sajik_daeje_1771719257413.png', modalImage: '/images/tours/ceremonies/sajik_daeje_1771719257413.png' },
+    { name: '환구대제', nameEn: 'Hwangu Daeje', desc: 'The Korean Empire’s sovereign rite to Heaven — a grand ceremony declaring imperial standing as an independent empire equal to the great powers.', highlight: 'Imperial Heaven Rite', duration: 'Annual', capacity: 'By Invitation', image: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png', modalImage: '/images/tours/ceremonies/hwangu_daeje_1771719276005.png' },
+];
+
+const museumToursKo = [
+    { name: '국립고궁박물관', nameEn: 'National Palace Museum of Korea', desc: '조선왕실과 대한제국 왕실의 역사를 집대성한 보물창고. 어보, 순종황제 어차 등 왕실의 눈물이 배어 있는 역사적 유물 전시.', highlight: '조선·대한제국 왕실 보물창고', duration: '2시간', capacity: '20명', image: '/images/tours/museums/national_palace_museum_1771721177147.png', modalImage: '/images/tours/museums/national_palace_museum_1771721177147.png' },
+    { name: '서울역사박물관', nameEn: 'Seoul Museum of History', desc: '경희궁 터에 자리한 박물관. 알렌 컬렉션, 명성황후의 부채 등 외교와 문화 주권 회복의 생생한 증거를 만날 수 있는 곳.', highlight: '경희궁 터 · 알렌 컬렉션', duration: '2시간', capacity: '20명', image: '/images/tours/museums/seoul_museum_history_1771721194719.png', modalImage: '/images/tours/museums/seoul_museum_history_1771721194719.png' },
+    { name: '대한제국역사관', nameEn: 'Korean Empire History Museum', desc: '덕수궁 석조전 내에 위치한 특별 전시. 근대 왕실의 외교, 군사, 문화 활동을 소개합니다.', highlight: '덕수궁 석조전 · 근대 왕실 전시', duration: '1.5시간', capacity: '20명', image: '/images/tours/museums/korean_empire_history_museum_1771721421146.png', modalImage: '/images/tours/museums/korean_empire_history_museum_1771721421146.png' },
+    { name: '국립중앙박물관', nameEn: 'National Museum of Korea', desc: '한국의 5천년 역사와 문화유산을 총망라하는 세계적 규모의 박물관. 신라 금관부터 조선 백자까지 아우르는 정수.', highlight: '5천년 역사 · 세계적 박물관', duration: '3시간', capacity: '15명', image: '/images/tours/museums/national_museum_korea_1771721439376.png', modalImage: '/images/tours/museums/national_museum_korea_1771721439376.png' },
+    { name: '국립민속박물관', nameEn: 'National Folk Museum of Korea', desc: '한국인의 일상생활, 의식주, 세시풍속을 전시. 원형대로 보전된 왕실과 민간 문화를 생생히 기록.', highlight: '전통 생활상 · 의식주 문화', duration: '2시간', capacity: '20명', image: '/images/tours/museums/national_folk_museum_1771721456474.png', modalImage: '/images/tours/museums/national_folk_museum_1771721456474.png' },
+    { name: '주미대한제국공사관', nameEn: 'Old Korean Legation in Washington D.C.', desc: '미국 워싱턴 D.C.에 위치한 19세기 대한제국 자주외교의 상징. 외교관들의 발자취가 서린 빅토리아풍 공사관.', highlight: '워싱턴 D.C. · 자주외교의 장', duration: '2시간', capacity: '10명', image: '/images/tours/museums/old_korean_legation_1771721475089.png', modalImage: '/images/tours/museums/old_korean_legation_1771721475089.png' },
+];
+
+const museumToursEn = [
+    { name: '국립고궁박물관', nameEn: 'National Palace Museum of Korea', desc: 'A treasury of the Joseon and Korean Empire courts — featuring royal seals (eobo), Emperor Sunjong’s imperial automobile, and historic artifacts steeped in royal memory.', highlight: 'Joseon · Korean Empire Royal Treasury', duration: '2 hours', capacity: '20 guests', image: '/images/tours/museums/national_palace_museum_1771721177147.png', modalImage: '/images/tours/museums/national_palace_museum_1771721177147.png' },
+    { name: '서울역사박물관', nameEn: 'Seoul Museum of History', desc: 'A museum on the former site of Gyeonghuigung — meet the Allen Collection, Empress Myeongseong’s fan, and vivid evidence of diplomacy and the recovery of cultural sovereignty.', highlight: 'Gyeonghuigung Site · Allen Collection', duration: '2 hours', capacity: '20 guests', image: '/images/tours/museums/seoul_museum_history_1771721194719.png', modalImage: '/images/tours/museums/seoul_museum_history_1771721194719.png' },
+    { name: '대한제국역사관', nameEn: 'Korean Empire History Museum', desc: 'A special exhibit inside Deoksugung’s Seokjojeon, presenting the diplomacy, military, and cultural activities of the modern Korean Empire.', highlight: 'Deoksugung Seokjojeon · Modern Royal Exhibit', duration: '1.5 hours', capacity: '20 guests', image: '/images/tours/museums/korean_empire_history_museum_1771721421146.png', modalImage: '/images/tours/museums/korean_empire_history_museum_1771721421146.png' },
+    { name: '국립중앙박물관', nameEn: 'National Museum of Korea', desc: 'A world-class museum spanning 5,000 years of Korean history and heritage — from the Silla golden crown to Joseon white porcelain.', highlight: '5,000 Years · World-Class Museum', duration: '3 hours', capacity: '15 guests', image: '/images/tours/museums/national_museum_korea_1771721439376.png', modalImage: '/images/tours/museums/national_museum_korea_1771721439376.png' },
+    { name: '국립민속박물관', nameEn: 'National Folk Museum of Korea', desc: 'Daily life, food, clothing, shelter, and seasonal customs — a vivid record of royal and folk culture preserved in original form.', highlight: 'Traditional Life · Daily-Life Culture', duration: '2 hours', capacity: '20 guests', image: '/images/tours/museums/national_folk_museum_1771721456474.png', modalImage: '/images/tours/museums/national_folk_museum_1771721456474.png' },
+    { name: '주미대한제국공사관', nameEn: 'Old Korean Legation in Washington D.C.', desc: 'A 19th-century symbol of the Korean Empire’s independent diplomacy in Washington D.C. — a Victorian-style legation marked by the footsteps of Korean diplomats.', highlight: 'Washington D.C. · Independent Diplomacy', duration: '2 hours', capacity: '10 guests', image: '/images/tours/museums/old_korean_legation_1771721475089.png', modalImage: '/images/tours/museums/old_korean_legation_1771721475089.png' },
 ];
 
 function TourCard({ tour, index, onImageClick }: { tour: any; index: number; onImageClick?: (img: string, title: string) => void }) {
@@ -155,7 +66,7 @@ function TourCard({ tour, index, onImageClick }: { tour: any; index: number; onI
                     >
                         <img src={tour.image} alt={tour.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                         <div className="absolute inset-0 flex items-center justify-center transition-colors duration-300 group-hover:bg-black/50">
-                            <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">상세보기</span>
+                            <span className="text-[#d4af37] font-semibold tracking-wider text-sm px-4 py-2 border border-[#d4af37]/50 rounded-full backdrop-blur-md bg-black/40 shadow-lg">View Details</span>
                         </div>
                     </div>
                 )}
@@ -179,8 +90,12 @@ function TourCard({ tour, index, onImageClick }: { tour: any; index: number; onI
 }
 
 export default function ToursPage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.services;
+    const ko = language === 'ko';
+    const palaceTours = ko ? palaceToursKo : palaceToursEn;
+    const ceremonyTours = ko ? ceremonyToursKo : ceremonyToursEn;
+    const museumTours = ko ? museumToursKo : museumToursEn;
     const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
     const [expandedSection, setExpandedSection] = useState<number | null>(null);
     const [expandedTombSection, setExpandedTombSection] = useState<string | null>('0-0');
@@ -791,10 +706,10 @@ export default function ToursPage() {
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('ceremonies', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">3대 제향</h2>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">{ko ? '3대 제향' : 'The Three Grand Rites'}</h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'ceremonies' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례</p>
+                        <p className="text-gray-400 text-sm mt-3">{ko ? '대한제국 왕실의 전통 제향 — 황태손 전하가 초헌관으로 봉직하시는 국가 의례' : 'Traditional rites of the Korean Imperial Court — national ceremonies in which HRH the Crown Prince serves as Chief Officiant'}</p>
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
                     <AnimatePresence initial={false}>
@@ -817,7 +732,7 @@ export default function ToursPage() {
                 <div className="container mx-auto px-4 max-w-5xl relative z-10">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('tombs', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">왕릉제향</h2>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">{ko ? '왕릉제향' : 'Royal Tomb Rites'}</h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'tombs' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
 
@@ -849,7 +764,7 @@ export default function ToursPage() {
                                                 onClick={() => setExpandedDistrict(expandedDistrict === dIdx ? null : dIdx)}
                                                 className="w-full flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-[#d4af37]/10 transition-colors text-left"
                                             >
-                                                <span className="text-[#d4af37] font-serif font-bold text-base md:text-lg">&#x1F3EF; {district.district} ({district.tombs.length}기)</span>
+                                                <span className="text-[#d4af37] font-serif font-bold text-base md:text-lg">&#x1F3EF; {district.district} ({district.tombs.length}{ko ? '기' : ' tombs'})</span>
                                                 <span className={`text-[#d4af37] text-lg transition-transform duration-300 ${expandedDistrict === dIdx ? 'rotate-180' : ''}`}>&#x25BE;</span>
                                             </button>
                                             <AnimatePresence initial={false}>
@@ -887,13 +802,13 @@ export default function ToursPage() {
                                                                                             <p key={pi} className="text-gray-300 text-sm leading-[1.9] break-keep" style={{ textIndent: '1em' }}>{p}</p>
                                                                                         ))}
                                                                                         <div className="mt-4 bg-[#0a0f25]/60 rounded-lg p-4">
-                                                                                            <h4 className="text-[#d4af37] font-semibold text-xs mb-3">제향일 안내</h4>
+                                                                                            <h4 className="text-[#d4af37] font-semibold text-xs mb-3">{ko ? '제향일 안내' : 'Rite Schedule'}</h4>
                                                                                             <table className="w-full text-xs text-gray-300 border-collapse">
                                                                                                 <thead>
                                                                                                     <tr className="border-b border-[#d4af37]/30">
-                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">일시</th>
-                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">장소</th>
-                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">시간</th>
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">{ko ? '일시' : 'Date'}</th>
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">{ko ? '장소' : 'Location'}</th>
+                                                                                                        <th className="py-1.5 px-2 text-left text-[#d4af37] font-medium">{ko ? '시간' : 'Time'}</th>
                                                                                                     </tr>
                                                                                                 </thead>
                                                                                                 <tbody>
@@ -926,7 +841,7 @@ export default function ToursPage() {
 
                                 {/* Features Accordion */}
                                 <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify break-keep mb-8">
-                                    {[
+                                    {(ko ? [
                                         {
                                             title: "자연을 섬기는 건축: 풍수와 합일",
                                             paragraphs: [
@@ -955,7 +870,36 @@ export default function ToursPage() {
                                                 "매년 이곳에서 역대 제왕들께 술잔을 올립니다(초헌관). 이는 과거의 역사를 기억하고, 현재의 우리를 성찰하며, 미래의 번영을 기원하는 '정신적 대화'입니다. 이 끊이지 않는 의식이야말로 조선왕릉을 세계문화유산으로 만든 결정적인 근거입니다."
                                             ]
                                         }
-                                    ].map((section, idx) => (
+                                    ] : [
+                                        {
+                                            title: "Architecture in Service of Nature: Unity with Pungsu",
+                                            paragraphs: [
+                                                "The siting of Joseon royal tombs is grounded in pungsu-jiri (geomancy). Sites were chosen with mountains at the back (背山) and water in front (臨水), so that human-made structures never violated the lines of nature.",
+                                                "Rather than cutting away mountains to create the tomb area, the burial mound was designed to be cradled in the mountain’s embrace. This reveals our people’s eco-conscious worldview, which saw nature as a partner in coexistence rather than a target of conquest. The fact that such dense forests remain in their original state so close to the city is thanks to centuries of safeguarding this land as inviolable sacred ground."
+                                            ]
+                                        },
+                                        {
+                                            title: "Philosophy of Space: From the Worldly to the Sacred",
+                                            paragraphs: [
+                                                "A royal tomb is divided into three spatial stages: the entry zone where caretakers reside, the rite zone where the living and the dead meet, and the burial zone where the king rests.",
+                                                "The moment one passes through the Hongsalmun gate, one must lay aside worldly status. The slightly elevated path on the left is the “Hyangno” — for ancestral spirits — and the lower path on the right is the “Eoro” — for the king. Even the king walked the lower path before his ancestors, embodying humility and filial piety. This is a space defined by ye (etiquette and reverence)."
+                                            ]
+                                        },
+                                        {
+                                            title: "The Greatness of Records: Uigwe and Restoration",
+                                            paragraphs: [
+                                                "How could the appearance of 500 years ago be preserved intact? The secret lies in the records. The Sallyeungdogam Uigwe documented the personnel, materials, locations of stone objects — even individual nails — used in tomb construction.",
+                                                "Thanks to this documentary culture, we can restore the original form 100% perfectly even after partial damage from war or disaster. The Joseon royal tombs are not only a heritage of stone, but also a “Palace of Records” built on paper."
+                                            ]
+                                        },
+                                        {
+                                            title: "A Living Heritage: 600 Years of Rites",
+                                            paragraphs: [
+                                                "The most important thing is that this is not a “past-perfect” relic but a “present-continuous” space. Joseon fell, but the rites did not stop. Through the brutal trials of Japanese occupation and the Korean War, our descendants still set the rite tables.",
+                                                "Each year, sacred wine is offered to past kings (Choheongwan — Chief Officiant). This is a “spiritual dialogue” that remembers the past, examines the present, and prays for future prosperity. This unbroken ceremony is precisely what qualified the Joseon royal tombs as UNESCO World Heritage."
+                                            ]
+                                        }
+                                    ]).map((section, idx) => (
                                         <div
                                             key={idx}
                                             className="border border-[#d4af37]/30 bg-[#0a1128]/60 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 shadow-lg"
@@ -994,10 +938,10 @@ export default function ToursPage() {
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('palaces', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">5대궁 투어</h2>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">{ko ? '5대궁 투어' : 'Five Royal Palaces Tour'}</h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'palaces' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어</p>
+                        <p className="text-gray-400 text-sm mt-3">{ko ? 'Royal Palaces of Seoul — 서울의 5대 궁궐 프리미엄 투어' : 'Royal Palaces of Seoul — premium tours of the five grand palaces'}</p>
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
                     <AnimatePresence initial={false}>
@@ -1019,10 +963,10 @@ export default function ToursPage() {
                 <div className="container mx-auto px-4 max-w-6xl">
                     <div className="text-center mb-12">
                         <button onClick={(e) => toggleTourSection('museums', e.currentTarget)} className="flex items-center justify-center gap-3 mx-auto cursor-pointer group">
-                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">박물관 투어</h2>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fceda6] to-[#d4af37]">{ko ? '박물관 투어' : 'Museum Tours'}</h2>
                             <span className={`text-[#d4af37] text-xl transition-transform duration-300 ${tourSection === 'museums' ? 'rotate-180' : ''}`}>▾</span>
                         </button>
-                        <p className="text-gray-400 text-sm mt-3">Museums & Historical Sites — 왕실 문화유산을 만나는 프리미엄 박물관 투어</p>
+                        <p className="text-gray-400 text-sm mt-3">{ko ? 'Museums & Historical Sites — 왕실 문화유산을 만나는 프리미엄 박물관 투어' : 'Museums & Historical Sites — premium museum tours of royal cultural heritage'}</p>
                         <div className="h-1 w-20 bg-[#d4af37] mx-auto rounded-full mt-4"></div>
                     </div>
                     <AnimatePresence initial={false}>
