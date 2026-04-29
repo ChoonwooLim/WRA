@@ -149,12 +149,43 @@ export function HeroSection() {
                                 }}
                             />
                         ) : (
-                            <img
-                                src="/images/wra-title-ko.png?v=3"
-                                alt="세계왕립아카데미"
-                                className="h-[3.2rem] md:h-[4.8rem] lg:h-[5.6rem] w-auto object-contain"
+                            <motion.div
+                                role="img"
+                                aria-label="세계왕립아카데미"
+                                className="w-[19rem] md:w-[28.5rem] lg:w-[33.3rem]"
                                 style={{
-                                    filter: 'brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                    aspectRatio: '2403 / 404',
+                                    WebkitMaskImage: 'url(/images/wra-title-ko.png?v=3)',
+                                    WebkitMaskSize: 'contain',
+                                    WebkitMaskRepeat: 'no-repeat',
+                                    WebkitMaskPosition: 'center',
+                                    maskImage: 'url(/images/wra-title-ko.png?v=3)',
+                                    maskSize: 'contain',
+                                    maskRepeat: 'no-repeat',
+                                    maskPosition: 'center',
+                                    backgroundImage:
+                                        'linear-gradient(90deg, #ffffff 0%, #ffffff 25%, #fceda6 42%, #d4af37 50%, #fceda6 58%, #ffffff 75%, #ffffff 100%)',
+                                    backgroundSize: '200% 100%',
+                                    backgroundRepeat: 'repeat',
+                                }}
+                                animate={{
+                                    backgroundPosition: ['200% 0%', '0% 0%'],
+                                    filter: [
+                                        'hue-rotate(0deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                        'hue-rotate(360deg) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                    ],
+                                }}
+                                transition={{
+                                    backgroundPosition: {
+                                        duration: 6,
+                                        repeat: Infinity,
+                                        ease: 'linear',
+                                    },
+                                    filter: {
+                                        duration: 18,
+                                        repeat: Infinity,
+                                        ease: 'linear',
+                                    },
                                 }}
                             />
                         )}
@@ -170,7 +201,7 @@ export function HeroSection() {
                         <img
                             src="/images/wra-title-en.png?v=2"
                             alt="World Royal Academy"
-                            className="h-5 md:h-7 lg:h-8 w-auto object-contain"
+                            className="w-[19rem] md:w-[28.5rem] lg:w-[33.3rem] h-auto object-contain"
                             style={{
                                 filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.5)) drop-shadow(0 0 12px rgba(212,175,55,0.25))',
                             }}
