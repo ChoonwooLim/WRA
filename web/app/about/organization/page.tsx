@@ -104,6 +104,7 @@ const OrgNode = ({
 
 export default function OrganizationPage() {
     const { dict, language } = useLanguage();
+    const ko = language === 'ko';
     const [showCeoModal, setShowCeoModal] = useState(false);
     const [showChancellorModal, setShowChancellorModal] = useState(false);
 
@@ -141,7 +142,7 @@ export default function OrganizationPage() {
                         {/* Level 0: Chancellor */}
                         <div className="relative flex flex-col items-center justify-center w-full z-10">
                             <div onClick={() => setShowChancellorModal(true)} className="cursor-pointer group flex flex-col items-center">
-                                <OrgNode title="황태손 이 원 전하" subtitle="KING" variant="chancellor" className="cursor-pointer" showProfile />
+                                <OrgNode title={ko ? '황태손 이 원 전하' : 'HRH Crown Prince Lee Won'} subtitle="KING" variant="chancellor" className="cursor-pointer" showProfile />
                             </div>
                         </div>
 
@@ -150,10 +151,10 @@ export default function OrganizationPage() {
 
                         {/* ── 신광철 노드 (중앙) ── */}
                         <div className="bg-[#0f111a]/85 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-center px-10 py-5 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-[#d4af37]/80 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] z-10">
-                            <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">한국문화창조학교</p>
-                            <p className="text-[#d4af37] text-sm mt-1">교장 <span className="font-bold text-lg">신광철</span><span className="text-[#d4af37]/70 text-xs">(작가)</span></p>
+                            <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">{ko ? '한국문화창조학교' : 'Korea Culture Creation School'}</p>
+                            <p className="text-[#d4af37] text-sm mt-1">{ko ? '교장' : 'Principal'} <span className="font-bold text-lg">{ko ? '신광철' : 'Shin Kwang-chul'}</span><span className="text-[#d4af37]/70 text-xs">{ko ? '(작가)' : '(Author)'}</span></p>
                             <Link href="/about/profile/sinkwangchul" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
-                                프로필 →
+                                {ko ? '프로필 →' : 'Profile →'}
                             </Link>
                         </div>
 
@@ -174,16 +175,16 @@ export default function OrganizationPage() {
                             {/* 왼쪽 박스: 수평선 끝 바로 왼쪽 */}
                             <div className="absolute top-1/2 -translate-y-1/2 bg-[#0f111a]/85 border border-[#d4af37]/40 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg text-center transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10"
                                 style={{ right: 'calc(50% + 140px)' }}>
-                                <p className="text-[#e6c875] font-semibold text-base">한국학 연구소</p>
-                                <p className="text-[#e6c875] font-semibold text-base mt-2">AI 브레인 헬스 연구소</p>
+                                <p className="text-[#e6c875] font-semibold text-base">{ko ? '한국학 연구소' : 'Institute of Korean Studies'}</p>
+                                <p className="text-[#e6c875] font-semibold text-base mt-2">{ko ? 'AI 브레인 헬스 연구소' : 'AI Brain Health Research Center'}</p>
                             </div>
 
                             {/* 오른쪽 박스: 수평선 끝 바로 오른쪽 */}
                             <div className="absolute top-1/2 -translate-y-1/2 bg-[#0f111a]/85 border border-[#d4af37]/40 px-8 py-6 rounded-xl backdrop-blur-md shadow-lg transition-all hover:border-[#d4af37]/70 hover:bg-[#d4af37]/10 text-center"
                                 style={{ left: 'calc(50% + 140px)' }}>
-                                <p className="text-[#e6c875] font-semibold text-base">브랜드경영 윤리위원회</p>
+                                <p className="text-[#e6c875] font-semibold text-base">{ko ? '브랜드경영 윤리위원회' : 'Brand Management Ethics Committee'}</p>
                                 <Link href="/about/progress-report" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
-                                    경과보고 →
+                                    {ko ? '경과보고 →' : 'Progress Report →'}
                                 </Link>
                             </div>
                         </div>
@@ -192,14 +193,14 @@ export default function OrganizationPage() {
                         <div className="md:hidden flex flex-col items-center gap-0 w-full z-10">
                             <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl text-center w-full">
-                                <p className="text-[#e6c875] font-semibold">한국학 연구소</p>
-                                <p className="text-[#e6c875] font-semibold mt-1">AI 브레인 헬스 연구소</p>
+                                <p className="text-[#e6c875] font-semibold">{ko ? '한국학 연구소' : 'Institute of Korean Studies'}</p>
+                                <p className="text-[#e6c875] font-semibold mt-1">{ko ? 'AI 브레인 헬스 연구소' : 'AI Brain Health Research Center'}</p>
                             </div>
                             <div className="self-center w-[1.5px] h-4 bg-[#d4af37]/40" />
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full text-center">
-                                <p className="text-[#e6c875] font-semibold">브랜드경영 윤리위원회</p>
+                                <p className="text-[#e6c875] font-semibold">{ko ? '브랜드경영 윤리위원회' : 'Brand Management Ethics Committee'}</p>
                                 <Link href="/about/progress-report" className="inline-block mt-2 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 transition-all">
-                                    경과보고 →
+                                    {ko ? '경과보고 →' : 'Progress Report →'}
                                 </Link>
                             </div>
                             <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
@@ -208,14 +209,14 @@ export default function OrganizationPage() {
                         {/* Level 1: CEO + 전략기획실 */}
                         <div className="relative flex flex-col items-center w-full z-10">
                             <div onClick={() => setShowCeoModal(true)} className="cursor-pointer group flex flex-col items-center">
-                                <OrgNode title="제니 킴" subtitle="CEO" variant="ceo" showProfile />
+                                <OrgNode title={ko ? '제니 킴' : 'Jenny Kim'} subtitle="CEO" variant="ceo" showProfile />
                             </div>
 
                             {/* 전략기획실 - absolute positioned to the right */}
                             <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 items-center" style={{ left: 'calc(50% + 90px)' }}>
                                 <div className="w-12 h-[1.5px] bg-gradient-to-r from-[#d4af37]/60 to-[#d4af37]/30" />
                                 <div className="bg-gradient-to-br from-[#1a140a]/95 via-[#0c0903]/95 to-[#1a140a]/95 border border-[#d4af37]/40 outline outline-[1.5px] outline-[#d4af37]/20 outline-offset-[3px] text-[#d4af37] px-8 py-4 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.1)] text-base font-medium z-10 transition-all duration-300 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/60 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                                    전략기획실
+                                    {ko ? '전략기획실' : 'Strategic Planning Office'}
                                 </div>
                             </div>
                         </div>
@@ -243,8 +244,8 @@ export default function OrganizationPage() {
                         <div className="w-full max-w-5xl flex flex-col md:flex-row justify-center gap-8 relative">
                             <div className="w-full md:w-1/2 flex justify-center px-2 mb-4 md:mb-0">
                                 <OrgNode
-                                    title="국내운영본부"
-                                    subtitle="Domestic Operations"
+                                    title={ko ? '국내운영본부' : 'Domestic Operations'}
+                                    subtitle={ko ? 'Domestic Operations' : '국내운영본부'}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -253,8 +254,8 @@ export default function OrganizationPage() {
                             <div className="md:hidden w-[2px] h-4 bg-[#d4af37]/30 self-center" />
                             <div className="w-full md:w-1/2 flex justify-center px-2">
                                 <OrgNode
-                                    title="국제운영본부"
-                                    subtitle="International Operations"
+                                    title={ko ? '국제운영본부' : 'International Operations'}
+                                    subtitle={ko ? 'International Operations' : '국제운영본부'}
                                     variant="ceo"
                                     className="w-full max-w-[280px]"
                                 />
@@ -271,16 +272,21 @@ export default function OrganizationPage() {
                             <div className="w-full bg-[#0c1024]/80 backdrop-blur-xl rounded-2xl p-8 md:p-10 flex flex-col items-center">
                                 {/* Bridging Top Label (Optional, but gives context) */}
                                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#0c1024] px-6 py-1 border border-[#d4af37]/40 rounded-full text-[#d4af37] text-xs md:text-sm tracking-widest font-medium whitespace-nowrap shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-                                    공통 협력 · 지원 본부
+                                    {ko ? '공통 협력 · 지원 본부' : 'Shared Collaboration & Support Divisions'}
                                 </div>
 
                                 <div className="w-full flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center relative z-10 w-full pt-2">
-                                    {[
+                                    {(ko ? [
                                         "K-로얄 인증센터",
                                         "글로벌 협력단",
                                         "DX 혁신본부",
                                         "미디어 홍보실"
-                                    ].map((dept, idx) => (
+                                    ] : [
+                                        "K-Royal Certification Center",
+                                        "Global Partnerships",
+                                        "DX Innovation",
+                                        "Media & PR"
+                                    ]).map((dept, idx) => (
                                         <div key={idx} className="w-full md:w-1/4 flex justify-center px-3 mb-4 md:mb-0">
                                             <div className="w-full max-w-[220px] bg-[#0c0f17]/90 border border-[#d4af37]/30 outline outline-[2px] outline-[#d4af37]/30 outline-offset-[3px] text-gray-200 text-center py-5 px-3 rounded-xl shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-[#d4af37]/15 hover:border-[#d4af37]/80 hover:outline-[#d4af37]/60 text-sm md:text-base font-medium relative overflow-hidden group">
                                                 {/* Subtle highlight effect on hover */}
@@ -337,7 +343,7 @@ export default function OrganizationPage() {
                                     </div>
                                     <div className="flex-1 text-center md:text-left">
                                         <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-2">
-                                            제니킴 <span className="text-lg md:text-xl text-gray-400 font-normal ml-2">(최유나)</span>
+                                            {ko ? '제니킴' : 'Jenny Kim'} <span className="text-lg md:text-xl text-gray-400 font-normal ml-2">{ko ? '(최유나)' : '(Choi Yu-na)'}</span>
                                         </h2>
                                         <h3 className="text-lg md:text-xl font-semibold mb-4 inline-block"
                                             style={{
@@ -350,7 +356,9 @@ export default function OrganizationPage() {
                                         <GlassCard className="p-5 relative">
                                             <Quote className="absolute top-3 left-3 w-10 h-10 text-[#d4af37]/10 rotate-180" />
                                             <p className="text-gray-300 text-sm leading-relaxed relative z-10 pl-4">
-                                                국민일보·한국일보 주관 브랜드 대상 2관왕에 빛나는, 대한민국 톱티어 글로벌 비즈니스 커뮤니케이션 및 HR 컨설팅 전문가입니다.
+                                                {ko
+                                                    ? '국민일보·한국일보 주관 브랜드 대상 2관왕에 빛나는, 대한민국 톱티어 글로벌 비즈니스 커뮤니케이션 및 HR 컨설팅 전문가입니다.'
+                                                    : 'A two-time Brand Grand Prize winner (Kookmin Ilbo & Hankook Ilbo) and a top-tier Korean expert in global business communication and HR consulting.'}
                                             </p>
                                         </GlassCard>
                                     </div>
@@ -358,66 +366,72 @@ export default function OrganizationPage() {
 
                                 {/* Core Competencies */}
                                 <div className="mb-12">
-                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">핵심 역량</h3>
+                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">{ko ? '핵심 역량' : 'Core Competencies'}</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <GlassCard className="p-5 border-t-4 border-t-[#8b5cf6]/50">
                                             <Target className="w-6 h-6 text-[#a78bfa] mb-3" />
-                                            <h4 className="text-white font-bold text-sm mb-2">심리·성향 기반 HR 진단 & 헤드헌팅</h4>
-                                            <p className="text-gray-400 text-xs leading-relaxed">개별 맞춤 진단을 통해 글로벌 비즈니스에 즉시 투입 가능한 최적의 인재를 스크리닝 및 코칭합니다.</p>
+                                            <h4 className="text-white font-bold text-sm mb-2">{ko ? '심리·성향 기반 HR 진단 & 헤드헌팅' : 'Psychology-Based HR Diagnostics & Headhunting'}</h4>
+                                            <p className="text-gray-400 text-xs leading-relaxed">{ko ? '개별 맞춤 진단을 통해 글로벌 비즈니스에 즉시 투입 가능한 최적의 인재를 스크리닝 및 코칭합니다.' : 'Through individualized diagnostics, we screen and coach top talent ready for immediate global deployment.'}</p>
                                         </GlassCard>
                                         <GlassCard className="p-5 border-t-4 border-t-[#00d4ff]/50">
                                             <Globe className="w-6 h-6 text-[#00d4ff] mb-3" />
-                                            <h4 className="text-white font-bold text-sm mb-2">기업 맞춤형 목표 달성 컨설팅</h4>
-                                            <p className="text-gray-400 text-xs leading-relaxed">각 기업과 개인의 목표에 부합하는 맞춤형 커리큘럼을 설계하여 압도적인 목표 달성률을 기록합니다.</p>
+                                            <h4 className="text-white font-bold text-sm mb-2">{ko ? '기업 맞춤형 목표 달성 컨설팅' : 'Customized Goal-Achievement Consulting'}</h4>
+                                            <p className="text-gray-400 text-xs leading-relaxed">{ko ? '각 기업과 개인의 목표에 부합하는 맞춤형 커리큘럼을 설계하여 압도적인 목표 달성률을 기록합니다.' : 'We design custom curricula matched to each enterprise and individual’s goals — delivering outstanding achievement rates.'}</p>
                                         </GlassCard>
                                         <GlassCard className="p-5 border-t-4 border-t-[#d4af37]/50">
                                             <Briefcase className="w-6 h-6 text-[#d4af37] mb-3" />
-                                            <h4 className="text-white font-bold text-sm mb-2">B2B 글로벌 특수 목적 프로젝트 총괄</h4>
-                                            <p className="text-gray-400 text-xs leading-relaxed">삼성, SK, 현대 등 주요 대기업 임원진 대상 해외 진출 프로젝트를 총괄 리드합니다.</p>
+                                            <h4 className="text-white font-bold text-sm mb-2">{ko ? 'B2B 글로벌 특수 목적 프로젝트 총괄' : 'Lead — B2B Global Special-Purpose Projects'}</h4>
+                                            <p className="text-gray-400 text-xs leading-relaxed">{ko ? '삼성, SK, 현대 등 주요 대기업 임원진 대상 해외 진출 프로젝트를 총괄 리드합니다.' : 'Leads overseas-expansion projects for executives at major Korean conglomerates including Samsung, SK, and Hyundai.'}</p>
                                         </GlassCard>
                                     </div>
                                 </div>
 
                                 {/* Awards */}
                                 <div className="mb-12">
-                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">주요 수상 및 언론 보도</h3>
+                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">{ko ? '주요 수상 및 언론 보도' : 'Awards & Media'}</h3>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <a href="https://www.hankookilbo.com/news/article/A2023110815200004552" target="_blank" rel="noopener noreferrer" className="group">
                                             <GlassCard className="p-5 h-full transition-all group-hover:border-[#00d4ff]/30">
-                                                <span className="px-2 py-1 rounded-full bg-[#00d4ff]/10 text-[#00d4ff] text-xs font-bold">📰 한국일보 (2023.11)</span>
-                                                <h4 className="text-white font-bold mt-3 mb-2 text-sm group-hover:text-[#00d4ff] transition-colors">2023 대한민국 대표 브랜드 TOP100 대상</h4>
-                                                <span className="text-xs text-[#64ffda] flex items-center gap-1">기사 원문 보기 <ExternalLink className="w-3 h-3" /></span>
+                                                <span className="px-2 py-1 rounded-full bg-[#00d4ff]/10 text-[#00d4ff] text-xs font-bold">{ko ? '📰 한국일보 (2023.11)' : '📰 Hankook Ilbo (Nov 2023)'}</span>
+                                                <h4 className="text-white font-bold mt-3 mb-2 text-sm group-hover:text-[#00d4ff] transition-colors">{ko ? '2023 대한민국 대표 브랜드 TOP100 대상' : '2023 Korea Representative Brand TOP100 Grand Prize'}</h4>
+                                                <span className="text-xs text-[#64ffda] flex items-center gap-1">{ko ? '기사 원문 보기' : 'Read full article'} <ExternalLink className="w-3 h-3" /></span>
                                             </GlassCard>
                                         </a>
                                         <a href="https://www.kmib.co.kr/article/view.asp?arcid=0018262272" target="_blank" rel="noopener noreferrer" className="group">
                                             <GlassCard className="p-5 h-full transition-all group-hover:border-[#d4af37]/30">
-                                                <span className="px-2 py-1 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold">📰 국민일보 (2023.05)</span>
-                                                <h4 className="text-white font-bold mt-3 mb-2 text-sm group-hover:text-[#d4af37] transition-colors">국민선호브랜드대상 교육 부문 대상 수상</h4>
-                                                <span className="text-xs text-[#d4af37] flex items-center gap-1">기사 원문 보기 <ExternalLink className="w-3 h-3" /></span>
+                                                <span className="px-2 py-1 rounded-full bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold">{ko ? '📰 국민일보 (2023.05)' : '📰 Kookmin Ilbo (May 2023)'}</span>
+                                                <h4 className="text-white font-bold mt-3 mb-2 text-sm group-hover:text-[#d4af37] transition-colors">{ko ? '국민선호브랜드대상 교육 부문 대상 수상' : 'Citizen’s Preferred Brand Grand Prize — Education Category'}</h4>
+                                                <span className="text-xs text-[#d4af37] flex items-center gap-1">{ko ? '기사 원문 보기' : 'Read full article'} <ExternalLink className="w-3 h-3" /></span>
                                             </GlassCard>
                                         </a>
                                     </div>
                                     <div className="flex flex-wrap gap-3 justify-center mt-6">
                                         <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-medium flex items-center gap-1">
-                                            <Award className="w-3 h-3 text-[#d4af37]" /> 연세대 창업경진대회 대상 (2회 우승)
+                                            <Award className="w-3 h-3 text-[#d4af37]" /> {ko ? '연세대 창업경진대회 대상 (2회 우승)' : 'Yonsei Startup Competition — Grand Prize (2-time winner)'}
                                         </span>
                                         <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-medium flex items-center gap-1">
-                                            <Award className="w-3 h-3 text-[#d4af37]" /> 숨고, 마이멘토 누적 고용 600건+
+                                            <Award className="w-3 h-3 text-[#d4af37]" /> {ko ? '숨고, 마이멘토 누적 고용 600건+' : 'Soomgo · MyMentor — 600+ engagements'}
                                         </span>
                                     </div>
                                 </div>
 
                                 {/* Career Timeline */}
                                 <div className="mb-8">
-                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">이력 및 글로벌 경험</h3>
+                                    <h3 className="text-xl font-bold text-[#d4af37] mb-6 text-center">{ko ? '이력 및 글로벌 경험' : 'Career & Global Experience'}</h3>
                                     <div className="space-y-3">
-                                        {[
+                                        {(ko ? [
                                             { period: '2021.01 ~ 현재', title: '글로벌 비즈니스 전문 강사 / 컨설턴트', highlight: true },
                                             { period: '2020.01 ~ 현재', title: '제니SA 대표 / 세계왕립아카데미 대표', highlight: true },
                                             { period: '2019.06 ~ 2019.09', title: '알파스터디, 스터디서치 전문 영어강사 (리더)' },
                                             { period: '2016.09', title: '무역회사 G&M 통번역사' },
                                             { period: '2013.12', title: 'E&M 전문 영어학원' },
-                                        ].map((item, idx) => (
+                                        ] : [
+                                            { period: 'Jan 2021 – Present', title: 'Global Business Specialist Instructor / Consultant', highlight: true },
+                                            { period: 'Jan 2020 – Present', title: 'CEO, Jenny SA · CEO, World Royal Academy', highlight: true },
+                                            { period: 'Jun 2019 – Sep 2019', title: 'Alpha Study & StudySearch — Lead English Instructor' },
+                                            { period: 'Sep 2016', title: 'G&M Trading Co. — Interpreter / Translator' },
+                                            { period: 'Dec 2013', title: 'E&M Specialized English Academy' },
+                                        ]).map((item, idx) => (
                                             <div key={idx} className={`flex items-center gap-4 p-3 rounded-lg ${item.highlight ? 'bg-[#d4af37]/5 border border-[#d4af37]/20' : 'bg-white/5 border border-white/5'}`}>
                                                 <span className={`text-xs font-mono whitespace-nowrap ${item.highlight ? 'text-[#d4af37]' : 'text-gray-500'}`}>{item.period}</span>
                                                 <span className={`text-sm ${item.highlight ? 'text-white font-semibold' : 'text-gray-400'}`}>{item.title}</span>
@@ -430,8 +444,17 @@ export default function OrganizationPage() {
                                 <div className="bg-gradient-to-r from-[#120e26] via-[#1a1442] to-[#120e26] rounded-xl p-6 border border-white/10 text-center mb-8">
                                     <Globe className="w-6 h-6 text-[#00d4ff] mx-auto mb-3" />
                                     <p className="text-gray-300 text-sm">
-                                        미국, 중국, 싱가포르 등 다국적 언어권 유학과 실무 경험을 바탕으로
-                                        <span className="text-white font-semibold"> 현지 비즈니스 문화에 대한 깊이 있는 통찰력</span>을 제공합니다.
+                                        {ko ? (
+                                            <>
+                                                미국, 중국, 싱가포르 등 다국적 언어권 유학과 실무 경험을 바탕으로
+                                                <span className="text-white font-semibold"> 현지 비즈니스 문화에 대한 깊이 있는 통찰력</span>을 제공합니다.
+                                            </>
+                                        ) : (
+                                            <>
+                                                With study and work experience across the U.S., China, and Singapore, she delivers
+                                                <span className="text-white font-semibold"> deep insight into local business cultures</span>.
+                                            </>
+                                        )}
                                     </p>
                                 </div>
 
@@ -439,11 +462,20 @@ export default function OrganizationPage() {
                                 <div className="text-center">
                                     <Quote className="w-10 h-10 text-[#d4af37]/20 mx-auto mb-4" />
                                     <p className="text-base md:text-lg font-light text-white leading-relaxed italic mb-4" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
-                                        "영어는 판단의 도구가 아닌 <span className="text-[#d4af37] font-bold">소통의 도구</span>입니다.
-                                        여러분과 기업이 해외로 진출하는 <span className="text-[#64ffda] font-bold">완벽한 다리</span>가 되어 드리겠습니다."
+                                        {ko ? (
+                                            <>
+                                                &ldquo;영어는 판단의 도구가 아닌 <span className="text-[#d4af37] font-bold">소통의 도구</span>입니다.
+                                                여러분과 기업이 해외로 진출하는 <span className="text-[#64ffda] font-bold">완벽한 다리</span>가 되어 드리겠습니다.&rdquo;
+                                            </>
+                                        ) : (
+                                            <>
+                                                &ldquo;English is not a tool of judgment but a <span className="text-[#d4af37] font-bold">tool of communication</span>.
+                                                I will be the <span className="text-[#64ffda] font-bold">perfect bridge</span> for you and your company to expand overseas.&rdquo;
+                                            </>
+                                        )}
                                     </p>
                                     <p className="text-[#d4af37] text-xs font-medium tracking-wider uppercase">
-                                        — 2023 대한민국 대표 브랜드 대상 수상 소감 中
+                                        {ko ? '— 2023 대한민국 대표 브랜드 대상 수상 소감 中' : '— Excerpt from 2023 Korea Representative Brand Grand Prize acceptance speech'}
                                     </p>
                                 </div>
                             </div>
@@ -490,13 +522,15 @@ export default function OrganizationPage() {
                                     </div>
                                     <div className="flex-1 text-center md:text-left">
                                         <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-2">
-                                            황태손 이 원 전하
+                                            {ko ? '황태손 이 원 전하' : 'HRH Crown Prince Lee Won'}
                                         </h2>
-                                        <p className="text-[#d4af37] text-lg mb-1">대한제국왕실 제5대 수장</p>
+                                        <p className="text-[#d4af37] text-lg mb-1">{ko ? '대한제국왕실 제5대 수장' : '5th Head of the Korean Imperial Family'}</p>
                                         <p className="text-gray-500 text-sm mb-4">皇太子 李 源 殿下, 1962~</p>
                                         <GlassCard className="p-5 relative !bg-gradient-to-br !from-[#d4af37]/5 !to-transparent">
                                             <p className="text-gray-300 text-sm leading-relaxed">
-                                                고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손(황위계승 1순위)입니다. 왕실 문화유산을 세계적인 한류 콘텐츠로 만들어가고 있습니다.
+                                                {ko
+                                                    ? '고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손(황위계승 1순위)입니다. 왕실 문화유산을 세계적인 한류 콘텐츠로 만들어가고 있습니다.'
+                                                    : 'A great-grandson of Emperor Gojong and grandson of Prince Imperial Uichin, he was adopted in 2003 as heir to Crown Prince Yi Gu, becoming the imperial successor (first in line of succession). He is shaping royal cultural heritage into world-class Hallyu content.'}
                                             </p>
                                         </GlassCard>
                                     </div>
@@ -512,9 +546,9 @@ export default function OrganizationPage() {
                                                     <Shield className="w-5 h-5 text-[#d4af37]" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-white font-bold text-sm mb-1">신분 및 정통성</h4>
-                                                    <p className="text-[#d4af37]/50 text-xs mb-2">Identity & Legitimacy</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">대한제국왕실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손입니다.</p>
+                                                    <h4 className="text-white font-bold text-sm mb-1">{ko ? '신분 및 정통성' : 'Identity & Legitimacy'}</h4>
+                                                    <p className="text-[#d4af37]/50 text-xs mb-2">{ko ? 'Identity & Legitimacy' : '신분 및 정통성'}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{ko ? '대한제국왕실 제5대 수장. 고종황제의 증손이자 의친왕의 손자로, 2003년 이 구 황태손의 양자로 입적되어 왕실의 법통을 이은 황사손입니다.' : '5th Head of the Korean Imperial Family. As a great-grandson of Emperor Gojong and grandson of Prince Imperial Uichin, he was adopted in 2003 as heir to Crown Prince Yi Gu, continuing the imperial succession.'}</p>
                                                 </div>
                                             </div>
                                         </GlassCard>
@@ -524,9 +558,9 @@ export default function OrganizationPage() {
                                                     <Landmark className="w-5 h-5 text-[#d4af37]" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-white font-bold text-sm mb-1">제향 주관</h4>
-                                                    <p className="text-[#d4af37]/50 text-xs mb-2">Royal Rites & Ceremonies</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">황제기증보유자로서 유네스코 세계유산으로 등재된 종베대제와 사직대제, 환구대제의 초헌관으로 봉직하고 계십니다.</p>
+                                                    <h4 className="text-white font-bold text-sm mb-1">{ko ? '제향 주관' : 'Royal Rites & Ceremonies'}</h4>
+                                                    <p className="text-[#d4af37]/50 text-xs mb-2">{ko ? 'Royal Rites & Ceremonies' : '제향 주관'}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{ko ? '황제기증보유자로서 유네스코 세계유산으로 등재된 종베대제와 사직대제, 환구대제의 초헌관으로 봉직하고 계십니다.' : 'As an imperial-rite holder, he serves as the Chief Officiant (Choheongwan) at the Jongmyo Daeje, Sajik Daeje, and Hwangu Daeje — UNESCO Intangible Heritage rituals.'}</p>
                                                 </div>
                                             </div>
                                         </GlassCard>
@@ -536,9 +570,9 @@ export default function OrganizationPage() {
                                                     <Globe className="w-5 h-5 text-[#d4af37]" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-white font-bold text-sm mb-1">문화재 환수 활동</h4>
-                                                    <p className="text-[#d4af37]/50 text-xs mb-2">Cultural Heritage Restoration</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">해외로 유출된 왕실 문화재 환수에 매진하여, 명성황후의 화조도접선 등 국보급 문화재를 환수하는 성과를 거두었습니다.</p>
+                                                    <h4 className="text-white font-bold text-sm mb-1">{ko ? '문화재 환수 활동' : 'Cultural Heritage Restoration'}</h4>
+                                                    <p className="text-[#d4af37]/50 text-xs mb-2">{ko ? 'Cultural Heritage Restoration' : '문화재 환수 활동'}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{ko ? '해외로 유출된 왕실 문화재 환수에 매진하여, 명성황후의 화조도접선 등 국보급 문화재를 환수하는 성과를 거두었습니다.' : 'Devoted to repatriating royal artifacts taken overseas, he has secured the return of national-treasure-class works including Empress Myeongseong’s Hwajodo folding fan.'}</p>
                                                 </div>
                                             </div>
                                         </GlassCard>
@@ -548,9 +582,9 @@ export default function OrganizationPage() {
                                                     <GraduationCap className="w-5 h-5 text-[#d4af37]" />
                                                 </div>
                                                 <div>
-                                                    <h4 className="text-white font-bold text-sm mb-1">대외 교류 및 문화 사업</h4>
-                                                    <p className="text-[#d4af37]/50 text-xs mb-2">International Relations & Cultural Projects</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">인도네시아, 태국 등 해외 왕실과 교류하며, 2025년 세계왕실전통문화엑스포 개최를 추진하고 있습니다.</p>
+                                                    <h4 className="text-white font-bold text-sm mb-1">{ko ? '대외 교류 및 문화 사업' : 'International Relations & Cultural Projects'}</h4>
+                                                    <p className="text-[#d4af37]/50 text-xs mb-2">{ko ? 'International Relations & Cultural Projects' : '대외 교류 및 문화 사업'}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{ko ? '인도네시아, 태국 등 해외 왕실과 교류하며, 2025년 세계왕실전통문화엑스포 개최를 추진하고 있습니다.' : 'He maintains exchanges with foreign royal families in Indonesia, Thailand, and beyond, and is organizing the 2025 World Royal & Imperial Traditional Culture Expo.'}</p>
                                                 </div>
                                             </div>
                                         </GlassCard>
@@ -560,10 +594,19 @@ export default function OrganizationPage() {
                                 {/* Academic Activity Highlight */}
                                 <div className="bg-gradient-to-r from-[#120e26] via-[#1a1442] to-[#120e26] rounded-xl p-6 border border-white/10 text-center mb-8">
                                     <GraduationCap className="w-6 h-6 text-[#d4af37] mx-auto mb-3" />
-                                    <h4 className="text-white font-bold mb-2">조선 대한 왕실 문화 계승 발전 세계화</h4>
+                                    <h4 className="text-white font-bold mb-2">{ko ? '조선 대한 왕실 문화 계승 발전 세계화' : 'Carrying Joseon & Korean Imperial Culture Forward to the World'}</h4>
                                     <p className="text-gray-300 text-sm">
-                                        미국 컴럼비아대학교 강연 등을 통해 조선 대한 왕실 문화의 계승 발전과 세계화를 위해 노력하고 계시며,
-                                        <span className="text-white font-semibold"> 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신</span>하고 계십니다.
+                                        {ko ? (
+                                            <>
+                                                미국 컴럼비아대학교 강연 등을 통해 조선 대한 왕실 문화의 계승 발전과 세계화를 위해 노력하고 계시며,
+                                                <span className="text-white font-semibold"> 한국의 궁중문화를 세계적인 문화유산으로 알리는 데 헌신</span>하고 계십니다.
+                                            </>
+                                        ) : (
+                                            <>
+                                                Through engagements such as lectures at Columbia University, he works to advance and globalize Joseon and Korean imperial culture,
+                                                <span className="text-white font-semibold"> dedicating himself to bringing Korea’s court culture forward as world-class cultural heritage</span>.
+                                            </>
+                                        )}
                                     </p>
                                 </div>
 
@@ -574,7 +617,7 @@ export default function OrganizationPage() {
                                         className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-sm font-medium hover:bg-[#d4af37]/20 transition-colors"
                                         onClick={() => setShowChancellorModal(false)}
                                     >
-                                        황태손 소개 페이지 바로가기 <ExternalLink className="w-4 h-4" />
+                                        {ko ? '황태손 소개 페이지 바로가기' : 'Visit Crown Prince Profile Page'} <ExternalLink className="w-4 h-4" />
                                     </Link>
                                 </div>
                             </div>

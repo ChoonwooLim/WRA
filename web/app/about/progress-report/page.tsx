@@ -2,6 +2,7 @@
 
 import { HeroBanner } from '@/components/shared/HeroBanner';
 import { SectionHeader } from '@/components/shared/SectionHeader';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 import { motion } from 'framer-motion';
 import {
     Landmark,
@@ -23,13 +24,11 @@ type Milestone = {
     icon: React.ReactNode;
 };
 
-const milestones: Milestone[] = [
+const milestonesKo: Milestone[] = [
     {
         year: '1990',
         title: '「대중음악의 산업화」 발표',
-        points: [
-            '문화산업의 경제적 가치 및 산업화 방향 국내 최초 제시',
-        ],
+        points: ['문화산업의 경제적 가치 및 산업화 방향 국내 최초 제시'],
         icon: <Rocket className="w-6 h-6" />,
     },
     {
@@ -45,10 +44,7 @@ const milestones: Milestone[] = [
     {
         year: '2011. 10',
         title: '한국문화창조 아카데미 1기 개강',
-        points: [
-            '한국학연구소 주최',
-            '인적자원개발(HRD) 및 한국형 인재육성 체계 구축',
-        ],
+        points: ['한국학연구소 주최', '인적자원개발(HRD) 및 한국형 인재육성 체계 구축'],
         icon: <GraduationCap className="w-6 h-6" />,
     },
     {
@@ -119,12 +115,106 @@ const milestones: Milestone[] = [
     },
 ];
 
+const milestonesEn: Milestone[] = [
+    {
+        year: '1990',
+        title: 'Publication of “The Industrialization of Popular Music”',
+        points: ['First Korean proposal to articulate the economic value of the cultural industry and a roadmap for its industrialization'],
+        icon: <Rocket className="w-6 h-6" />,
+    },
+    {
+        year: '1995',
+        title: 'Korean Entrepreneurship & Leadership Research',
+        points: [
+            'Research on Korean entrepreneurial spirit and global leadership',
+            'Joint research with the Korea Small Business Institute — discovering women’s startup ideas from advanced economies and crafting commercialization strategies for women’s job creation',
+            'Developing Korean-style models for overseas new-business ventures',
+        ],
+        icon: <Landmark className="w-6 h-6" />,
+    },
+    {
+        year: 'Oct 2011',
+        title: 'Inaugural Class of the Korea Culture Creation Academy',
+        points: ['Hosted by the Institute of Korean Studies', 'Establishing HRD and Korean-style talent development systems'],
+        icon: <GraduationCap className="w-6 h-6" />,
+    },
+    {
+        year: 'Nov 2015',
+        title: 'Founding & Opening of the Korea Culture Creation School',
+        points: [
+            '“Culture within people, people within culture.”',
+            'Embracing the cultural DNA of a great Korea and a great Korean people',
+            'Aspiring to be a hub that establishes Korean identity and shares Hallyu culture with the world',
+        ],
+        icon: <Flag className="w-6 h-6" />,
+    },
+    {
+        year: 'Vision',
+        title: 'A Vision for the Future',
+        points: [
+            'Declaring the era of “Parting with Two Centuries of the Familiar”',
+            'Creation · Job-creation · Entrepreneurship — Self-Employment',
+            'Global Impact Startups — cultivating private one-person unicorns ($1B)',
+            'In the AGI era that transcends all human capabilities — a vision for a quiet revolution of questions (Reading + Writing)',
+            'Korea–ASEAN tour kickoff — lecture at Polytechnic College in Concepción, Iloilo, Philippines (Topic: Korea’s creative DNA and BTS)',
+            'Developing Korean-style humanities — Geungjeong & Useum character contest / Philosophy Village / “The Mind-Study Journey of Geungjeong & Useum” (reflection + introspection + awakening) / “Dreams are gifts you give yourself by making them come true.”',
+            'AI Brain Health Research Center — neurofeedback-based / brain-science meditation healing programs',
+        ],
+        icon: <Sparkles className="w-6 h-6" />,
+    },
+    {
+        year: 'Mar 2026  ·  2025–2030',
+        title: 'Project Hallyu Management — Korea’s Creation, Globalized from Within',
+        points: [
+            'Vision proclamation and inauguration of World Royal Academy & World Royal Heritage',
+            'Beyond a cultural power — Korea at the center of civilization',
+            'K-HUMAN national-brand strategy',
+            'Industrialization of K-Culture hybrid software',
+            'Building a tradition–technology fusion platform',
+            'K-Royal Heritage public-diplomacy governance — partnership network with global royal, imperial, and traditional-culture institutions',
+            'Global Youth K-New Leadership Program — integrated cultural and knowledge diplomacy projects',
+            'K-Royal Heritage academic–industrial collaboration',
+        ],
+        icon: <Globe className="w-6 h-6" />,
+    },
+    {
+        year: 'Jun 2026',
+        title: 'K-Royal Heritage EduPop',
+        points: [
+            'WRA core domains — Korean Studies · Korean Humanities · Korean Language (overseas HRD and Korean-style talent development)',
+            'K-Royal Heritage · K-Tourism & MICE',
+            'World Royal Heritage (exhibitions · tourism · international conferences · forums)',
+        ],
+        icon: <BookOpen className="w-6 h-6" />,
+    },
+    {
+        year: 'Nov 2026',
+        title: 'World Royal Library — U.S. Launch',
+        points: [
+            'Building the world’s first real-time automated MARC generation system',
+            'The World’s First Real-Time MARC Solution',
+            {
+                heading: 'E-CIP (Electronic Cataloging in Publication)',
+                items: [
+                    '~24 million bibliographic records across 7 countries',
+                    'Real-time display of duplicate-copy status for library holdings',
+                    '90% of ~110 million academic papers and journals',
+                ],
+            },
+        ],
+        icon: <Library className="w-6 h-6" />,
+    },
+];
+
 export default function ProgressReportPage() {
+    const { language } = useLanguage();
+    const ko = language === 'ko';
+    const milestones = ko ? milestonesKo : milestonesEn;
     return (
         <div className="bg-[#050510] min-h-screen">
             <HeroBanner
-                title="한국문화창조학교 및 세계왕립아카데미 추진 경과보고"
-                subtitle="Progress Report — Korea Culture Creation School & World Royal Academy"
+                title={ko ? '한국문화창조학교 및 세계왕립아카데미 추진 경과보고' : 'Progress Report — Korea Culture Creation School & World Royal Academy'}
+                subtitle={ko ? 'Progress Report — Korea Culture Creation School & World Royal Academy' : '한국문화창조학교 및 세계왕립아카데미 추진 경과보고'}
             />
 
             <section className="py-20 relative z-10">
@@ -136,18 +226,18 @@ export default function ProgressReportPage() {
                             <h3 className="text-[#d4af37] text-sm uppercase tracking-[0.4em] font-semibold">Founder</h3>
                         </div>
                         <ul className="space-y-2 text-[#fceda6] font-serif text-lg md:text-2xl leading-snug mb-5">
-                            <li>한국문화창조학교 대표 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
-                            <li>세계왕립아카데미 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
-                            <li>세계왕립헤리티지 <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">(창설자)</span></li>
+                            <li>{ko ? '한국문화창조학교 대표' : 'President, Korea Culture Creation School'} <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">{ko ? '(창설자)' : '(Founder)'}</span></li>
+                            <li>{ko ? '세계왕립아카데미' : 'World Royal Academy'} <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">{ko ? '(창설자)' : '(Founder)'}</span></li>
+                            <li>{ko ? '세계왕립헤리티지' : 'World Royal Heritage'} <span className="text-[#d4af37]/80 text-base md:text-lg ml-1">{ko ? '(창설자)' : '(Founder)'}</span></li>
                         </ul>
                         <div className="flex items-baseline gap-3 pt-4 border-t border-[#d4af37]/20">
-                            <span className="text-[#d4af37] text-sm md:text-base tracking-widest">설립 위원장</span>
-                            <span className="text-[#fceda6] text-2xl md:text-3xl font-bold tracking-[0.2em]">이 호 종</span>
+                            <span className="text-[#d4af37] text-sm md:text-base tracking-widest">{ko ? '설립 위원장' : 'Founding Chairman'}</span>
+                            <span className="text-[#fceda6] text-2xl md:text-3xl font-bold tracking-[0.2em]">{ko ? '이 호 종' : 'Lee Ho-jong'}</span>
                         </div>
                     </div>
 
                     <SectionHeader
-                        title="추진 연혁"
+                        title={ko ? '추진 연혁' : 'Key Milestones'}
                         subtitle="Key Milestones"
                     />
 
