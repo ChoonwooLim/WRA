@@ -11,11 +11,12 @@ const bookImages = [
 ];
 
 export default function BooksGalleryPage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
+    const ko = language === 'ko';
 
     // Safely fallback if dict hasn't updated yet or if keys are missing from older dicts
-    const title = dict.pages?.education?.textbooksTitle || "발간 서적 및 교재";
-    const desc = dict.pages?.education?.textbooksDesc || "";
+    const title = dict.pages?.education?.textbooksTitle || (ko ? '발간 서적 및 교재' : 'Published Books & Materials');
+    const desc = dict.pages?.education?.textbooksDesc || '';
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -61,25 +62,39 @@ export default function BooksGalleryPage() {
                         >
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="h-[1px] w-8 bg-[#d4af37]" />
-                                <h3 className="text-[#d4af37] text-sm uppercase tracking-[0.4em] font-semibold">대표 서적 (Featured)</h3>
+                                <h3 className="text-[#d4af37] text-sm uppercase tracking-[0.4em] font-semibold">{ko ? '대표 서적 (Featured)' : 'Featured'}</h3>
                             </div>
 
                             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-[#fceda6] mb-6 leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                                세계왕립아카데미 <br className="hidden md:block" />철학과 비전의 정수
+                                {ko ? (
+                                    <>세계왕립아카데미 <br className="hidden md:block" />철학과 비전의 정수</>
+                                ) : (
+                                    <>World Royal Academy<br className="hidden md:block" /> — The Essence of Philosophy & Vision</>
+                                )}
                             </h2>
 
                             <p className="text-gray-300 text-base md:text-lg leading-[1.8] mb-10 font-light max-w-xl">
-                                "한국의 찬란한 문화 유산과 현대 경영 철학이 만나는 기념비적인 저작"<br /><br />
-                                시대를 초월하는 지혜와 글로벌 리더십의 본질을 담아내어,<br />
-                                가장 한국적인 가치를 전 세계에 널리 알리고자 합니다.
+                                {ko ? (
+                                    <>
+                                        &ldquo;한국의 찬란한 문화 유산과 현대 경영 철학이 만나는 기념비적인 저작&rdquo;<br /><br />
+                                        시대를 초월하는 지혜와 글로벌 리더십의 본질을 담아내어,<br />
+                                        가장 한국적인 가치를 전 세계에 널리 알리고자 합니다.
+                                    </>
+                                ) : (
+                                    <>
+                                        &ldquo;A landmark work where Korea&rsquo;s brilliant cultural heritage meets modern management philosophy.&rdquo;<br /><br />
+                                        Capturing timeless wisdom and the essence of global leadership,<br />
+                                        we aim to share the most distinctly Korean values with the world.
+                                    </>
+                                )}
                             </p>
 
                             <div className="flex gap-4">
                                 <button className="px-8 py-3.5 bg-gradient-to-r from-[#d4af37] to-[#e6c875] text-black hover:scale-105 transition-transform duration-300 rounded-full text-sm tracking-widest uppercase font-bold shadow-[0_4px_20px_rgba(212,175,55,0.4)]">
-                                    도서 상세정보
+                                    {ko ? '도서 상세정보' : 'Book Details'}
                                 </button>
                                 <button className="px-8 py-3.5 bg-transparent border border-[#d4af37]/60 text-[#d4af37] hover:bg-[#d4af37]/10 transition-colors duration-300 rounded-full text-sm tracking-widest uppercase font-medium">
-                                    목차 보기
+                                    {ko ? '목차 보기' : 'Table of Contents'}
                                 </button>
                             </div>
                         </motion.div>

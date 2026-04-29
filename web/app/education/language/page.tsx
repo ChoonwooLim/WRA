@@ -10,8 +10,9 @@ import { motion } from 'framer-motion';
 import { KoreanEducationInfographics } from '@/components/education/KoreanEducationInfographics';
 
 export default function LanguagePage() {
-    const { dict } = useLanguage();
+    const { dict, language } = useLanguage();
     const d = dict.pages.education;
+    const ko = language === 'ko';
 
     return (
         <div className="bg-[#050510] min-h-screen">
@@ -56,7 +57,9 @@ export default function LanguagePage() {
 
 
                             <p className="text-white text-xl md:text-2xl font-serif tracking-wide leading-relaxed font-medium">
-                                "천지(天地)의 소리가 당신의 언어가 되는 순간,"
+                                {ko
+                                    ? <>&ldquo;천지(天地)의 소리가 당신의 언어가 되는 순간,&rdquo;</>
+                                    : <>&ldquo;The moment the sound of Heaven and Earth (天地) becomes your tongue,&rdquo;</>}
                             </p>
                         </motion.div>
 
@@ -67,10 +70,21 @@ export default function LanguagePage() {
                             transition={{ duration: 0.8, delay: 0.5 }}
                             className="text-gray-300 font-serif text-base md:text-[17px] leading-[2.2] space-y-1 opacity-80"
                         >
-                            <p>: 태초에 소리가 있었고, 그 소리는 자연의 이치였습니다.</p>
-                            <p>1446년, 세종은 바람의 소리와 대지의 울림을 글자로 빚어냈습니다.</p>
-                            <p>자연을 닮은 가장 완벽한 문자,</p>
-                            <p>이제 세계왕립아카데미에서 그 위대한 유산의 주인이 되십시오.</p>
+                            {ko ? (
+                                <>
+                                    <p>: 태초에 소리가 있었고, 그 소리는 자연의 이치였습니다.</p>
+                                    <p>1446년, 세종은 바람의 소리와 대지의 울림을 글자로 빚어냈습니다.</p>
+                                    <p>자연을 닮은 가장 완벽한 문자,</p>
+                                    <p>이제 세계왕립아카데미에서 그 위대한 유산의 주인이 되십시오.</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p>: In the beginning there was sound, and that sound was the order of nature.</p>
+                                    <p>In 1446, King Sejong shaped the voice of the wind and the resonance of the earth into letters.</p>
+                                    <p>The most perfect script — one that mirrors nature itself.</p>
+                                    <p>Now, at World Royal Academy, become an heir to this magnificent legacy.</p>
+                                </>
+                            )}
                         </motion.div>
                     </div>
                 </div>
