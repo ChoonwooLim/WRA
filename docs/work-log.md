@@ -100,3 +100,99 @@
 - `/admin/subscribers` 에러 배너 노출 fix 덕분에 향후 유사한 403/세션 만료 이슈가 발생해도 사용자가 원인을 바로 식별 가능.
 
 ---
+
+## 2026-04-28
+
+### 작업 요약
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| feat | 신광철 작가 프로필 책 갤러리 갱신 (황금 액자 + 4열 그리드, 신규 표지 36점) | 완료 |
+| chore | 작업 트리 일괄 커밋 (로고/원본 이미지/크라운·타이틀 자산, 페이지 수정, .claude 로컬 설정) | 완료 |
+
+### 세부 내용
+
+- **1f11a37** `feat: 신광철 작가 프로필 책 갤러리 갱신 (황금 액자 + 4열 그리드)`
+  - 신규 책 표지 36점 추가 (`web/public/images/books/sinkwangchul/`, `그림1`~`그림38` 4·34 누락)
+  - 그리드 레이아웃 4열(데스크탑)로 변경, 가로 우선 정렬 (CSS columns → grid)
+  - 황금 그라데이션 액자(프레임) + 매트지 + floor reflection 호버 효과
+  - 모든 표지가 동일한 3:4 액자 안에서 비율 유지하며 통일된 크기로 표시 (`object-contain`)
+- **e4d6a73** `chore: 작업 트리 일괄 커밋`
+  - 로고 자산 추가 (`Logo/`)
+  - 신광철 도서 원본 이미지 백업 (`image/`)
+  - WRA 크라운/타이틀 이미지 추가 (`web/public/images/wra-{crown,title-en,title-ko}.png`)
+  - about/organization, progress-report, HeroSection, Footer, Navbar 미커밋 변경 일괄 정리
+  - AI_WIKI.md, 실행 미리보기 HTML, 로컬 .claude 설정 포함
+
+---
+
+## 2026-04-29
+
+### 작업 요약
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| style | 히어로 한글 타이틀 80% 축소 + 흰색 렌더링 (CSS filter brightness(0) invert(1)) | 완료 |
+| feat | 히어로 한글 타이틀 색상 흐름 애니메이션 (CSS mask + 그라데이션 sweep + hue-rotate 사이클) | 완료 |
+| fix | 황태손 인사말 본문 '왕실' → '왕실, 황실' 통일 (한 4곳 + 영 4곳) | 완료 |
+| fix | 히어로 타이틀 언어 토글 무관하게 한글본 동일 표시 (글자 순서 보존) | 완료 |
+| feat (i18n) | 영문 모드 미번역 한글 일괄 번역 — 11개 페이지 (Navbar, certification, CEO 프로필, education 4종, warrant 2종, community 2종, about 2종, services/tours) | 부분완료 |
+
+### 세부 내용
+
+- **9c40738** `style: 히어로 한글 타이틀 80% 축소 + 흰색 렌더링`
+  - `Logo/세계왕립아카데미.png` → `web/public/images/wra-title-ko.png` 교체 (cache-busting `?v=3`)
+  - 너비 정렬: KO·EN 메인 둘 다 `w-[19/28.5/33.3]rem` 로 통일 (높이는 비율 자동)
+  - CSS filter `brightness(0) invert(1) drop-shadow(...)` 로 어두운 글자 → 순백 + 그림자
+- **730401f** `feat: 히어로 한글 타이틀 색상 흐름 애니메이션`
+  - `<motion.div>` + CSS `mask-image` 로 글자 모양만 추출
+  - `linear-gradient(90deg, white→fceda6→d4af37→fceda6→white)` + `background-size: 200%` + `repeat` 으로 무한 sweep
+  - `backgroundPosition: ['200% 0%', '0% 0%']` (좌→우, 6초 linear)
+  - `filter: hue-rotate(0→360deg)` 18초 사이클 추가 — 무지개 색 순환
+- **0574a1e** `fix: 황태손 인사말 '왕실' → '왕실, 황실' 통일`
+  - 한글 4곳: 역사적으로/국제 네트워크/협력 네트워크/이제 ~의 품격
+  - 영문 4곳: royal families → royal and imperial families 등 자연스러운 영문 변환
+  - 위원회 요청 반영 (이전 누락분)
+- **f08bc59** `fix: 히어로 타이틀 언어 무관하게 한글본과 동일하게 표시`
+  - 사용자 피드백: 글자 순서·구성을 한글본 기준으로 항상 표시
+  - 메인 타이틀 (세계왕립아카데미) + 자막 (WORLD ROYAL ACADEMY) 둘 다 언어 무관 고정
+  - 미사용 `language` destructuring 정리
+
+#### i18n 대규모 번역 작업 (6 커밋)
+
+- **e6f3208** `i18n: 영문 모드 미번역 한글 일괄 번역 (Navbar/Certification/CEO)`
+  - Navbar: `지갑 로딩...` → `Loading...` (Web3 ConnectButton 비-React 컨텍스트)
+  - certification 페이지: 철학 인용구, 혜택 카드 3종, CEO 필수교육 카드 3종, 로열 헤리티지 파트너스
+  - CEO 프로필 (`about/ceo/`): 인트로/핵심역량 3종/B2B 클라이언트 4종/주요 프로젝트/한국일보·국민일보 기사/어워드/타임라인 5종/글로벌 인사이트/클로징 인용구
+  - 인라인 `ko ? KO : EN` 패턴 (CEO 페이지 기존 패턴 확장)
+- **f9bf2ff** `i18n: 교육 페이지 번역 (literature/culture/books/language)`
+  - literature 페이지: 시·철학 본문 의역 — 데이터 배열 KO/EN 분리(curriculumSteps/expectedEffects/programFormats), AI시대 인문학 시구, "가장 먼 거리"·"인문학이란" 카드, 프로그램 목표/운영방식/차별성/기대효과/대상, 책 글쓰기 12단계
+  - culture 페이지: literature 와 동일 콘텐츠 → 번역된 literature 파일 복사 (BOM 보존)
+  - books 페이지: 대표 서적 헤더, 인용구, CTA 버튼
+  - language 페이지: 훈민정음 시구 영문판
+- **b8aa0d2** `i18n: warrant 랜딩/교육·커뮤니티 contact·newsletter 영문화`
+  - warrant: 4영역 카드 (교육/투어/멤버십/컨설팅) + 히어로/섹션 헤더
+  - warrant/education: 한국학/한국인문학/한국어 프로그램 카드 + 자세히 보기 라벨
+  - community/contact: 라벨, 에러 메시지, 전송 완료 상태, 제출 버튼
+  - community/newsletter: 구독 결과 메시지(이미/재구독/신규), 동의 문구, 로딩/빈 상태
+- **db42378** `i18n: about-progress-report / about-organization 영문화`
+  - progress-report: 8개 마일스톤 KO/EN 분기(1990 대중음악 산업화 ~ 2026.11 세계왕립도서관)
+  - organization: 조직도 4계층, 황태손/CEO/원장 카드, 4개 공통 협력 본부, CEO 모달, 황태손 모달 4가지 활동 영역
+  - 황실 호칭 학술 영문 표기 (Empress Myeongseong, Jongmyo Daeje, Crown Prince Yi Gu 등)
+- **b4acebb** `i18n: services/tours 1차`
+  - palaceTours/ceremonyTours/museumTours: KO/EN 배열 분리 (5궁 + 3제향 + 6박물관)
+  - 섹션 헤더: 3대 제향 / 왕릉제향 / 5대궁 투어 / 박물관 투어 + 부제
+  - 왕릉 4가지 특징 (풍수 합일 / 공간 철학 / 의궤 기록 / 살아있는 제례) KO/EN 분기
+  - 능역 콜랩스 라벨 (제향일 안내, 일시/장소/시간, '기'→'tombs')
+- **791bbcf** `i18n: services/tours palaceData 영문판`
+  - 587줄 추가 — 15개 항목 모달 본문 영문 의역
+  - 5대궁 + 5대궁 안내도 + 3대 제향 (preIntro/schedule 포함) + 6박물관
+  - 모든 갤러리 캡션 KO/EN 분기
+
+### 미완료 (다음 세션)
+
+- `services/tours` 모달 UI 라벨 (이미지 갤러리 네비게이션 등)
+- `warrant/tours` 와 `services/tours` 동기화 (warrant/tours 는 UNESCO 섹션 추가됨)
+- 사용자 요청: "이섹션까지만하고 멈춰" — palaceData EN 작성 완료 후 일시 중단 상태
+
+---
