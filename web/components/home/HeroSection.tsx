@@ -150,9 +150,12 @@ export function HeroSection() {
                             />
                         ) : (
                             <img
-                                src="/images/wra-title-ko.png?v=2"
+                                src="/images/wra-title-ko.png?v=3"
                                 alt="세계왕립아카데미"
-                                className="h-16 md:h-24 lg:h-28 w-auto object-contain"
+                                className="h-[3.2rem] md:h-[4.8rem] lg:h-[5.6rem] w-auto object-contain"
+                                style={{
+                                    filter: 'brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.55))',
+                                }}
                             />
                         )}
                     </motion.div>
