@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { ArrowLeft, Edit, Trash2, Eye, Clock, User, MessageSquareReply, Check, X } from 'lucide-react';
 import Link from 'next/link';
+import { AttachmentList, AttachmentItem } from '@/components/editor/AttachmentList';
+import '@/components/editor/editor.css';
 
 interface PostData {
     id: string;
@@ -19,6 +21,7 @@ interface PostData {
     answererId: string | null;
     answeredAt: string | null;
     authorId: string;
+    attachments?: AttachmentItem[] | null;
     createdAt: string;
     updatedAt: string;
     author: { id: string; name: string | null; email: string | null; role: string };
@@ -62,9 +65,8 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
         'gallery': '/community/gallery',
     };
 
-    // @ts-ignore
     const isAuthor = session?.user?.email === post?.author?.email;
-    // @ts-ignore
+    // @ts-expect-error - role is augmented on session.user
     const isAdmin = session?.user?.role === 'admin' || session?.user?.role === 'sub-admin';
     const canEdit = isAuthor || isAdmin;
 
@@ -207,9 +209,14 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
 
                 {/* Post Content */}
                 <div
-                    className="min-h-[200px] text-gray-300 leading-relaxed whitespace-pre-wrap mb-8 prose prose-invert max-w-none"
+                    className="rich-content-view min-h-[200px] text-gray-300 leading-relaxed mb-4"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
+
+                {/* Attachments */}
+                {Array.isArray(post.attachments) && post.attachments.length > 0 && (
+                    <AttachmentList attachments={post.attachments} />
+                )}
 
                 {/* Q&A Answer Section */}
                 {post.board === 'qna' && (
@@ -243,7 +250,7 @@ export default function PostDetailPage({ params }: { params: Promise<{ id: strin
                                     )}
                                 </div>
                                 <div
-                                    className="text-gray-200 leading-relaxed whitespace-pre-wrap prose prose-invert max-w-none"
+                                    className="rich-content-view text-gray-200 leading-relaxed"
                                     dangerouslySetInnerHTML={{ __html: post.answerContent }}
                                 />
                             </div>

@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { ArrowLeft, Send, Upload, Loader2, Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
+import { RichEditor } from '@/components/editor/RichEditor';
+import { AttachmentUploader, Attachment } from '@/components/editor/AttachmentUploader';
 
 const boardOptions = [
     { value: 'notices', label: '📢 공지사항', adminOnly: true },
@@ -20,48 +22,6 @@ const categoryOptions: Record<string, string[]> = {
     'free-board': [],
 };
 
-const NEWSLETTER_TEMPLATES = {
-    standard: `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; padding: 20px;">
-    <h2 style="color: #0d0d20; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px;">[이곳에 뉴스레터 소제목을 입력하세요]</h2>
-    <p style="font-size: 16px;">여기에 뉴스레터 전문 텍스트를 입력해주세요.</p>
-    <p style="font-size: 16px;">WRA의 최신 소식과 공지사항을 자유롭게 작성할 수 있는 기본형 템플릿입니다.</p>
-</div>`,
-    showcase: `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-    <div style="width: 100%; height: 300px; background-color: #f3f4f6; position: relative;">
-        <!-- 이미지 주소를 src="여기에" 넣어주세요 -->
-        <img src="https://via.placeholder.com/800x300?text=Header+Image+Here" alt="Header Image" style="width: 100%; height: 100%; object-fit: cover;" />
-    </div>
-    <div style="padding: 40px; background-color: #ffffff;">
-        <h2 style="color: #0d0d20; font-size: 28px; margin-top: 0; margin-bottom: 20px; font-weight: bold;">[메인 쇼케이스 제목을 입력하세요]</h2>
-        <h3 style="color: #d4af37; font-size: 18px; margin-top: 0; margin-bottom: 30px;">서브 타이틀 또는 강조 문구</h3>
-        <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
-            중요한 행사나 멤버십 도입, 혹은 주요 성과를 소개하기 좋은 프리미엄 이미지 배너형 템플릿입니다. 이 텍스트를 지우고 내용을 입력해주세요. 첫인상을 강력하게 남길 수 있습니다.
-        </p>
-    </div>
-</div>`,
-    event: `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; background-color: #fafafa; padding: 40px; border-radius: 16px;">
-    <div style="text-align: center; margin-bottom: 40px;">
-        <span style="display: inline-block; padding: 6px 16px; background-color: #0d0d20; color: #d4af37; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">EVENT INVITATION</span>
-        <h2 style="color: #111827; font-size: 32px; margin: 0 0 16px 0;">[행사 또는 이벤트 제목]</h2>
-        <p style="font-size: 18px; color: #6b7280; max-width: 600px; margin: 0 auto;">여러분을 특별한 자리에 초대합니다. 행사 목적이나 간단한 소개를 여기에 적어주세요.</p>
-    </div>
-    
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); margin-bottom: 30px; border: 1px solid #f3f4f6;">
-        <h3 style="margin-top: 0; color: #0d0d20; font-size: 18px; border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px;">행사 개요 (Event Details)</h3>
-        <ul style="list-style-type: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 12px;"><strong>🗓️ 일시:</strong> 2026년 00월 00일 (요일) 00:00 AM</li>
-            <li style="margin-bottom: 12px;"><strong>📍 장소:</strong> [행사 장소명 및 주소 입력]</li>
-            <li style="margin-bottom: 12px;"><strong>👥 대상:</strong> [참석 대상자 기준 입력]</li>
-            <li style="margin-bottom: 0;"><strong>👗 드레스코드:</strong> 비즈니스 포멀 (예시)</li>
-        </ul>
-    </div>
-    
-    <div style="text-align: center;">
-        <a href="#" style="display: inline-block; background-color: #d4af37; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: bold; font-size: 16px;">참석 신청하기 (RSVP)</a>
-    </div>
-</div>`
-};
-
 function WriteForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -72,8 +32,9 @@ function WriteForm() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('');
+    const [attachments, setAttachments] = useState<Attachment[]>([]);
 
-    // Template states
+    // Newsletter template states (kept for backwards compatibility)
     const [templateType, setTemplateType] = useState('standard');
     const [templateData, setTemplateData] = useState({
         imageUrl: '',
@@ -91,50 +52,78 @@ function WriteForm() {
     const [uploadingImage, setUploadingImage] = useState(false);
     const [error, setError] = useState('');
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNewsletterImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
-
-        // Validating file type
         if (!file.type.startsWith('image/')) {
             setError('이미지 파일만 업로드 가능합니다.');
             return;
         }
-
         setUploadingImage(true);
         setError('');
-
         const formData = new FormData();
         formData.append('file', file);
-
         try {
-            const res = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
+            const res = await fetch('/api/upload', { method: 'POST', body: formData });
             const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || '업로드 실패');
-            }
-
+            if (!res.ok) throw new Error(data.error || '업로드 실패');
             setTemplateData(prev => ({ ...prev, imageUrl: data.url }));
-        } catch (err: any) {
+        } catch (err) {
             console.error('Error uploading image:', err);
-            setError(err.message || '이미지 업로드에 실패했습니다. 다시 시도해주세요.');
+            setError((err as Error).message || '이미지 업로드에 실패했습니다.');
         } finally {
             setUploadingImage(false);
         }
     };
 
-    // @ts-ignore
+    // @ts-expect-error - role is augmented on session.user
     const isAdmin = session?.user?.role === 'admin' || session?.user?.role === 'sub-admin';
+
+    const buildNewsletterContent = (): string => {
+        if (templateType === 'showcase') {
+            return `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+    <div style="width: 100%; height: 300px; background-color: #f3f4f6; position: relative;">
+        <img src="${templateData.imageUrl || 'https://via.placeholder.com/800x300?text=Header+Image+Here'}" alt="Header Image" style="width: 100%; height: 100%; object-fit: cover;" />
+    </div>
+    <div style="padding: 40px; background-color: #ffffff;">
+        <h2 style="color: #0d0d20; font-size: 28px; margin-top: 0; margin-bottom: 20px; font-weight: bold;">${templateData.mainTitle}</h2>
+        ${templateData.subtitle ? `<h3 style="color: #d4af37; font-size: 18px; margin-top: 0; margin-bottom: 30px;">${templateData.subtitle}</h3>` : ''}
+        <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px; white-space: pre-wrap;">${templateData.description}</p>
+    </div>
+</div>`;
+        }
+        if (templateType === 'event') {
+            return `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; background-color: #fafafa; padding: 40px; border-radius: 16px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+        <span style="display: inline-block; padding: 6px 16px; background-color: #0d0d20; color: #d4af37; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">EVENT INVITATION</span>
+        <h2 style="color: #111827; font-size: 32px; margin: 0 0 16px 0;">${templateData.mainTitle}</h2>
+        <p style="font-size: 18px; color: #6b7280; max-width: 600px; margin: 0 auto; white-space: pre-wrap;">${templateData.description}</p>
+    </div>
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); margin-bottom: 30px; border: 1px solid #f3f4f6;">
+        <h3 style="margin-top: 0; color: #0d0d20; font-size: 18px; border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px;">행사 개요 (Event Details)</h3>
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 12px;"><strong>🗓️ 일시:</strong> ${templateData.eventDate}</li>
+            <li style="margin-bottom: 12px;"><strong>📍 장소:</strong> ${templateData.location}</li>
+            <li style="margin-bottom: 12px;"><strong>👥 대상:</strong> ${templateData.audience}</li>
+            <li style="margin-bottom: 0;"><strong>👗 드레스코드:</strong> ${templateData.dressCode}</li>
+        </ul>
+    </div>
+    ${templateData.rsvpLink ? `<div style="text-align: center;">
+        <a href="${templateData.rsvpLink}" target="_blank" style="display: inline-block; background-color: #d4af37; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: bold; font-size: 16px;">참석 신청하기 (RSVP)</a>
+    </div>` : ''}
+</div>`;
+        }
+        if (templateType === 'full-image') {
+            return `<div style="text-align: center;">
+    <img src="${templateData.imageUrl}" alt="Newsletter Image" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
+</div>`;
+        }
+        return content;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Form Validation
         if (!title.trim()) {
             setError('게시판 제목을 입력해주세요.');
             return;
@@ -148,55 +137,24 @@ function WriteForm() {
                     setError('쇼케이스 제목과 본문 내용을 모두 입력해주세요.');
                     return;
                 }
-                finalContent = `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-    <div style="width: 100%; height: 300px; background-color: #f3f4f6; position: relative;">
-        <img src="${templateData.imageUrl || 'https://via.placeholder.com/800x300?text=Header+Image+Here'}" alt="Header Image" style="width: 100%; height: 100%; object-fit: cover;" />
-    </div>
-    <div style="padding: 40px; background-color: #ffffff;">
-        <h2 style="color: #0d0d20; font-size: 28px; margin-top: 0; margin-bottom: 20px; font-weight: bold;">${templateData.mainTitle}</h2>
-        ${templateData.subtitle ? `<h3 style="color: #d4af37; font-size: 18px; margin-top: 0; margin-bottom: 30px;">${templateData.subtitle}</h3>` : ''}
-        <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px; white-space: pre-wrap;">${templateData.description}</p>
-    </div>
-</div>`;
             } else if (templateType === 'event') {
                 if (!templateData.mainTitle || !templateData.eventDate) {
                     setError('행사 제목과 일시를 모두 입력해주세요.');
                     return;
                 }
-                finalContent = `<div style="font-family: 'Malgun Gothic', sans-serif; line-height: 1.8; color: #333; max-width: 800px; margin: 0 auto; background-color: #fafafa; padding: 40px; border-radius: 16px;">
-    <div style="text-align: center; margin-bottom: 40px;">
-        <span style="display: inline-block; padding: 6px 16px; background-color: #0d0d20; color: #d4af37; border-radius: 20px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">EVENT INVITATION</span>
-        <h2 style="color: #111827; font-size: 32px; margin: 0 0 16px 0;">${templateData.mainTitle}</h2>
-        <p style="font-size: 18px; color: #6b7280; max-width: 600px; margin: 0 auto; white-space: pre-wrap;">${templateData.description}</p>
-    </div>
-    
-    <div style="background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); margin-bottom: 30px; border: 1px solid #f3f4f6;">
-        <h3 style="margin-top: 0; color: #0d0d20; font-size: 18px; border-bottom: 1px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 20px;">행사 개요 (Event Details)</h3>
-        <ul style="list-style-type: none; padding: 0; margin: 0;">
-            <li style="margin-bottom: 12px;"><strong>🗓️ 일시:</strong> ${templateData.eventDate}</li>
-            <li style="margin-bottom: 12px;"><strong>📍 장소:</strong> ${templateData.location}</li>
-            <li style="margin-bottom: 12px;"><strong>👥 대상:</strong> ${templateData.audience}</li>
-            <li style="margin-bottom: 0;"><strong>👗 드레스코드:</strong> ${templateData.dressCode}</li>
-        </ul>
-    </div>
-    
-    ${templateData.rsvpLink ? `<div style="text-align: center;">
-        <a href="${templateData.rsvpLink}" target="_blank" style="display: inline-block; background-color: #d4af37; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-weight: bold; font-size: 16px;">참석 신청하기 (RSVP)</a>
-    </div>` : ''}
-</div>`;
             } else if (templateType === 'full-image') {
                 if (!templateData.imageUrl) {
                     setError('업로드된 이미지가 없습니다. 이미지를 첨부해주세요.');
                     return;
                 }
-                finalContent = `<div style="text-align: center;">
-    <img src="${templateData.imageUrl}" alt="Newsletter Image" style="max-width: 100%; height: auto; display: inline-block; border-radius: 8px;" />
-</div>`;
-            } else if (!finalContent.trim()) {
+            } else if (!finalContent.trim() || finalContent === '<p></p>') {
                 setError('본문 내용을 입력해주세요.');
                 return;
             }
-        } else if (!finalContent.trim()) {
+            if (templateType !== 'standard') {
+                finalContent = buildNewsletterContent();
+            }
+        } else if (!finalContent.trim() || finalContent === '<p></p>') {
             setError('내용을 입력해주세요.');
             return;
         }
@@ -208,7 +166,13 @@ function WriteForm() {
             const res = await fetch('/api/posts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ board, title, content: finalContent, category: category || undefined }),
+                body: JSON.stringify({
+                    board,
+                    title,
+                    content: finalContent,
+                    category: category || undefined,
+                    attachments,
+                }),
             });
 
             const data = await res.json();
@@ -218,6 +182,9 @@ function WriteForm() {
                 setSubmitting(false);
                 return;
             }
+
+            // Clear auto-saved draft on successful submit
+            try { localStorage.removeItem(`wra:draft:${board}`); } catch { }
 
             const boardPath = board === 'free-board' ? 'free-board' : board === 'qna' ? 'qna' : board === 'newsletter' ? 'newsletter' : 'notices';
             router.push(`/community/${boardPath}`);
@@ -235,6 +202,8 @@ function WriteForm() {
             </div>
         );
     }
+
+    const useRichEditor = !(board === 'newsletter' && templateType !== 'standard');
 
     return (
         <div className="board-container">
@@ -281,34 +250,21 @@ function WriteForm() {
                         <label className="block text-sm font-bold text-blue-400 mb-3">📰 뉴스레터 양식 선택</label>
                         <p className="text-xs text-gray-400 mb-4">원하시는 양식을 선택하시면 아래에 해당 양식을 채울 수 있는 빈칸 폼이 제공됩니다.</p>
                         <div className="flex flex-wrap gap-3">
-                            <button
-                                type="button"
-                                onClick={() => setTemplateType('standard')}
-                                className={`px-4 py-2 border rounded-lg text-sm transition-colors ${templateType === 'standard' ? 'bg-blue-500/20 border-blue-500/50 text-blue-300' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'}`}
-                            >
-                                📝 일반 에디터
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setTemplateType('showcase')}
-                                className={`px-4 py-2 border rounded-lg text-sm transition-colors ${templateType === 'showcase' ? 'bg-blue-500/20 border-blue-500/50 text-blue-300' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'}`}
-                            >
-                                🖼️ 쇼케이스 이미지형
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setTemplateType('event')}
-                                className={`px-4 py-2 border rounded-lg text-sm transition-colors ${templateType === 'event' ? 'bg-blue-500/20 border-blue-500/50 text-blue-300' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'}`}
-                            >
-                                📅 행사 안내 (RSVP)형
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setTemplateType('full-image')}
-                                className={`px-4 py-2 border rounded-lg text-sm transition-colors ${templateType === 'full-image' ? 'bg-blue-500/20 border-blue-500/50 text-blue-300' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'}`}
-                            >
-                                🖼️ 통이미지 (Full Image) 업로드형
-                            </button>
+                            {[
+                                { v: 'standard', label: '📝 일반 에디터 (리치 편집기)' },
+                                { v: 'showcase', label: '🖼️ 쇼케이스 이미지형' },
+                                { v: 'event', label: '📅 행사 안내 (RSVP)형' },
+                                { v: 'full-image', label: '🖼️ 통이미지 (Full Image) 업로드형' },
+                            ].map((opt) => (
+                                <button
+                                    key={opt.v}
+                                    type="button"
+                                    onClick={() => setTemplateType(opt.v)}
+                                    className={`px-4 py-2 border rounded-lg text-sm transition-colors ${templateType === opt.v ? 'bg-blue-500/20 border-blue-500/50 text-blue-300' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'}`}
+                                >
+                                    {opt.label}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 )}
@@ -340,7 +296,7 @@ function WriteForm() {
                     />
                 </div>
 
-                {board === 'newsletter' && templateType !== 'standard' ? (
+                {!useRichEditor ? (
                     <div className="space-y-4 border border-white/10 p-5 rounded-xl bg-white/5">
                         <h3 className="text-cyan-400 font-bold mb-4 border-b border-white/10 pb-2">기본 정보 (빈칸을 채워주세요)</h3>
 
@@ -375,7 +331,7 @@ function WriteForm() {
                                                 type="file"
                                                 accept="image/*"
                                                 className="hidden"
-                                                onChange={handleImageUpload}
+                                                onChange={handleNewsletterImageUpload}
                                                 disabled={uploadingImage}
                                             />
                                         </label>
@@ -392,12 +348,6 @@ function WriteForm() {
                                             />
                                         </div>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-2">
-                                        {templateType === 'full-image'
-                                            ? "미리 만들어두신 포스터나 세로형 통이미지를 첨부하시면 본문에 화면 꽉 차게 나타납니다."
-                                            : "직접 업로드하시거나, 기존 이미지의 웹 주소(URL)를 입력하셔도 됩니다."}
-                                    </p>
-
                                     {templateData.imageUrl && (
                                         <div className="mt-3 w-full max-h-96 rounded-lg border border-white/10 overflow-hidden relative bg-[#050510] flex justify-center">
                                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -493,16 +443,20 @@ function WriteForm() {
                     </div>
                 ) : (
                     <div>
-                        <label className="block text-sm text-gray-400 mb-2">내용 {board === 'newsletter' && '(일반 텍스트 위주)'}</label>
-                        <textarea
+                        <label className="block text-sm text-gray-400 mb-2">내용</label>
+                        <RichEditor
                             value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            placeholder="내용을 입력하세요"
-                            rows={12}
-                            className="w-full bg-[#0a0a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 resize-none"
+                            onChange={setContent}
+                            autoSaveKey={`wra:draft:${board}`}
+                            placeholder="내용을 입력하세요. 이미지는 드래그·붙여넣기·툴바 버튼으로 추가하실 수 있습니다."
                         />
                     </div>
                 )}
+
+                <div>
+                    <label className="block text-sm text-gray-400 mb-2">첨부파일</label>
+                    <AttachmentUploader value={attachments} onChange={setAttachments} />
+                </div>
 
                 <div className="flex justify-end gap-3">
                     <button

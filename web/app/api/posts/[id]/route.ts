@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { createNotification } from '@/lib/notifications';
+import { Prisma } from '@prisma/client';
 
 // GET /api/posts/[id] — get single post + increment views
 export async function GET(
@@ -65,15 +66,29 @@ export async function PUT(
         }
 
         const body = await req.json();
-        const { title, content, category, answered, answerContent } = body;
+        const { title, content, category, answered, answerContent, attachments } = body;
 
         const isAdmin = user.role === 'admin' || user.role === 'sub-admin';
 
-        const updateData: any = {};
+        const updateData: Prisma.PostUncheckedUpdateInput = {};
         if (title !== undefined) updateData.title = title;
         if (content !== undefined) updateData.content = content;
         if (category !== undefined) updateData.category = category;
         if (answered !== undefined) updateData.answered = answered;
+        if (attachments !== undefined) {
+            const sanitized = Array.isArray(attachments)
+                ? attachments
+                    .filter((a) => a && typeof a.url === 'string' && typeof a.name === 'string')
+                    .map((a) => ({
+                        name: String(a.name).slice(0, 256),
+                        url: String(a.url),
+                        size: Number(a.size) || 0,
+                        mimeType: typeof a.mimeType === 'string' ? a.mimeType : 'application/octet-stream',
+                    }))
+                    .slice(0, 20)
+                : [];
+            updateData.attachments = sanitized.length > 0 ? sanitized : Prisma.JsonNull;
+        }
 
         // Answer handling — admin/sub-admin only, QnA only
         let answerChanged = false;

@@ -65,6 +65,7 @@ model Post {
   answererId    String?
   answeredAt    DateTime?
   authorId      String
+  attachments   Json?     // Array of { name, url, size, mimeType } for downloadable files
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 

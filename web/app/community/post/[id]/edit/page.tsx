@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { ArrowLeft, Save } from 'lucide-react';
 import Link from 'next/link';
+import { RichEditor } from '@/components/editor/RichEditor';
+import { AttachmentUploader, Attachment } from '@/components/editor/AttachmentUploader';
 
 const categoryOptions: Record<string, string[]> = {
     notices: ['활동', '인증', '투어', '교육', '일반'],
@@ -21,6 +23,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
     const [content, setContent] = useState('');
     const [category, setCategory] = useState('');
     const [board, setBoard] = useState('');
+    const [attachments, setAttachments] = useState<Attachment[]>([]);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState('');
@@ -34,6 +37,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                     setContent(data.post.content);
                     setCategory(data.post.category || '');
                     setBoard(data.post.board);
+                    if (Array.isArray(data.post.attachments)) {
+                        setAttachments(data.post.attachments);
+                    }
                 }
                 setLoading(false);
             })
@@ -42,7 +48,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!title.trim() || !content.trim()) {
+        if (!title.trim() || !content.trim() || content === '<p></p>') {
             setError('제목과 내용을 모두 입력해주세요.');
             return;
         }
@@ -54,7 +60,12 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
             const res = await fetch(`/api/posts/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title, content, category: category || undefined }),
+                body: JSON.stringify({
+                    title,
+                    content,
+                    category: category || undefined,
+                    attachments,
+                }),
             });
 
             const data = await res.json();
@@ -110,7 +121,6 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Category (for notices only) */}
                     {categoryOptions[board]?.length > 0 && (
                         <div>
                             <label className="block text-sm text-gray-400 mb-2">카테고리</label>
@@ -127,7 +137,6 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                         </div>
                     )}
 
-                    {/* Title */}
                     <div>
                         <label className="block text-sm text-gray-400 mb-2">제목</label>
                         <input
@@ -138,18 +147,16 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                         />
                     </div>
 
-                    {/* Content */}
                     <div>
                         <label className="block text-sm text-gray-400 mb-2">내용</label>
-                        <textarea
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            rows={12}
-                            className="w-full bg-[#0a0a1a] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 resize-none"
-                        />
+                        <RichEditor value={content} onChange={setContent} />
                     </div>
 
-                    {/* Buttons */}
+                    <div>
+                        <label className="block text-sm text-gray-400 mb-2">첨부파일</label>
+                        <AttachmentUploader value={attachments} onChange={setAttachments} />
+                    </div>
+
                     <div className="flex justify-end gap-3">
                         <button
                             type="button"

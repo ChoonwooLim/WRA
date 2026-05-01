@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { createNotification, NotificationType } from '@/lib/notifications';
+import type { Prisma } from '@prisma/client';
 
 const BOARD_LABEL: Record<string, string> = {
     notices: '공지사항',
@@ -20,7 +21,7 @@ export async function GET(req: NextRequest) {
         const limit = parseInt(searchParams.get('limit') || '10');
         const skip = (page - 1) * limit;
 
-        const where: any = {};
+        const where: Prisma.PostWhereInput = {};
         if (board) where.board = board;
         if (search) {
             where.title = { contains: search, mode: 'insensitive' };
@@ -69,7 +70,7 @@ export async function POST(req: NextRequest) {
         }
 
         const body = await req.json();
-        const { board, title, content, category } = body;
+        const { board, title, content, category, attachments } = body;
 
         if (!board || !title || !content) {
             return NextResponse.json({ error: '제목과 내용을 모두 입력해주세요.' }, { status: 400 });
@@ -80,6 +81,18 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: '공지사항 및 뉴스레터는 관리자만 작성할 수 있습니다.' }, { status: 403 });
         }
 
+        const sanitizedAttachments = Array.isArray(attachments)
+            ? attachments
+                .filter((a) => a && typeof a.url === 'string' && typeof a.name === 'string')
+                .map((a) => ({
+                    name: String(a.name).slice(0, 256),
+                    url: String(a.url),
+                    size: Number(a.size) || 0,
+                    mimeType: typeof a.mimeType === 'string' ? a.mimeType : 'application/octet-stream',
+                }))
+                .slice(0, 20)
+            : [];
+
         const post = await prisma.post.create({
             data: {
                 board,
@@ -87,6 +100,7 @@ export async function POST(req: NextRequest) {
                 content,
                 category: category || null,
                 authorId: user.id,
+                attachments: sanitizedAttachments.length > 0 ? sanitizedAttachments : undefined,
             },
             include: {
                 author: {
