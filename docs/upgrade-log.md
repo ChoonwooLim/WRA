@@ -29,3 +29,11 @@
 | 2026-04-29 | 영문 모드 i18n — about-progress-report (8개 마일스톤) + about-organization (조직도 + 모달) | i18n | web/app/about/progress-report/page.tsx, web/app/about/organization/page.tsx |
 | 2026-04-29 | 영문 모드 i18n — services/tours 카드 데이터 + 섹션 헤더 + 왕릉 4가지 특징 | i18n | web/app/services/tours/page.tsx |
 | 2026-04-29 | 영문 모드 i18n — services/tours palaceData 영문판 (5궁 + 3제향 + 6박물관 + 안내도, 587줄 추가) | i18n | web/app/services/tours/page.tsx |
+| 2026-05-01 | 게시글 작성기 Tiptap v3 리치 에디터 도입 (StarterKit + Image + TextAlign + Color + Highlight + Table + Youtube) | 기능 추가 | web/components/editor/RichEditor.tsx, web/components/editor/EditorToolbar.tsx, web/components/editor/editor.css |
+| 2026-05-01 | 본문 이미지 인라인 삽입 — 드래그-드롭 / 클립보드 붙여넣기 / 파일선택 자동 업로드 | 기능 추가 | web/components/editor/RichEditor.tsx |
+| 2026-05-01 | 이미지 리사이즈 NodeView — 6핸들 드래그 + 25/50/75/100% 프리셋 + 좌·중·우 정렬 + 삭제, width/align 속성 HTML 직렬화 | 기능 추가 | web/components/editor/ResizableImage.tsx, web/components/editor/editor.css |
+| 2026-05-01 | 자동저장(localStorage 1.5초 debounce) + 복원 프롬프트 + 글자/단어 카운터 | UX 개선 | web/components/editor/RichEditor.tsx |
+| 2026-05-01 | 첨부파일 시스템 — 드래그-드롭 zone, XHR upload.progress 진행률, 다운로드 카드 그리드 (최대 10개 × 50MB) | 기능 추가 | web/components/editor/AttachmentUploader.tsx, web/components/editor/AttachmentList.tsx |
+| 2026-05-01 | Post.attachments JSONB 컬럼 + POST/PUT 라우트 검증·sanitize (max 20개) | DB·API | web/prisma/schema.prisma, web/prisma/migrations/20260501000000_add_post_attachments/migration.sql, web/app/api/posts/route.ts, web/app/api/posts/[id]/route.ts |
+| 2026-05-01 | /api/upload 권한 완화(관리자 → 로그인 사용자 전체) + 50MB 한도 + 원본 파일명 보존 | 인프라 | web/app/api/upload/route.ts |
+| 2026-05-01 | /api/uploads/[filename] MIME 매핑 30+ 확장자 (PDF/HWP/Office/ZIP/MP4 등) | 인프라 | web/app/api/uploads/[filename]/route.ts |

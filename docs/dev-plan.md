@@ -17,6 +17,7 @@
 | 9 | 뉴스레터 구독 시스템 (구독/해지/일괄발송/관리자 대시보드) | 완료 | 2026-04-20 |
 | 10 | wagmi RPC CORS 에러 제거 | 완료 | 2026-04-20 |
 | 11 | 관리자 알림 시스템 실DB 연동 (Notification 모델 + 이벤트 훅 + 관리자 페이지) | 완료 | 2026-04-20 |
+| 12 | 게시글 작성기 리치 에디터(Tiptap v3) + 이미지 리사이즈 + 첨부파일 시스템 | 완료 | 2026-05-01 |
 
 ## 기능 목록
 
@@ -35,3 +36,5 @@
 | 뉴스레터 일괄 발송 (관리자 posts 페이지 Send 버튼) | 완료 | - | Resend Batch 100통/chunk, List-Unsubscribe 헤더 |
 | 관리자 구독자 관리 (`/admin/subscribers`) | 완료 | - | 검색/상태필터/CSV/개별토글/일괄삭제 |
 | 관리자 알림 시스템 (`/admin/notifications` + `/api/admin/notifications`) | 완료 | - | Notification 모델, 회원가입/게시글/구독 이벤트 자동 적재, 필터 탭 5종 |
+| 게시글 리치 에디터 (`/community/write`, `/community/post/[id]/edit`) | 완료 | - | Tiptap v3 + 이미지 리사이즈 + 첨부파일 + 자동저장 + 4개 게시판 공통 적용 |
+| 첨부파일 (`Post.attachments` JSONB) | 완료 | - | 드래그-드롭 + XHR 진행률 + 50MB×10개 + 다운로드 카드 그리드 |

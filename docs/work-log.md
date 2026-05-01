@@ -196,3 +196,43 @@
 - 사용자 요청: "이섹션까지만하고 멈춰" — palaceData EN 작성 완료 후 일시 중단 상태
 
 ---
+
+## 2026-05-01
+
+### 작업 요약
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| feat | 게시글 작성기 대폭 확장 — Tiptap v3 리치 에디터 도입 | 완료 |
+| feat | 본문 이미지 드래그-드롭 / 클립보드 붙여넣기 / 파일선택 자동 업로드 + 인라인 삽입 | 완료 |
+| feat | 이미지 리사이즈 (6핸들 드래그 + 비율 프리셋 + 정렬 + 삭제) — 커스텀 NodeView | 완료 |
+| feat | YouTube/Vimeo URL 임베드, 표(컬럼 리사이즈), 코드블록, 14색 글자색, 8색 형광펜 | 완료 |
+| feat | 자동저장(localStorage 1.5초 debounce) + 복원 프롬프트 + 글자/단어 카운터 | 완료 |
+| feat | 첨부파일 시스템 — 드래그-드롭 zone + XHR 진행률 + 다운로드 카드 그리드 | 완료 |
+| feat | Post.attachments JSONB 컬럼 추가 (마이그레이션 + API 검증·sanitize) | 완료 |
+| fix | /api/upload 의 req.formData() 이중 호출 버그 → 바디 스트림 소진으로 500 응답 | 완료 |
+| feat | /api/uploads/[filename] MIME 매핑 30+ 확장자 (PDF/HWP/Office/ZIP/MP4 등) | 완료 |
+
+### 세부 내용
+
+- **cc74bfa** `feat(community): 게시글 작성기 대폭 확장 — Tiptap 리치 에디터 + 이미지 리사이즈 + 첨부파일`
+  - 새 컴포넌트 6종: `web/components/editor/{RichEditor,EditorToolbar,AttachmentUploader,AttachmentList,ResizableImage,editor.css}`
+  - Tiptap v3.22 + 17개 확장 의존성 추가 (StarterKit · Image · TextAlign · Color · Highlight · TextStyle · Placeholder · CharacterCount · Table×4 · Youtube · Underline)
+  - 이미지 리사이즈는 `TiptapImage.extend()` + `ReactNodeViewRenderer` 로 커스텀 NodeView 구현 — `width`(px/%)와 `align`(left/center/right) 속성을 HTML inline style 로 직렬화하여 게시글 상세에서도 동일하게 렌더
+  - 자동저장 키: `wra:draft:${board}` (게시판별 분리). 등록 성공 시 즉시 삭제
+  - 첨부파일은 `Post.attachments` JSONB 단일 필드에 `[{name,url,size,mimeType}]` 배열로 저장 (별도 테이블 미사용 — 단순화)
+  - 마이그레이션 `20260501000000_add_post_attachments` 신규 + DB 적용 완료
+  - `/api/upload` 핵심 버그 수정: `req.formData()` 를 한 번만 파싱해서 `Buffer` 로 들고 있다가 원격 프록시 시도 → 실패 시 같은 buffer 로 로컬 폴백 (이전엔 두 번 호출하여 두 번째가 throw → catch 블록에서 "Failed to process upload" 500 응답)
+  - 업로드 권한: 관리자 한정 → 로그인 사용자 전체 (Q&A·자유게시판도 첨부 가능하도록)
+  - 50MB 파일 한도, 원본 파일명 보존 (HTML5 `download` 속성으로 다운로드 시 원래 이름)
+  - `/api/uploads/[filename]` MIME 테이블 확장 — 이미지·문서·오피스·압축·AV 30+ 확장자
+  - 적용 화면: `/community/write`, `/community/post/[id]/edit`, `/community/post/[id]` (모든 게시판 공통, 뉴스레터 기존 템플릿 유지)
+  - 게시글 상세는 `.rich-content-view` CSS 클래스로 다크 테마 prose 스타일 적용
+
+### 미완료 / 운영 메모
+
+- 운영 배포 시 Render.com 빌드 단계에서 `prisma migrate deploy` 가 자동 실행되는지 확인 필요 (현 빌드 스크립트는 `prisma generate && next build`)
+- 첨부파일 보안: 로그인 사용자라면 누구나 업로드 가능 — 악성 파일 업로드 방어책(antivirus 스캔 등)은 별도 검토
+- 하이드레이션 미스매치 (Navbar Crown Prince ↔ 황태손 소개) 기존 이슈 — 이번 작업과 무관, 별도 티켓 권장
+
+---
