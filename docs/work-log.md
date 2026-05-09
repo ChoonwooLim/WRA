@@ -236,3 +236,26 @@
 - 하이드레이션 미스매치 (Navbar Crown Prince ↔ 황태손 소개) 기존 이슈 — 이번 작업과 무관, 별도 티켓 권장
 
 ---
+
+## 2026-05-10
+
+### 작업 요약
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| fix | 모바일 게시판(공지/Q&A/자유) — 6컬럼 테이블에서 제목이 한 글자씩 세로로 압축되던 문제 → 카드 리스트로 전환 | 완료 |
+| fix | services/tours · warrant/tours 모달 본문 — `text-justify` + `break-keep` 조합으로 모바일에서 글자간격이 극단 확장되던 문제 → 모바일 좌측정렬, 데스크톱은 양쪽정렬 유지 | 완료 |
+
+### 세부 내용
+
+- **b8188bf** `fix(mobile): 게시판 카드 레이아웃 + tours 모달 본문 좌측정렬`
+  - **게시판 카드 변환** (`web/app/globals.css`): `.board-table` 은 `notices` / `qna` / `free-board` 세 게시판이 공유. 데스크톱 6컬럼 테이블이 모바일 좁은 폭에서 제목 셀이 1글자 폭으로 압축되어 글자가 세로로 쌓이던 문제. `@media (max-width: 640px)` 추가 — `thead` 숨김, `tr` 을 카드(border + padding + bg)로 변환, 1행은 `#번호 + 카테고리/상태` 인라인 메타, 2행은 제목(1rem, 600, 흰색, `word-break: keep-all`), 3행은 작성자/날짜/조회수/(추천) 인라인 푸터. 자유게시판은 제목이 2번째 컬럼이지만 `td.post-title` 규칙이 `nth-child` 보다 뒤에 정의되어 우선 적용 (CSS specificity 동률 → 정의 순서)
+  - **tours 모달 정렬** (`web/app/services/tours/page.tsx:1428,1675` + `web/app/warrant/tours/page.tsx:989,1207`): `text-justify` + `break-keep` + `tracking-wide` 조합이 좁은 폭에서 한 단어가 한 줄을 차지할 때 양쪽 끝에 맞추려고 글자 사이 공백을 극단 확장 (스크린샷의 "글자가 띄엄띄엄 흩어진" 모양). 4 곳 모두 `text-justify` → `text-left md:text-justify` 로 변경. 데스크톱 양쪽정렬은 기존대로 유지
+
+### 운영 메모
+
+- 변경은 CSS-only + className 조정이라 빌드 영향 없음. Render.com 자동 배포 트리거됨
+- 데스크톱 (>640px) 시각 변화 없음. 모바일/태블릿(≤640px) 만 영향
+- 동일 패턴 (`.board-table` 공유 + `text-justify` 조합)이 다른 페이지에 새로 추가되면 같은 미디어쿼리 자동 적용됨
+
+---
