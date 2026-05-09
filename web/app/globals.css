@@ -349,3 +349,106 @@ body {
   background-color: #374151;
   color: #d1d5db;
 }
+
+/* ===================================================
+   Mobile board layout — convert table to card list
+   Used by: notices, qna, free-board (all share .board-table)
+   =================================================== */
+@media (max-width: 640px) {
+  .board-container {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+  .board-title {
+    font-size: 1.25rem;
+  }
+  .board-search {
+    max-width: none;
+  }
+
+  .board-table thead {
+    display: none;
+  }
+  .board-table,
+  .board-table tbody,
+  .board-table tr,
+  .board-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .board-table tbody tr {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    padding: 0.85rem 1rem;
+    background-color: rgba(255, 255, 255, 0.025);
+  }
+  .board-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .board-table td {
+    border: none !important;
+    padding: 0;
+    font-size: 0.825rem;
+    text-align: left !important;
+  }
+
+  /* 헤더 행: 번호 + 카테고리/상태 (인라인) */
+  .board-table td:first-child {
+    display: inline-block;
+    width: auto;
+    color: #6c757d;
+    font-size: 0.72rem;
+    margin-right: 0.5rem;
+  }
+  .board-table td:first-child::before {
+    content: "#";
+    margin-right: 1px;
+    opacity: 0.6;
+  }
+  .board-table td:nth-child(2) {
+    display: inline-block;
+    width: auto;
+  }
+
+  /* 제목 — 카드의 주요 텍스트 */
+  .board-table td.post-title {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    line-height: 1.45;
+    margin: 0.4rem 0 0.55rem;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  /* 푸터 메타: 작성자 / 날짜 / 조회수 / (추천)
+     자유게시판은 제목이 2번째라 3번째부터 메타. post-title 규칙이 뒤에 와서 제목은 영향 없음. */
+  .board-table td:nth-child(n+3) {
+    display: inline-block;
+    width: auto;
+    color: #6c757d;
+    font-size: 0.72rem;
+    margin-right: 0.85rem;
+  }
+  .board-table td:nth-child(n+3):last-child {
+    margin-right: 0;
+  }
+
+  /* 로딩/빈 상태는 colSpan 단일 셀 — 중앙정렬 유지 */
+  .board-table tbody tr td[colspan] {
+    display: block !important;
+    width: 100%;
+    text-align: center !important;
+    padding: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+  .board-table tbody tr td[colspan]::before {
+    content: none;
+  }
+}

@@ -986,7 +986,7 @@ export default function ToursPage() {
 
 
                                 {/* Features Accordion */}
-                                <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify break-keep mb-8">
+                                <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-left md:text-justify break-keep mb-8">
                                     {[
                                         {
                                             title: "자연을 섬기는 건축: 풍수와 합일",
@@ -1204,7 +1204,7 @@ export default function ToursPage() {
                                         </div>
 
                                         {/* Detailed Content API */}
-                                        <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-justify px-4 md:px-8 break-keep">
+                                        <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed md:leading-[1.8] tracking-wide text-left md:text-justify px-4 md:px-8 break-keep">
                                             {palaceData[selectedImage.title].sections.map((section: any, idx: number) => (
                                                 <div
                                                     key={idx}
