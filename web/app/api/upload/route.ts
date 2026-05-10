@@ -34,48 +34,13 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Buffer the file once so we can both proxy AND fall back to local if the remote fails.
         const buffer = Buffer.from(await file.arrayBuffer());
-        const responseMeta = {
-            name: file.name,
-            size: file.size,
-            mimeType: file.type || 'application/octet-stream',
-        };
-
-        // Try remote image server first if configured.
-        const imageServerUrl = process.env.IMAGE_SERVER_URL;
-        if (imageServerUrl) {
-            try {
-                const remoteFormData = new FormData();
-                remoteFormData.append(
-                    'file',
-                    new Blob([new Uint8Array(buffer)], { type: responseMeta.mimeType }),
-                    file.name
-                );
-
-                const res = await fetch(`${imageServerUrl}/api/upload`, {
-                    method: 'POST',
-                    body: remoteFormData,
-                    headers: { 'Cookie': req.headers.get('cookie') || '' },
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    return NextResponse.json({ ...data, ...responseMeta }, { status: 200 });
-                }
-                console.warn(
-                    `Remote upload to ${imageServerUrl} returned ${res.status}; falling back to local.`,
-                    await res.text().catch(() => '')
-                );
-            } catch (err) {
-                console.error('Remote upload threw; falling back to local:', err);
-            }
-        }
-
-        // Local fallback (or primary, when no IMAGE_SERVER_URL is set).
         const ext = sanitizeExt(file.name);
         const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}${ext}`;
 
+        // UPLOAD_DIR must point at the Render persistent disk in production
+        // (e.g. /var/data/uploads). Without it the container's ephemeral disk
+        // is used and files vanish on every redeploy.
         const uploadDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'public', 'uploads');
         try {
             await mkdir(uploadDir, { recursive: true });
@@ -87,7 +52,12 @@ export async function POST(req: NextRequest) {
         await writeFile(filepath, buffer);
 
         return NextResponse.json(
-            { url: `/api/uploads/${filename}`, ...responseMeta },
+            {
+                url: `/api/uploads/${filename}`,
+                name: file.name,
+                size: file.size,
+                mimeType: file.type || 'application/octet-stream',
+            },
             { status: 200 }
         );
     } catch (error) {

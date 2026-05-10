@@ -66,39 +66,20 @@ export async function GET(
     const uploadDir = process.env.UPLOAD_DIR || path.join(process.cwd(), 'public', 'uploads');
     const filepath = path.join(uploadDir, filename);
 
-    if (existsSync(filepath)) {
-        try {
-            const fileBuffer = await readFile(filepath);
-            const mimeType = mimeForFilename(filename);
-            return new NextResponse(fileBuffer as unknown as BodyInit, {
-                headers: {
-                    'Content-Type': mimeType,
-                    'Cache-Control': 'public, max-age=31536000, immutable',
-                },
-            });
-        } catch (error) {
-            console.error('Error reading local file:', error);
-        }
+    if (!existsSync(filepath)) {
+        return new NextResponse('File not found', { status: 404 });
     }
 
-    const imageServerUrl = process.env.IMAGE_SERVER_URL;
-    if (imageServerUrl) {
-        try {
-            const remoteUrl = `${imageServerUrl}/api/uploads/${filename}`;
-            const res = await fetch(remoteUrl);
-            if (res.ok) {
-                const buffer = await res.arrayBuffer();
-                return new NextResponse(Buffer.from(buffer) as unknown as BodyInit, {
-                    headers: {
-                        'Content-Type': res.headers.get('Content-Type') || mimeForFilename(filename),
-                        'Cache-Control': 'public, max-age=31536000, immutable',
-                    },
-                });
-            }
-        } catch (error) {
-            console.error('Error proxying from remote server:', error);
-        }
+    try {
+        const fileBuffer = await readFile(filepath);
+        return new NextResponse(fileBuffer as unknown as BodyInit, {
+            headers: {
+                'Content-Type': mimeForFilename(filename),
+                'Cache-Control': 'public, max-age=31536000, immutable',
+            },
+        });
+    } catch (error) {
+        console.error('Error reading local file:', error);
+        return new NextResponse('Internal error', { status: 500 });
     }
-
-    return new NextResponse('File not found', { status: 404 });
 }
