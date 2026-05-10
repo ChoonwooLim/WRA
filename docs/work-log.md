@@ -258,4 +258,38 @@
 - 데스크톱 (>640px) 시각 변화 없음. 모바일/태블릿(≤640px) 만 영향
 - 동일 패턴 (`.board-table` 공유 + `text-justify` 조합)이 다른 페이지에 새로 추가되면 같은 미디어쿼리 자동 적용됨
 
+### 추가 작업 — 이미지 영속화 인프라 (오후)
+
+| 카테고리 | 작업 내용 | 상태 |
+|----------|----------|------|
+| infra | Render.com Persistent Disk 부착 (`/var/data`, 1GB) + `UPLOAD_DIR=/var/data/uploads` 환경변수 설정 — 사용자 콘솔 작업 | 완료 |
+| refactor | `/api/upload` · `/api/uploads/[filename]` 의 `IMAGE_SERVER_URL` 원격 프록시/폴백 분기 제거 → Render 디스크 단일 경로로 단순화 | 완료 |
+| chore | 깨진 이미지 일괄 정리 임시 admin 라우트 추가 후 즉시 제거 (방침 변경) | 완료 |
+
+#### 배경
+
+운영 사이트(Render.com) 에서 다른 사용자가 작성한 게시글의 이미지가 모두 깨진 상태였음. 원인은 **Render Web Service 의 컨테이너 디스크가 휘발성(ephemeral)** 이라 매 배포·재시작마다 `web/public/uploads/` 의 파일이 사라진 것. DB 의 `<img src="/api/uploads/...">` 는 살아있고 실제 파일만 사라지는 패턴.
+
+#### 세부 내용
+
+- **0117c0b** `refactor(upload): IMAGE_SERVER_URL 원격 프록시 분기 제거 → Render 디스크 단일 경로`
+  - `wra.twinverse.org` 가 폐기되어 `IMAGE_SERVER_URL` 로 가는 원격 프록시/폴백 분기는 모두 죽은 코드
+  - `/api/upload`: 원격 fetch + cookie 전달 + 폴백 시도 제거. 항상 `UPLOAD_DIR` (없으면 `public/uploads`) 에 직접 저장. 71줄 삭제 / 22줄 추가
+  - `/api/uploads/[filename]`: 원격 프록시 폴백 제거. 파일 없으면 즉시 404
+  - `IMAGE_SERVER_URL` 환경변수는 더 이상 읽히지 않으므로 `.env` 및 Render 콘솔에서 제거 가능
+- **2f9d70c → f917b00** `chore(admin): 깨진 이미지 정리 임시 라우트 추가/제거`
+  - `POST /api/admin/cleanup-broken-images?mode=dry|apply` — admin 전용. 본문 깨진 `<img>` 를 placeholder 박스로 치환하고 `attachments` JSONB 배열의 깨진 항목을 제거하는 1회용 도구
+  - 사용자 결정: 자동 정리 대신 **관리자가 작성자에게 직접 재업로드 요청** → 도구 즉시 삭제 (운영 노출 방지)
+
+#### 결정 사항 / 운영 방침
+
+- **이미지 손실 게시글**: 자동 정리 안 함. 관리자가 작성자에게 재업로드 요청 (수동 운영)
+- **Render Disk 의존**: 이제 단일 인스턴스로 강제됨. 수평 확장이 필요해지면 외부 객체 스토리지(R2 / S3 / Supabase Storage)로 마이그레이션 필요
+- **재배포 시 짧은 502 정상**: Persistent Disk 부착 서비스는 zero-downtime deploy 깨짐. 매 deploy 1~3분 다운타임 가능 — 502 페이지가 잠깐 떠도 정상
+
+#### 미완료 / 후속
+
+- 운영 검증 권장: 새 글에 이미지 업로드 → Render Manual Deploy 한 번 더 → 이미지 살아있는지 확인 (실 사용자 신규 글로 자연스레 검증됨)
+- `IMAGE_SERVER_URL` 환경변수가 Render 콘솔에 아직 남아있을 가능성 — 코드는 안 읽지만 청소하면 깔끔
+
 ---
