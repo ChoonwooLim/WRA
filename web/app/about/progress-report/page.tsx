@@ -13,6 +13,7 @@ import {
     Globe,
     BookOpen,
     Library,
+    Palette,
 } from 'lucide-react';
 
 type Bullet = string | { heading: string; items: string[] };
@@ -87,12 +88,11 @@ const milestonesKo: Milestone[] = [
         icon: <Globe className="w-6 h-6" />,
     },
     {
-        year: '2026. 06',
-        title: 'K-로얄 헤리티지 에듀팝',
+        year: '2026. 07',
+        title: 'K-Edupop',
         points: [
-            '세계왕립아카데미 주요 분야 — 한국학 · 한국인문학 · 한국어 (해외 인적자원개발 및 한국형 인재육성)',
-            'K-로얄 헤리티지 · K-Tourism & MICE',
-            '세계왕립헤리티지 (전시 · 관광 · 국제회의 · 포럼)',
+            '세계왕립헤리티지 — MICE 산업 (전시 · 관광 · 국제회의 · 박람회)',
+            'K-HUMAN 아카데미 (한국어 · 한국인문학 · 한국학)',
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
@@ -112,6 +112,15 @@ const milestonesKo: Milestone[] = [
             },
         ],
         icon: <Library className="w-6 h-6" />,
+    },
+    {
+        year: '2027. 11',
+        title: '세계왕실문화엑스포',
+        points: [
+            '세계왕실문화엑스포 개최',
+            '세계왕실 비엔날레 & 인터렉티브 아트 전시',
+        ],
+        icon: <Palette className="w-6 h-6" />,
     },
 ];
 
@@ -178,12 +187,11 @@ const milestonesEn: Milestone[] = [
         icon: <Globe className="w-6 h-6" />,
     },
     {
-        year: 'Jun 2026',
-        title: 'K-Royal Heritage EduPop',
+        year: 'Jul 2026',
+        title: 'K-Edupop',
         points: [
-            'WRA core domains — Korean Studies · Korean Humanities · Korean Language (overseas HRD and Korean-style talent development)',
-            'K-Royal Heritage · K-Tourism & MICE',
-            'World Royal Heritage (exhibitions · tourism · international conferences · forums)',
+            'World Royal Heritage — MICE industry (exhibitions · tourism · international conferences · expos)',
+            'K-HUMAN Academy (Korean Language · Korean Humanities · Korean Studies)',
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
@@ -203,6 +211,15 @@ const milestonesEn: Milestone[] = [
             },
         ],
         icon: <Library className="w-6 h-6" />,
+    },
+    {
+        year: 'Nov 2027',
+        title: 'World Royal Culture Expo',
+        points: [
+            'Hosting the World Royal Culture Expo',
+            'World Royal Biennale & Interactive Art Exhibition',
+        ],
+        icon: <Palette className="w-6 h-6" />,
     },
 ];
 
