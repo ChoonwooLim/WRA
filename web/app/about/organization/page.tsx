@@ -146,16 +146,25 @@ export default function OrganizationPage() {
                             </div>
                         </div>
 
-                        {/* ── 수직선: 황태손 → 신광철 ── */}
+                        {/* ── 수직선: 황태손 → WRA 총장 ── */}
                         <div className="w-[2px] h-12 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
 
-                        {/* ── 신광철 노드 (중앙) ── */}
+                        {/* ── WRA 신광철 작가(총장) 노드 (중앙) ── */}
                         <div className="bg-[#0f111a]/85 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/25 outline-offset-[3px] text-center px-10 py-5 rounded-xl backdrop-blur-md shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-[#d4af37]/80 hover:shadow-[0_0_25px_rgba(212,175,55,0.25)] z-10">
-                            <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">{ko ? '한국문화창조학교' : 'Korea Culture Creation School'}</p>
-                            <p className="text-[#d4af37] text-sm mt-1">{ko ? '교장' : 'Principal'} <span className="font-bold text-lg">{ko ? '신광철' : 'Shin Kwang-chul'}</span><span className="text-[#d4af37]/70 text-xs">{ko ? '(작가)' : '(Author)'}</span></p>
+                            <p className="text-[#e6c875] font-bold text-base md:text-lg tracking-wide">WRA</p>
+                            <p className="text-[#d4af37] text-sm mt-1"><span className="font-bold text-lg">{ko ? '신광철' : 'Shin Kwang-chul'}</span> {ko ? '작가' : 'Author'}<span className="text-[#d4af37]/70 text-xs">{ko ? '(총장)' : '(President)'}</span></p>
                             <Link href="/about/profile/sinkwangchul" className="inline-block mt-3 px-3 py-1 text-xs tracking-widest uppercase text-[#d4af37] border border-[#d4af37]/50 rounded-full hover:bg-[#d4af37]/15 hover:border-[#d4af37] transition-all">
                                 {ko ? '프로필 →' : 'Profile →'}
                             </Link>
+                        </div>
+
+                        {/* ── 수직선: 총장 → 부총장 ── */}
+                        <div className="w-[2px] h-10 bg-gradient-to-b from-[#d4af37]/70 to-[#d4af37]/50" />
+
+                        {/* ── 이금희 부총장 노드 ── */}
+                        <div className="min-w-[220px] bg-[#0f111a]/85 border border-[#d4af37]/50 outline outline-[1.5px] outline-[#d4af37]/20 outline-offset-[3px] text-center px-8 py-4 rounded-xl backdrop-blur-md shadow-[0_4px_18px_rgba(212,175,55,0.12)] transition-all hover:border-[#d4af37]/80 hover:shadow-[0_0_22px_rgba(212,175,55,0.2)] z-10">
+                            <p className="text-[#e6c875] font-bold text-lg tracking-wide">{ko ? '이금희' : 'Lee Geum-hee'}</p>
+                            <p className="text-[#d4af37] text-sm mt-1">{ko ? '부총장' : 'Vice Chancellor'}</p>
                         </div>
 
                         {/* ── Junction 행: absolute 포지셔닝으로 겹침 없이 배치 ── */}
@@ -177,6 +186,7 @@ export default function OrganizationPage() {
                                 style={{ right: 'calc(50% + 140px)' }}>
                                 <p className="text-[#e6c875] font-semibold text-base">{ko ? '한국학 연구소' : 'Institute of Korean Studies'}</p>
                                 <p className="text-[#e6c875] font-semibold text-base mt-2">{ko ? 'AI 브레인 헬스 연구소' : 'AI Brain Health Research Center'}</p>
+                                <p className="text-[#e6c875] font-semibold text-base mt-2">{ko ? '출판미디어 느티나무가 있는 풍경' : 'Publishing Media: A Landscape with a Zelkova Tree'}</p>
                             </div>
 
                             {/* 오른쪽 박스: 수평선 끝 바로 오른쪽 */}
@@ -195,6 +205,7 @@ export default function OrganizationPage() {
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl text-center w-full">
                                 <p className="text-[#e6c875] font-semibold">{ko ? '한국학 연구소' : 'Institute of Korean Studies'}</p>
                                 <p className="text-[#e6c875] font-semibold mt-1">{ko ? 'AI 브레인 헬스 연구소' : 'AI Brain Health Research Center'}</p>
+                                <p className="text-[#e6c875] font-semibold mt-1">{ko ? '출판미디어 느티나무가 있는 풍경' : 'Publishing Media: A Landscape with a Zelkova Tree'}</p>
                             </div>
                             <div className="self-center w-[1.5px] h-4 bg-[#d4af37]/40" />
                             <div className="bg-[#0f111a]/85 border border-[#d4af37]/40 text-gray-200 px-5 py-4 rounded-xl w-full text-center">
@@ -208,8 +219,12 @@ export default function OrganizationPage() {
 
                         {/* Level 1: CEO + 전략기획실 */}
                         <div className="relative flex flex-col items-center w-full z-10">
-                            <div onClick={() => setShowCeoModal(true)} className="cursor-pointer group flex flex-col items-center">
-                                <OrgNode title={ko ? '제니 킴' : 'Jenny Kim'} subtitle="CEO" variant="ceo" showProfile />
+                            <div className="flex flex-col items-center">
+                                <OrgNode
+                                    title={ko ? '정은아' : 'Jeong Eun-a'}
+                                    subtitle={ko ? '대표이사 CEO' : 'President & CEO'}
+                                    variant="ceo"
+                                />
                             </div>
 
                             {/* 전략기획실 - absolute positioned to the right */}

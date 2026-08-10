@@ -97,7 +97,7 @@ const milestonesKo: Milestone[] = [
         icon: <BookOpen className="w-6 h-6" />,
     },
     {
-        year: '2026. 11',
+        year: '2027. 10',
         title: '세계 왕립 도서관 미국 런칭',
         points: [
             '세계 최초 실시간 MARC 자동 생성 시스템 구축',
@@ -196,7 +196,7 @@ const milestonesEn: Milestone[] = [
         icon: <BookOpen className="w-6 h-6" />,
     },
     {
-        year: 'Nov 2026',
+        year: 'Oct 2027',
         title: 'World Royal Library — U.S. Launch',
         points: [
             'Building the world’s first real-time automated MARC generation system',
@@ -249,7 +249,12 @@ export default function ProgressReportPage() {
                         </ul>
                         <div className="flex items-baseline gap-3 pt-4 border-t border-[#d4af37]/20">
                             <span className="text-[#d4af37] text-sm md:text-base tracking-widest">{ko ? '설립 위원장' : 'Founding Chairman'}</span>
-                            <span className="text-[#fceda6] text-2xl md:text-3xl font-bold tracking-[0.2em]">{ko ? '이 호 종' : 'Lee Ho-jong'}</span>
+                            <span className="text-[#fceda6] text-2xl md:text-3xl font-bold tracking-[0.2em]">
+                                {ko ? '이호종' : 'Lee Ho-jong'}
+                                <span className="ml-2 text-sm md:text-base font-normal tracking-normal text-[#d4af37]/80">
+                                    {ko ? '(교육 운동가)' : '(Education Activist)'}
+                                </span>
+                            </span>
                         </div>
                     </div>
 
