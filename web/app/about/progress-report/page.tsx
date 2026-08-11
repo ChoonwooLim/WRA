@@ -91,7 +91,16 @@ const milestonesKo: Milestone[] = [
         year: '2026. 10',
         title: 'K-Edupop',
         points: [
-            'K-HUMAN 캠퍼스 (IBT토픽 (한국어능력시험) 모의고사, 한국인문학, 한국학, 글쓰기, 책쓰기)',
+            {
+                heading: 'K-HUMAN 캠퍼스',
+                items: [
+                    'IBT토픽 (한국어능력시험) 모의고사',
+                    '한국인문학',
+                    '한국학',
+                    '글쓰기',
+                    '책쓰기',
+                ],
+            },
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
@@ -189,7 +198,16 @@ const milestonesEn: Milestone[] = [
         year: 'Oct 2026',
         title: 'K-Edupop',
         points: [
-            'K-HUMAN Campus (IBT TOPIK (Test of Proficiency in Korean) mock test · Korean Humanities · Korean Studies · Writing · Book Writing)',
+            {
+                heading: 'K-HUMAN Campus',
+                items: [
+                    'IBT TOPIK (Test of Proficiency in Korean) Mock Test',
+                    'Korean Humanities',
+                    'Korean Studies',
+                    'Writing',
+                    'Book Writing',
+                ],
+            },
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
