@@ -88,17 +88,16 @@ const milestonesKo: Milestone[] = [
         icon: <Globe className="w-6 h-6" />,
     },
     {
-        year: '2026. 07',
+        year: '2026. 10',
         title: 'K-Edupop',
         points: [
-            '세계왕립헤리티지 — MICE 산업 (전시 · 관광 · 국제회의 · 박람회)',
-            'K-HUMAN 아카데미 (한국어 · 한국인문학 · 한국학)',
+            'K-HUMAN 캠퍼스 (IBT토픽 (한국어능력시험) 모의고사, 한국인문학, 한국학, 글쓰기, 책쓰기)',
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
     {
         year: '2027. 10',
-        title: '세계 왕립 도서관 미국 런칭',
+        title: 'K-라이브러리',
         points: [
             '세계 최초 실시간 MARC 자동 생성 시스템 구축',
             'The World’s First Real-Time MARC Solution',
@@ -187,17 +186,16 @@ const milestonesEn: Milestone[] = [
         icon: <Globe className="w-6 h-6" />,
     },
     {
-        year: 'Jul 2026',
+        year: 'Oct 2026',
         title: 'K-Edupop',
         points: [
-            'World Royal Heritage — MICE industry (exhibitions · tourism · international conferences · expos)',
-            'K-HUMAN Academy (Korean Language · Korean Humanities · Korean Studies)',
+            'K-HUMAN Campus (IBT TOPIK (Test of Proficiency in Korean) mock test · Korean Humanities · Korean Studies · Writing · Book Writing)',
         ],
         icon: <BookOpen className="w-6 h-6" />,
     },
     {
         year: 'Oct 2027',
-        title: 'World Royal Library — U.S. Launch',
+        title: 'K-Library',
         points: [
             'Building the world’s first real-time automated MARC generation system',
             'The World’s First Real-Time MARC Solution',
