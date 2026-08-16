@@ -79,7 +79,7 @@ export async function sendContactEmail(input: {
     subject: string;
     message: string;
 }) {
-    const to = process.env.CONTACT_TO || 'youna789@gmail.com';
+    const to = process.env.CONTACT_TO || 'k-human108@naver.com';
     const apiKey = process.env.RESEND_API_KEY;
     const from = process.env.RESEND_FROM || 'World Royal Academy <onboarding@resend.dev>';
 
