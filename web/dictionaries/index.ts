@@ -25,10 +25,8 @@
         tours: string;
         membership: string;
         consulting: string;
-        // Community submenu
+        // WRA ESG submenu
         notices: string;
-        newsletter: string;
-        qna: string;
         // Legacy keys (kept for page content compatibility)
         certification: string;
         services: string;
@@ -219,7 +217,7 @@ export const en: Dictionary = {
         crownPrince: 'Crown Prince',
         about: 'About WRA',
         warrant: 'WRA K-HUMAN',
-        community: 'Community',
+        community: 'WRA ESG',
         adminDashboard: 'Admin Dashboard',
         startLogin: 'Start Login',
         loginSignup: 'Login / Sign Up',
@@ -239,8 +237,6 @@ export const en: Dictionary = {
         membership: 'Membership',
         consulting: 'Royal Consulting',
         notices: 'Notices',
-        newsletter: 'Newsletter',
-        qna: 'Q&A',
         // Legacy keys
         certification: 'Certification',
         services: 'Services',
@@ -428,7 +424,7 @@ export const ko: Dictionary = {
         crownPrince: '황태손 소개',
         about: 'WRA 소개',
         warrant: 'WRA K-HUMAN',
-        community: '커뮤니티',
+        community: 'WRA ESG',
         adminDashboard: '관리자 대시보드',
         startLogin: '로그인 시작',
         loginSignup: '로그인 / 회원가입',
@@ -448,8 +444,6 @@ export const ko: Dictionary = {
         membership: '멤버십',
         consulting: '컨설팅',
         notices: '공지',
-        newsletter: '뉴스레터 구독',
-        qna: 'QnA',
         // Legacy keys
         certification: '인증',
         services: '컨설팅·투어',

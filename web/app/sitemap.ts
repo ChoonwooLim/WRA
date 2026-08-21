@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 const BASE_URL = 'https://xn--989ao0kixfkpc53jxpgt2bj12a.org';
 
@@ -63,8 +63,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: '/community/notices', priority: 0.6, changeFrequency: 'weekly' as const },
         { url: '/community/gallery', priority: 0.6, changeFrequency: 'weekly' as const },
         { url: '/community/free-board', priority: 0.5, changeFrequency: 'weekly' as const },
-        { url: '/community/qna', priority: 0.5, changeFrequency: 'weekly' as const },
-        { url: '/community/newsletter', priority: 0.5, changeFrequency: 'monthly' as const },
         { url: '/community/contact', priority: 0.6, changeFrequency: 'monthly' as const },
     ];
 

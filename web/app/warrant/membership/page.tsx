@@ -75,7 +75,7 @@ export default function MembershipPage() {
                             WRA 멤버십에 관심이 있으신 분은 아래 버튼을 통해 상담을 요청해 주세요.
                         </p>
                         <a
-                            href="/community/qna"
+                            href="/community/contact"
                             className="inline-block px-8 py-3 rounded-xl bg-gradient-to-r from-[#d4af37] to-[#aa771c] text-black font-semibold hover:shadow-lg hover:shadow-[#d4af37]/20 transition-all"
                         >
                             멤버십 문의하기
