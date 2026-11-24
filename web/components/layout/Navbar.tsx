@@ -81,7 +81,6 @@ export function Navbar() {
                 { label: dict.navbar.vision, href: '/about' },
                 { label: dict.navbar.coreValuesPage, href: '/about/core-values' },
                 { label: dict.navbar.organization, href: '/about/organization' },
-                { label: dict.navbar.textbooksPage, href: '/about/textbooks' },
             ],
         },
         {

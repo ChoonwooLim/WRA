@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: '/about/founding-philosophy', priority: 0.7, changeFrequency: 'monthly' as const },
         { url: '/about/organization', priority: 0.7, changeFrequency: 'monthly' as const },
         { url: '/about/partners', priority: 0.7, changeFrequency: 'monthly' as const },
-        { url: '/about/textbooks', priority: 0.7, changeFrequency: 'monthly' as const },
     ];
 
     // Crown Prince pages

@@ -16,7 +16,6 @@
         vision: string;
         coreValuesPage: string;
         organization: string;
-        textbooksPage: string;
         // WRA Warrant submenu
         education: string;
         kLanguage: string;
@@ -228,7 +227,6 @@ export const en: Dictionary = {
         vision: 'Vision & Mission',
         coreValuesPage: 'Core Values',
         organization: 'Organization',
-        textbooksPage: 'Textbooks',
         education: 'Korean Studies',
         kLanguage: 'K-Heritage Language',
         kLiterature: 'Korean Humanities',
@@ -435,7 +433,6 @@ export const ko: Dictionary = {
         vision: '비전 & 미션',
         coreValuesPage: '핵심가치',
         organization: '조직도',
-        textbooksPage: '교재',
         education: '한국학공부',
         kLanguage: '한국어',
         kLiterature: '한국 인문학',

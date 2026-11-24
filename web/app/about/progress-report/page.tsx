@@ -14,6 +14,7 @@ import {
     BookOpen,
     Library,
     Palette,
+    Clapperboard,
 } from 'lucide-react';
 
 type Bullet = string | { heading: string; items: string[] };
@@ -103,6 +104,18 @@ const milestonesKo: Milestone[] = [
             },
         ],
         icon: <BookOpen className="w-6 h-6" />,
+    },
+    {
+        year: '2027. 03',
+        title: 'K-HUMAN 에듀테인먼트',
+        points: [
+            'K-HUMAN 아카데미',
+            'K-HUMAN 뉴스 미디어',
+            'K-HUMAN 독립영화',
+            'K-HUMAN 패션위크',
+            'K-HUMAN 트윈버스',
+        ],
+        icon: <Clapperboard className="w-6 h-6" />,
     },
     {
         year: '2027. 10',
@@ -210,6 +223,18 @@ const milestonesEn: Milestone[] = [
             },
         ],
         icon: <BookOpen className="w-6 h-6" />,
+    },
+    {
+        year: 'Mar 2027',
+        title: 'K-HUMAN Edutainment',
+        points: [
+            'K-HUMAN Academy',
+            'K-HUMAN News Media',
+            'K-HUMAN Independent Film',
+            'K-HUMAN Fashion Week',
+            'K-HUMAN Twinverse',
+        ],
+        icon: <Clapperboard className="w-6 h-6" />,
     },
     {
         year: 'Oct 2027',
