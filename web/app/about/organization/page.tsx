@@ -19,7 +19,7 @@ import {
     X,
 } from 'lucide-react';
 
-// 안정준 부총장 산하 5개 분야 (title = 큰 글씨, subtitle = 필기체 보조 표기)
+// 정은아 대표이사 산하 5개 분야 (title = 큰 글씨, subtitle = 필기체 보조 표기)
 const DIVISIONS_KO = [
     { title: '미술', subtitle: 'Fine Arts' },
     { title: '건축', subtitle: 'Architecture' },
@@ -233,9 +233,21 @@ export default function OrganizationPage() {
                             <div className="self-center w-[1.5px] h-6 bg-[#d4af37]/50" />
                         </div>
 
-                        {/* Level 1: 부총장 산하 5개 분야 — 분기선 (Desktop) */}
+                        {/* Level 1: 정은아 대표이사 */}
+                        <div className="relative flex flex-col items-center w-full z-10">
+                            <OrgNode
+                                title={ko ? '정은아' : 'Jeong Eun-a'}
+                                subtitle={ko ? '대표이사 CEO' : 'President & CEO'}
+                                variant="ceo"
+                            />
+                        </div>
+
+                        {/* 모바일: 대표이사 → 5개 분야 연결선 */}
+                        <div className="md:hidden w-[2px] h-6 bg-[#d4af37]/50" />
+
+                        {/* Level 2: 대표이사 산하 5개 분야 — 분기선 (Desktop) */}
                         <div className="relative w-full max-w-5xl hidden md:flex flex-col items-center z-10">
-                            <div className="w-[2px] h-10 bg-gradient-to-b from-[#d4af37]/60 to-[#d4af37]/50" />
+                            <div className="w-[2px] h-10 bg-gradient-to-b from-[#d4af37] to-[#d4af37]/50" />
                             <div className="relative w-full h-10">
                                 {/* 5개 열 중심(10%·30%·50%·70%·90%)을 잇는 수평선 */}
                                 <div className="absolute top-0 left-[10%] right-[10%] h-[2px] bg-[#d4af37]/50" />
@@ -245,7 +257,7 @@ export default function OrganizationPage() {
                             </div>
                         </div>
 
-                        {/* Level 1: 5개 분야 노드 — 데스크톱 5열 / 모바일 세로 */}
+                        {/* Level 2: 5개 분야 노드 — 데스크톱 5열 / 모바일 세로 */}
                         <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-0 relative z-10">
                             {(ko ? DIVISIONS_KO : DIVISIONS_EN).map((div) => (
                                 <div key={div.title} className="flex justify-center px-2">
