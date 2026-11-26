@@ -11,7 +11,6 @@ import {
     Flag,
     Sparkles,
     Globe,
-    BookOpen,
     Library,
     Palette,
     Clapperboard,
@@ -87,23 +86,6 @@ const milestonesKo: Milestone[] = [
             'K-로얄 헤리티지 기반 학문·산업 연계',
         ],
         icon: <Globe className="w-6 h-6" />,
-    },
-    {
-        year: '2026. 10',
-        title: 'K-Edupop',
-        points: [
-            {
-                heading: 'K-HUMAN 캠퍼스',
-                items: [
-                    'IBT토픽 (한국어능력시험) 모의고사',
-                    '한국인문학',
-                    '한국학',
-                    '글쓰기',
-                    '책쓰기',
-                ],
-            },
-        ],
-        icon: <BookOpen className="w-6 h-6" />,
     },
     {
         year: '2027. 03',
@@ -206,23 +188,6 @@ const milestonesEn: Milestone[] = [
             'K-Royal Heritage academic–industrial collaboration',
         ],
         icon: <Globe className="w-6 h-6" />,
-    },
-    {
-        year: 'Oct 2026',
-        title: 'K-Edupop',
-        points: [
-            {
-                heading: 'K-HUMAN Campus',
-                items: [
-                    'IBT TOPIK (Test of Proficiency in Korean) Mock Test',
-                    'Korean Humanities',
-                    'Korean Studies',
-                    'Writing',
-                    'Book Writing',
-                ],
-            },
-        ],
-        icon: <BookOpen className="w-6 h-6" />,
     },
     {
         year: 'Mar 2027',
